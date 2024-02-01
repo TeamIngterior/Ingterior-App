@@ -9,6 +9,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="background_color">#FF000000</color>
+    <color name="button_text_tint_color">#FFFFFFFF</color>
     <color name="text_view_tint_color">#fefefe</color>
     <color name="image_button_tint_color">#fefefe</color>
     <color name="image_button_background_color">#FF000000</color>

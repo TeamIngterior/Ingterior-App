@@ -9,6 +9,19 @@
         android:id="@+id/inputSimpleEstimationFragment"
         android:name="com.ing.ingterior.ui.simple.InputSimpleEstimationFragment"
         android:label="fragment_input_simple_estimation"
-        tools:layout="@layout/fragment_input_simple_estimation" />
+        tools:layout="@layout/fragment_input_simple_estimation" >
+        <action
+            android:id="@+id/action_inputSimpleEstimationFragment_to_resultSimpleEstimationFragment"
+            app:destination="@id/resultSimpleEstimationFragment"
+            app:popUpTo="@id/inputSimpleEstimationFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/resultSimpleEstimationFragment"
+        android:name="com.ing.ingterior.ui.simple.ResultSimpleEstimationFragment"
+        android:label="fragment_result_simple_estimation"
+        tools:layout="@layout/fragment_result_simple_estimation"/>
+
 
 </navigation>
