@@ -4,17 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.sign.SignInActivity">
+    tools:context=".ui.site.SiteManagementFragment">
 
 
     <Button
-        android:id="@+id/btn_sign_in"
+        android:id="@+id/btn_sm_go_to_blueprint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="로그인"
+        android:text="세부공사관리로 넘어가기"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

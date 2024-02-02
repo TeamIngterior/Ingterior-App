@@ -4,17 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.sign.SignInActivity">
-
+    tools:context=".ui.site.SiteListActivity">
 
     <Button
-        android:id="@+id/btn_sign_in"
+        android:id="@+id/btn_sl_generate_site"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="로그인"
+        android:text="새 현장 등록하기"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

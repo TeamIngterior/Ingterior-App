@@ -6,5 +6,9 @@ import android.view.View
 abstract class Move {
     abstract fun moveSimpleEstimationActivity(activity: Activity)
     abstract fun moveSignInActivity(activity: Activity)
+    abstract fun moveNewSiteActivity(activity: Activity)
+
+
     abstract fun moveResultSimpleEstimationFragment(view: View)
+
 }

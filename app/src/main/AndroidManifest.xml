@@ -25,14 +25,14 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.site.NewSiteActivity"
+            android:name=".ui.site.SiteListActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.site.SiteActivity"
+            android:name=".ui.site.SiteManagementActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

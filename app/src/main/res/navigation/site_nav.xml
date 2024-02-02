@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/site_management_nav"
+    app:startDestination="@id/bluePrintManagementFragment">
+
+    <fragment
+        android:id="@+id/bluePrintManagementFragment"
+        android:name="com.ing.ingterior.ui.site.BluePrintManagementFragment"
+        android:label="fragment_input_simple_estimation"
+        tools:layout="@layout/fragment_blue_print_management" >
+        <action
+            android:id="@+id/action_bluePrintManagementFragment_to_editBlueprintFragment"
+            app:destination="@id/editBlueprintFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/editBlueprintFragment"
+        android:name="com.ing.ingterior.ui.site.EditBlueprintFragment"
+        android:label="fragment_result_simple_estimation"
+        tools:layout="@layout/fragment_edit_blueprint"/>
+
+
+</navigation>
