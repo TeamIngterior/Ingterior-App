@@ -6,13 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.ing.ingterior.R
 import com.ing.ingterior.injection.Factory
-import com.ing.ingterior.injection.Move
 import com.ing.ingterior.ui.IngTeriorViewModelFactory
-import com.ing.ingterior.ui.start.StartViewModel
 
 class InputSimpleEstimationFragment : Fragment() {
 

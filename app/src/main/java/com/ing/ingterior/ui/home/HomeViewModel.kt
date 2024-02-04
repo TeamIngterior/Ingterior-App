@@ -1,8 +1,8 @@
-package com.ing.ingterior.ui.start
+package com.ing.ingterior.ui.home
 
 import androidx.lifecycle.ViewModel
 
-class StartViewModel : ViewModel() {
+class HomeViewModel : ViewModel() {
     var isFirst: Boolean = true
 
     override fun onCleared() {

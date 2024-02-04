@@ -49,7 +49,7 @@
             android:name=".ui.simple.SimpleEstimationActivity"
             android:exported="true" />
         <activity
-            android:name=".ui.start.StartActivity"
+            android:name=".ui.home.HometActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

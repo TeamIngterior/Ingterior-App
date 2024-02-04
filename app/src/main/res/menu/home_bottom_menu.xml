@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_main"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="메인"/>
+    <item
+        android:id="@+id/menu_calendar"
+        android:icon="@drawable/ic_baseline_calendar_today_24"
+        android:title="일정"/>
+    <item
+        android:id="@+id/menu_message"
+        android:icon="@drawable/ic_baseline_message_24"
+        android:title="메시지"/>
+    <item
+        android:id="@+id/menu_setting"
+        android:icon="@drawable/ic_baseline_settings_24"
+        android:title="설정"/>
+</menu>

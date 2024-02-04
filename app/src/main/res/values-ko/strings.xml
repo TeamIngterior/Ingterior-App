@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Ing테리어</string>
+    <string name="app_name">잉테리어</string>
     <string name="hello_blank_fragment">빈 페이지</string>
     <string name="menu_sign_in">로그인</string>
     <string name="message_free_interior_design_calc">인테리어 간편견적</string>

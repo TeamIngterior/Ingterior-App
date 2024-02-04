@@ -3,7 +3,7 @@ package com.ing.ingterior.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.ing.ingterior.ui.simple.SimpleEstimationViewModel
-import com.ing.ingterior.ui.start.StartViewModel
+import com.ing.ingterior.ui.home.HomeViewModel
 
 class IngTeriorViewModelFactory : ViewModelProvider.Factory {
 
@@ -12,8 +12,8 @@ class IngTeriorViewModelFactory : ViewModelProvider.Factory {
     }
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if(modelClass.isAssignableFrom(StartViewModel::class.java)){
-            return StartViewModel() as T
+        if(modelClass.isAssignableFrom(HomeViewModel::class.java)){
+            return HomeViewModel() as T
         }
         else if (modelClass.isAssignableFrom(SimpleEstimationViewModel::class.java)) {
             return interiorViewModel as T
