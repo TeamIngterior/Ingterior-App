@@ -27,7 +27,7 @@ class HometActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
 
         if(viewModel.isFirst) {
-            AnimationUtils.fadeInAndOut(ivLogo, 500, object : AnimationUtils.AnimationListener {
+            AnimationUtils.fadeInAndOut(ivLogo, 750, object : AnimationUtils.AnimationListener {
                 override fun start() {
                     lineSplashScreenLayout.isVisible = true
                 }

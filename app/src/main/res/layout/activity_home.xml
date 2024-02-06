@@ -31,13 +31,19 @@
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_home_navigation_view"
             android:layout_width="wrap_content"
-            android:layout_height="58dp"
-            app:itemBackground="@color/white"
+            android:layout_height="72dp"
+            app:itemBackground="@drawable/bg_bottom_nav"
+            app:itemHorizontalTranslationEnabled="false"
             app:labelVisibilityMode="labeled"
+            app:itemIconSize="@dimen/bottom_icon_menu_size"
+            app:itemPaddingTop="16dp"
+            app:itemTextAppearanceActive="@style/TextAppearance.BottomNavigationView.Active.Label"
+            app:itemTextAppearanceInactive="@style/TextAppearance.BottomNavigationView.InActive.Label"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:menu="@menu/home_bottom_menu" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -52,13 +58,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <ImageView
             android:id="@+id/iv_home_splash_logo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/logo" />
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_logo"
+            android:scaleType="centerInside"/>
 
     </LinearLayout>
 
