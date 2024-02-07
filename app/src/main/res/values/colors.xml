@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary_color06">#464866</color>
-    <color name="primary_color05">#606382</color>
-    <color name="primary_color04">#767992</color>
-    <color name="primary_color03">#8D91A4</color>
-    <color name="primary_color02">#ACB0BF</color>
-    <color name="primary_color01">#ACB0BF</color>
-    <color name="sub_color05">#FF6347</color>
-    <color name="sub_color04">#FE8770</color>
-    <color name="sub_color03">#FEAA98</color>
-    <color name="sub_color02">#FECCBF</color>
-    <color name="sub_color01">#FAE9E8</color>
+    <color name="primary_color07">#464866</color>
+    <color name="primary_color06">#616483</color>
+    <color name="primary_color05">#777A93</color>
+    <color name="primary_color04">#8E92A5</color>
+    <color name="primary_color03">#ADB1C0</color>
+    <color name="primary_color02">#CDCFDA</color>
+    <color name="primary_color01">#EBEBF2</color>
+
+    <color name="secondary_color05">#FF6347</color>
+    <color name="secondary_color04">#FF8871</color>
+    <color name="secondary_color03">#FFAB99</color>
+    <color name="secondary_color02">#FFCDC0</color>
+    <color name="secondary_color01">#FFCDC0</color>
 
     <color name="text_color_06">#1E1E1E</color>
     <color name="text_color_05">#5D5D5D</color>

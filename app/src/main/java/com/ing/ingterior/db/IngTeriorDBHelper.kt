@@ -4,13 +4,15 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-const val DATABASE_NAME = "interior"
+const val DATABASE_NAME = "ingterior.db"
 private const val DATABASE_VERSION = 1
 class IngTeriorDBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL(User.CREATE_SIGN_TABLE)
-        db.execSQL(Site.)
+        db.execSQL(Site.CREATE_SITE_TABLE)
+        db.execSQL(Site.Management.CREATE_MANAGEMENT_TABLE)
+        db.execSQL(Site.Fold.CREATE_FOLD_TABLE)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
