@@ -150,7 +150,7 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
         <LinearLayout
-            android:id="@+id/line_home_main_new_site"
+            android:id="@+id/line_home_main_site_management"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:orientation="vertical"
@@ -174,7 +174,7 @@
 
 
     <LinearLayout
-        android:id="@+id/line_home_main_login"
+        android:id="@+id/line_home_main_sign_in"
         android:layout_width="match_parent"
         android:layout_height="58dp"
         android:gravity="center_vertical"

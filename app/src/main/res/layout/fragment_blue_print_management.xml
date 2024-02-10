@@ -7,27 +7,4 @@
     tools:context=".ui.site.BluePrintManagementFragment">
 
 
-    <ImageView
-        android:id="@+id/iv_blue_print"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btn_blue_print_from_gallery"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="갤러리"
-        app:layout_constraintBottom_toTopOf="@+id/btn_blue_print_from_camera" />
-
-
-    <Button
-        android:id="@+id/btn_blue_print_from_camera"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="카메라"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

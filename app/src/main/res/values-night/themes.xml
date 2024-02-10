@@ -3,8 +3,8 @@
     <style name="Theme.IngTetrior" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primary_color07</item>
-        <item name="colorPrimaryVariant">@color/primary_color05</item>
-        <item name="colorOnPrimary">@color/primary_color06</item>
+        <item name="colorPrimaryVariant">@color/text_color_06</item>
+        <item name="colorOnPrimary">@color/text_color_06</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/secondary_color05</item>
         <item name="colorSecondaryVariant">@color/secondary_color04</item>
