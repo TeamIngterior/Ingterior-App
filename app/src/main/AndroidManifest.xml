@@ -18,6 +18,13 @@
         android:theme="@style/Theme.IngTetrior"
         tools:targetApi="31">
         <activity
+            android:name=".SiteActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ui.TestActivity"
             android:exported="false">
             <meta-data
@@ -26,20 +33,6 @@
         </activity>
         <activity
             android:name=".ui.schedule.ScheduleActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".ui.site.SiteListActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".ui.site.SiteManagementActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -56,7 +49,7 @@
             android:name=".ui.simple.SimpleEstimationActivity"
             android:exported="true" />
         <activity
-            android:name=".ui.home.HometActivity"
+            android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -69,6 +62,10 @@
                 android:value="" />
         </activity>
 
+        <provider
+            android:name=".db.IngTeriorProvider"
+            android:authorities="ingterior"
+            android:exported="false"></provider>
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"

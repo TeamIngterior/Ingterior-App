@@ -6,9 +6,9 @@
         android:icon="@drawable/ic_baseline_home_24"
         android:title="메인"/>
     <item
-        android:id="@+id/menu_calendar"
+        android:id="@+id/menu_site_management"
         android:icon="@drawable/ic_baseline_calendar_today_24"
-        android:title="일정"/>
+        android:title="현장관리"/>
     <item
         android:id="@+id/menu_message"
         android:icon="@drawable/ic_baseline_message_24"

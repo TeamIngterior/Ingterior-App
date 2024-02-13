@@ -1,11 +1,20 @@
 <resources>
-    <string name="app_name">IngTetrior</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
-    <string name="menu_sign_in">Sign In</string>
-    <string name="message_free_interior_design_calc">Free Interior Design Calculation</string>
-    <string name="message_deficiency_check_and_construction_management">Deficiency Check/Construction Management</string>
-    <string name="message_interior_estimate">Interior Estimate</string>
+    <string name="app_name">잉테리어</string>
+    <string name="hello_blank_fragment">빈 페이지</string>
+    <string name="menu_login">로그인</string>
+    <string name="title_add_new_site">새 현장 추가</string>
+    <string name="action_view_quick_estimate">인테리어 간편견적</string>
+    <string name="message_interior_estimate">간편견적보기</string>
+    <string name="prompt_check_and_management">하자체크&amp;공사관리</string>
+    <string name="prompt_login_required">로그인이 필요한 서비스입니다.\n로그인 하기</string>
+    <string name="prompt_register_new_site">새 현장을 등록해 보세요!</string>
+    <string name="tip_register_new_site">이사할 때, 입주 전 확인할 때 필수!</string>
+    <string name="prompt_explore_more_interior_services">잉테리어의 더 많은 서비스를 \n시작해 보세요!</string>
+    <string name="action_login_kakaotalk">카카오톡으로 이용하기</string>
+    <string name="action_login_naver">네이버로 이용하기</string>
+    <string name="action_login_google">Google로 이용하기</string>
+    <string name="action_login_instagram">Instagram으로 이용하기</string>
+    <string name="prompt_home_renovation_cost_estimate">우리 집 인테리어 공사는 얼마일까?</string>
+    <string name="action_simple_estimate">인테리어 간편견적</string>
 
 </resources>

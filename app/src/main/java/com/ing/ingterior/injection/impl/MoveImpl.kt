@@ -6,12 +6,18 @@ import android.view.View
 import androidx.navigation.Navigation
 import com.ing.ingterior.R
 import com.ing.ingterior.injection.Move
+import com.ing.ingterior.ui.MainActivity
 import com.ing.ingterior.ui.TestActivity
 import com.ing.ingterior.ui.sign.SignInActivity
 import com.ing.ingterior.ui.simple.SimpleEstimationActivity
-import com.ing.ingterior.ui.site.SiteListActivity
 
 class MoveImpl : Move() {
+    override fun moveMainActivity(activity: Activity) {
+        val intent = Intent(activity, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        activity.startActivity(intent)
+    }
+
     override fun moveSimpleEstimationActivity(activity: Activity) {
         val intent = Intent(activity, SimpleEstimationActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
@@ -20,12 +26,6 @@ class MoveImpl : Move() {
 
     override fun moveSignInActivity(activity: Activity) {
         val intent = Intent(activity, SignInActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-        activity.startActivity(intent)
-    }
-
-    override fun moveSiteManagementActivity(activity: Activity) {
-        val intent = Intent(activity, SiteListActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         activity.startActivity(intent)
     }

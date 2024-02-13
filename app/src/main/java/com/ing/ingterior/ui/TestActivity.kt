@@ -39,10 +39,8 @@ class TestActivity : AppCompatActivity() {
                         ImageUtils.rotateImageIfRequired(imageBitmap, ImageUtils.imageFile!!)
                     }
 
-
                     ivTest.setImageBitmap(rotatedBitmap)
                 }
-//
             }
             else{
                 Toast.makeText(this, "사진을 불러오지 못했습니다.", Toast.LENGTH_SHORT).show()

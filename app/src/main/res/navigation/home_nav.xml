@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeMainFragment"
-        android:name="com.ing.ingterior.ui.home.HomeMainFragment"
+        android:name="com.ing.ingterior.ui.main.HomeFragment"
         android:label="fragment_home_main"
-        tools:layout="@layout/fragment_home_main" />
+        tools:layout="@layout/fragment_home" />
 </navigation>

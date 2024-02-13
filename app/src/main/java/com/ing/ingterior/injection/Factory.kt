@@ -15,5 +15,6 @@ abstract class Factory {
     abstract fun getApplication(): IngTeriorApplication
     abstract fun getMove(): Move
     abstract fun getServiceApi(): ServerApi
-
+    abstract fun getSession(): Session
+    abstract fun getDatabase(): Database
 }

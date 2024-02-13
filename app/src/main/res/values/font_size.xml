@@ -2,18 +2,32 @@
 <resources>
     <dimen name="bottom_icon_menu_size">24dp</dimen>
 
-    <dimen name="title_h1">22sp</dimen>
-    <dimen name="title_h2">22sp</dimen>
-    <dimen name="title_h3">18sp</dimen>
-    <dimen name="title_h4">16sp</dimen>
+    <!-- Pretendard Semibold -->
+    <dimen name="title_h1">21sp</dimen>
 
-    <dimen name="body1">16sp</dimen>
-    <dimen name="body2">14sp</dimen>
+    <!-- Pretendard Medium -->
+    <dimen name="title_h2">21sp</dimen>
 
-    <dimen name="button1">18sp</dimen>
-    <dimen name="button2">14sp</dimen>
+    <!-- Pretendard Bold -->
+    <dimen name="title_h3">20sp</dimen>
 
-    <dimen name="caption1">14sp</dimen>
-    <dimen name="caption2">12sp</dimen>
+    <!-- Pretendard Medium -->
+    <dimen name="title_h4">15sp</dimen>
+    <dimen name="title_h5">13sp</dimen>
+
+    <!-- Pretendard Regular -->
+    <dimen name="body1">12sp</dimen>
+    <dimen name="body2">10sp</dimen>
+
+    <!-- Pretendard Medium -->
+    <dimen name="button1">15sp</dimen>
+    <dimen name="button2">12sp</dimen>
+
+    <!-- Pretendard Medium -->
+    <dimen name="caption1">12sp</dimen>
+    <dimen name="caption2">9sp</dimen>
+
+    <!-- Pretendard Medium -->
+    <dimen name="label">15sp</dimen>
 
 </resources>

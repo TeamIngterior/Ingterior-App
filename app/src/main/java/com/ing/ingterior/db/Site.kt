@@ -23,7 +23,7 @@ object Site {
     }
 
     object Fold {
-        const val TABLE_NAME = "Fold"
+        const val TABLE_NAME = "fold"
         const val _ID = "_id"
         const val FOLD_IMAGES = "fold_images"
         const val FOLD_NAME = "fold_name"

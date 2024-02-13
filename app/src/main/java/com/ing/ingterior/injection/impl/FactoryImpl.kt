@@ -1,15 +1,15 @@
 package com.ing.ingterior.injection.impl
 
 import com.ing.ingterior.IngTeriorApplication
-import com.ing.ingterior.injection.Factory
-import com.ing.ingterior.injection.Move
-import com.ing.ingterior.injection.ServerApi
+import com.ing.ingterior.injection.*
 
 class FactoryImpl : Factory() {
 
     private var application: IngTeriorApplication? = null
     private var move: Move? = null
     private var serverApi: ServerApi? = null
+    private var session: Session? = null
+    private var database: Database? = null
 
     companion object{
         fun register(application: IngTeriorApplication){
@@ -18,6 +18,8 @@ class FactoryImpl : Factory() {
             factory.application = application
             factory.move = MoveImpl()
             factory.serverApi = ServerApiIImpl()
+            factory.session = SessionImpl()
+            factory.database = DatabaseImpl()
         }
     }
 
@@ -31,5 +33,13 @@ class FactoryImpl : Factory() {
 
     override fun getServiceApi(): ServerApi {
         return serverApi!!
+    }
+
+    override fun getSession(): Session {
+        return session!!
+    }
+
+    override fun getDatabase(): Database {
+        return database!!
     }
 }
