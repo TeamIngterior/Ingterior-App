@@ -18,7 +18,7 @@
         android:theme="@style/Theme.IngTetrior"
         tools:targetApi="31">
         <activity
-            android:name=".SiteActivity"
+            android:name=".ui.site.NewSiteActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -65,7 +65,7 @@
         <provider
             android:name=".db.IngTeriorProvider"
             android:authorities="ingterior"
-            android:exported="false"></provider>
+            android:exported="false"/>
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"

@@ -47,12 +47,12 @@ class HomeFragment : Fragment() {
         }
 
         lineSimpleEstimateLayout.setOnClickListener{
-            Factory.get().getMove().moveTestActivity(requireActivity())
+            Factory.get().getMove().moveSimpleEstimationActivity(requireActivity())
         }
 
         lineSiteManagement.setOnClickListener{
             if(Factory.get().getSession().isLogin()) {
-
+                Factory.get().getMove().moveSiteActivity(requireActivity())
             }
             else{
                 Factory.get().getMove().moveSignInActivity(requireActivity())

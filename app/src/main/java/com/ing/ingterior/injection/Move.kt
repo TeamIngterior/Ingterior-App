@@ -7,7 +7,10 @@ abstract class Move {
     abstract fun moveMainActivity(activity: Activity)
     abstract fun moveSimpleEstimationActivity(activity: Activity)
     abstract fun moveSignInActivity(activity: Activity)
-    abstract fun moveResultSimpleEstimationFragment(view: View)
-    abstract fun moveTestActivity(activity: Activity)
+    abstract fun moveSiteActivity(activity: Activity)
 
+    // fragment
+    abstract fun moveResultSimpleEstimationFragment(view: View)
+
+    abstract fun moveTestActivity(activity: Activity)
 }

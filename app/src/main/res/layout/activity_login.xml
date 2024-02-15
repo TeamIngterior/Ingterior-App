@@ -23,28 +23,22 @@
             android:paddingStart="6dp"
             android:paddingEnd="6dp">
 
-            <ImageView
+            <com.ing.ui.button.ImageBackButton
                 android:id="@+id/iv_login_back"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:scaleType="centerInside"
-                android:clickable="true"
                 android:background="@drawable/bg_circle_effect"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
+            <com.ing.ui.text.LabelView
                 android:id="@+id/textView"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:fontFamily="@font/pretendard_bold"
                 android:gravity="center"
                 android:text="@string/menu_login"
-                android:textColor="@color/text_color_06"
-                android:textSize="@dimen/title_h3"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -72,15 +66,13 @@
             android:layout_height="64dp"
             app:srcCompat="@drawable/ic_main_logo_vertical" />
 
-        <TextView
+        <com.ing.ui.text.TitleH2View
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/pretendard_semibold"
             android:lineSpacingExtra="8dp"
-            android:text="@string/prompt_explore_more_interior_services"
-            android:textColor="@color/text_color_06"
-            android:textSize="@dimen/title_h1" />
+            android:text="@string/prompt_explore_more_interior_services" />
 
 
         <LinearLayout
@@ -89,21 +81,18 @@
             android:layout_marginTop="8dp"
             android:orientation="horizontal">
 
-            <TextView
+            <com.ing.ui.text.LabelView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/pretendard_medium"
-                android:text="1분"
-                android:textColor="@color/text_color_06"
-                android:textSize="@dimen/caption1" />
+                android:text="1분" />
 
-            <TextView
+            <com.ing.ui.text.LabelView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/pretendard_medium"
                 android:text="이면 회원가입 가능해요."
-                android:textColor="@color/text_color_04"
-                android:textSize="@dimen/caption1" />
+                app:customTextColor="@color/text_color_04" />
 
         </LinearLayout>
 
@@ -137,14 +126,11 @@
                 android:layout_marginEnd="8dp"
                 app:srcCompat="@drawable/ic_logo_kakao_24" />
 
-            <TextView
+            <com.ing.ui.text.LabelView
                 android:id="@+id/tv_login_kakaotalk"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/pretendard_semibold"
-                android:text="@string/action_login_kakaotalk"
-                android:textColor="@color/text_color_06"
-                android:textSize="@dimen/body1" />
+                android:text="@string/action_login_kakaotalk" />
 
         </LinearLayout>
 
@@ -165,14 +151,12 @@
                 android:padding="2dp"
                 app:srcCompat="@drawable/ic_logo_naver_24" />
 
-            <TextView
+            <com.ing.ui.text.LabelView
                 android:id="@+id/tv_login_naver"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/pretendard_semibold"
                 android:text="@string/action_login_naver"
-                android:textColor="@color/text_color_01"
-                android:textSize="@dimen/body1" />
+                app:customTextColor="@color/text_color_01" />
 
         </LinearLayout>
 
@@ -193,14 +177,11 @@
                 android:layout_marginEnd="8dp"
                 app:srcCompat="@drawable/ic_logo_google_24" />
 
-            <TextView
+            <com.ing.ui.text.LabelView
                 android:id="@+id/tv_login_google"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/pretendard_semibold"
-                android:text="@string/action_login_google"
-                android:textColor="@color/text_color_06"
-                android:textSize="@dimen/body1" />
+                android:text="@string/action_login_google" />
 
         </LinearLayout>
 
@@ -219,16 +200,13 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginEnd="8dp"
-                app:srcCompat="@drawable/ic_logo_google_24" />
+                app:srcCompat="@drawable/ic_logo_instagram_24" />
 
-            <TextView
+            <com.ing.ui.text.LabelView
                 android:id="@+id/tv_login_instagram"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/pretendard_semibold"
-                android:text="@string/action_login_instagram"
-                android:textColor="@color/text_color_06"
-                android:textSize="@dimen/body1" />
+                android:text="@string/action_login_instagram" />
 
         </LinearLayout>
 

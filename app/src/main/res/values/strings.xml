@@ -16,5 +16,6 @@
     <string name="action_login_instagram">Instagram으로 이용하기</string>
     <string name="prompt_home_renovation_cost_estimate">우리 집 인테리어 공사는 얼마일까?</string>
     <string name="action_simple_estimate">인테리어 간편견적</string>
+    <string name="prompt_enter_site_name">현장 주소(이름)를 입력해 주세요.</string>
 
 </resources>
