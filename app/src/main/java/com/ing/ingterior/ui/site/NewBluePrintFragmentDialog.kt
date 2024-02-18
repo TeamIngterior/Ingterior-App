@@ -1,5 +1,6 @@
 package com.ing.ingterior.ui.site
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -21,48 +22,38 @@ import com.ing.ingterior.util.FileWrapper.createFileName
 import com.ing.ingterior.util.FileWrapper.getImageNameFromUri
 import com.ing.ingterior.util.ImageUtils
 import com.ing.ui.button.VisualButton
+import com.ing.ui.button.VisualButton2
 import com.ing.ui.button.VisualImageButton
 import com.ing.ui.text.label.LabelView
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+
 
 class NewBluePrintFragmentDialog : DialogFragment() {
+    interface DialogListener {
+        fun onDialogDismiss()
+    }
 
     companion object{
         private const val TAG = "NewBluePrintFragmentDialog"
     }
 
+    var listener: DialogListener? = null
+
     private val vibClose:VisualImageButton by lazy { requireView().findViewById(R.id.vib_new_blue_print_close) }
     private val vibRotate:VisualImageButton by lazy { requireView().findViewById(R.id.vib_new_blue_print_rotate) }
     private val vibHorizontalInversion:VisualImageButton by lazy { requireView().findViewById(R.id.vib_new_blue_print_horizontal_inversion) }
     private val vibVerticalInversion:VisualImageButton by lazy { requireView().findViewById(R.id.vib_new_blue_print_vertical_inversion) }
+    private val btnReset: VisualButton2 by lazy { requireView().findViewById(R.id.btn_blue_print_reset) }
+
     private val viewSelectImage:View by lazy { requireView().findViewById(R.id.view_new_blue_print_select_image) }
     private val labelSelectImage:LabelView by lazy { requireView().findViewById(R.id.label_new_blue_print_select_image) }
     private val ivSelectImage:ImageView by lazy { requireView().findViewById(R.id.iv_new_blue_print_select_image) }
     private val btnCommit: VisualButton by lazy { requireView().findViewById(R.id.btn_new_blue_print_commit) }
 
-
     private val viewModel : SiteViewModel by lazy { ViewModelProvider(this, IngTeriorViewModelFactory())[SiteViewModel::class.java] }
 
-    private val getPictureResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
-        if(result.resultCode == AppCompatActivity.RESULT_OK) {
-            val photoUri = result.data?.data
-            if(photoUri != null) {
-                val fileName = createFileName(requireContext(), photoUri)
-                val fileName2 = getImageNameFromUri(requireContext(), photoUri)
-
-                Log.d(TAG, "onCreate: fileName＝${fileName}, fileName2＝${fileName2}")
-                if(fileName!=null){
-                    viewModel.bluePrintModel.postValue(BluePrintModel(0L, photoUri, fileName2, 0f))
-                }
-                else{
-                    Toast.makeText(requireContext(), "유효하지 않은 타입의 사진입니다.", Toast.LENGTH_SHORT).show()
-                }
-            }
-            else{
-                Toast.makeText(requireContext(), "사진을 불러오지 못했습니다.", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -116,14 +107,28 @@ class NewBluePrintFragmentDialog : DialogFragment() {
 
             lifecycleScope.launch {
                 viewModel.bluePrintModel.value?.updateVerticalInversion()
-
                 ivSelectImage.setImageBitmap(viewModel.reScaleBluePrintImage(requireContext()))
             }
         }
 
-        viewSelectImage.setOnClickListener {
-            getPictureResult.launch(ImageUtils.getPictureIntent())
+        btnReset.setOnClickListener {
+            val bluePrint = viewModel.bluePrintModel.value ?: return@setOnClickListener
+            val ifNeedReset = bluePrint.horizontalInversion || bluePrint.verticalInversion || bluePrint.rotation > 0
+            if(ifNeedReset) {
+                lifecycleScope.launch{
+                    withContext(Dispatchers.IO){
+                        viewModel.bluePrintModel.postValue(BluePrintModel(0L, bluePrint.uri, bluePrint.name))
+                    }
+                    ivSelectImage.setImageBitmap(viewModel.reScaleBluePrintImage(requireContext()))
+                }
+            }
+
+
         }
+
+//        viewSelectImage.setOnClickListener {
+//            getPictureResult.launch(ImageUtils.getPictureIntent())
+//        }
 
         btnCommit.setOnClickListener {
             dismiss()
@@ -140,7 +145,7 @@ class NewBluePrintFragmentDialog : DialogFragment() {
                     labelSelectImage.isVisible = false
                     ivSelectImage.isVisible = true
                     btnCommit.isEnabled = true
-                    ivSelectImage.setImageBitmap(viewModel.reScaleBluePrintImage(requireContext()))
+                    ivSelectImage.setImageBitmap(viewModel.getImageBitmap(requireContext()))
                 }
             }
 
@@ -158,5 +163,10 @@ class NewBluePrintFragmentDialog : DialogFragment() {
             val height = displayMetrics.heightPixels * 0.85 // 화면 높이의 75%
             dialog.window?.setLayout(width, height.toInt())
         }
+    }
+
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+        listener?.onDialogDismiss()
     }
 }

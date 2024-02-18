@@ -11,8 +11,10 @@ import android.util.Log
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.distinctUntilChanged
 import androidx.lifecycle.lifecycleScope
 import com.ing.ingterior.EXTRA_MOVE_INDEX
 import com.ing.ingterior.R
@@ -23,9 +25,13 @@ import com.ing.ingterior.db.Site.CODE
 import com.ing.ingterior.db.Site.CONTENT_URI
 import com.ing.ingterior.db.Site.NAME
 import com.ing.ingterior.injection.Factory
+import com.ing.ingterior.model.BluePrintModel
 import com.ing.ingterior.ui.IngTeriorViewModelFactory
+import com.ing.ingterior.util.FileWrapper
 import com.ing.ingterior.util.FileWrapper.createImageFile
+import com.ing.ingterior.util.ImageUtils
 import com.ing.ui.button.VisualButton
+import com.ing.ui.button.VisualButton2
 import com.ing.ui.check.VisualCheckBox
 import com.ing.ui.text.edit.InputTextLayout
 import kotlinx.coroutines.*
@@ -43,9 +49,45 @@ class NewSiteActivity : AppCompatActivity() {
     private val btnAdd: VisualButton by lazy { findViewById(R.id.btn_new_site_add) }
     private val vcbDefects: VisualCheckBox by lazy { findViewById(R.id.vcb_new_site_defects) }
     private val vcbManagement: VisualCheckBox by lazy { findViewById(R.id.vcb_new_site_management) }
-    private val lineAddImage: LinearLayout by lazy { findViewById(R.id.line_new_site_add_image) }
+    private val btnAddImage: VisualButton2 by lazy { findViewById(R.id.btn_new_site_add_image) }
+
+    private val lineAddImage: LinearLayout by lazy { findViewById(R.id.line_new_site_image) }
+    private val ivImage: ImageView by lazy { findViewById(R.id.iv_new_site_image) }
+    private val btnEditImage: VisualButton2 by lazy { findViewById(R.id.btn_new_site_edit_image) }
+    private val btnRemoveImage: VisualButton2 by lazy { findViewById(R.id.btn_new_site_remove_image) }
+
+    private val dismissListener = object : NewBluePrintFragmentDialog.DialogListener {
+        override fun onDialogDismiss() {
+            lifecycleScope.launch {
+                ivImage.setImageBitmap(viewModel.getImageBitmap(this@NewSiteActivity))
+            }
+        }
+
+    }
 
     private val viewModel : SiteViewModel by lazy { ViewModelProvider(this, IngTeriorViewModelFactory())[SiteViewModel::class.java] }
+
+    private val getPictureResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
+        if(result.resultCode == RESULT_OK) {
+            val photoUri = result.data?.data
+            if(photoUri != null) {
+                val fileName = FileWrapper.createFileName(this, photoUri)
+                val fileName2 = FileWrapper.getImageNameFromUri(this, photoUri)
+
+                Log.d(TAG, "onCreate: fileName＝${fileName}, fileName2＝${fileName2}")
+                if(fileName!=null){
+                    viewModel.bluePrintModel.postValue(BluePrintModel(0L, photoUri, fileName2))
+                    showImageDialog()
+                }
+                else{
+                    Toast.makeText(this, "유효하지 않은 타입의 사진입니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
+            else{
+                Toast.makeText(this, "사진을 불러오지 못했습니다.", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,10 +119,12 @@ class NewSiteActivity : AppCompatActivity() {
             btnAdd.isEnabled = viewModel.requireEnable()
         }
 
-        lineAddImage.setOnClickListener {
-            val transaction = supportFragmentManager.beginTransaction()
-            val bluePrintFragmentDialog = NewBluePrintFragmentDialog()
-            bluePrintFragmentDialog.show(transaction, "bluePrintFragmentDialog ")
+        btnEditImage.setOnClickListener {
+            showImageDialog()
+        }
+
+        btnAddImage.setOnClickListener {
+            getPictureResult.launch(ImageUtils.getPictureIntent())
         }
 
         btnAdd.setOnClickListener {
@@ -97,7 +141,7 @@ class NewSiteActivity : AppCompatActivity() {
                 Log.d(TAG, "onCreate: bluePrintModel＝${viewModel.bluePrintModel.value}")
 
                 val file:File? = if(viewModel.bluePrintModel.value == null) null
-                        else createImageFile(context, viewModel.reScaleBluePrintImage(context)!!, viewModel.bluePrintModel.value?.name ?: "")
+                        else createImageFile(context, viewModel.getImageBitmap(context)!!, viewModel.bluePrintModel.value?.name ?: "")
 
 
                 if(withContext(Dispatchers.IO) {
@@ -120,13 +164,37 @@ class NewSiteActivity : AppCompatActivity() {
                 setResult(RESULT_OK, intent)
                 finish()
             }
-
         }
+
+        viewModel.bluePrintModel.distinctUntilChanged().observe(this) { bluePrint ->
+            lifecycleScope.launch {
+                if(bluePrint==null) {
+                    lineAddImage.isVisible = false
+                    btnAddImage.isVisible = true
+                    ivImage.setImageURI(null)
+                }
+                else{
+                    lineAddImage.isVisible = true
+                    btnAddImage.isVisible = false
+                    ivImage.setImageBitmap(viewModel.getImageBitmap(this@NewSiteActivity))
+                }
+            }
+        }
+
+        btnRemoveImage.setOnClickListener {
+            viewModel.bluePrintModel.postValue(null)
+        }
+    }
+
+    private fun showImageDialog(){
+        val transaction = supportFragmentManager.beginTransaction()
+        val bluePrintFragmentDialog = NewBluePrintFragmentDialog()
+        bluePrintFragmentDialog.listener = dismissListener
+        bluePrintFragmentDialog.show(transaction, "bluePrintFragmentDialog ")
     }
 
     override fun onDestroy() {
         IngTeriorViewModelFactory.siteViewModel = null
-
         super.onDestroy()
     }
 

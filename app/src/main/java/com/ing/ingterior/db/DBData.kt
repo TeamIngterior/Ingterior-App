@@ -10,10 +10,8 @@ object Sign {
     const val LATEST_DATE = "date"
 
     const val CONTENT_URI = "content://ingterior/$TABLE_NAME"
-
     const val CREATE_TABLE = "CREATE TABLE $TABLE_NAME ($_ID INTEGER PRIMARY KEY AUTOINCREMENT, $USER_ID INTEGER NOT NULL, " +
             "$EMAIL TEXT NOT NULL, $TOKEN TEXT NOT NULL, $TYPE INTEGER NOT NULL, $LATEST_DATE INTEGER NOT NULL);"
-
     val PROJECTION = arrayOf(_ID, USER_ID, EMAIL, TOKEN, TYPE, LATEST_DATE)
 }
 
@@ -27,7 +25,6 @@ object Site {
     const val CREATE_DATE = "create_date"
 
     const val CONTENT_URI = "content://ingterior/${TABLE_NAME}"
-
     const val CREATE_TABLE = "CREATE TABLE $TABLE_NAME($_ID INTEGER PRIMARY KEY AUTOINCREMENT, $USER_ID INTEGER NOT NULL, $NAME TEXT NOT NULL, $CODE TEXT NOT NULL, " +
             "$BLUEPRINT_ID INTEGER NOT NULL, $CREATE_DATE INTEGER NOT NULL);"
     val QUERY_ALL = "SELECT site._id, site.user_id, site.name, site.code, site.blueprint_id, site.create_date, " +

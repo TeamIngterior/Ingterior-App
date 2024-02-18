@@ -3,7 +3,7 @@
     <dimen name="image_button_size">40dp</dimen>
     <dimen name="image_button_padding">12dp</dimen>
 
-    <dimen name="login_icon_size">18dp</dimen>
+    <dimen name="login_icon_size">16dp</dimen>
     <dimen name="login_label_start_margin">8dp</dimen>
 
     <dimen name="horizontal_input_text_padding">16dp</dimen>

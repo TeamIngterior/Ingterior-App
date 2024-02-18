@@ -25,4 +25,10 @@
     <declare-styleable name="VisualImageButton">
         <attr name="visualBackground" format="reference"/>
     </declare-styleable>
+
+    <declare-styleable name="VisualButton2">
+        <attr name="visualSrc" format="reference"/>
+        <attr name="visualText" format="string"/>
+        <attr name="visualIconSize" format="dimension"/>
+    </declare-styleable>
 </resources>

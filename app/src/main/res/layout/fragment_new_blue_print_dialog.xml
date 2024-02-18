@@ -68,17 +68,29 @@
 
     </LinearLayout>
 
+    <com.ing.ui.button.VisualButton2
+        android:id="@+id/btn_blue_print_reset"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp"
+        app:layout_constraintEnd_toEndOf="@+id/frame_new_blue_print_select_image"
+        app:layout_constraintStart_toStartOf="@+id/frame_new_blue_print_select_image"
+        app:layout_constraintTop_toBottomOf="@+id/line_new_blue_print_options"
+        app:visualText="이미지 원본으로 되돌리기" />
+
     <FrameLayout
         android:id="@+id/frame_new_blue_print_select_image"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:orientation="horizontal"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/bg_round_square_effect"
         android:clickable="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/line_new_blue_print_options">
+        app:layout_constraintTop_toBottomOf="@+id/btn_blue_print_reset">
 
         <com.ing.ui.text.label.LabelView
             android:id="@+id/label_new_blue_print_select_image"
@@ -102,7 +114,7 @@
             android:id="@+id/view_new_blue_print_select_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clickable="true"
+            android:clickable="false"
             android:background="@drawable/bg_view_effect"/>
 
     </FrameLayout>

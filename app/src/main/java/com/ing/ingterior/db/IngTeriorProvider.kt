@@ -107,20 +107,18 @@ class IngTeriorProvider : ContentProvider() {
                     }
                 }
 
-                if (bluePrintId != -1L) {
-                    val siteValues = ContentValues().apply {
-                        put(USER_ID, contentValues.getAsLong(USER_ID))
-                        put(NAME, contentValues.getAsString(NAME))
-                        put(CODE, contentValues.getAsString(CODE))
-                        put(BLUEPRINT_ID, bluePrintId)
-                        put(CREATE_DATE, Date().time)
-                    }
-
-                    val rowId = withContext(Dispatchers.IO) {
-                        db.insert(Site.TABLE_NAME, null, siteValues)
-                    }
-                    rsUri = Uri.parse("$uri/$rowId")
+                val siteValues = ContentValues().apply {
+                    put(USER_ID, contentValues.getAsLong(USER_ID))
+                    put(NAME, contentValues.getAsString(NAME))
+                    put(CODE, contentValues.getAsString(CODE))
+                    put(BLUEPRINT_ID, bluePrintId)
+                    put(CREATE_DATE, Date().time)
                 }
+
+                val rowId = withContext(Dispatchers.IO) {
+                    db.insert(Site.TABLE_NAME, null, siteValues)
+                }
+                rsUri = Uri.parse("$uri/$rowId")
             }
             else -> throw UnsupportedOperationException(NO_DELETES_INSERTS_OR_UPDATES + uri)
         }

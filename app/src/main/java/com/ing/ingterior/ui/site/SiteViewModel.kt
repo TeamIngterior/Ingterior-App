@@ -23,6 +23,11 @@ class SiteViewModel : ViewModel() {
         return siteName.isNotEmpty() && (isDefects || isManagement)
     }
 
+    suspend fun getImageBitmap(context: Context): Bitmap? {
+        return if(bluePrintModel.value?.bitmap == null) reScaleBluePrintImage(context)
+        else bluePrintModel.value?.bitmap
+    }
+
     suspend fun reScaleBluePrintImage(context: Context): Bitmap? = withContext(Dispatchers.IO) {
         val photoUri = bluePrintModel.value?.uri ?: return@withContext null
         val rotation = bluePrintModel.value?.rotation ?: 0f
@@ -38,6 +43,9 @@ class SiteViewModel : ViewModel() {
         // 필요에 따라 이미지 좌우 반전
         val flipHorizontalBitmap = ImageUtils.GraphicUtils.flipImageHorizontally(rotatedBitmap, horizontalInversion)
 
-        ImageUtils.GraphicUtils.flipImageVertically(flipHorizontalBitmap, verticalInversion)
+        val rsBitmap = ImageUtils.GraphicUtils.flipImageVertically(flipHorizontalBitmap, verticalInversion)
+        bluePrintModel.value?.bitmap = rsBitmap
+
+        rsBitmap
     }
 }
