@@ -3,18 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menu_main"
-        android:icon="@drawable/ic_baseline_home_24"
-        android:title="메인"/>
+        android:icon="@drawable/ic_home_24"
+        android:title="@string/menu_main"/>
     <item
         android:id="@+id/menu_site_management"
-        android:icon="@drawable/ic_baseline_calendar_today_24"
-        android:title="현장관리"/>
+        android:icon="@drawable/ic_site_list_24"
+        android:title="@string/menu_site_list"/>
     <item
         android:id="@+id/menu_message"
-        android:icon="@drawable/ic_baseline_message_24"
-        android:title="메시지"/>
+        android:icon="@drawable/ic_message_24"
+        android:title="@string/menu_message"/>
     <item
         android:id="@+id/menu_setting"
-        android:icon="@drawable/ic_baseline_settings_24"
-        android:title="설정"/>
+        android:icon="@drawable/ic_setting_24"
+        android:title="@string/menu_setting"/>
 </menu>

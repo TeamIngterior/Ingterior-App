@@ -66,6 +66,9 @@ class MainActivity : AppCompatActivity() {
                 true
             }
         }
+    }
 
+    fun selectBottomNavigationMenuItem(index: Int) {
+        bottomNavView.selectedItemId = viewModel.getPageId(index)
     }
 }

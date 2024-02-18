@@ -17,7 +17,7 @@ class InputSimpleEstimationFragment : Fragment() {
         private const val TAG = "InputSimpleEstimationFragment"
     }
 
-    private val viewModel : SimpleEstimationViewModel by lazy { ViewModelProvider(this, IngTeriorViewModelFactory())[SimpleEstimationViewModel::class.java] }
+
     private val btnResult: Button by lazy { requireView().findViewById(R.id.btn_ise_result) }
 
     override fun onCreate(savedInstanceState: Bundle?) {

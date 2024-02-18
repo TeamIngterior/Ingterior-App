@@ -3,19 +3,37 @@
     <string name="hello_blank_fragment">빈 페이지</string>
     <string name="menu_login">로그인</string>
     <string name="title_add_new_site">새 현장 추가</string>
-    <string name="action_view_quick_estimate">인테리어 간편견적</string>
     <string name="message_interior_estimate">간편견적보기</string>
+    <string name="tip_register_new_site">이사할 때, 입주 전 확인할 때 필수!</string>
+
     <string name="prompt_check_and_management">하자체크&amp;공사관리</string>
     <string name="prompt_login_required">로그인이 필요한 서비스입니다.\n로그인 하기</string>
     <string name="prompt_register_new_site">새 현장을 등록해 보세요!</string>
-    <string name="tip_register_new_site">이사할 때, 입주 전 확인할 때 필수!</string>
     <string name="prompt_explore_more_interior_services">잉테리어의 더 많은 서비스를 \n시작해 보세요!</string>
+    <string name="prompt_home_renovation_cost_estimate">우리 집 인테리어 공사는 얼마일까?</string>
+    <string name="title_enter_site_name">현장 주소(이름)를 입력해 주세요.</string>
+
     <string name="action_login_kakaotalk">카카오톡으로 이용하기</string>
     <string name="action_login_naver">네이버로 이용하기</string>
     <string name="action_login_google">Google로 이용하기</string>
     <string name="action_login_instagram">Instagram으로 이용하기</string>
-    <string name="prompt_home_renovation_cost_estimate">우리 집 인테리어 공사는 얼마일까?</string>
     <string name="action_simple_estimate">인테리어 간편견적</string>
-    <string name="prompt_enter_site_name">현장 주소(이름)를 입력해 주세요.</string>
+    <string name="action_add_image">이미지 첨부하기</string>
+    <string name="action_view_quick_estimate">인테리어 간편견적</string>
+    <string name="action_add_new_site">새 현장 추가하기</string>
+
+
+    <string name="hint_new_site_1">마커 기능을 사용하여 현장관리를 더 효율적으로 이용할 수 있습니다.</string>
+    <string name="hint_new_site_2">-최대 1개까지 추가 가능합니다.\n-파일 형식은 Jpg, Jpeg, Png, Gif 만 가능합니다.\n-최대 5MB 까지 등록 가능합니다.</string>
+    <string name="label_defect_check">하자체크</string>
+    <string name="label_site_management">공사관리</string>
+    <string name="caption_muti_select_enabled">다중선택 가능</string>
+    <string name="title_select_site_type">현장의 유형을 선택해주세요.</string>
+    <string name="caption_option">(선택)</string>
+    <string name="title_upload_site_plan_image">현장 도면 이미지를 업로드 해주세요.</string>
+    <string name="menu_main">메인</string>
+    <string name="menu_site_list">현장 목록</string>
+    <string name="menu_message">메시지</string>
+    <string name="menu_setting">설정</string>
 
 </resources>

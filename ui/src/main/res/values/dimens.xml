@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="back_button_size">48dp</dimen>
-    <dimen name="back_button_padding">18dp</dimen>
+    <dimen name="image_button_size">40dp</dimen>
+    <dimen name="image_button_padding">12dp</dimen>
+
+    <dimen name="login_icon_size">18dp</dimen>
+    <dimen name="login_label_start_margin">8dp</dimen>
 
     <dimen name="horizontal_input_text_padding">16dp</dimen>
     <dimen name="vertical_input_text_padding">14dp</dimen>
+
+    <dimen name="input_text_support_start_margin">14dp</dimen>
+
+
+    <dimen name="check_box_spacing">8dp</dimen>
+    <dimen name="check_box_size">16dp</dimen>
+
 
 </resources>

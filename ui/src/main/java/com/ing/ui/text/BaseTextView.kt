@@ -15,5 +15,7 @@ open class BaseTextView : androidx.appcompat.widget.AppCompatTextView {
         context,
         attrs,
         defStyleAttr
-    ){}
+    ){
+
+    }
 }

@@ -41,4 +41,7 @@
     <color name="btn_kakaotalk_color">#FEE500</color>
     <color name="btn_naver_color">#03C75A</color>
     <color name="btn_google_insta_color">#FFFFFF</color>
+
+    <color name="transparent_color">#00000000</color>
+    <color name="transparent_20_color">#33000000</color>
 </resources>

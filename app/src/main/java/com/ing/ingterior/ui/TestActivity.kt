@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.ing.ingterior.R
 import com.ing.ingterior.cameraPermission
 import com.ing.ingterior.util.ImageUtils
+import com.ing.ingterior.util.ImageUtils.GraphicUtils.rotateImageIfRequired
 import com.ing.ingterior.util.PermissionUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -36,7 +37,7 @@ class TestActivity : AppCompatActivity() {
                     }
 
                     val rotatedBitmap:Bitmap = withContext(Dispatchers.IO){
-                        ImageUtils.rotateImageIfRequired(imageBitmap, ImageUtils.imageFile!!)
+                        rotateImageIfRequired(imageBitmap, ImageUtils.imageFile!!)
                     }
 
                     ivTest.setImageBitmap(rotatedBitmap)

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <size android:width="2dp" />
+    <solid android:color="@color/primary_color07"/> <!-- 여기에서 커서 색상을 원하는 대로 변경 -->
+</shape>

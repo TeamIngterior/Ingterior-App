@@ -9,10 +9,11 @@ private const val DATABASE_VERSION = 1
 class IngTeriorDBHelper(context: Context) : SQLiteOpenHelper(context, "${AUTHORITY}.db", null, DATABASE_VERSION) {
 
     override fun onCreate(db: SQLiteDatabase) {
-        db.execSQL(Log.CREATE_LOG_TABLE)
-        db.execSQL(Site.CREATE_SITE_TABLE)
-        db.execSQL(Site.Management.CREATE_MANAGEMENT_TABLE)
-        db.execSQL(Site.Fold.CREATE_FOLD_TABLE)
+        db.execSQL(Sign.CREATE_TABLE)
+        db.execSQL(Site.CREATE_TABLE)
+        db.execSQL(Image.CREATE_TABLE)
+        db.execSQL(Management.CREATE_TABLE)
+        db.execSQL(Fold.CREATE_TABLE)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_color"
     tools:context=".ui.site.NewSiteActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -23,15 +24,17 @@
             android:paddingStart="6dp"
             android:paddingEnd="6dp">
 
-            <com.ing.ui.button.ImageBackButton
+            <com.ing.ui.button.VisualImageButton
                 android:id="@+id/iv_site_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_back_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
-            <com.ing.ui.text.LabelView
+            <com.ing.ui.text.label.LabelView
                 android:id="@+id/textView"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -47,51 +50,220 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <LinearLayout
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="vertical"
-        android:paddingStart="@dimen/page_horizontal_padding"
-        android:paddingEnd="@dimen/page_horizontal_padding"
+        android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar2">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar2"
+        app:layout_constraintVertical_bias="0.0">
+
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingTop="24dp">
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/page_horizontal_padding"
+            android:paddingEnd="@dimen/page_horizontal_padding"
+            android:paddingBottom="84dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar2">
 
-            <com.ing.ui.text.TitleH5View
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/title_h5"
-                android:text="@string/prompt_enter_site_name"
-                android:layout_marginEnd="1dp"/>
+                android:layout_marginTop="24dp"
+                android:orientation="horizontal">
 
-            <com.ing.ui.text.TitleH5View
-                android:layout_width="wrap_content"
+                <com.ing.ui.text.title.TitleH5View
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="1dp"
+                    android:text="@string/title_enter_site_name" />
+
+                <com.ing.ui.text.title.TitleH5View
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="*"
+                    app:customTextColor="@color/secondary_color05" />
+
+            </LinearLayout>
+
+            <com.ing.ui.text.edit.InputTextLayout
+                android:id="@+id/itv_new_site_name_layout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/secondary_color05"
-                android:fontFamily="@font/pretendard_medium"
-                android:textSize="@dimen/title_h5"
-                android:text="*"/>
+                android:layout_marginTop="16dp"
+                app:inputHint="띄어쓰기 포함 최대 50자"
+                app:inputMax="50"
+                app:inputSupportSpacing="2dp" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:orientation="horizontal">
+
+                <com.ing.ui.text.title.TitleH5View
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="1dp"
+                    android:text="@string/title_select_site_type" />
+
+                <com.ing.ui.text.title.TitleH5View
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="*"
+                    app:customTextColor="@color/secondary_color05" />
+
+                <com.ing.ui.text.caption.Caption2View
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:text="@string/caption_muti_select_enabled" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal">
+
+                <com.ing.ui.check.VisualCheckBox
+                    android:id="@+id/vcb_new_site_defects"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    app:checkBoxText="@string/label_defect_check"
+                    app:isChecked="true" />
+
+                <TextView
+                    android:layout_width="8dp"
+                    android:layout_height="match_parent" />
+
+
+                <com.ing.ui.check.VisualCheckBox
+                    android:id="@+id/vcb_new_site_management"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    app:checkBoxText="@string/label_site_management" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.ing.ui.text.title.TitleH5View
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="1dp"
+                        android:text="@string/title_upload_site_plan_image" />
+
+                    <com.ing.ui.text.caption.Caption2View
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:text="@string/caption_option" />
+
+                </LinearLayout>
+
+                <com.ing.ui.text.caption.Caption2View
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/hint_new_site_1" />
+
+                <LinearLayout
+                    android:id="@+id/line_new_site_add_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/bg_add_image"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:layout_marginEnd="6dp"
+                        app:srcCompat="@drawable/ic_add_image" />
+
+                    <com.ing.ui.text.label.LabelView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/action_add_image" />
+
+                </LinearLayout>
+
+
+                <com.ing.ui.text.caption.Caption2View
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:lineSpacingExtra="4dp"
+                    android:text="@string/hint_new_site_2" />
+
+
+            </LinearLayout>
 
         </LinearLayout>
 
-        <com.ing.ui.text.InputTextView
-            android:id="@+id/itv_new_site_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:hint="띄어쓰기 포함 최대 50자"/>
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.ing.ui.button.VisualButton
+        android:id="@+id/btn_new_site_add"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:enabled="false"
+        android:text="@string/action_add_new_site"
+        android:layout_marginStart="@dimen/page_horizontal_padding"
+        android:layout_marginEnd="@dimen/page_horizontal_padding"
+        android:layout_marginBottom="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/nestedScrollView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/line_new_site_progress"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/transparent_20_color"
+        android:gravity="center"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
 
     </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,3 +9,5 @@ var storagePermissions = arrayOf(
 )
 
 var cameraPermission = Manifest.permission.CAMERA
+
+const val EXTRA_MOVE_INDEX = "move_index"

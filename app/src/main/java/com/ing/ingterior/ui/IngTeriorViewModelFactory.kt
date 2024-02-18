@@ -3,12 +3,14 @@ package com.ing.ingterior.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.ing.ingterior.ui.simple.SimpleEstimationViewModel
+import com.ing.ingterior.ui.site.SiteViewModel
 
 class IngTeriorViewModelFactory : ViewModelProvider.Factory {
 
     companion object{
         private val mainViewModel = MainViewModel()
-        private val interiorViewModel = SimpleEstimationViewModel()
+        var simpleEstimationViewModel: SimpleEstimationViewModel? = SimpleEstimationViewModel()
+        var siteViewModel: SiteViewModel? = SiteViewModel()
 
     }
 
@@ -17,7 +19,12 @@ class IngTeriorViewModelFactory : ViewModelProvider.Factory {
             return mainViewModel as T
         }
         else if (modelClass.isAssignableFrom(SimpleEstimationViewModel::class.java)) {
-            return interiorViewModel as T
+            if(simpleEstimationViewModel == null) simpleEstimationViewModel = SimpleEstimationViewModel()
+            return simpleEstimationViewModel as T
+        }
+        else if (modelClass.isAssignableFrom(SiteViewModel::class.java)) {
+            if(siteViewModel == null) siteViewModel = SiteViewModel()
+            return siteViewModel as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

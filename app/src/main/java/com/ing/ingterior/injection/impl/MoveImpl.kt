@@ -3,12 +3,13 @@ package com.ing.ingterior.injection.impl
 import android.app.Activity
 import android.content.Intent
 import android.view.View
+import androidx.activity.result.ActivityResultLauncher
 import androidx.navigation.Navigation
 import com.ing.ingterior.R
 import com.ing.ingterior.injection.Move
 import com.ing.ingterior.ui.MainActivity
 import com.ing.ingterior.ui.TestActivity
-import com.ing.ingterior.ui.sign.SignInActivity
+import com.ing.ingterior.ui.log.SignInActivity
 import com.ing.ingterior.ui.simple.SimpleEstimationActivity
 import com.ing.ingterior.ui.site.NewSiteActivity
 
@@ -31,10 +32,13 @@ class MoveImpl : Move() {
         activity.startActivity(intent)
     }
 
-    override fun moveSiteActivity(activity: Activity) {
+    override fun moveSiteActivity(
+        activity: Activity,
+        moveResultLauncher: ActivityResultLauncher<Intent>
+    ) {
         val intent = Intent(activity, NewSiteActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-        activity.startActivity(intent)
+        moveResultLauncher.launch(intent)
     }
 
     override fun moveResultSimpleEstimationFragment(view: View) {

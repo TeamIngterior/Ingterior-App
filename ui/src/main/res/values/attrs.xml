@@ -4,4 +4,25 @@
         <attr name="customTextColor" format="color" />
         <attr name="customTextSize" format="dimension" />
     </declare-styleable>
+
+    <declare-styleable name="InputTextLayout">
+        <attr name="inputText" format="string"/>
+        <attr name="inputHint" format="string"/>
+        <attr name="inputMax" format="integer"/>
+        <attr name="inputSupportText" format="string"/>
+        <attr name="inputSupportSpacing" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="IngCheckBox">
+        <attr name="checkBoxText" format="string"/>
+        <attr name="isChecked" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="LoginButton">
+        <attr name="loginType" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="VisualImageButton">
+        <attr name="visualBackground" format="reference"/>
+    </declare-styleable>
 </resources>
