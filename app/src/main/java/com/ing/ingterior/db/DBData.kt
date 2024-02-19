@@ -7,38 +7,36 @@ object Sign {
     const val EMAIL = "email"
     const val TOKEN = "token"
     const val TYPE = "type"
-    const val LATEST_DATE = "date"
+    const val LATEST_DATE = "latest_date"
 
     const val CONTENT_URI = "content://ingterior/$TABLE_NAME"
-    const val CREATE_TABLE = "CREATE TABLE $TABLE_NAME ($_ID INTEGER PRIMARY KEY AUTOINCREMENT, $USER_ID INTEGER NOT NULL, " +
-            "$EMAIL TEXT NOT NULL, $TOKEN TEXT NOT NULL, $TYPE INTEGER NOT NULL, $LATEST_DATE INTEGER NOT NULL);"
+
+
     val PROJECTION = arrayOf(_ID, USER_ID, EMAIL, TOKEN, TYPE, LATEST_DATE)
 }
 
 object Site {
+    const val SITE_MANAGER = "manager"
+    const val SITE_GUEST = "guest"
+
+    const val EXTRA_SITE_OPERATOR = "site_operator"
+    const val FOLD_DEFAULT = 1
+    const val FOLD_MANAGEMENT = 2
+    const val FOLD_ALL = 3
+
     const val TABLE_NAME = "site"
     const val _ID = "_id"
     const val USER_ID = "user_id"
     const val NAME = "name"
     const val CODE = "code"
+    const val DEFAULT_IDS = "default_ids"
+    const val MANAGEMENT_IDS = "management_ids"
     const val BLUEPRINT_ID = "blueprint_id"
-    const val CREATE_DATE = "create_date"
+    const val CREATED_DATE = "created_date"
 
     const val CONTENT_URI = "content://ingterior/${TABLE_NAME}"
-    const val CREATE_TABLE = "CREATE TABLE $TABLE_NAME($_ID INTEGER PRIMARY KEY AUTOINCREMENT, $USER_ID INTEGER NOT NULL, $NAME TEXT NOT NULL, $CODE TEXT NOT NULL, " +
-            "$BLUEPRINT_ID INTEGER NOT NULL, $CREATE_DATE INTEGER NOT NULL);"
-    val QUERY_ALL = "SELECT site._id, site.user_id, site.name, site.code, site.blueprint_id, site.create_date, " +
+    val QUERY_ALL = "SELECT site._id, site.user_id, site.name, site.code, site.default_ids, site.management_ids, site.blueprint_id, site.created_date,  " +
             "image.location, image.filename FROM site JOIN image ON site.blueprint_id = image._id WHERE site._id = ?"
-}
-
-object Management {
-    const val TABLE_NAME = "management"
-    const val _ID = "_id"
-    const val SITE_ID = "site_id"
-    const val FOLDS = "folds"
-
-    const val CREATE_TABLE = "CREATE TABLE $TABLE_NAME(${_ID} INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            "$SITE_ID INTEGER NOT NULL, $FOLDS TEXT NOT NULL);"
 }
 
 object Image {
@@ -46,22 +44,20 @@ object Image {
     const val _ID = "_id"
     const val LOCATION = "location"
     const val FILENAME = "filename"
-    const val CREATE_DATE = "create_date"
+    const val CREATED_DATE = "created_date"
 
-    const val CREATE_TABLE = "CREATE TABLE ${TABLE_NAME}(${_ID} INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            "$LOCATION TEXT NOT NULL, $FILENAME TEXT NOT NULL, $CREATE_DATE INTEGER NOT NULL);"
 }
 
 object Fold {
     const val TABLE_NAME = "fold"
     const val _ID = "_id"
-    const val FOLD_IMAGES = "fold_images"
-    const val FOLD_NAME = "fold_name"
+    const val SITE_ID = "site_id"
+    const val TYPE = "type"
+    const val NAME = "name"
     const val MEMO = "memo"
-    const val CREATER = "creater"
+    const val IMAGE_IDS = "image_ids"
+    const val CREATOR_ID = "creator_id"
+    const val CREATOR_TYPE = "creator_type"
     const val POSITION = "position"
-    const val CREATE_DATE = "create_date"
-
-    const val CREATE_TABLE = "CREATE TABLE $TABLE_NAME(${_ID} INTEGER PRIMARY KEY AUTOINCREMENT, $FOLD_IMAGES TEXT NOT NULL, $FOLD_NAME TEXT NOT NULL, " +
-            "$MEMO TEXT NOT NULL, $CREATER INTEGER NOT NULL, $POSITION TEXT NOT NULL, $CREATE_DATE INTEGER NOT NULL);"
+    const val CREATED_DATE = "created_date"
 }

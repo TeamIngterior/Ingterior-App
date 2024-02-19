@@ -23,6 +23,9 @@ import com.ing.ingterior.db.Image.LOCATION
 import com.ing.ingterior.db.Sign.USER_ID
 import com.ing.ingterior.db.Site.CODE
 import com.ing.ingterior.db.Site.CONTENT_URI
+import com.ing.ingterior.db.Site.FOLD_DEFAULT
+import com.ing.ingterior.db.Site.FOLD_MANAGEMENT
+import com.ing.ingterior.db.Site.EXTRA_SITE_OPERATOR
 import com.ing.ingterior.db.Site.NAME
 import com.ing.ingterior.injection.Factory
 import com.ing.ingterior.model.BluePrintModel
@@ -143,6 +146,10 @@ class NewSiteActivity : AppCompatActivity() {
                 val file:File? = if(viewModel.bluePrintModel.value == null) null
                         else createImageFile(context, viewModel.getImageBitmap(context)!!, viewModel.bluePrintModel.value?.name ?: "")
 
+                var operator = 0
+                if(viewModel.isDefects) operator += FOLD_DEFAULT
+                if(viewModel.isDefects) operator += FOLD_MANAGEMENT
+                val insertUri = Uri.parse(CONTENT_URI).buildUpon().appendQueryParameter(EXTRA_SITE_OPERATOR, operator.toString()).build()
 
                 if(withContext(Dispatchers.IO) {
                         val userId = Factory.get().getSession().getUser()?.id
@@ -152,7 +159,7 @@ class NewSiteActivity : AppCompatActivity() {
                         contentValues.put(CODE, "A${System.currentTimeMillis()}")
                         contentValues.put(LOCATION, file?.absolutePath?:"")
                         contentValues.put(FILENAME, file?.name?:"")
-                        context.contentResolver.insert(Uri.parse(CONTENT_URI), contentValues) == null
+                        context.contentResolver.insert(insertUri, contentValues) == null
                     }) {
                     Toast.makeText(context, "에러 발생", Toast.LENGTH_SHORT).show()
                 }

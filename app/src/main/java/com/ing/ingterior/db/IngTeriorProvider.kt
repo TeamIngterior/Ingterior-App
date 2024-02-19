@@ -4,16 +4,27 @@ import android.content.ContentProvider
 import android.content.ContentValues
 import android.content.UriMatcher
 import android.database.Cursor
+import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
 import android.util.Log
+import com.ing.ingterior.db.Fold.CREATOR_ID
+import com.ing.ingterior.db.Fold.CREATOR_TYPE
+import com.ing.ingterior.db.Fold.SITE_ID
+import com.ing.ingterior.db.Fold.TABLE_NAME
+import com.ing.ingterior.db.Fold.TYPE
 import com.ing.ingterior.db.Image.FILENAME
 import com.ing.ingterior.db.Image.LOCATION
 import com.ing.ingterior.db.Sign.USER_ID
-import com.ing.ingterior.db.Site.CREATE_DATE
+import com.ing.ingterior.db.Site.CREATED_DATE
 import com.ing.ingterior.db.Site.BLUEPRINT_ID
 import com.ing.ingterior.db.Site.CODE
+import com.ing.ingterior.db.Site.FOLD_ALL
+import com.ing.ingterior.db.Site.FOLD_DEFAULT
+import com.ing.ingterior.db.Site.FOLD_MANAGEMENT
+import com.ing.ingterior.db.Site.EXTRA_SITE_OPERATOR
 import com.ing.ingterior.db.Site.NAME
 import com.ing.ingterior.db.Site.QUERY_ALL
+import com.ing.ingterior.db.Site.SITE_MANAGER
 import kotlinx.coroutines.*
 import java.util.Date
 
@@ -95,6 +106,8 @@ class IngTeriorProvider : ContentProvider() {
             }
             MATCH_SITE -> {
                 if(contentValues == null) return@runBlocking null
+                val operator = uri.getQueryParameter(EXTRA_SITE_OPERATOR)?: return@runBlocking null
+
                 val bluePrintId:Long = withContext(Dispatchers.IO){
                     if(contentValues.getAsString(LOCATION).isEmpty()) -1L
                     else{
@@ -102,28 +115,56 @@ class IngTeriorProvider : ContentProvider() {
                         val bluePrintValues = ContentValues(3)
                         bluePrintValues.put(LOCATION, contentValues.getAsString(LOCATION))
                         bluePrintValues.put(FILENAME, contentValues.getAsString(FILENAME))
-                        bluePrintValues.put(CREATE_DATE, Date().time)
+                        bluePrintValues.put(CREATED_DATE, Date().time)
                         db.insert(Image.TABLE_NAME, null, bluePrintValues)
                     }
                 }
+
 
                 val siteValues = ContentValues().apply {
                     put(USER_ID, contentValues.getAsLong(USER_ID))
                     put(NAME, contentValues.getAsString(NAME))
                     put(CODE, contentValues.getAsString(CODE))
                     put(BLUEPRINT_ID, bluePrintId)
-                    put(CREATE_DATE, Date().time)
+                    put(CREATED_DATE, Date().time)
                 }
 
                 val rowId = withContext(Dispatchers.IO) {
                     db.insert(Site.TABLE_NAME, null, siteValues)
                 }
+
+                when(operator.toInt()) {
+                    FOLD_DEFAULT -> {
+                        insertEmptyFold(db, FOLD_DEFAULT, contentValues.getAsLong(USER_ID), rowId)
+                    }
+                    FOLD_MANAGEMENT -> {
+                        insertEmptyFold(db, FOLD_MANAGEMENT, contentValues.getAsLong(USER_ID), rowId)
+                    }
+                    FOLD_ALL -> {
+                        insertEmptyFold(db, FOLD_DEFAULT, contentValues.getAsLong(USER_ID), rowId)
+                        insertEmptyFold(db, FOLD_MANAGEMENT, contentValues.getAsLong(USER_ID), rowId)
+                    }
+                    else -> {
+                        insertEmptyFold(db, FOLD_DEFAULT, contentValues.getAsLong(USER_ID), rowId)
+                    }
+                }
+
                 rsUri = Uri.parse("$uri/$rowId")
             }
             else -> throw UnsupportedOperationException(NO_DELETES_INSERTS_OR_UPDATES + uri)
         }
         Log.d(TAG, "insert: rsUri=$rsUri")
         return@runBlocking rsUri
+    }
+
+    private fun insertEmptyFold(db: SQLiteDatabase, foldType: Int, userId: Long, siteId: Long) {
+        val foldValues = ContentValues()
+        foldValues.put(TYPE, foldType)
+        foldValues.put(SITE_ID, siteId)
+        foldValues.put(CREATOR_ID, userId)
+        foldValues.put(CREATOR_TYPE, SITE_MANAGER)
+        foldValues.put(CREATED_DATE, Date().time)
+        db.insert(TABLE_NAME, null, foldValues)
     }
 
     override fun delete(uri: Uri, selection: String?, selectionArgs: Array<out String>?): Int {
