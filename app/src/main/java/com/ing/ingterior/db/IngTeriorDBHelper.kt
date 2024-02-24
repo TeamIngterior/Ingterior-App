@@ -25,6 +25,8 @@ class IngTeriorDBHelper(context: Context) : SQLiteOpenHelper(context, "${AUTHORI
         const val FOLD_CREATE_TABLE = "CREATE TABLE ${Fold.TABLE_NAME}(${Fold._ID} INTEGER PRIMARY KEY AUTOINCREMENT, ${Fold.SITE_ID} INTEGER NOT NULL, ${Fold.TYPE} INTEGER NOT NULL, ${Fold.NAME} TEXT, ${Fold.IMAGE_IDS} TEXT, " +
                 "${Fold.MEMO} TEXT, ${Fold.CREATOR_ID} INTEGER NOT NULL, ${Fold.CREATOR_TYPE} TEXT NOT NULL, ${Fold.POSITION} TEXT, ${Fold.CREATED_DATE} INTEGER NOT NULL);"
 
+
+        // trigger 생성 안된 상태 디버깅 필요
         const val CREATE_ADD_FOLD_DEFAULT_TRIGGER = "CREATE TRIGGER AddFoldIdToSiteDefault AFTER INSERT ON fold " +
                 "FOR EACH ROW " +
                 "WHEN NEW.type = 1 " +

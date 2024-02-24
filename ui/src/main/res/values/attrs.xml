@@ -31,4 +31,8 @@
         <attr name="visualText" format="string"/>
         <attr name="visualIconSize" format="dimension"/>
     </declare-styleable>
+
+    <declare-styleable name="VisualDotLineButton">
+        <attr name="dotText" format="string"/>
+    </declare-styleable>
 </resources>
