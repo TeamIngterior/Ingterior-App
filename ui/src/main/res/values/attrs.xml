@@ -29,6 +29,7 @@
     <declare-styleable name="VisualButton2">
         <attr name="visualSrc" format="reference"/>
         <attr name="visualText" format="string"/>
+        <attr name="visualTextSize" format="float"/>
         <attr name="visualIconSize" format="dimension"/>
     </declare-styleable>
 

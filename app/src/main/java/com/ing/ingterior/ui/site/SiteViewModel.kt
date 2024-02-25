@@ -2,12 +2,19 @@ package com.ing.ingterior.ui.site
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.net.Uri
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.ing.ingterior.db.Image
+import com.ing.ingterior.db.Site
+import com.ing.ingterior.db.Status
+import com.ing.ingterior.injection.Factory
 import com.ing.ingterior.model.BluePrintModel
 import com.ing.ingterior.util.ImageUtils
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.withContext
 
 class SiteViewModel : ViewModel() {
@@ -48,4 +55,6 @@ class SiteViewModel : ViewModel() {
 
         rsBitmap
     }
+
+
 }

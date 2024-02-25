@@ -7,26 +7,8 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
 import android.util.Log
-import com.ing.ingterior.db.Fold.CREATOR_ID
-import com.ing.ingterior.db.Fold.CREATOR_TYPE
-import com.ing.ingterior.db.Fold.SITE_ID
-import com.ing.ingterior.db.Fold.TABLE_NAME
-import com.ing.ingterior.db.Fold.TYPE
-import com.ing.ingterior.db.Image.FILENAME
-import com.ing.ingterior.db.Image.LOCATION
-import com.ing.ingterior.db.Sign.USER_ID
-import com.ing.ingterior.db.Site.CREATED_DATE
-import com.ing.ingterior.db.Site.BLUEPRINT_ID
-import com.ing.ingterior.db.Site.CODE
-import com.ing.ingterior.db.Site.FOLD_ALL
-import com.ing.ingterior.db.Site.FOLD_DEFAULT
-import com.ing.ingterior.db.Site.FOLD_MANAGEMENT
-import com.ing.ingterior.db.Site.EXTRA_SITE_OPERATOR
-import com.ing.ingterior.db.Site.NAME
-import com.ing.ingterior.db.Site.QUERY_ALL
-import com.ing.ingterior.db.Site.SITE_MANAGER
 import kotlinx.coroutines.*
-import java.util.Date
+import java.util.*
 
 
 class IngTeriorProvider : ContentProvider() {
@@ -70,7 +52,9 @@ class IngTeriorProvider : ContentProvider() {
     ): Cursor? {
         var cursor: Cursor? = null
         val db = dbHelper.readableDatabase
-        when(URI_MATCHER.match(uri)) {
+        val matcher = URI_MATCHER.match(uri)
+        Log.d(TAG, "query: uri=$uri, matcher=$matcher, selection=$selection, selectionArgs=${Arrays.toString(selectionArgs)}")
+        when(matcher) {
             MATCH_SIGN -> {
                 cursor = db.query(Sign.TABLE_NAME, Sign.PROJECTION, null, null, null, null, null)
             }
@@ -81,9 +65,12 @@ class IngTeriorProvider : ContentProvider() {
                         null, null, null)
                 }
             }
+            MATCH_SITE  -> {
+                cursor = db.rawQuery(Site.QUERY_ALL, selectionArgs, null)
+            }
             MATCH_SITE_ID -> {
                 val siteId = uri.lastPathSegment?.toLong() ?: return null
-                cursor = db.rawQuery(QUERY_ALL, arrayOf(siteId.toString()), null)
+                cursor = db.rawQuery(Site.QUERY_ALL, arrayOf(siteId.toString()), null)
             }
             else -> throw UnsupportedOperationException(NO_DELETES_INSERTS_OR_UPDATES + uri)
         }
@@ -106,27 +93,28 @@ class IngTeriorProvider : ContentProvider() {
             }
             MATCH_SITE -> {
                 if(contentValues == null) return@runBlocking null
-                val operator = uri.getQueryParameter(EXTRA_SITE_OPERATOR)?: return@runBlocking null
+                val operator = uri.getQueryParameter(Site.EXTRA_SITE_OPERATOR)?: return@runBlocking null
 
                 val bluePrintId:Long = withContext(Dispatchers.IO){
-                    if(contentValues.getAsString(LOCATION).isEmpty()) -1L
+                    if(contentValues.getAsString(Image.LOCATION).isEmpty()) -1L
                     else{
                         Log.d(TAG, "insert: contentValues=$contentValues")
                         val bluePrintValues = ContentValues(3)
-                        bluePrintValues.put(LOCATION, contentValues.getAsString(LOCATION))
-                        bluePrintValues.put(FILENAME, contentValues.getAsString(FILENAME))
-                        bluePrintValues.put(CREATED_DATE, Date().time)
+                        bluePrintValues.put(Image.LOCATION, contentValues.getAsString(Image.LOCATION))
+                        bluePrintValues.put(Image.FILENAME, contentValues.getAsString(Image.FILENAME))
+                        bluePrintValues.put(Image.CREATED_DATE, Date().time)
                         db.insert(Image.TABLE_NAME, null, bluePrintValues)
                     }
                 }
 
 
                 val siteValues = ContentValues().apply {
-                    put(USER_ID, contentValues.getAsLong(USER_ID))
-                    put(NAME, contentValues.getAsString(NAME))
-                    put(CODE, contentValues.getAsString(CODE))
-                    put(BLUEPRINT_ID, bluePrintId)
-                    put(CREATED_DATE, Date().time)
+                    put(Site.CREATOR_ID, contentValues.getAsLong(Sign.USER_ID))
+                    put(Site.PARTICIPANT_IDS, contentValues.getAsLong(Sign.USER_ID).toString())
+                    put(Site.NAME, contentValues.getAsString(Site.NAME))
+                    put(Site.CODE, contentValues.getAsString(Site.CODE))
+                    put(Site.BLUEPRINT_ID, bluePrintId)
+                    put(Site.CREATED_DATE, Date().time)
                 }
 
                 val rowId = withContext(Dispatchers.IO) {
@@ -134,18 +122,18 @@ class IngTeriorProvider : ContentProvider() {
                 }
 
                 when(operator.toInt()) {
-                    FOLD_DEFAULT -> {
-                        insertEmptyFold(db, FOLD_DEFAULT, contentValues.getAsLong(USER_ID), rowId)
+                    Fold.FOLD_DEFAULT -> {
+                        insertEmptyFold(db, Fold.FOLD_DEFAULT, contentValues.getAsLong(Sign.USER_ID), rowId)
                     }
-                    FOLD_MANAGEMENT -> {
-                        insertEmptyFold(db, FOLD_MANAGEMENT, contentValues.getAsLong(USER_ID), rowId)
+                    Fold.FOLD_MANAGEMENT -> {
+                        insertEmptyFold(db, Fold.FOLD_MANAGEMENT, contentValues.getAsLong(Sign.USER_ID), rowId)
                     }
-                    FOLD_ALL -> {
-                        insertEmptyFold(db, FOLD_DEFAULT, contentValues.getAsLong(USER_ID), rowId)
-                        insertEmptyFold(db, FOLD_MANAGEMENT, contentValues.getAsLong(USER_ID), rowId)
+                    Fold.FOLD_ALL -> {
+                        insertEmptyFold(db, Fold.FOLD_DEFAULT, contentValues.getAsLong(Sign.USER_ID), rowId)
+                        insertEmptyFold(db, Fold.FOLD_MANAGEMENT, contentValues.getAsLong(Sign.USER_ID), rowId)
                     }
                     else -> {
-                        insertEmptyFold(db, FOLD_DEFAULT, contentValues.getAsLong(USER_ID), rowId)
+                        insertEmptyFold(db, Fold.FOLD_DEFAULT, contentValues.getAsLong(Sign.USER_ID), rowId)
                     }
                 }
 
@@ -159,12 +147,12 @@ class IngTeriorProvider : ContentProvider() {
 
     private fun insertEmptyFold(db: SQLiteDatabase, foldType: Int, userId: Long, siteId: Long) {
         val foldValues = ContentValues()
-        foldValues.put(TYPE, foldType)
-        foldValues.put(SITE_ID, siteId)
-        foldValues.put(CREATOR_ID, userId)
-        foldValues.put(CREATOR_TYPE, SITE_MANAGER)
-        foldValues.put(CREATED_DATE, Date().time)
-        db.insert(TABLE_NAME, null, foldValues)
+        foldValues.put(Fold.TYPE, foldType)
+        foldValues.put(Fold.SITE_ID, siteId)
+        foldValues.put(Fold.CREATOR_ID, userId)
+        foldValues.put(Fold.CREATOR_TYPE, Site.SITE_MANAGER)
+        foldValues.put(Fold.CREATED_DATE, Date().time)
+        db.insert(Fold.TABLE_NAME, null, foldValues)
     }
 
     override fun delete(uri: Uri, selection: String?, selectionArgs: Array<out String>?): Int {

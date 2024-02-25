@@ -17,7 +17,7 @@ class SessionImpl : Session() {
             // TODO 이미 로그인된 상태
         }
         else{
-            user = User(0, "jypjun12@gmail.com", "T", TYPE_GOOGLE)
+            user = User(1, "jypjun12@gmail.com", "T", TYPE_GOOGLE)
             Factory.get().getDatabase().insertLog(context, user!!)
         }
 

@@ -1,11 +1,8 @@
 package com.ing.ingterior.db
 
-import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.provider.SyncStateContract.Helpers.insert
-import java.util.*
 
 const val AUTHORITY = "ingterior"
 private const val DATABASE_VERSION = 1
@@ -15,8 +12,9 @@ class IngTeriorDBHelper(context: Context) : SQLiteOpenHelper(context, "${AUTHORI
         const val SIGN_CREATE_TABLE = "CREATE TABLE ${Sign.TABLE_NAME} (${Sign._ID} INTEGER PRIMARY KEY AUTOINCREMENT, ${Sign.USER_ID} INTEGER NOT NULL, " +
                 "${Sign.EMAIL} TEXT NOT NULL, ${Sign.TOKEN} TEXT NOT NULL, ${Sign.TYPE} INTEGER NOT NULL, ${Sign.LATEST_DATE} INTEGER NOT NULL);"
 
-        const val SITE_CREATE_TABLE = "CREATE TABLE ${Site.TABLE_NAME}(${Site._ID} INTEGER PRIMARY KEY AUTOINCREMENT, ${Site.USER_ID} INTEGER NOT NULL, ${Site.NAME} TEXT NOT NULL, ${Site.CODE} TEXT NOT NULL, " +
-                "${Site.DEFAULT_IDS} TEXT , ${Site.MANAGEMENT_IDS} TEXT , ${Site.BLUEPRINT_ID} INTEGER NOT NULL, ${Site.CREATED_DATE} INTEGER NOT NULL);"
+        const val SITE_CREATE_TABLE = "CREATE TABLE ${Site.TABLE_NAME}(${Site._ID} INTEGER PRIMARY KEY AUTOINCREMENT, ${Site.CREATOR_ID} INTEGER NOT NULL, " +
+                "${Site.PARTICIPANT_IDS} INTEGER NOT NULL, ${Site.NAME} TEXT NOT NULL, ${Site.CODE} TEXT NOT NULL, ${Site.DEFAULT_IDS} TEXT , ${Site.MANAGEMENT_IDS} TEXT , " +
+                "${Site.BLUEPRINT_ID} INTEGER NOT NULL, ${Site.CREATED_DATE} INTEGER NOT NULL);"
 
         const val IMAGE_CREATE_TABLE = "CREATE TABLE ${Image.TABLE_NAME}(${Image._ID} INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "${Image.LOCATION} TEXT NOT NULL, ${Image.FILENAME} TEXT NOT NULL, ${Image.CREATED_DATE} INTEGER NOT NULL);"
@@ -24,6 +22,7 @@ class IngTeriorDBHelper(context: Context) : SQLiteOpenHelper(context, "${AUTHORI
 
         const val FOLD_CREATE_TABLE = "CREATE TABLE ${Fold.TABLE_NAME}(${Fold._ID} INTEGER PRIMARY KEY AUTOINCREMENT, ${Fold.SITE_ID} INTEGER NOT NULL, ${Fold.TYPE} INTEGER NOT NULL, ${Fold.NAME} TEXT, ${Fold.IMAGE_IDS} TEXT, " +
                 "${Fold.MEMO} TEXT, ${Fold.CREATOR_ID} INTEGER NOT NULL, ${Fold.CREATOR_TYPE} TEXT NOT NULL, ${Fold.POSITION} TEXT, ${Fold.CREATED_DATE} INTEGER NOT NULL);"
+
 
 
         // trigger 생성 안된 상태 디버깅 필요

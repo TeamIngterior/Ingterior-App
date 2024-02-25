@@ -18,15 +18,11 @@ import androidx.lifecycle.distinctUntilChanged
 import androidx.lifecycle.lifecycleScope
 import com.ing.ingterior.EXTRA_MOVE_INDEX
 import com.ing.ingterior.R
+import com.ing.ingterior.db.Fold
 import com.ing.ingterior.db.Image.FILENAME
 import com.ing.ingterior.db.Image.LOCATION
 import com.ing.ingterior.db.Sign.USER_ID
-import com.ing.ingterior.db.Site.CODE
-import com.ing.ingterior.db.Site.CONTENT_URI
-import com.ing.ingterior.db.Site.FOLD_DEFAULT
-import com.ing.ingterior.db.Site.FOLD_MANAGEMENT
-import com.ing.ingterior.db.Site.EXTRA_SITE_OPERATOR
-import com.ing.ingterior.db.Site.NAME
+import com.ing.ingterior.db.Site
 import com.ing.ingterior.injection.Factory
 import com.ing.ingterior.model.BluePrintModel
 import com.ing.ingterior.ui.IngTeriorViewModelFactory
@@ -147,16 +143,16 @@ class NewSiteActivity : AppCompatActivity() {
                         else createImageFile(context, viewModel.getImageBitmap(context)!!, viewModel.bluePrintModel.value?.name ?: "")
 
                 var operator = 0
-                if(viewModel.isDefects) operator += FOLD_DEFAULT
-                if(viewModel.isDefects) operator += FOLD_MANAGEMENT
-                val insertUri = Uri.parse(CONTENT_URI).buildUpon().appendQueryParameter(EXTRA_SITE_OPERATOR, operator.toString()).build()
+                if(viewModel.isDefects) operator += Fold.FOLD_DEFAULT
+                if(viewModel.isDefects) operator += Fold.FOLD_MANAGEMENT
+                val insertUri = Uri.parse(Site.CONTENT_URI).buildUpon().appendQueryParameter(Site.EXTRA_SITE_OPERATOR, operator.toString()).build()
 
                 if(withContext(Dispatchers.IO) {
                         val userId = Factory.get().getSession().getUser()?.id
                         val contentValues = ContentValues()
                         contentValues.put(USER_ID, userId)
-                        contentValues.put(NAME, viewModel.siteName)
-                        contentValues.put(CODE, "A${System.currentTimeMillis()}")
+                        contentValues.put(Site.NAME, viewModel.siteName)
+                        contentValues.put(Site.CODE, "A${System.currentTimeMillis()}")
                         contentValues.put(LOCATION, file?.absolutePath?:"")
                         contentValues.put(FILENAME, file?.name?:"")
                         context.contentResolver.insert(insertUri, contentValues) == null
