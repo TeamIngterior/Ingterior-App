@@ -37,7 +37,7 @@
         android:layout_height="64dp"
         android:orientation="horizontal"
         android:layout_marginTop="8dp"
-        android:text="@string/action_simple_estimate"
+        app:visualText="@string/action_simple_estimate"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_home_main_title"/>
@@ -110,28 +110,14 @@
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
-        <LinearLayout
-            android:id="@+id/line_home_site_management"
+
+        <com.ing.ui.button.VisualDotLineButton
+            android:id="@+id/vdlb_home_new_site_action"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:background="@drawable/bg_home_site_management"
-            android:clickable="true"
-            >
+            app:visualLineSpacingExtra="12dp"
+            app:visualText="@string/prompt_login_required"/>
 
-            <TextView
-                android:id="@+id/tv_home_site_management"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fontFamily="@font/pretendard_bold"
-                android:text="@string/prompt_login_required"
-                android:textSize="@dimen/title_h3"
-                android:textColor="@color/text_color_06"
-                android:gravity="center"
-                android:lineSpacingExtra="8dp"/>
-
-        </LinearLayout>
 
     </LinearLayout>
 

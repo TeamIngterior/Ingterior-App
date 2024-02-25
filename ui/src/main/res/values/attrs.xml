@@ -9,31 +9,34 @@
         <attr name="inputText" format="string"/>
         <attr name="inputHint" format="string"/>
         <attr name="inputMax" format="integer"/>
+        <attr name="inputMaxLine" format="integer"/>
+        <attr name="inputSingleLine" format="boolean"/>
         <attr name="inputSupportText" format="string"/>
         <attr name="inputSupportSpacing" format="dimension"/>
     </declare-styleable>
 
-    <declare-styleable name="IngCheckBox">
+    <declare-styleable name="VisualCheckBox">
         <attr name="checkBoxText" format="string"/>
         <attr name="isChecked" format="boolean"/>
+        <attr name="checkBoxSrc" format="reference"/>
+        <attr name="uncheckBoxSrc" format="reference"/>
     </declare-styleable>
 
     <declare-styleable name="LoginButton">
         <attr name="loginType" format="string"/>
     </declare-styleable>
 
-    <declare-styleable name="VisualImageButton">
-        <attr name="visualBackground" format="reference"/>
-    </declare-styleable>
-
-    <declare-styleable name="VisualButton2">
+    <declare-styleable name="BaseButtonView">
         <attr name="visualSrc" format="reference"/>
         <attr name="visualText" format="string"/>
         <attr name="visualTextSize" format="float"/>
         <attr name="visualIconSize" format="dimension"/>
+        <attr name="visualEnable" format="boolean"/>
+        <attr name="visualLineSpacingExtra" format="dimension"/>
     </declare-styleable>
 
-    <declare-styleable name="VisualDotLineButton">
-        <attr name="dotText" format="string"/>
+    <declare-styleable name="VisualImageButton">
+        <attr name="visualBackground" format="reference"/>
     </declare-styleable>
+
 </resources>

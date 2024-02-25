@@ -10,14 +10,12 @@ import com.ing.ui.R
 import com.ing.ui.text.body.Body1View
 import com.ing.ui.text.label.LabelView
 
-class VisualDotLineButton : LinearLayoutCompat {
+class VisualDotLineButton : BaseButtonView {
 
     private val bodyView: Body1View by lazy {
         Body1View(context).apply {
-            layoutParams = LinearLayoutCompat.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-            ).apply { gravity = Gravity.CENTER_VERTICAL }
+            layoutParams = LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+            gravity = Gravity.CENTER
             setTextColor(ContextCompat.getColor(context, R.color.text_color_05))
         }
     }
@@ -33,15 +31,21 @@ class VisualDotLineButton : LinearLayoutCompat {
         isClickable = true
         isFocusable = true
         background = ContextCompat.getDrawable(context, R.drawable.bg_dot_line_button)
-
-        orientation = LinearLayoutCompat.HORIZONTAL
         gravity = Gravity.CENTER
-        addView(bodyView)
-
         attrs?.let {
-            val typedArray = context.obtainStyledAttributes(attrs, R.styleable.VisualDotLineButton, defStyleAttr, 0)
-            bodyView.text = typedArray.getString(R.styleable.VisualDotLineButton_dotText)
+            val typedArray = context.obtainStyledAttributes(attrs, R.styleable.BaseButtonView, defStyleAttr, 0)
+            bodyView.text = typedArray.getString(R.styleable.BaseButtonView_visualText)
             typedArray.recycle()
         }
+
+        addView(bodyView)
+    }
+
+    fun setText(text: String){
+        bodyView.text = text
+    }
+
+    fun setText(textId: Int){
+        bodyView.setText(textId)
     }
 }

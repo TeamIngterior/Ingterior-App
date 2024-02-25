@@ -18,6 +18,7 @@ import com.ing.ingterior.ui.IngTeriorViewModelFactory
 import com.ing.ingterior.ui.MainActivity
 import com.ing.ingterior.ui.MainViewModel
 import com.ing.ui.button.VisualButton
+import com.ing.ui.button.VisualDotLineButton
 
 class HomeFragment : Fragment() {
 
@@ -27,8 +28,7 @@ class HomeFragment : Fragment() {
 
     private val viewModel : MainViewModel by lazy { ViewModelProvider(this, IngTeriorViewModelFactory())[MainViewModel::class.java] }
     private val btnSimpleEstimateLayout:VisualButton by lazy { requireView().findViewById(R.id.line_home_main_simple_estimation) }
-    private val lineSiteManagement:LinearLayout by lazy { requireView().findViewById(R.id.line_home_site_management) }
-    private val tvSiteManagement:TextView by lazy { requireView().findViewById(R.id.tv_home_site_management) }
+    private val vdlbNewSiteAction :VisualDotLineButton by lazy { requireView().findViewById(R.id.vdlb_home_new_site_action) }
 
     private val moveResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
         if(result.resultCode == AppCompatActivity.RESULT_OK) {
@@ -57,8 +57,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if(viewModel.isLogin()) {
-            tvSiteManagement.setText(R.string.prompt_register_new_site)
-
+            vdlbNewSiteAction.setText(R.string.prompt_register_new_site)
             // TODO 유저의 현장이 있는지 확인하고 있으면 리스트를 보여줘야 함
         }
 
@@ -66,7 +65,7 @@ class HomeFragment : Fragment() {
             Factory.get().getMove().moveSimpleEstimationActivity(requireActivity())
         }
 
-        lineSiteManagement.setOnClickListener{
+        vdlbNewSiteAction.setOnClickListener{
             if(Factory.get().getSession().isLogin()) {
                 Factory.get().getMove().moveSiteActivity(requireActivity(), moveResultLauncher)
             }

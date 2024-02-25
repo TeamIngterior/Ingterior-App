@@ -65,6 +65,12 @@ class InputTextLayout : ConstraintLayout {
             val filters = arrayOf<InputFilter>(InputFilter.LengthFilter(inputMax))
             inputTextView.filters = filters
 
+            val inputMaxLine = typedArray.getInteger(R.styleable.InputTextLayout_inputMaxLine, 10)
+            inputTextView.maxLines = inputMaxLine
+
+            val singleLine = typedArray.getBoolean(R.styleable.InputTextLayout_inputSingleLine, false)
+            inputTextView.isSingleLine = singleLine
+
             val supportText = typedArray.getString(R.styleable.InputTextLayout_inputSupportText) ?: ""
             supportTextView.text = supportText
             supportTextView.isVisible = supportText.isNotEmpty()

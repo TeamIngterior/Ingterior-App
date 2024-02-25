@@ -2,14 +2,10 @@ package com.ing.ingterior.ui.site
 
 import android.content.DialogInterface
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
@@ -18,11 +14,8 @@ import androidx.lifecycle.lifecycleScope
 import com.ing.ingterior.R
 import com.ing.ingterior.model.BluePrintModel
 import com.ing.ingterior.ui.IngTeriorViewModelFactory
-import com.ing.ingterior.util.FileWrapper.createFileName
-import com.ing.ingterior.util.FileWrapper.getImageNameFromUri
-import com.ing.ingterior.util.ImageUtils
 import com.ing.ui.button.VisualButton
-import com.ing.ui.button.VisualButton2
+import com.ing.ui.button.VisualDefaultButton
 import com.ing.ui.button.VisualImageButton
 import com.ing.ui.text.label.LabelView
 import kotlinx.coroutines.Dispatchers
@@ -40,12 +33,13 @@ class NewBluePrintFragmentDialog : DialogFragment() {
     }
 
     var listener: DialogListener? = null
+    var isCreate = false
 
     private val vibClose:VisualImageButton by lazy { requireView().findViewById(R.id.vib_new_blue_print_close) }
     private val vibRotate:VisualImageButton by lazy { requireView().findViewById(R.id.vib_new_blue_print_rotate) }
     private val vibHorizontalInversion:VisualImageButton by lazy { requireView().findViewById(R.id.vib_new_blue_print_horizontal_inversion) }
     private val vibVerticalInversion:VisualImageButton by lazy { requireView().findViewById(R.id.vib_new_blue_print_vertical_inversion) }
-    private val btnReset: VisualButton2 by lazy { requireView().findViewById(R.id.btn_blue_print_reset) }
+    private val btnReset: VisualDefaultButton by lazy { requireView().findViewById(R.id.btn_blue_print_reset) }
 
     private val viewSelectImage:View by lazy { requireView().findViewById(R.id.view_new_blue_print_select_image) }
     private val labelSelectImage:LabelView by lazy { requireView().findViewById(R.id.label_new_blue_print_select_image) }
@@ -74,6 +68,7 @@ class NewBluePrintFragmentDialog : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         vibClose.setOnClickListener {
+            if(isCreate) viewModel.bluePrintModel.postValue(null)
             dismiss()
         }
 
@@ -150,9 +145,7 @@ class NewBluePrintFragmentDialog : DialogFragment() {
             }
 
         }
-
     }
-
 
     override fun onStart() {
         super.onStart()

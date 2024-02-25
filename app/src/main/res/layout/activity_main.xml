@@ -38,6 +38,7 @@
             app:labelVisibilityMode="labeled"
             app:itemIconSize="@dimen/bottom_icon_menu_size"
             app:itemPaddingTop="16dp"
+            app:itemIconTint="@color/color_main_bottom_icon"
             app:itemTextAppearanceActive="@style/TextAppearance.BottomNavigationView.Active.Label"
             app:itemTextAppearanceInactive="@style/TextAppearance.BottomNavigationView.InActive.Label"
             app:layout_constraintBottom_toBottomOf="parent"

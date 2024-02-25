@@ -23,9 +23,9 @@ data class Site(val _id: Long, val creatorId: Long, val participantIds: String, 
 
         const val CONTENT_URI = "content://ingterior/${TABLE_NAME}"
 
-        const val QUERY_ALL = "SELECT site.${Site._ID}, site.${Site.CREATOR_ID}, site.${Site.PARTICIPANT_IDS}, site.${Site.NAME}, site.${Site.CODE}, site.${Site.DEFAULT_IDS}, site.${Site.MANAGEMENT_IDS}, site.${Site.BLUEPRINT_ID}, site.${Site.CREATED_DATE}, " +
-                "image.${Image.FILENAME}, image.${Image.LOCATION} FROM ${Site.TABLE_NAME} AS site JOIN ${Image.TABLE_NAME} AS image ON site.${Site.BLUEPRINT_ID} = image.${Image._ID} " +
-                "WHERE ',' || site.${Site.PARTICIPANT_IDS} || ',' LIKE '%,' || ? || ',%'"
+        const val QUERY_ALL = "SELECT site.${Site._ID}, site.${Site.CREATOR_ID}, site.$PARTICIPANT_IDS, site.${Site.NAME}, site.${Site.CODE}, site.${Site.DEFAULT_IDS}, site.${Site.MANAGEMENT_IDS}, site.${Site.BLUEPRINT_ID}, site.${Site.CREATED_DATE}, " +
+                "image.${Image.FILENAME}, image.${Image.LOCATION} FROM ${Site.TABLE_NAME} AS site LEFT JOIN ${Image.TABLE_NAME} AS image ON site.${Site.BLUEPRINT_ID} = image.${Image._ID} " +
+                "WHERE ',' || site.$PARTICIPANT_IDS || ',' LIKE '%,' || ? || ',%'"
 
         val ALL_PROJECTION = arrayOf(
             _ID,                    // 0

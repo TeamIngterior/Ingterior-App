@@ -52,9 +52,10 @@ class MainViewModel : ViewModel() {
         return getUser() != null
     }
 
-
     val allSiteListData = MutableLiveData<Status<ArrayList<Site>>>()
-    fun getAllSiteList(context: Context) {
+    fun getAllSiteList(context: Context, forced: Boolean) {
+        if(!forced && allSiteListData.value!=null && allSiteListData.value is Status.Success) return
+        allSiteListData.postValue(Status.Loading)
         val userId = Factory.get().getSession().getUser()?.id ?: return allSiteListData.postValue(Status.Error("로그인 상태가 아닙니다."))
         val siteList = arrayListOf<Site>()
         val cursor = context.contentResolver.query(Uri.parse(Site.CONTENT_URI), Site.ALL_PROJECTION, null, arrayOf(userId.toString()), null)
@@ -70,8 +71,8 @@ class MainViewModel : ViewModel() {
                     val managementIds = cursor.getString(cursor.getColumnIndexOrThrow(Site.MANAGEMENT_IDS)) ?: ""
                     val blueprintId = cursor.getLong(cursor.getColumnIndexOrThrow(Site.BLUEPRINT_ID)) ?: 0L
                     val createdDate = cursor.getLong(cursor.getColumnIndexOrThrow(Site.CREATED_DATE)) ?: 0L
-                    val bluePrintName = cursor.getString(cursor.getColumnIndexOrThrow(Image.FILENAME))
-                    val bluePrintLocation = cursor.getString(cursor.getColumnIndexOrThrow(Image.LOCATION))
+                    val bluePrintName = cursor.getString(cursor.getColumnIndexOrThrow(Image.FILENAME)) ?: ""
+                    val bluePrintLocation = cursor.getString(cursor.getColumnIndexOrThrow(Image.LOCATION)) ?: ""
                     siteList.add(Site(id, creatorId, participantIds, name, code, defaultIds, managementIds, blueprintId, createdDate, bluePrintName, bluePrintLocation))
                 }while (it.moveToNext())
             }

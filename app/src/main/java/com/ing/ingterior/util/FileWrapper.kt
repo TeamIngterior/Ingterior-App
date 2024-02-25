@@ -9,6 +9,7 @@ import android.util.Log
 import android.webkit.MimeTypeMap
 import com.ing.ingterior.injection.Factory
 import java.io.File
+import java.io.FileNotFoundException
 import java.io.FileOutputStream
 import java.io.IOException
 import java.util.*
@@ -16,6 +17,9 @@ import java.util.*
 object FileWrapper {
 
     private const val TAG = "FileWrapper"
+
+    const val KB = 1024.0
+    const val MB = 1024.0 * 1024.0
 
     private fun getOrCreateDirectory(context: Context): File{
         val pictureDirectory = File(context.dataDir, "Image")
@@ -111,5 +115,18 @@ object FileWrapper {
             }
         }
         return fileName
+    }
+
+    fun getFileSizeFromUri(context: Context, uri: Uri): Long{
+        val contentResolver: ContentResolver = context.contentResolver
+        val fileSize: Long? = try {
+            contentResolver.openFileDescriptor(uri, "r")?.use { parcelFileDescriptor ->
+                parcelFileDescriptor.statSize // 파일 크기를 바이트 단위로 반환
+            }
+        } catch (e: FileNotFoundException) {
+            e.printStackTrace()
+            return -1
+        }
+        return fileSize ?: -1
     }
 }

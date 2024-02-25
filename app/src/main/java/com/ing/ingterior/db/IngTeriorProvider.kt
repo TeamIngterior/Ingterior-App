@@ -106,7 +106,7 @@ class IngTeriorProvider : ContentProvider() {
                         db.insert(Image.TABLE_NAME, null, bluePrintValues)
                     }
                 }
-
+                Log.d(TAG, "insert: bluePrintId=$bluePrintId")
 
                 val siteValues = ContentValues().apply {
                     put(Site.CREATOR_ID, contentValues.getAsLong(Sign.USER_ID))
@@ -120,6 +120,7 @@ class IngTeriorProvider : ContentProvider() {
                 val rowId = withContext(Dispatchers.IO) {
                     db.insert(Site.TABLE_NAME, null, siteValues)
                 }
+                Log.d(TAG, "insert: rowId=$rowId")
 
                 when(operator.toInt()) {
                     Fold.FOLD_DEFAULT -> {
@@ -136,8 +137,7 @@ class IngTeriorProvider : ContentProvider() {
                         insertEmptyFold(db, Fold.FOLD_DEFAULT, contentValues.getAsLong(Sign.USER_ID), rowId)
                     }
                 }
-
-                rsUri = Uri.parse("$uri/$rowId")
+                rsUri = Uri.parse("${Site.CONTENT_URI}/$rowId")
             }
             else -> throw UnsupportedOperationException(NO_DELETES_INSERTS_OR_UPDATES + uri)
         }

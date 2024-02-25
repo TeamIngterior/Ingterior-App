@@ -16,20 +16,17 @@ class VisualImageButton : androidx.appcompat.widget.AppCompatImageView {
 
         isClickable = true
         foregroundTintList = ContextCompat.getColorStateList(context, R.color.image_button_tint_color)
-        val allPadding = context.resources.getDimensionPixelSize(R.dimen.image_button_padding)
-        setPadding(allPadding, allPadding, allPadding, allPadding)
 
         attrs?.let {
             val typedArray = context.obtainStyledAttributes(attrs, R.styleable.VisualImageButton, defStyleAttr, 0)
+            val styleAttr = context.obtainStyledAttributes(attrs, intArrayOf(android.R.attr.padding))
             setBackgroundResource(typedArray.getResourceId(R.styleable.VisualImageButton_visualBackground, R.drawable.bg_circle_effect))
+            var padding = styleAttr.getDimensionPixelSize(0, 0)
+            if(padding == 0) padding = context.resources.getDimensionPixelSize(R.dimen.image_button_padding)
+            setPadding(padding, padding, padding, padding)
+            styleAttr.recycle()
             typedArray.recycle()
         }
 
-    }
-
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        val allSize = context.resources.getDimensionPixelSize(R.dimen.image_button_size)
-        val exactMeasureSpec = MeasureSpec.makeMeasureSpec(allSize, MeasureSpec.EXACTLY)
-        super.onMeasure(exactMeasureSpec, exactMeasureSpec)
     }
 }

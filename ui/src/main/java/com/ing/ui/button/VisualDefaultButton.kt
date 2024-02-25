@@ -2,19 +2,17 @@ package com.ing.ui.button
 
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.ing.ui.Config
 import com.ing.ui.R
 import com.ing.ui.text.label.LabelView
 
-class VisualButton2 : LinearLayoutCompat {
+class VisualDefaultButton : BaseButtonView {
 
     private var iconRec: Int = 0
     private var actionString: String = ""
@@ -55,8 +53,8 @@ class VisualButton2 : LinearLayoutCompat {
         addView(labelView)
 
         attrs?.let {
-            val typedArray = context.obtainStyledAttributes(attrs, R.styleable.VisualButton2, defStyleAttr, 0)
-            iconRec = (typedArray.getResourceId(R.styleable.VisualButton2_visualSrc, 0))
+            val typedArray = context.obtainStyledAttributes(attrs, R.styleable.BaseButtonView, defStyleAttr, 0)
+            iconRec = (typedArray.getResourceId(R.styleable.BaseButtonView_visualSrc, 0))
             if(iconRec>0){
                 imageView.isVisible = true
                 imageView.setImageResource(iconRec)
@@ -68,13 +66,13 @@ class VisualButton2 : LinearLayoutCompat {
                 setLabelStartMargin(0)
             }
 
-            actionString = (typedArray.getString(R.styleable.VisualButton2_visualText)) ?: ""
+            actionString = (typedArray.getString(R.styleable.BaseButtonView_visualText)) ?: ""
             labelView.text = actionString
 
-            val textSize = (typedArray.getFloat(R.styleable.VisualButton2_visualTextSize, Config.LABEL_FONT_SIZE))
+            val textSize = (typedArray.getFloat(R.styleable.BaseButtonView_visualTextSize, Config.LABEL_FONT_SIZE))
             labelView.textSize = textSize
 
-            val size = (typedArray.getDimensionPixelSize(R.styleable.VisualButton2_visualIconSize, 0))
+            val size = (typedArray.getDimensionPixelSize(R.styleable.BaseButtonView_visualIconSize, 0))
             if(size != 0) {
                 val iconLayoutParams = LayoutParams(size, size)
                 iconLayoutParams.gravity = Gravity.CENTER_VERTICAL

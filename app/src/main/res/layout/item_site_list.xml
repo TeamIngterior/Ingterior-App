@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:paddingStart="@dimen/page_horizontal_padding"
     android:paddingEnd="@dimen/page_horizontal_padding"
+    android:paddingBottom="16dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -50,8 +51,10 @@
 
         <com.ing.ui.button.VisualImageButton
             android:id="@+id/vib_site_item_option"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:scaleType="centerInside"
+            android:padding="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -78,14 +81,16 @@
             android:layout_marginEnd="6dp"
             tools:text="영통구 인계동 5동 912호 전체공사 진어쩌고 저쩌고 어쩌고 저쩌고"/>
 
-        <ImageView
+        <com.ing.ui.check.VisualImageCheckBox
             android:id="@+id/iv_site_item_favorite"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:scaleType="centerInside"
-            app:srcCompat="@drawable/ic_non_favorite_20"
+            android:padding="8dp"
+            app:checkBoxSrc="@drawable/ic_favorite_20"
+            app:uncheckBoxSrc="@drawable/ic_un_favorite_20"
+            app:isChecked="false"
             />
-
     </LinearLayout>
 
     <LinearLayout
