@@ -7,12 +7,16 @@
 
     <declare-styleable name="InputTextLayout">
         <attr name="inputText" format="string"/>
+        <attr name="inputTextColor" format="color"/>
         <attr name="inputHint" format="string"/>
         <attr name="inputMax" format="integer"/>
         <attr name="inputMaxLine" format="integer"/>
+        <attr name="inputPaddingVertical" format="dimension"/>
+        <attr name="inputPaddingHorizontal" format="dimension"/>
         <attr name="inputSingleLine" format="boolean"/>
         <attr name="inputSupportText" format="string"/>
         <attr name="inputSupportSpacing" format="dimension"/>
+        <attr name="inputSupportColor" format="color"/>
     </declare-styleable>
 
     <declare-styleable name="VisualCheckBox">
@@ -30,7 +34,9 @@
         <attr name="visualSrc" format="reference"/>
         <attr name="visualText" format="string"/>
         <attr name="visualTextSize" format="float"/>
+        <attr name="visualTintColor" format="color"/>
         <attr name="visualIconSize" format="dimension"/>
+        <attr name="visualButtonBackground" format="reference"/>
         <attr name="visualEnable" format="boolean"/>
         <attr name="visualLineSpacingExtra" format="dimension"/>
     </declare-styleable>

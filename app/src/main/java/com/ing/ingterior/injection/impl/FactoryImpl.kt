@@ -7,7 +7,6 @@ class FactoryImpl : Factory() {
 
     private var application: IngTeriorApplication? = null
     private var move: Move? = null
-    private var serverApi: ServerApi? = null
     private var session: Session? = null
     private var database: Database? = null
 
@@ -17,7 +16,6 @@ class FactoryImpl : Factory() {
             instance = factory
             factory.application = application
             factory.move = MoveImpl()
-            factory.serverApi = ServerApiIImpl()
             factory.session = SessionImpl()
             factory.database = DatabaseImpl()
         }
@@ -31,9 +29,6 @@ class FactoryImpl : Factory() {
         return move!!
     }
 
-    override fun getServiceApi(): ServerApi {
-        return serverApi!!
-    }
 
     override fun getSession(): Session {
         return session!!

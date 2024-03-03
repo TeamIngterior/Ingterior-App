@@ -46,7 +46,6 @@ class InputTextLayout : ConstraintLayout {
             LayoutParams.WRAP_CONTENT
         )
         supportTextView.textSize = CAPTION2_FONT_SIZE
-        supportTextView.setTextColor(ContextCompat.getColor(context, R.color.text_color_04))
         val font: Typeface = resources.getFont(Config.MEDIUM)
         supportTextView.typeface = font
         supportTextView.layoutParams = supportTextViewParams
@@ -61,9 +60,16 @@ class InputTextLayout : ConstraintLayout {
             val text = typedArray.getString(R.styleable.InputTextLayout_inputText)
             inputTextView.setText(text)
 
+            val textColor = typedArray.getColor(R.styleable.InputTextLayout_inputTextColor, ContextCompat.getColor(context, R.color.text_color_06))
+            inputTextView.setTextColor(textColor)
+
             val inputMax = typedArray.getInteger(R.styleable.InputTextLayout_inputMax, 100)
             val filters = arrayOf<InputFilter>(InputFilter.LengthFilter(inputMax))
             inputTextView.filters = filters
+
+            val horizontalPadding = typedArray.getDimensionPixelSize(R.styleable.InputTextLayout_inputPaddingVertical, context.resources.getDimensionPixelSize(R.dimen.horizontal_input_text_padding))
+            val verticalPadding = typedArray.getDimensionPixelSize(R.styleable.InputTextLayout_inputPaddingHorizontal, context.resources.getDimensionPixelSize(R.dimen.vertical_input_text_padding))
+            inputTextView.setPadding(horizontalPadding, verticalPadding, horizontalPadding, verticalPadding)
 
             val inputMaxLine = typedArray.getInteger(R.styleable.InputTextLayout_inputMaxLine, 10)
             inputTextView.maxLines = inputMaxLine
@@ -74,6 +80,9 @@ class InputTextLayout : ConstraintLayout {
             val supportText = typedArray.getString(R.styleable.InputTextLayout_inputSupportText) ?: ""
             supportTextView.text = supportText
             supportTextView.isVisible = supportText.isNotEmpty()
+
+            val supportTextColor = typedArray.getColor(R.styleable.InputTextLayout_inputSupportColor, ContextCompat.getColor(context, R.color.text_color_04))
+            supportTextView.setTextColor(supportTextColor)
 
             spacing = typedArray.getDimensionPixelSize(R.styleable.InputTextLayout_inputSupportSpacing, 0)
             typedArray.recycle()

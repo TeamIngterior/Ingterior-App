@@ -19,9 +19,9 @@ import androidx.lifecycle.lifecycleScope
 import com.ing.ingterior.EXTRA_MOVE_INDEX
 import com.ing.ingterior.R
 import com.ing.ingterior.db.Fold
-import com.ing.ingterior.db.Image.FILENAME
-import com.ing.ingterior.db.Image.LOCATION
-import com.ing.ingterior.db.Sign.USER_ID
+import com.ing.ingterior.db.Image.Companion.FILENAME
+import com.ing.ingterior.db.Image.Companion.LOCATION
+import com.ing.ingterior.db.Sign.Companion.USER_ID
 import com.ing.ingterior.db.Site
 import com.ing.ingterior.injection.Factory
 import com.ing.ingterior.model.BluePrintModel
@@ -87,7 +87,7 @@ class NewSiteActivity : AppCompatActivity() {
 
                 if(fileName!=null){
                     viewModel.bluePrintModel.postValue(BluePrintModel(0L, photoUri, fileName))
-                    showImageDialog(true)
+                    Factory.get().getMove().showImageDialog(this,  dismissListener, true)
                 }
                 else{
                     Toast.makeText(this, "유효하지 않은 타입의 사진입니다.", Toast.LENGTH_SHORT).show()
@@ -130,7 +130,7 @@ class NewSiteActivity : AppCompatActivity() {
         }
 
         btnEditImage.setOnClickListener {
-            showImageDialog(false)
+            Factory.get().getMove().showImageDialog(this,  dismissListener, false)
         }
 
         btnAddImage.setOnClickListener {
@@ -204,14 +204,6 @@ class NewSiteActivity : AppCompatActivity() {
         btnRemoveImage.setOnClickListener {
             viewModel.bluePrintModel.postValue(null)
         }
-    }
-
-    private fun showImageDialog(isCreate: Boolean){
-        val transaction = supportFragmentManager.beginTransaction()
-        val bluePrintFragmentDialog = NewBluePrintFragmentDialog()
-        bluePrintFragmentDialog.listener = dismissListener
-        bluePrintFragmentDialog.isCreate = isCreate
-        bluePrintFragmentDialog.show(transaction, "bluePrintFragmentDialog ")
     }
 
     override fun onDestroy() {

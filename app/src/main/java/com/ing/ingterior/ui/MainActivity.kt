@@ -1,22 +1,37 @@
 package com.ing.ingterior.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ing.ingterior.R
 import com.ing.ingterior.injection.Factory
+import com.ing.ingterior.injection.ServerApi
+import com.ing.ingterior.model.SiteModel
 import com.ing.ingterior.ui.main.HomeFragment
 import com.ing.ingterior.ui.main.MessageFragment
 import com.ing.ingterior.ui.main.SettingFragment
 import com.ing.ingterior.ui.main.SiteListFragment
 import com.ing.ingterior.util.AnimationUtils
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
+
+    companion object{
+        // 프래그먼트 생성을 지연시키기 위해 Pair 대신 Pair<() -> Fragment, Int> 사용
+        private val pageMappings = mapOf(
+            R.id.menu_main to Pair({ HomeFragment() }, 0),
+            R.id.menu_site_management to Pair({ SiteListFragment() }, 1),
+            R.id.menu_message to Pair({ MessageFragment() }, 2),
+            R.id.menu_setting to Pair({ SettingFragment() }, 3)
+        )
+    }
 
     private val viewModel : MainViewModel by lazy { ViewModelProvider(this, IngTeriorViewModelFactory())[MainViewModel::class.java] }
     private val ivLogo: ImageView by lazy { findViewById(R.id.iv_main_splash_logo) }
@@ -26,6 +41,23 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val serverApi = ServerApi.retrofit.create(ServerApi::class.java)
+        serverApi.updateConstruction(SiteModel(111, 27, "테스트 현장", 3)).enqueue(object : Callback<SiteModel> {
+            override fun onResponse(call: Call<SiteModel>, response: Response<SiteModel>) {
+                if (response.isSuccessful) {
+                    // 성공적으로 업데이트 되었을 때의 처리
+                    Log.d("test", "Update Success: ${response.body()}")
+                } else {
+                    // 서버 에러 처리
+                    Log.d("test","Server Error: ${response.code()}")
+                }
+            }
+
+            override fun onFailure(call: Call<SiteModel>, t: Throwable) {
+                // 네트워크 에러 처리
+                Log.d("test","Network Error: ${t.message}")
+            }
+        })
 
         if(Factory.get().getApplication().isFirst) {
             AnimationUtils.fadeInAndOut(ivLogo, 750, object : AnimationUtils.AnimationListener {
@@ -43,32 +75,27 @@ class MainActivity : AppCompatActivity() {
         }
 
         bottomNavView.setOnItemSelectedListener { item ->
-            var selectedFragment: Fragment? = null
-            when(item.itemId) {
-                R.id.menu_main -> {
-                    selectedFragment = HomeFragment()
-                }
-                R.id.menu_site_management -> {
-                    selectedFragment = SiteListFragment()
-                }
-                R.id.menu_message -> {
-                    selectedFragment = MessageFragment()
-                }
-                R.id.menu_setting -> {
-                    selectedFragment = SettingFragment()
-                }
-            }
-            if(selectedFragment==null) false
-            else {
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_main_view, selectedFragment)
-                    .commit()
-                true
-            }
+            val (fragmentCreator, pageIndex) = pageMappings[item.itemId] ?: return@setOnItemSelectedListener false
+            val selectedFragment = fragmentCreator() // 프래그먼트 생성
+
+            if(viewModel.currentPageIndex == pageIndex) return@setOnItemSelectedListener false
+
+            supportFragmentManager.beginTransaction().replace(R.id.fragment_main_view, selectedFragment).commit()
+            viewModel.currentPageIndex = pageIndex
+            true
         }
     }
 
     fun selectBottomNavigationMenuItem(index: Int) {
         bottomNavView.selectedItemId = viewModel.getPageId(index)
+    }
+
+    override fun onBackPressed() {
+        if(viewModel.fabOpen.value == true) {
+            viewModel.fabOpen.postValue(false)
+        }
+        else{
+            super.onBackPressed()
+        }
     }
 }

@@ -4,6 +4,7 @@ import android.content.Context
 import android.net.Uri
 import android.util.Log
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ing.ingterior.R
@@ -44,12 +45,10 @@ class MainViewModel : ViewModel() {
         }
     }
 
-    fun getUser() : User?{
-        return Factory.get().getSession().getUser()
-    }
+    val user = MutableLiveData<User>()
 
     fun isLogin(): Boolean {
-        return getUser() != null
+        return user.value != null
     }
 
     val allSiteListData = MutableLiveData<Status<ArrayList<Site>>>()
@@ -71,9 +70,10 @@ class MainViewModel : ViewModel() {
                     val managementIds = cursor.getString(cursor.getColumnIndexOrThrow(Site.MANAGEMENT_IDS)) ?: ""
                     val blueprintId = cursor.getLong(cursor.getColumnIndexOrThrow(Site.BLUEPRINT_ID)) ?: 0L
                     val createdDate = cursor.getLong(cursor.getColumnIndexOrThrow(Site.CREATED_DATE)) ?: 0L
+                    val favorite = cursor.getInt(cursor.getColumnIndexOrThrow(Site.FAVORITE)) ?: 0
                     val bluePrintName = cursor.getString(cursor.getColumnIndexOrThrow(Image.FILENAME)) ?: ""
                     val bluePrintLocation = cursor.getString(cursor.getColumnIndexOrThrow(Image.LOCATION)) ?: ""
-                    siteList.add(Site(id, creatorId, participantIds, name, code, defaultIds, managementIds, blueprintId, createdDate, bluePrintName, bluePrintLocation))
+                    siteList.add(Site(id, creatorId, participantIds, name, code, defaultIds, managementIds, blueprintId, createdDate, bluePrintName, bluePrintLocation, favorite == 1))
                 }while (it.moveToNext())
             }
             cursor.close()
@@ -86,6 +86,8 @@ class MainViewModel : ViewModel() {
             allSiteListData.postValue(Status.Success(siteList))
         }
     }
+
+    var fabOpen = MutableLiveData(false) // 초기 상태는 닫힌 상태로 설정
 
     override fun onCleared() {
         super.onCleared()

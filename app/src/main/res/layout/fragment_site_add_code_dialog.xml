@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/background_color">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.ing.ui.button.VisualImageButton
+            android:id="@+id/vib_add_code_close"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_close_24" />
+
+        <com.ing.ui.text.title.TitleH5View
+            android:id="@+id/titleH5View"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="현장 코드를 입력해 주세요."
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vib_add_code_close" />
+
+
+        <LinearLayout
+            android:id="@+id/line_add_code_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:paddingStart="@dimen/page_horizontal_padding"
+            android:paddingEnd="@dimen/page_horizontal_padding"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleH5View">
+
+
+            <com.ing.ui.text.edit.InputTextLayout
+                android:id="@+id/itv_add_code_input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                app:inputPaddingVertical="8dp"
+                app:inputPaddingHorizontal="8dp"
+                app:inputHint="공유받은 코드를 입력해 주세요."
+                app:inputSupportColor="@color/error_color"
+                app:inputMax="50"
+                app:inputMaxLine="1"
+                app:inputSingleLine="true"
+                app:inputSupportSpacing="2dp"
+                app:layout_constraintEnd_toStartOf="@+id/btn_add_code_input"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/titleH5View" />
+
+
+            <com.ing.ui.button.VisualDefaultButton
+                android:id="@+id/btn_add_code_input"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingStart="@dimen/page_horizontal_padding"
+                android:paddingEnd="@dimen/page_horizontal_padding"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/itv_add_code_input"
+                app:visualText="코드 입력" />
+
+
+        </LinearLayout>
+
+
+
+        <com.ing.ui.text.body.Body2View
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="코드를 잘못 입력했습니다.\n입력하신 코드명을 다시 확인해 주세요."
+            android:lineSpacingExtra="4dp"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"
+            app:customTextColor="@color/error_color"
+            app:layout_constraintStart_toStartOf="@+id/line_add_code_layout"
+            app:layout_constraintTop_toBottomOf="@+id/line_add_code_layout" />
+
+
+        <LinearLayout
+            android:id="@+id/line_add_code_site_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="@dimen/page_horizontal_padding"
+            android:layout_marginEnd="@dimen/page_horizontal_padding"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line_add_code_layout">
+
+            <com.ing.ui.text.title.TitleH5View
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="영통구 인계동 5동 912호 전체공사 진행"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp">
+
+                <FrameLayout
+                    android:layout_width="48dp"
+                    android:layout_height="48dp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="center"
+                        android:background="@drawable/bg_round_square"
+                        android:backgroundTint="@color/white"
+                        app:srcCompat="@drawable/ic_avatar"/>
+
+                </FrameLayout>
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:orientation="vertical">
+
+                    <com.ing.ui.text.body.Body2View
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="top"
+                        app:customTextColor="@color/text_color_05"
+                        tools:text="생성자: 1GA001"/>
+
+                    <com.ing.ui.text.body.Body2View
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        app:customTextColor="@color/text_color_05"
+                        tools:text="2024.01.19"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <com.ing.ui.button.VisualButton
+            android:id="@+id/btn_add_code_commit"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginStart="@dimen/horizontal_input_text_padding"
+            android:layout_marginEnd="@dimen/horizontal_input_text_padding"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line_add_code_site_layout"
+            app:layout_constraintVertical_bias="0"
+            app:visualEnable="false"
+            app:visualText="추가하기" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.core.widget.NestedScrollView>

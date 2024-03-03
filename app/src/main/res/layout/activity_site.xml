@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.site.SiteActivity">
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tool_site_list_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:contentInsetStart="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.ing.ui.button.VisualImageButton
+                android:id="@+id/vib_site_list_back"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="@dimen/login_label_start_margin"
+                app:srcCompat="@drawable/ic_back_24" />
+
+
+            <com.ing.ui.text.label.LabelView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/vib_site_list_option"
+                app:layout_constraintStart_toEndOf="@+id/vib_site_list_back"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="가나다" />
+
+
+            <com.ing.ui.button.VisualImageButton
+                android:id="@+id/vib_site_list_option"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_vertical_menu" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <com.ing.ui.text.tab.VisualTabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tool_site_list_bar">
+
+
+    </com.ing.ui.text.tab.VisualTabLayout>
+
+
+    <FrameLayout
+        android:id="@+id/frame_new_blue_print_select_image"
+        android:layout_width="350dp"
+        android:layout_height="350dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/bg_round_square_effect"
+        android:clickable="false"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout">
+
+        <com.ing.ui.text.label.LabelView
+            android:id="@+id/label_new_blue_print_select_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="도면 이미지 선택하기" />
+
+        <ImageView
+            android:id="@+id/iv_new_blue_print_select_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_margin="2dp"
+            android:visibility="gone"
+            tools:src="@drawable/blueprint1"
+            tools:visibility="visible" />
+
+        <View
+            android:id="@+id/view_new_blue_print_select_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_view_effect"
+            android:clickable="false" />
+
+    </FrameLayout>
+
+    <com.ing.ui.button.VisualDotLineButton
+        android:layout_width="350dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="24dp"
+        app:visualLineSpacingExtra="3dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frame_new_blue_print_select_image"
+        app:visualText="아래에 + 버튼을 눌러\n새로운 하자를 추가해 보세요!" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_site_option"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:backgroundTint="@color/primary_color07"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_add_image"
+        app:tint="@color/white" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

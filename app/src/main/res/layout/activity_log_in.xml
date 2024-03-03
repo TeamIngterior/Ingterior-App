@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color"
-    tools:context=".ui.log.SignInActivity">
+    tools:context=".ui.sign.LogInActivity">
 
 
     <androidx.appcompat.widget.Toolbar
@@ -23,31 +23,25 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="120dp"
-                android:layout_height="32dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginStart="@dimen/horizontal_input_text_padding"
-                app:srcCompat="@drawable/ic_main_logo_horizon" />
-
             <com.ing.ui.button.VisualImageButton
+                android:id="@+id/vib_log_in_back"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginEnd="@dimen/horizontal_input_text_padding"
-                app:srcCompat="@drawable/ic_vertical_menu_24" />
+                android:layout_marginStart="@dimen/login_label_start_margin"
+                app:srcCompat="@drawable/ic_back_24" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/text_color_03"
+
+            <com.ing.ui.text.label.LabelView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/menu_login"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
-
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -81,7 +75,7 @@
                 <ImageView
                     android:layout_width="48dp"
                     android:layout_height="48dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="28dp"
                     app:srcCompat="@drawable/ic_main_logo_24" />
 
                 <com.ing.ui.text.title.TitleH2View
@@ -166,6 +160,7 @@
                 android:paddingBottom="?attr/actionBarSize"
                 android:gravity="center"
                 android:orientation="vertical"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/line_login_buttons_layout">

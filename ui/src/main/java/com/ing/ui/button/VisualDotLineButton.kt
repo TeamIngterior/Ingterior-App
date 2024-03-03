@@ -35,6 +35,10 @@ class VisualDotLineButton : BaseButtonView {
         attrs?.let {
             val typedArray = context.obtainStyledAttributes(attrs, R.styleable.BaseButtonView, defStyleAttr, 0)
             bodyView.text = typedArray.getString(R.styleable.BaseButtonView_visualText)
+
+            val lineSpacingExtra = typedArray.getDimensionPixelSize(R.styleable.BaseButtonView_visualLineSpacingExtra, 0)
+            bodyView.setLineSpacing(lineSpacingExtra.toFloat(), 1.0f)
+
             typedArray.recycle()
         }
 

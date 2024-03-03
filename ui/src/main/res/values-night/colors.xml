@@ -38,6 +38,8 @@
     <color name="image_button_background_color">#000000</color>
     <color name="image_button_effect_color">#F4F4F4</color>
 
+    <color name="error_color">#A52A2A</color>
+
     <color name="btn_kakaotalk_color">#FEE500</color>
     <color name="btn_naver_color">#03C75A</color>
     <color name="btn_google_insta_color">#FFFFFF</color>

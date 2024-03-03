@@ -21,9 +21,9 @@ class InputTextView: androidx.appcompat.widget.AppCompatEditText {
         isFocusableInTouchMode = true
         background = ContextCompat.getDrawable(context, R.drawable.bg_input_text_view)
 
-        val horizontalPadding = context.resources.getDimensionPixelSize(R.dimen.horizontal_input_text_padding)
-        val verticalPadding = context.resources.getDimensionPixelSize(R.dimen.vertical_input_text_padding)
-        setPadding(horizontalPadding, verticalPadding, horizontalPadding, verticalPadding)
+//        val horizontalPadding = context.resources.getDimensionPixelSize(R.dimen.horizontal_input_text_padding)
+//        val verticalPadding = context.resources.getDimensionPixelSize(R.dimen.vertical_input_text_padding)
+//        setPadding(horizontalPadding, verticalPadding, horizontalPadding, verticalPadding)
         textSize = LABEL_FONT_SIZE
 
         val font: Typeface = resources.getFont(Config.MEDIUM)
@@ -32,5 +32,6 @@ class InputTextView: androidx.appcompat.widget.AppCompatEditText {
         setTextColor(ContextCompat.getColor(context, R.color.text_color_06))
         setHintTextColor(ContextCompat.getColor(context, R.color.text_color_04))
     }
+
 
 }

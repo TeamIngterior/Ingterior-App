@@ -1,6 +1,7 @@
 package com.ing.ingterior.ui.site
 
 import android.content.DialogInterface
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import com.ing.ingterior.R
 import com.ing.ingterior.model.BluePrintModel
 import com.ing.ingterior.ui.IngTeriorViewModelFactory
+import com.ing.ingterior.util.DisplayUtils
 import com.ing.ui.button.VisualButton
 import com.ing.ui.button.VisualDefaultButton
 import com.ing.ui.button.VisualImageButton
@@ -149,14 +151,16 @@ class NewBluePrintFragmentDialog : DialogFragment() {
 
     override fun onStart() {
         super.onStart()
-        val dialog = dialog
         if (dialog != null) {
-            val displayMetrics = resources.displayMetrics
-            val width = displayMetrics.widthPixels // 화면 너비의 90%
-            val height = displayMetrics.heightPixels * 0.85 // 화면 높이의 75%
-            dialog.window?.setLayout(width, height.toInt())
+            val configuration = resources.configuration
+            if (configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                DisplayUtils.dialogWidthChange(requireDialog(), resources.getFloat(R.dimen.dialog_land_width_ratio))
+            } else if (configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                DisplayUtils.dialogWidthChange(requireDialog(), resources.getFloat(R.dimen.dialog_port_width_ratio))
+            }
         }
     }
+
 
     override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)

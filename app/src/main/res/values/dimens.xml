@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="page_horizontal_padding">16dp</dimen>
+    <dimen name="dialog_port_width_ratio">0.95</dimen>
+    <dimen name="dialog_land_width_ratio">0.85</dimen>
 </resources>

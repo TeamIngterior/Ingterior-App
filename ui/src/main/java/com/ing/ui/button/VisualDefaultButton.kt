@@ -1,6 +1,7 @@
 package com.ing.ui.button
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.View
@@ -46,9 +47,6 @@ class VisualDefaultButton : BaseButtonView {
         orientation = HORIZONTAL
         gravity = Gravity.CENTER
 
-        background = ContextCompat.getDrawable(context, R.drawable.bg_default_button)
-
-
         addView(imageView)
         addView(labelView)
 
@@ -82,15 +80,22 @@ class VisualDefaultButton : BaseButtonView {
             }
             else{
                 imageView.isVisible = false
-                imageView.visibility = View.GONE // 이 부분을 추가합니다.
+                imageView.visibility = View.GONE
                 setLabelStartMargin(0)
             }
+
+            val buttonBackground = typedArray.getResourceId(R.styleable.BaseButtonView_visualButtonBackground, R.drawable.bg_default_button)
+            background = ContextCompat.getDrawable(context, buttonBackground)
+
+            val tintColor = typedArray.getColor(R.styleable.BaseButtonView_visualTintColor, ContextCompat.getColor(context, R.color.text_color_06))
+            imageView.imageTintList = ColorStateList.valueOf(tintColor)
+            labelView.setTextColor(tintColor)
             typedArray.recycle()
         }
     }
 
     private fun setLabelStartMargin(startMargin: Int){
-        layoutParams = LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply {
+        labelView.layoutParams = LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply {
             setMargins(startMargin,0,0,0)
         }
 
