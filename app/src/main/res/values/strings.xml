@@ -40,5 +40,6 @@
 
     <string name="duration_short_format" translatable="false">%s:%s</string>
     <string name="duration_long_format" translatable="false">%s:%s:%s</string>
+    <string name="google_login_client_id">412737837459–0qdosc06qcmrprm9njet7o5rmh9o094g.apps.googleusercontent.com</string>
 
 </resources>

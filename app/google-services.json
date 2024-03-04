@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "412737837459",
+    "project_id": "ingterior",
+    "storage_bucket": "ingterior.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:412737837459:android:09242c37ba3361b6237066",
+        "android_client_info": {
+          "package_name": "com.ing.ingterior"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCr4yojNO4vDOOCObjo-ltTsTFWnkH2Puk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -13,7 +13,7 @@ import com.ing.ingterior.injection.Move
 import com.ing.ingterior.ui.MainActivity
 import com.ing.ingterior.ui.TestActivity
 import com.ing.ingterior.ui.main.SiteAddCodeDialog
-import com.ing.ingterior.ui.sign.LogInActivity
+import com.ing.ingterior.ui.log.LogInActivity
 import com.ing.ingterior.ui.simple.SimpleEstimationActivity
 import com.ing.ingterior.ui.site.SiteImageEditDialog
 import com.ing.ingterior.ui.site.SiteCreateOrEditActivity
