@@ -4,9 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.ing.ingterior.R
 
-class SiteActivity : AppCompatActivity() {
+class SiteManagementActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_site)
+        setContentView(R.layout.activity_site_management)
     }
 }

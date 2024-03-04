@@ -13,7 +13,7 @@ import com.ing.ingterior.R
 import com.ing.ingterior.injection.Factory
 import com.ing.ingterior.ui.IngTeriorViewModelFactory
 import com.ing.ingterior.ui.MainActivity
-import com.ing.ingterior.ui.MainViewModel
+import com.ing.ingterior.ui.viewmodel.MainViewModel
 import com.ing.ui.button.VisualButton
 import com.ing.ui.button.VisualDotLineButton
 
@@ -31,7 +31,6 @@ class HomeFragment : Fragment() {
         if(result.resultCode == AppCompatActivity.RESULT_OK) {
             if(result.data == null) return@registerForActivityResult
             val index = result.data!!.getIntExtra(EXTRA_MOVE_INDEX, viewModel.currentPageIndex)
-            viewModel.getAllSiteList(requireContext(), true)
             (requireActivity() as MainActivity).selectBottomNavigationMenuItem(index)
         }
     }
@@ -70,7 +69,7 @@ class HomeFragment : Fragment() {
 
         vdlbNewSiteAction.setOnClickListener{
             if(Factory.get().getSession().isLogin()) {
-                Factory.get().getMove().moveNewSiteActivity(requireActivity(), moveResultLauncher)
+                Factory.get().getMove().moveSiteCreateOrEditActivity(requireActivity(), moveResultLauncher, null)
             }
             else{
                 Factory.get().getMove().moveSignInActivity(requireActivity(), updateResultLauncher)

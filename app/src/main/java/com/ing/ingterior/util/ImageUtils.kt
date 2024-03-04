@@ -3,6 +3,7 @@ package com.ing.ingterior.util
 import android.content.ClipData
 import android.content.Context
 import android.content.Intent
+import android.database.Cursor
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
@@ -72,9 +73,18 @@ object ImageUtils {
         // Uri에서 이미지 추출
         fun loadBitmapFromUri(uri: Uri, context: Context): Bitmap? {
             return try {
-                context.contentResolver.openInputStream(uri)?.use { inputStream ->
-                    BitmapFactory.decodeStream(inputStream)
+                context.contentResolver.openInputStream(uri)?.use { inputStream -> BitmapFactory.decodeStream(inputStream)
                 }
+            } catch (e: FileNotFoundException) {
+                e.printStackTrace()
+                null
+            }
+        }
+
+        fun loadBitmapFromFile(path: String): Bitmap? {
+            return try {
+                val file = File(path)
+                BitmapFactory.decodeStream(FileInputStream(file))
             } catch (e: FileNotFoundException) {
                 e.printStackTrace()
                 null
@@ -338,5 +348,15 @@ object ImageUtils {
             }
         }
         return newBitmap
+    }
+
+    fun getMediaFileSize(context: Context, uri: Uri): Long{
+        var fileSize = 0L
+        val cursor: Cursor? = context.contentResolver.query(uri, arrayOf(MediaStore.Images.Media.SIZE), null, null, null)
+        if(cursor!=null && cursor.moveToFirst()){
+            fileSize = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.SIZE))
+            cursor.close()
+        }
+        return fileSize
     }
 }

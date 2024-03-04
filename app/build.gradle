@@ -1,16 +1,19 @@
 plugins {
     id 'com.android.application'
+    id 'kotlin-parcelize'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
     id 'org.jetbrains.kotlin.android'
 }
 
 android {
     namespace 'com.ing.ingterior'
-    compileSdk 32
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.ing.ingterior"
         minSdk 28
-        targetSdk 32
+        targetSdk 34
         versionCode 1
         versionName "1.0.0.1"
 

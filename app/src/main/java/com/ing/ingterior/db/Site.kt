@@ -3,11 +3,14 @@ package com.ing.ingterior.db
 import android.content.ContentValues
 import android.content.Context
 import android.net.Uri
+import android.os.Parcelable
 import android.util.Log
+import kotlinx.parcelize.Parcelize
 
-data class Site(val _id: Long, val creatorId: Long, val participantIds: String, val name: String, val code: String,
-                var defaultIds: String = "", var managementIds:String = "", var blueprintId: Long=0, var createdDate:Long,
-                var bluePrintName: String = "", var bluePrintLocation: String = "", var favorite: Boolean = false) {
+@Parcelize
+data class Site(val _id: Long, val creatorId: Long, val participantIds: String, val siteName: String, val siteCode: String,
+                var defaultIds: String = "", var managementIds:String = "", var imageId: Long=0, var createdDate:Long,
+                var imageName: String = "", var imageLocation: String = "", var favorite: Boolean = false) : Parcelable {
 
     companion object{
         const val TAG = "Site"

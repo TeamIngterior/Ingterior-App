@@ -12,10 +12,8 @@ import com.ing.ingterior.R
 import com.ing.ingterior.injection.Factory
 import com.ing.ingterior.injection.ServerApi
 import com.ing.ingterior.model.SiteModel
-import com.ing.ingterior.ui.main.HomeFragment
-import com.ing.ingterior.ui.main.MessageFragment
-import com.ing.ingterior.ui.main.SettingFragment
-import com.ing.ingterior.ui.main.SiteListFragment
+import com.ing.ingterior.ui.main.*
+import com.ing.ingterior.ui.viewmodel.MainViewModel
 import com.ing.ingterior.util.AnimationUtils
 import retrofit2.Call
 import retrofit2.Callback
@@ -42,22 +40,22 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val serverApi = ServerApi.retrofit.create(ServerApi::class.java)
-        serverApi.updateConstruction(SiteModel(111, 27, "테스트 현장", 3)).enqueue(object : Callback<SiteModel> {
-            override fun onResponse(call: Call<SiteModel>, response: Response<SiteModel>) {
-                if (response.isSuccessful) {
-                    // 성공적으로 업데이트 되었을 때의 처리
-                    Log.d("test", "Update Success: ${response.body()}")
-                } else {
-                    // 서버 에러 처리
-                    Log.d("test","Server Error: ${response.code()}")
-                }
-            }
-
-            override fun onFailure(call: Call<SiteModel>, t: Throwable) {
-                // 네트워크 에러 처리
-                Log.d("test","Network Error: ${t.message}")
-            }
-        })
+//        serverApi.updateConstruction(SiteModel(111, 27, "테스트 현장", 3)).enqueue(object : Callback<SiteModel> {
+//            override fun onResponse(call: Call<SiteModel>, response: Response<SiteModel>) {
+//                if (response.isSuccessful) {
+//                    // 성공적으로 업데이트 되었을 때의 처리
+//                    Log.d("test", "Update Success: ${response.body()}")
+//                } else {
+//                    // 서버 에러 처리
+//                    Log.d("test","Server Error: ${response.code()}")
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<SiteModel>, t: Throwable) {
+//                // 네트워크 에러 처리
+//                Log.d("test","Network Error: ${t.message}")
+//            }
+//        })
 
         if(Factory.get().getApplication().isFirst) {
             AnimationUtils.fadeInAndOut(ivLogo, 750, object : AnimationUtils.AnimationListener {

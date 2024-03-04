@@ -2,12 +2,14 @@ package com.ing.ingterior.util
 
 import android.content.ContentResolver
 import android.content.Context
+import android.database.Cursor
 import android.graphics.Bitmap
 import android.net.Uri
+import android.provider.MediaStore
 import android.provider.OpenableColumns
+import android.text.TextUtils
 import android.util.Log
 import android.webkit.MimeTypeMap
-import com.ing.ingterior.injection.Factory
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.FileOutputStream
@@ -17,6 +19,11 @@ import java.util.*
 object FileWrapper {
 
     private const val TAG = "FileWrapper"
+    const val DOCUMENTS_EXTERNAL_AUTHORITY = "com.android.externalstorage.documents"
+    const val CONTACTS_FILES_AUTHORITY = "com.android.contacts.files"
+    const val FILE_PROVIDER_AUTHORITY = "com.ing.ingterior.fileProvider";
+    const val DOCUMENTS_AUTHORITY = "com.android.providers.downloads.documents"
+    const val DOCUMENTS_MEDIA_AUTHORITY = "com.android.providers.media.documents"
 
     const val KB = 1024.0
     const val MB = 1024.0 * 1024.0
@@ -55,7 +62,7 @@ object FileWrapper {
         var fileOutputStream: FileOutputStream? = null
         try {
             fileOutputStream = FileOutputStream(file)
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream) // PNG 형식으로 압축하고 저장합니다.
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 80, fileOutputStream) // JPEG 형식으로 압축하고 저장합니다.
         } catch (e: IOException) {
             e.printStackTrace()
         } finally {
@@ -66,7 +73,7 @@ object FileWrapper {
                 e.printStackTrace()
             }
         }
-        Log.d(TAG, "createImageFile: file=$file")
+        Log.d(TAG, "createImageFile: file=$file, file size=${file.length()}")
 
         return file
     }
@@ -129,4 +136,46 @@ object FileWrapper {
         }
         return fileSize ?: -1
     }
+
+    fun getFileSize(context: Context, uri: Uri?): Long {
+        var size = 0L
+        if (uri != null && isFileUri(uri)) {
+            try {
+                val cSize: Cursor? = context.contentResolver.query(uri, null, null, null, null)
+                if (cSize != null && cSize.moveToFirst()) {
+                    size = cSize.getLong(cSize.getColumnIndexOrThrow(OpenableColumns.SIZE))
+                    cSize.close()
+                }
+            } catch (e: IllegalStateException) {
+                Log.e(TAG, "getFileSize", e)
+            }
+        }
+        return size
+    }
+
+    fun isFileUri(uri: Uri?): Boolean {
+        return uri != null && (TextUtils.equals(uri.scheme, ContentResolver.SCHEME_FILE)
+                || isExternalStorageDocument(uri) || isProviderFile(uri) || isDownloadsDocument(uri))
+    }
+
+    /**
+     * @param uri The Uri to check.
+     * @return Whether the Uri authority is ExternalStorageProvider.
+     */
+    private fun isExternalStorageDocument(uri: Uri): Boolean {
+        return DOCUMENTS_EXTERNAL_AUTHORITY == uri.authority
+    }
+
+    private fun isProviderFile(uri: Uri): Boolean{
+        return uri.authority == this.FILE_PROVIDER_AUTHORITY
+    }
+
+    /**
+     * @param uri The Uri to check.
+     * @return Whether the Uri authority is DownloadsProvider.
+     */
+    private fun isDownloadsDocument(uri: Uri): Boolean {
+        return DOCUMENTS_AUTHORITY == uri.authority
+    }
+
 }

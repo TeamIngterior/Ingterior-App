@@ -78,7 +78,7 @@
             tools:text="영통구 인계동 5동 912호 전체공사 진어쩌고 저쩌고 어쩌고 저쩌고"/>
 
         <com.ing.ui.check.VisualImageCheckBox
-            android:id="@+id/iv_site_item_favorite"
+            android:id="@+id/ivc_site_item_favorite"
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:scaleType="centerInside"

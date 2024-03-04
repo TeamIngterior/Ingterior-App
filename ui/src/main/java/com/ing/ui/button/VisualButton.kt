@@ -50,4 +50,8 @@ class VisualButton : BaseButtonView {
 
         addView(labelView)
     }
+
+    fun setText(text: String) {
+        labelView.text = text
+    }
 }

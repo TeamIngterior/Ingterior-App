@@ -10,4 +10,11 @@ var storagePermissions = arrayOf(
 
 var cameraPermission = Manifest.permission.CAMERA
 
-const val EXTRA_MOVE_INDEX = "move_index"
+const val EXTRA_MOVE_INDEX = "extra_move_index"
+const val EXTRA_SITE = "extra_site"
+
+val DIALOG_LAND_WIDTH_RATIO = 0.85F
+val DIALOG_PORT_WIDTH_RATIO = 0.95F
+
+val IMAGE_LAND_WIDTH_RATIO = 0.6F
+val IMAGE_PORT_WIDTH_RATIO = 0.75F

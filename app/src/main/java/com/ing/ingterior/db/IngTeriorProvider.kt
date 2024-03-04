@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
 import android.util.Log
 import com.ing.ingterior.db.Site.Companion.FAVORITE
-import com.ing.ingterior.db.Site.Companion.UPDATE_FAVORITE
 import kotlinx.coroutines.*
 import java.util.*
 
@@ -26,12 +25,14 @@ class IngTeriorProvider : ContentProvider() {
         private const val URI_SITE                              = "site"
         private const val URI_SITE_ID                           = "site/#"
         private const val URI_SITE_FAVORITE_ID                  = "site/favorite/#"
+        private const val URI_IMAGE_ID                          = "image/#"
 
         private const val MATCH_SIGN                            = 0
         private const val MATCH_SIGN_USER_ID                    = 1
         private const val MATCH_SITE                            = 2
         private const val MATCH_SITE_ID                         = 3
         private const val MATCH_SITE_FAVORITE_ID                = 4
+        private const val MATCH_IMAGE_ID                        = 5
     }
 
     init {
@@ -40,6 +41,7 @@ class IngTeriorProvider : ContentProvider() {
         URI_MATCHER.addURI(AUTHORITY, URI_SITE, MATCH_SITE)
         URI_MATCHER.addURI(AUTHORITY, URI_SITE_ID, MATCH_SITE_ID)
         URI_MATCHER.addURI(AUTHORITY, URI_SITE_FAVORITE_ID, MATCH_SITE_FAVORITE_ID)
+        URI_MATCHER.addURI(AUTHORITY, URI_IMAGE_ID, MATCH_IMAGE_ID)
     }
 
     private val dbHelper: IngTeriorDBHelper by lazy { IngTeriorDBHelper(context!!) }
@@ -56,7 +58,7 @@ class IngTeriorProvider : ContentProvider() {
         sortOrder: String?
     ): Cursor? {
         var cursor: Cursor? = null
-        val db = dbHelper.writableDatabase
+        val db = dbHelper.readableDatabase
         try {
             db.beginTransaction()
             val matcher = URI_MATCHER.match(uri)
@@ -78,6 +80,10 @@ class IngTeriorProvider : ContentProvider() {
                 MATCH_SITE_ID -> {
                     val siteId = uri.lastPathSegment?.toLong() ?: return null
                     cursor = db.rawQuery(Site.QUERY_ALL, arrayOf(siteId.toString()), null)
+                }
+                MATCH_IMAGE_ID -> {
+                    val imageId = uri.lastPathSegment?.toLong() ?: return null
+                    cursor = db.rawQuery(Image.QUERY_ID, arrayOf(imageId.toString()), null)
                 }
                 else -> throw UnsupportedOperationException(NO_DELETES_INSERTS_OR_UPDATES + uri)
             }
@@ -117,7 +123,7 @@ class IngTeriorProvider : ContentProvider() {
                     bluePrintValues.put(Image.CREATED_DATE, Date().time)
                     Log.d(TAG, "insert: contentValues=$contentValues")
 
-                    val bluePrintId:Long = if(contentValues.getAsString(Image.LOCATION).isEmpty()) -1L
+                    val bluePrintId:Long = if(contentValues.getAsString(Image.LOCATION).isEmpty()) 0
                     else{ db.insert(Image.TABLE_NAME, null, bluePrintValues) }
                     Log.d(TAG, "insert: bluePrintId=$bluePrintId")
 
@@ -164,6 +170,7 @@ class IngTeriorProvider : ContentProvider() {
     }
 
     private fun insertEmptyFold(db: SQLiteDatabase, foldType: Int, userId: Long, siteId: Long) {
+
         val foldValues = ContentValues()
         foldValues.put(Fold.TYPE, foldType)
         foldValues.put(Fold.SITE_ID, siteId)
@@ -173,8 +180,36 @@ class IngTeriorProvider : ContentProvider() {
         db.insert(Fold.TABLE_NAME, null, foldValues)
     }
 
+    private fun deleteFoldFromSite(db: SQLiteDatabase, foldType: Int, siteId: Long) {
+        db.delete(Fold.TABLE_NAME, "${Fold.SITE_ID} = ? AND ${Fold.TYPE} = ?", arrayOf(siteId.toString(), foldType.toString()))
+    }
+
     override fun delete(uri: Uri, selection: String?, selectionArgs: Array<out String>?): Int {
-        return -1
+        val db = dbHelper.writableDatabase
+        try {
+            db.beginTransaction()
+            val matcher = URI_MATCHER.match(uri)
+            Log.d(TAG, "delete: uri=$uri, matcher=$matcher, selection=$selection, selectionArgs=${selectionArgs.contentToString()}")
+            when (matcher) {
+                MATCH_IMAGE_ID -> {
+                    val imageId = uri.lastPathSegment?.toLong() ?: return 0.also { db.endTransaction() }
+                    db.delete(Image.TABLE_NAME, "${Image._ID} = ?" , arrayOf(imageId.toString()))
+                    db.setTransactionSuccessful()
+                }
+                MATCH_SITE_ID -> {
+                    val siteId = uri.lastPathSegment?.toLong() ?: return 0.also { db.endTransaction() }
+                    db.delete(Site.TABLE_NAME, "${Site._ID} = ?" , arrayOf(siteId.toString()))
+                    db.setTransactionSuccessful()
+                }
+                else -> throw IllegalArgumentException("Unknown URI: $uri")
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "delete error: ", e)
+            return 0
+        } finally {
+            db.endTransaction()
+        }
+        return 1
     }
 
     override fun update(uri: Uri, contentValues: ContentValues?, selection: String?, selectionArgs: Array<out String>?): Int {
@@ -191,6 +226,63 @@ class IngTeriorProvider : ContentProvider() {
                     val updateQuery = "UPDATE site SET favorite = $favoriteValue WHERE _id = $siteId"
                     Log.d(TAG, "update: MATCH_SITE_FAVORITE_ID, updateQuery=$updateQuery")
                     db.execSQL(updateQuery)
+                    db.setTransactionSuccessful()
+                }
+                MATCH_SITE_ID -> {
+                    if(contentValues == null) return 0.also { db.endTransaction() }
+                    val operator = uri.getQueryParameter(Site.EXTRA_SITE_OPERATOR) ?: return 0.also { db.endTransaction() }
+                    val siteId = uri.lastPathSegment?.toLong() ?: return 0.also { db.endTransaction() }
+                    val siteQueryCursor = db.rawQuery(Site.QUERY_ALL, arrayOf(siteId.toString()), null) ?: return 0.also { db.endTransaction() }
+                    var bluePrintId = if(siteQueryCursor.moveToFirst()) {
+                        siteQueryCursor.getLong(siteQueryCursor.getColumnIndexOrThrow(Site.BLUEPRINT_ID))
+                    }
+                    else 0L
+                    siteQueryCursor.close()
+
+                    if(contentValues.containsKey(Image.LOCATION)){
+                        val imageValues = ContentValues(3)
+                        imageValues.put(Image.LOCATION, contentValues.getAsString(Image.LOCATION))
+                        imageValues.put(Image.FILENAME, contentValues.getAsString(Image.FILENAME))
+                        imageValues.put(Image.CREATED_DATE, Date().time)
+
+                        if(bluePrintId > 0) {
+                            db.update(Image.TABLE_NAME, contentValues, "${Image._ID} = ?", arrayOf(bluePrintId.toString()))
+                        }
+                        else {
+                            bluePrintId = db.insert(Image.TABLE_NAME, null, imageValues)
+                        }
+                    }
+                    else{
+                        db.delete(Image.TABLE_NAME, "${Image._ID} = ?", arrayOf(bluePrintId.toString()))
+                    }
+
+                    val siteValues = ContentValues().apply {
+                        put(Site.CREATOR_ID, contentValues.getAsLong(Sign.USER_ID))
+                        put(Site.PARTICIPANT_IDS, contentValues.getAsLong(Sign.USER_ID).toString())
+                        put(Site.NAME, contentValues.getAsString(Site.NAME))
+                        put(Site.CODE, contentValues.getAsString(Site.CODE))
+                        put(Site.BLUEPRINT_ID, bluePrintId)
+                        put(Site.CREATED_DATE, Date().time)
+                        put(Site.FAVORITE, 0)
+                    }
+
+                    val rs = db.update(Site.TABLE_NAME, siteValues, null, null)
+                    Log.d(TAG, "update: rs=$rs")
+
+                    when(operator.toInt()) {
+                        Fold.FOLD_DEFAULT -> {
+                            insertEmptyFold(db, Fold.FOLD_DEFAULT, contentValues.getAsLong(Sign.USER_ID), siteId)
+                            deleteFoldFromSite(db, Fold.FOLD_MANAGEMENT, siteId)
+                        }
+                        Fold.FOLD_MANAGEMENT -> {
+                            insertEmptyFold(db, Fold.FOLD_MANAGEMENT, contentValues.getAsLong(Sign.USER_ID), siteId)
+                            deleteFoldFromSite(db, Fold.FOLD_DEFAULT, siteId)
+                        }
+                        Fold.FOLD_ALL -> {
+                            insertEmptyFold(db, Fold.FOLD_DEFAULT, contentValues.getAsLong(Sign.USER_ID), siteId)
+                            insertEmptyFold(db, Fold.FOLD_MANAGEMENT, contentValues.getAsLong(Sign.USER_ID), siteId)
+                        }
+                    }
                     db.setTransactionSuccessful()
                 }
                 else -> throw IllegalArgumentException("Unknown URI: $uri")

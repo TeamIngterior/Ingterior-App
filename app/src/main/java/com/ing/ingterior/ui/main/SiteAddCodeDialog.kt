@@ -8,7 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
+import com.ing.ingterior.DIALOG_LAND_WIDTH_RATIO
+import com.ing.ingterior.DIALOG_PORT_WIDTH_RATIO
 import com.ing.ingterior.R
+import com.ing.ingterior.util.DisplayUtils
 import com.ing.ingterior.util.DisplayUtils.dialogWidthChange
 import com.ing.ui.button.VisualImageButton
 
@@ -44,10 +47,9 @@ class SiteAddCodeDialog : DialogFragment() {
         super.onStart()
         if (dialog != null) {
             val configuration = resources.configuration
-            if (configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                dialogWidthChange(requireDialog(), resources.getFloat(R.dimen.dialog_land_width_ratio))
+            if (configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) { dialogWidthChange(requireDialog(), DIALOG_LAND_WIDTH_RATIO)
             } else if (configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-                dialogWidthChange(requireDialog(), resources.getFloat(R.dimen.dialog_port_width_ratio))
+                dialogWidthChange(requireDialog(), DIALOG_PORT_WIDTH_RATIO)
             }
         }
     }

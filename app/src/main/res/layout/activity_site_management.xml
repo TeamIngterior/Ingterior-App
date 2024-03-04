@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.site.SiteActivity">
-
+    tools:context=".ui.site.SiteManagementActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tool_site_list_bar"
@@ -69,9 +68,9 @@
 
 
     <FrameLayout
-        android:id="@+id/frame_new_blue_print_select_image"
-        android:layout_width="350dp"
-        android:layout_height="350dp"
+        android:id="@+id/frame_image_management_select_image"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/bg_round_square_effect"
         android:clickable="false"
@@ -88,7 +87,7 @@
             android:text="도면 이미지 선택하기" />
 
         <ImageView
-            android:id="@+id/iv_new_blue_print_select_image"
+            android:id="@+id/iv_image_management_select_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -98,7 +97,7 @@
             tools:visibility="visible" />
 
         <View
-            android:id="@+id/view_new_blue_print_select_image"
+            android:id="@+id/view_image_management_select_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/bg_view_effect"
@@ -113,7 +112,7 @@
         app:visualLineSpacingExtra="3dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frame_new_blue_print_select_image"
+        app:layout_constraintTop_toBottomOf="@+id/frame_image_management_select_image"
         app:visualText="아래에 + 버튼을 눌러\n새로운 하자를 추가해 보세요!" />
 
 

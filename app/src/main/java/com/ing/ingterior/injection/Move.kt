@@ -5,18 +5,18 @@ import android.content.Intent
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.fragment.app.FragmentActivity
-import com.ing.ingterior.ui.site.NewBluePrintFragmentDialog
+import com.ing.ingterior.db.Site
+import com.ing.ingterior.ui.site.SiteImageEditDialog
 
 abstract class Move {
     abstract fun moveMainActivity(activity: Activity)
     abstract fun moveSimpleEstimationActivity(activity: Activity)
     abstract fun moveSignInActivity(activity: Activity)
     abstract fun moveSignInActivity(activity: Activity, moveResultLauncher: ActivityResultLauncher<Intent>)
-    abstract fun moveNewSiteActivity(activity: Activity)
-    abstract fun moveNewSiteActivity(activity: Activity, moveResultLauncher: ActivityResultLauncher<Intent>)
+    abstract fun moveSiteCreateOrEditActivity(activity: Activity, moveResultLauncher: ActivityResultLauncher<Intent>?, site: Site?)
 
     abstract fun showAddCodeDialog(activity: FragmentActivity)
-    abstract fun showImageDialog(activity: FragmentActivity, dismissListener: NewBluePrintFragmentDialog.DialogListener?, isCreate: Boolean)
+    abstract fun showImageDialog(activity: FragmentActivity, dismissListener: SiteImageEditDialog.DialogListener, isFirst: Boolean)
 
     // fragment
     abstract fun moveResultSimpleEstimationFragment(view: View)

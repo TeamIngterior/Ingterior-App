@@ -3,6 +3,7 @@
     <string name="hello_blank_fragment">빈 페이지</string>
     <string name="menu_login">로그인</string>
     <string name="title_add_new_site">새 현장 추가</string>
+    <string name="title_edit_site">현장 편집</string>
     <string name="message_interior_estimate">간편견적보기</string>
     <string name="tip_register_new_site">이사할 때, 입주 전 확인할 때 필수!</string>
     <string name="title_site_list">현장 목록</string>
@@ -22,7 +23,7 @@
     <string name="action_add_image">이미지 첨부하기</string>
     <string name="action_view_quick_estimate">인테리어 간편견적</string>
     <string name="action_add_new_site">새 현장 추가하기</string>
-
+    <string name="action_edit_site">편집 완료</string>
 
     <string name="hint_new_site_1">마커 기능을 사용하여 현장관리를 더 효율적으로 이용할 수 있습니다.</string>
     <string name="hint_new_site_2">-최대 1개까지 추가 가능합니다.\n-파일 형식은 Jpg, Jpeg, Png, Gif 만 가능합니다.\n-최대 5MB 까지 등록 가능합니다.</string>

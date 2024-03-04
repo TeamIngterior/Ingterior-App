@@ -8,11 +8,12 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/const_image_edit_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <com.ing.ui.button.VisualImageButton
-            android:id="@+id/vib_new_blue_print_close"
+            android:id="@+id/vib_image_edit_dialog_close"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginTop="8dp"
@@ -25,12 +26,11 @@
             android:id="@+id/titleH5View"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:gravity="center"
             android:text="영역 안에 이미지를 맞춰주세요."
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/vib_new_blue_print_close" />
+            app:layout_constraintTop_toBottomOf="@+id/vib_image_edit_dialog_close" />
 
 
         <LinearLayout
@@ -44,7 +44,7 @@
             app:layout_constraintTop_toBottomOf="@+id/titleH5View">
 
             <com.ing.ui.button.VisualImageButton
-                android:id="@+id/vib_new_blue_print_rotate"
+                android:id="@+id/vib_image_edit_dialog_rotate"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginEnd="24dp"
@@ -53,7 +53,7 @@
                 />
 
             <com.ing.ui.button.VisualImageButton
-                android:id="@+id/vib_new_blue_print_horizontal_inversion"
+                android:id="@+id/vib_image_edit_dialog_horizontal_inversion"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginEnd="24dp"
@@ -63,7 +63,7 @@
 
 
             <com.ing.ui.button.VisualImageButton
-                android:id="@+id/vib_new_blue_print_vertical_inversion"
+                android:id="@+id/vib_image_edit_dialog_vertical_inversion"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 app:srcCompat="@drawable/ic_vertical_inversion_24"
@@ -73,19 +73,18 @@
         </LinearLayout>
 
         <com.ing.ui.button.VisualDefaultButton
-            android:id="@+id/btn_blue_print_reset"
-            android:layout_width="0dp"
+            android:id="@+id/btn_image_edit_dialog_reset"
+            android:layout_width="220dp"
             android:layout_height="48dp"
-            android:layout_marginTop="16dp"
             android:layout_marginStart="18dp"
-            android:layout_marginEnd="18dp"
-            app:layout_constraintEnd_toEndOf="@+id/frame_new_blue_print_select_image"
-            app:layout_constraintStart_toStartOf="@+id/frame_new_blue_print_select_image"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/line_new_blue_print_options"
             app:visualText="이미지 원본으로 되돌리기" />
 
         <FrameLayout
-            android:id="@+id/frame_new_blue_print_select_image"
+            android:id="@+id/frame_image_edit_dialog_select_image"
             android:layout_width="300dp"
             android:layout_height="300dp"
             android:orientation="horizontal"
@@ -94,7 +93,7 @@
             android:clickable="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_blue_print_reset">
+            app:layout_constraintTop_toBottomOf="@+id/btn_image_edit_dialog_reset">
 
             <com.ing.ui.text.label.LabelView
                 android:id="@+id/label_new_blue_print_select_image"
@@ -104,7 +103,7 @@
                 android:text="도면 이미지 선택하기"/>
 
             <ImageView
-                android:id="@+id/iv_new_blue_print_select_image"
+                android:id="@+id/iv_image_edit_dialog_select_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -115,7 +114,7 @@
                 />
 
             <View
-                android:id="@+id/view_new_blue_print_select_image"
+                android:id="@+id/view_image_edit_dialog_select_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clickable="false"
@@ -124,10 +123,10 @@
         </FrameLayout>
 
         <com.ing.ui.button.VisualButton
-            android:id="@+id/btn_new_blue_print_commit"
+            android:id="@+id/btn_image_edit_dialog_commit"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="32dp"
             android:layout_marginBottom="16dp"
             android:layout_marginStart="@dimen/horizontal_input_text_padding"
             android:layout_marginEnd="@dimen/horizontal_input_text_padding"
@@ -137,7 +136,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/frame_new_blue_print_select_image" />
+            app:layout_constraintTop_toBottomOf="@+id/frame_image_edit_dialog_select_image" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

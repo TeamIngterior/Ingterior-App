@@ -6,16 +6,18 @@ import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.Navigation
+import com.ing.ingterior.EXTRA_SITE
 import com.ing.ingterior.R
+import com.ing.ingterior.db.Site
 import com.ing.ingterior.injection.Move
 import com.ing.ingterior.ui.MainActivity
 import com.ing.ingterior.ui.TestActivity
 import com.ing.ingterior.ui.main.SiteAddCodeDialog
 import com.ing.ingterior.ui.sign.LogInActivity
 import com.ing.ingterior.ui.simple.SimpleEstimationActivity
-import com.ing.ingterior.ui.site.NewBluePrintFragmentDialog
-import com.ing.ingterior.ui.site.NewSiteActivity
-import com.ing.ingterior.ui.site.SiteActivity
+import com.ing.ingterior.ui.site.SiteImageEditDialog
+import com.ing.ingterior.ui.site.SiteCreateOrEditActivity
+import com.ing.ingterior.ui.site.SiteManagementActivity
 
 class MoveImpl : Move() {
     override fun moveMainActivity(activity: Activity) {
@@ -42,19 +44,16 @@ class MoveImpl : Move() {
         moveResultLauncher.launch(intent)
     }
 
-    override fun moveNewSiteActivity(activity: Activity) {
-        val intent = Intent(activity, NewSiteActivity::class.java)
+    override fun moveSiteCreateOrEditActivity(activity: Activity, moveResultLauncher: ActivityResultLauncher<Intent>?, site: Site?) {
+        val intent = Intent(activity, SiteCreateOrEditActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-        activity.startActivity(intent)
-    }
-
-    override fun moveNewSiteActivity(
-        activity: Activity,
-        moveResultLauncher: ActivityResultLauncher<Intent>
-    ) {
-        val intent = Intent(activity, NewSiteActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-        moveResultLauncher.launch(intent)
+        intent.putExtra(EXTRA_SITE, site)
+        if(moveResultLauncher!=null) {
+            moveResultLauncher.launch(intent)
+        }
+        else{
+            activity.startActivity(intent)
+        }
     }
 
     override fun showAddCodeDialog(activity: FragmentActivity) {
@@ -62,11 +61,9 @@ class MoveImpl : Move() {
         siteAddCodeDialog.show(activity.supportFragmentManager.beginTransaction(), "site_add_code_dialog")
     }
 
-    override fun showImageDialog(activity: FragmentActivity, dismissListener: NewBluePrintFragmentDialog.DialogListener?, isCreate: Boolean) {
+    override fun showImageDialog(activity: FragmentActivity, dismissListener: SiteImageEditDialog.DialogListener, isFirst: Boolean) {
         val transaction = activity.supportFragmentManager.beginTransaction()
-        val bluePrintFragmentDialog = NewBluePrintFragmentDialog()
-        bluePrintFragmentDialog.listener = dismissListener
-        bluePrintFragmentDialog.isCreate = isCreate
+        val bluePrintFragmentDialog = SiteImageEditDialog(dismissListener, isFirst)
         bluePrintFragmentDialog.show(transaction, "bluePrintFragmentDialog")
     }
 
@@ -79,11 +76,10 @@ class MoveImpl : Move() {
         val intent = Intent(activity, TestActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         activity.startActivity(intent)
-
     }
 
     override fun moveSiteActivity(activity: Activity) {
-        val intent = Intent(activity, SiteActivity::class.java)
+        val intent = Intent(activity, SiteManagementActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         activity.startActivity(intent)
 

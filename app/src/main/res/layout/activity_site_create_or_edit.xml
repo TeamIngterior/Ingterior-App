@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color"
-    tools:context=".ui.site.NewSiteActivity">
+    tools:context=".ui.site.SiteCreateOrEditActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar2"
@@ -25,7 +25,7 @@
             android:paddingEnd="6dp">
 
             <com.ing.ui.button.VisualImageButton
-                android:id="@+id/iv_site_back"
+                android:id="@+id/iv_site_coe_back"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 app:srcCompat="@drawable/ic_back_24"
@@ -35,7 +35,7 @@
                 tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
             <com.ing.ui.text.label.LabelView
-                android:id="@+id/textView"
+                android:id="@+id/lb_coe_title"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -97,7 +97,7 @@
             </LinearLayout>
 
             <com.ing.ui.text.edit.InputTextLayout
-                android:id="@+id/itv_new_site_name_layout"
+                android:id="@+id/itv_site_coe_name_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -141,7 +141,7 @@
                 android:orientation="horizontal">
 
                 <com.ing.ui.check.VisualButtonCheckBox
-                    android:id="@+id/vcb_new_site_defects"
+                    android:id="@+id/vcb_site_coe_defects"
                     android:layout_width="0dp"
                     android:layout_height="48dp"
                     android:layout_weight="1"
@@ -155,7 +155,7 @@
 
 
                 <com.ing.ui.check.VisualButtonCheckBox
-                    android:id="@+id/vcb_new_site_management"
+                    android:id="@+id/vcb_site_coe_management"
                     android:layout_width="0dp"
                     android:layout_height="48dp"
                     android:layout_weight="1"
@@ -197,7 +197,7 @@
                     android:text="@string/hint_new_site_1" />
 
                 <com.ing.ui.button.VisualDefaultButton
-                    android:id="@+id/btn_new_site_add_image"
+                    android:id="@+id/btn_site_coe_add_image"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginTop="16dp"
@@ -217,7 +217,7 @@
                     tools:visibility="visible">
 
                     <ImageView
-                        android:id="@+id/iv_new_site_image"
+                        android:id="@+id/iv_site_coe_image"
                         android:layout_width="match_parent"
                         android:layout_height="328dp"
                         android:layout_gravity="center"
@@ -235,7 +235,7 @@
                         android:orientation="horizontal">
 
                         <com.ing.ui.button.VisualDefaultButton
-                            android:id="@+id/btn_new_site_edit_image"
+                            android:id="@+id/btn_site_coe_edit_image"
                             android:layout_width="0dp"
                             android:layout_height="48dp"
                             android:layout_weight="1"
@@ -249,7 +249,7 @@
                             android:layout_height="match_parent"/>
 
                         <com.ing.ui.button.VisualDefaultButton
-                            android:id="@+id/btn_new_site_remove_image"
+                            android:id="@+id/btn_site_coe_remove_image"
                             android:layout_width="0dp"
                             android:layout_height="48dp"
                             android:layout_weight="1"
@@ -279,7 +279,7 @@
     </androidx.core.widget.NestedScrollView>
 
     <com.ing.ui.button.VisualButton
-        android:id="@+id/btn_new_site_add"
+        android:id="@+id/btn_site_coe_commit"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginStart="@dimen/page_horizontal_padding"
@@ -292,7 +292,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
-        android:id="@+id/line_new_site_progress"
+        android:id="@+id/line_site_coe_progress"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/transparent_20_color"

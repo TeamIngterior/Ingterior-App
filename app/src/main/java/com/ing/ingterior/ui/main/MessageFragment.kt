@@ -7,9 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.ing.ingterior.R
-import com.ing.ingterior.injection.Factory
 import com.ing.ingterior.ui.IngTeriorViewModelFactory
-import com.ing.ingterior.ui.MainViewModel
+import com.ing.ingterior.ui.viewmodel.MainViewModel
 
 class MessageFragment : Fragment() {
     private val viewModel : MainViewModel by lazy { ViewModelProvider(this, IngTeriorViewModelFactory())[MainViewModel::class.java] }

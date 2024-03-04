@@ -8,5 +8,7 @@ data class Image(val id: Long, val location: String, val fileName: String, val c
         const val FILENAME = "filename"
         const val CREATED_DATE = "created_date"
 
+        const val CONTENT_URI = "content://ingterior/${TABLE_NAME}"
+        const val QUERY_ID = "SELECT * FROM $TABLE_NAME WHERE $_ID = ?"
     }
 }
