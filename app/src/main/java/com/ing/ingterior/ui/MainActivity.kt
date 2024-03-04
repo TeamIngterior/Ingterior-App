@@ -21,12 +21,12 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
-    companion object{
-        // 프래그먼트 생성을 지연시키기 위해 Pair 대신 Pair<() -> Fragment, Int> 사용
-        private val pageMappings = mapOf(
-            R.id.menu_main to Pair({ HomeFragment() }, 0),
-            R.id.menu_site_management to Pair({ SiteListFragment() }, 1),
-            R.id.menu_message to Pair({ MessageFragment() }, 2),
+                companion object{
+                // 프래그먼트 생성을 지연시키기 위해 Pair 대신 Pair<() -> Fragment, Int> 사용
+                private val pageMappings = mapOf(
+                    R.id.menu_main to Pair({ HomeFragment() }, 0),
+                    R.id.menu_site_management to Pair({ SiteListFragment() }, 1),
+                    R.id.menu_message to Pair({ MessageFragment() }, 2),
             R.id.menu_setting to Pair({ SettingFragment() }, 3)
         )
     }

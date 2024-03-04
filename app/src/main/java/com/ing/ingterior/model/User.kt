@@ -8,7 +8,7 @@ const val TYPE_KAKAO_TALK = "kakao"
 const val TYPE_NAVER = "naver"
 const val TYPE_GOOGLE = "google"
 const val TYPE_INSTAGRAM = "instagram"
-data class User(val id: Long, val email: String, val token: String, val type: String) {
+data class User(val id: Long, val email: String, val nickName: String, val token: String, val type: String) {
     fun toLog() : ContentValues {
         val values = ContentValues()
         values.put(Sign.USER_ID, id)

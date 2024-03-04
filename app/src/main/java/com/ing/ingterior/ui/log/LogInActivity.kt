@@ -1,20 +1,23 @@
 package com.ing.ingterior.ui.log
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.ing.ingterior.R
 import com.ing.ingterior.injection.Factory
+import com.ing.ingterior.model.TYPE_GOOGLE
 import com.ing.ingterior.model.TYPE_INSTAGRAM
 import com.ing.ingterior.model.TYPE_KAKAO_TALK
 import com.ing.ingterior.model.TYPE_NAVER
+import com.ing.ingterior.model.User
 import com.ing.ui.button.LoginButton
 import com.ing.ui.button.VisualImageButton
 
@@ -27,17 +30,26 @@ class LogInActivity : AppCompatActivity() {
     private val lbInstagram: LoginButton by lazy { findViewById(R.id.lb_login_instagram) }
     private lateinit var vibBack: VisualImageButton
 
-    private val googleSignInClient: GoogleSignInClient by lazy { getGoogleClient() }
-    private val googleAuthLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+    private val googleAuthLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
         try {
             val account: GoogleSignInAccount = task.getResult(ApiException::class.java)
             // 로그인 성공 처리
             Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
 //                Factory.get().getMove().moveMainActivity(this)
+            val userEmail = account.email ?: ""
             val userName = account.givenName
-            val serverAuth = account.serverAuthCode
-            Log.d(LogInActivity::class.java.simpleName, "userName=$userName, serverAuth=$serverAuth")
+            val userDisplayName = account.displayName ?: ""
+            val serverAuth = account.serverAuthCode ?: ""
+
+            val user = User(1, userEmail, serverAuth, userDisplayName, TYPE_GOOGLE)
+            Factory.get().getSession().setUser(user)
+            Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
+
+            Factory.get().getMove().moveMainActivity(this)
+            setResult(RESULT_OK)
+            finish()
+            Log.d(LogInActivity::class.java.simpleName, "userEmail=$userEmail, userName=$userName, userDisplayName=$userDisplayName")
         } catch (e: ApiException) {
             // 로그인 실패 처리
             Log.e(LogInActivity::class.java.simpleName, e.stackTraceToString())
@@ -54,28 +66,7 @@ class LogInActivity : AppCompatActivity() {
         }
 
         lbKakaoTalk.setOnClickListener {
-            val userModel = Factory.get().getSession().logIn(this, TYPE_KAKAO_TALK)
-            if(userModel != null) {
-                Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
-//                Factory.get().getMove().moveMainActivity(this)
-                setResult(RESULT_OK)
-                finish()
-            }
-        }
-
-        lbNaver.setOnClickListener {
-            val userModel = Factory.get().getSession().logIn(this, TYPE_NAVER)
-            if(userModel != null) {
-                Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
-//                Factory.get().getMove().moveMainActivity(this)
-                setResult(RESULT_OK)
-                finish()
-            }
-        }
-
-        lbGoogle.setOnClickListener {
-            signIn()
-//            val userModel = Factory.get().getSession().logIn(this, TYPE_GOOGLE)
+//            val userModel = Factory.get().getSession().googleLogin(this, TYPE_KAKAO_TALK)
 //            if(userModel != null) {
 //                Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
 ////                Factory.get().getMove().moveMainActivity(this)
@@ -84,28 +75,29 @@ class LogInActivity : AppCompatActivity() {
 //            }
         }
 
-        lbInstagram.setOnClickListener {
-            val userModel = Factory.get().getSession().logIn(this, TYPE_INSTAGRAM)
-            if(userModel != null) {
-                Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
-//                Factory.get().getMove().moveMainActivity(this)
-                setResult(RESULT_OK)
-                finish()
-            }
+        lbNaver.setOnClickListener {
+//            val userModel = Factory.get().getSession().googleLogin(this, TYPE_NAVER)
+//            if(userModel != null) {
+//                Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
+////                Factory.get().getMove().moveMainActivity(this)
+//                setResult(RESULT_OK)
+//                finish()
+//            }
         }
-    }
 
-    private fun signIn() {
-        val signInIntent = googleSignInClient.signInIntent
-        googleAuthLauncher.launch(signInIntent)
-    }
+        lbGoogle.setOnClickListener {
+            Factory.get().getSession().googleLogin(this, googleAuthLauncher)
+        }
 
-    private fun getGoogleClient(): GoogleSignInClient {
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestEmail()
-            .build()
-
-        return GoogleSignIn.getClient(this, gso)
+        lbInstagram.setOnClickListener {
+//            val userModel = Factory.get().getSession().googleLogin(this, TYPE_INSTAGRAM)
+//            if(userModel != null) {
+//                Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
+////                Factory.get().getMove().moveMainActivity(this)
+//                setResult(RESULT_OK)
+//                finish()
+//            }
+        }
     }
 
 }
