@@ -141,18 +141,18 @@ class IngTeriorProvider : ContentProvider() {
                     Log.d(TAG, "insert: rowId=$rowId")
 
                     when(operator.toInt()) {
-                        Fold.FOLD_DEFAULT -> {
-                            insertEmptyFold(db, Fold.FOLD_DEFAULT, contentValues.getAsLong(Sign.USER_ID), rowId)
+                        Fold.FOLD_DEFECTS -> {
+                            insertEmptyFold(db, Fold.FOLD_DEFECTS, contentValues.getAsLong(Sign.USER_ID), rowId)
                         }
                         Fold.FOLD_MANAGEMENT -> {
                             insertEmptyFold(db, Fold.FOLD_MANAGEMENT, contentValues.getAsLong(Sign.USER_ID), rowId)
                         }
                         Fold.FOLD_ALL -> {
-                            insertEmptyFold(db, Fold.FOLD_DEFAULT, contentValues.getAsLong(Sign.USER_ID), rowId)
+                            insertEmptyFold(db, Fold.FOLD_DEFECTS, contentValues.getAsLong(Sign.USER_ID), rowId)
                             insertEmptyFold(db, Fold.FOLD_MANAGEMENT, contentValues.getAsLong(Sign.USER_ID), rowId)
                         }
                         else -> {
-                            insertEmptyFold(db, Fold.FOLD_DEFAULT, contentValues.getAsLong(Sign.USER_ID), rowId)
+                            insertEmptyFold(db, Fold.FOLD_DEFECTS, contentValues.getAsLong(Sign.USER_ID), rowId)
                         }
                     }
                     rsUri = Uri.parse("${Site.CONTENT_URI}/$rowId")
@@ -270,16 +270,16 @@ class IngTeriorProvider : ContentProvider() {
                     Log.d(TAG, "update: rs=$rs")
 
                     when(operator.toInt()) {
-                        Fold.FOLD_DEFAULT -> {
-                            insertEmptyFold(db, Fold.FOLD_DEFAULT, contentValues.getAsLong(Sign.USER_ID), siteId)
+                        Fold.FOLD_DEFECTS -> {
+                            insertEmptyFold(db, Fold.FOLD_DEFECTS, contentValues.getAsLong(Sign.USER_ID), siteId)
                             deleteFoldFromSite(db, Fold.FOLD_MANAGEMENT, siteId)
                         }
                         Fold.FOLD_MANAGEMENT -> {
                             insertEmptyFold(db, Fold.FOLD_MANAGEMENT, contentValues.getAsLong(Sign.USER_ID), siteId)
-                            deleteFoldFromSite(db, Fold.FOLD_DEFAULT, siteId)
+                            deleteFoldFromSite(db, Fold.FOLD_DEFECTS, siteId)
                         }
                         Fold.FOLD_ALL -> {
-                            insertEmptyFold(db, Fold.FOLD_DEFAULT, contentValues.getAsLong(Sign.USER_ID), siteId)
+                            insertEmptyFold(db, Fold.FOLD_DEFECTS, contentValues.getAsLong(Sign.USER_ID), siteId)
                             insertEmptyFold(db, Fold.FOLD_MANAGEMENT, contentValues.getAsLong(Sign.USER_ID), siteId)
                         }
                     }

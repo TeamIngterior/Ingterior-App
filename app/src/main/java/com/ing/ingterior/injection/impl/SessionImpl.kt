@@ -11,29 +11,22 @@ import com.ing.ingterior.injection.Session
 import com.ing.ingterior.model.TYPE_GOOGLE
 import com.ing.ingterior.model.User
 
-class SessionImpl(private val context: Context) : Session() {
-    companion object{
-        private var user: User? = null
-    }
-
+class SessionImpl(context: Context) : Session() {
+    private var user: User? = null
     private val googleSignInClient: GoogleSignInClient
     init {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
+            .requestServerAuthCode("412737837459-8gb98d665el7im06opjl7d319pcouc37.apps.googleusercontent.com")
             .build()
         googleSignInClient = GoogleSignIn.getClient(context, gso)
     }
 
 
     override fun googleLogin(context: Context, launcher: ActivityResultLauncher<Intent>): User? {
-        // TODO 다시 짜야 함
-        if(isLogin()) {
-            // TODO 이미 로그인된 상태
-        }
-        else{
+        if(!isLogin()) {
             launcher.launch(googleSignInClient.signInIntent)
         }
-
         return user
     }
 
@@ -47,7 +40,7 @@ class SessionImpl(private val context: Context) : Session() {
     }
 
     override fun setUser(user: User) {
-
+        this.user = user
     }
 
     override fun isLogin(): Boolean {

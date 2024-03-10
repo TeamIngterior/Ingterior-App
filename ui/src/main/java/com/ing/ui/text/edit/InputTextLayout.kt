@@ -37,6 +37,7 @@ class InputTextLayout : ConstraintLayout {
             LayoutParams.WRAP_CONTENT
         )
         inputTextView.layoutParams = inputTextViewParams
+
         addView(inputTextView)
 
         // supportTextView 설정
@@ -71,11 +72,16 @@ class InputTextLayout : ConstraintLayout {
             val verticalPadding = typedArray.getDimensionPixelSize(R.styleable.InputTextLayout_inputPaddingHorizontal, context.resources.getDimensionPixelSize(R.dimen.vertical_input_text_padding))
             inputTextView.setPadding(horizontalPadding, verticalPadding, horizontalPadding, verticalPadding)
 
-            val inputMaxLine = typedArray.getInteger(R.styleable.InputTextLayout_inputMaxLine, 10)
-            inputTextView.maxLines = inputMaxLine
-
             val singleLine = typedArray.getBoolean(R.styleable.InputTextLayout_inputSingleLine, false)
             inputTextView.isSingleLine = singleLine
+
+            if(!singleLine){
+                spacing = typedArray.getDimensionPixelSize(R.styleable.InputTextLayout_inputSupportSpacing, 0)
+                inputTextView.setLineSpacing(spacing.toFloat(), 1f)
+
+                val inputMaxLine = typedArray.getInteger(R.styleable.InputTextLayout_inputMaxLine, 10)
+                inputTextView.maxLines = inputMaxLine
+            }
 
             val supportText = typedArray.getString(R.styleable.InputTextLayout_inputSupportText) ?: ""
             supportTextView.text = supportText
@@ -84,7 +90,6 @@ class InputTextLayout : ConstraintLayout {
             val supportTextColor = typedArray.getColor(R.styleable.InputTextLayout_inputSupportColor, ContextCompat.getColor(context, R.color.text_color_04))
             supportTextView.setTextColor(supportTextColor)
 
-            spacing = typedArray.getDimensionPixelSize(R.styleable.InputTextLayout_inputSupportSpacing, 0)
             typedArray.recycle()
         }
 

@@ -70,7 +70,7 @@ class SiteListAdapter(private val clickListener: SiteListItemListener) : Recycle
 
 
         fun bind(position: Int, site: Site) {
-            tvDefaults.isVisible = site.defaultIds.isNotEmpty()
+            tvDefaults.isVisible = site.defectsIds.isNotEmpty()
             tvManagement.isVisible = site.managementIds.isNotEmpty()
 
             tvSiteName.text = site.siteName

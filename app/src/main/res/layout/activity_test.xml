@@ -7,13 +7,24 @@
     tools:context=".ui.TestActivity">
 
 
-    <ImageView
-        android:id="@+id/iv_blue_print"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <FrameLayout
+        android:id="@+id/frame_site_management_image_layout"
+        android:layout_width="304dp"
+        android:layout_height="304dp"
+        android:background="@drawable/bg_round_square_effect"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.github.chrisbanes.photoview.PhotoView
+            android:id="@+id/iv_management_image"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_gravity="center"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/blueprint1" />
+
+    </FrameLayout>
 
     <Button
         android:id="@+id/btn_blue_print_from_gallery"

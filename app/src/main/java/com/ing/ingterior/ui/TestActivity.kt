@@ -6,14 +6,17 @@ import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.os.Bundle
 import android.util.Log
+import android.view.MotionEvent
 import android.view.ScaleGestureDetector
 import android.view.ScaleGestureDetector.SimpleOnScaleGestureListener
 import android.view.View.OnTouchListener
 import android.widget.Button
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import com.github.chrisbanes.photoview.PhotoView
 import com.ing.ingterior.R
 import com.ing.ingterior.cameraPermission
 import com.ing.ingterior.util.ImageUtils
@@ -40,7 +43,7 @@ class TestActivity : AppCompatActivity() {
                         rotateImageIfRequired(imageBitmap, ImageUtils.imageFile!!)
                     }
 
-                    ivTest.setImageBitmap(rotatedBitmap)
+                    ivImage.setImageBitmap(rotatedBitmap)
                 }
             }
             else{
@@ -48,14 +51,12 @@ class TestActivity : AppCompatActivity() {
             }
         }
     }
-    private val scaleGestureDetector: ScaleGestureDetector by lazy { ScaleGestureDetector(this, ScaleListener()) }
-    private val matrix = Matrix()
-    private var scale = 1f
+
     private val getPictureResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
         if(result.resultCode == RESULT_OK) {
             val photoUri = result.data?.data
             if(photoUri != null) {
-                ivTest.setImageURI(photoUri)
+                ivImage.setImageURI(photoUri)
             }
             else{
                 Toast.makeText(this, "사진을 불러오지 못했습니다.", Toast.LENGTH_SHORT).show()
@@ -63,7 +64,15 @@ class TestActivity : AppCompatActivity() {
         }
     }
 
-    private val ivTest: ImageView by lazy { findViewById(R.id.iv_blue_print) }
+    private lateinit var scaleGestureDetector: ScaleGestureDetector
+    private var scaleFactor = 1.0f
+
+    private lateinit var ivImage: PhotoView
+    private lateinit var markImageView: ImageView
+    private var lastTouchX: Float = 0f
+    private var lastTouchY: Float = 0f
+
+
     private val btnGallery : Button by lazy { findViewById(R.id.btn_blue_print_from_gallery) }
     private val btnCamera : Button by lazy { findViewById(R.id.btn_blue_print_from_camera) }
 
@@ -71,7 +80,7 @@ class TestActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test)
 
-
+        ivImage = findViewById(R.id.iv_management_image)
         btnGallery.setOnClickListener {
             getPictureResult.launch(ImageUtils.getPictureIntent())
         }
@@ -85,20 +94,33 @@ class TestActivity : AppCompatActivity() {
             }
         }
 
-        ivTest.setOnTouchListener(OnTouchListener { v, event ->
-            scaleGestureDetector.onTouchEvent(event)
+        val frameLayout: FrameLayout = findViewById(R.id.frame_site_management_image_layout)
 
-            // 이미지뷰 내에서의 터치 좌표 추출
-            val point = floatArrayOf(event.x, event.y)
-            matrix.invert(Matrix())
-            matrix.mapPoints(point)
+        // 동적으로 마크 생성 및 추가
+        markImageView = ImageView(this).apply {
+            layoutParams = FrameLayout.LayoutParams(resources.getDimensionPixelSize(R.dimen.mark_size), resources.getDimensionPixelSize(R.dimen.mark_size)) // 마크의 크기 설정
+            setImageResource(R.drawable.ic_mark) // 마크 이미지 설정
+            x = resources.getDimensionPixelSize(R.dimen.popup_item_width).toFloat() // 초기 X 위치 설정
+            y = resources.getDimensionPixelSize(R.dimen.popup_item_width).toFloat() // 초기 Y 위치 설정
+        }
+        frameLayout.addView(markImageView)
 
-            // 로그에 좌표 출력
-            Log.d("JYPARK", "실제 좌표: x=" + point[0] + ", y=" + point[1])
-
-            // 여기서 원하는 추가 작업 수행 가능
+        markImageView.setOnTouchListener { view, event ->
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    lastTouchX = event.x
+                    lastTouchY = event.y
+                }
+                MotionEvent.ACTION_MOVE -> {
+                    // 드래그 이동 로직
+                    val dx: Float = event.x - lastTouchX
+                    val dy: Float = event.y - lastTouchY
+                    view.x += dx
+                    view.y += dy
+                }
+            }
             true
-        })
+        }
     }
 
 
@@ -111,17 +133,4 @@ class TestActivity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
-    inner class ScaleListener : SimpleOnScaleGestureListener() {
-        override fun onScale(detector: ScaleGestureDetector): Boolean {
-            // 확대/축소 비율 갱신
-            scale *= detector.scaleFactor
-            // 최소 및 최대 확대 비율 제한
-            scale = Math.max(0.1f, Math.min(scale, 5.0f))
-
-            // 이미지뷰에 변환 적용
-            matrix.setScale(scale, scale)
-            ivTest.imageMatrix = matrix
-            return true
-        }
-    }
 }

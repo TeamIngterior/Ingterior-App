@@ -3,7 +3,7 @@ package com.ing.ingterior.db
 data class Fold(val id: Long, val siteId: Long, val type: Int, val name: String, val memo: String, val imageIds: String,
                 val creatorId:Long, val creatorType: Long, val position: String, val createdDate: Long){
     companion object{
-        const val FOLD_DEFAULT = 1
+        const val FOLD_DEFECTS = 1
         const val FOLD_MANAGEMENT = 2
         const val FOLD_ALL = 3
 

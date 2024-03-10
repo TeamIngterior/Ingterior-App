@@ -13,6 +13,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.common.api.ApiException
 import com.ing.ingterior.R
 import com.ing.ingterior.injection.Factory
+import com.ing.ingterior.injection.ServerApi
 import com.ing.ingterior.model.TYPE_GOOGLE
 import com.ing.ingterior.model.TYPE_INSTAGRAM
 import com.ing.ingterior.model.TYPE_KAKAO_TALK
@@ -49,7 +50,7 @@ class LogInActivity : AppCompatActivity() {
             Factory.get().getMove().moveMainActivity(this)
             setResult(RESULT_OK)
             finish()
-            Log.d(LogInActivity::class.java.simpleName, "userEmail=$userEmail, userName=$userName, userDisplayName=$userDisplayName")
+            Log.d(LogInActivity::class.java.simpleName, "userEmail=$userEmail, userName=$userName, userDisplayName=$userDisplayName, serverAuth=$serverAuth")
         } catch (e: ApiException) {
             // 로그인 실패 처리
             Log.e(LogInActivity::class.java.simpleName, e.stackTraceToString())
@@ -86,6 +87,8 @@ class LogInActivity : AppCompatActivity() {
         }
 
         lbGoogle.setOnClickListener {
+//            val serverApi = ServerApi.retrofit.create(ServerApi::class.java)
+//            serverApi.googleLogin()
             Factory.get().getSession().googleLogin(this, googleAuthLauncher)
         }
 

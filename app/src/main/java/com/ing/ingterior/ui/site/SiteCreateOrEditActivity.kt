@@ -3,7 +3,6 @@ package com.ing.ingterior.ui.site
 import android.content.ContentValues
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -126,11 +125,11 @@ class SiteCreateOrEditActivity : AppCompatActivity() {
                         Factory.get().getMove().showImageDialog(this,  dismissListener, true)
                     }
                     else{
-                        Toast.makeText(this, "유효하지 않은 타입의 사진입니다.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "유효 하지 않은 타입의 사진 입니다.", Toast.LENGTH_SHORT).show()
                     }
                 }
                 else{
-                    Toast.makeText(this, "사진을 불러오지 못했습니다.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "사진을 불러 오지 못했습니다.", Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -205,7 +204,7 @@ class SiteCreateOrEditActivity : AppCompatActivity() {
                 else createImageFile(context, siteViewModel.getImageBitmap(context)!!, siteViewModel.imageModel.value?.name ?: "")
 
                 var operator = 0
-                if (siteViewModel.isDefects) operator += Fold.FOLD_DEFAULT
+                if (siteViewModel.isDefects) operator += Fold.FOLD_DEFECTS
                 if (siteViewModel.isManagement) operator += Fold.FOLD_MANAGEMENT
 
                 if(siteViewModel.isCreate) {

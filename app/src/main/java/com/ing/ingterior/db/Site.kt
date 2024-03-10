@@ -9,7 +9,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Site(val _id: Long, val creatorId: Long, val participantIds: String, val siteName: String, val siteCode: String,
-                var defaultIds: String = "", var managementIds:String = "", var imageId: Long=0, var createdDate:Long,
+                var defectsIds: String = "", var managementIds:String = "", var imageId: Long=0, var createdDate:Long,
                 var imageName: String = "", var imageLocation: String = "", var favorite: Boolean = false) : Parcelable {
 
     companion object{
@@ -26,7 +26,7 @@ data class Site(val _id: Long, val creatorId: Long, val participantIds: String, 
         const val PARTICIPANT_IDS = "participant_ids"
         const val NAME = "name"
         const val CODE = "code"
-        const val DEFAULT_IDS = "default_ids"
+        const val DEFECTS_IDS = "defects_ids"
         const val MANAGEMENT_IDS = "management_ids"
         const val BLUEPRINT_ID = "blueprint_id"
         const val CREATED_DATE = "created_date"
@@ -35,7 +35,7 @@ data class Site(val _id: Long, val creatorId: Long, val participantIds: String, 
         const val CONTENT_URI = "content://ingterior/${TABLE_NAME}"
         const val CONTENT_FAVORITE_URI = "content://ingterior/${TABLE_NAME}/$FAVORITE"
 
-        const val QUERY_ALL = "SELECT site.$_ID, site.$CREATOR_ID, site.$PARTICIPANT_IDS, site.$NAME, site.$CODE, site.$DEFAULT_IDS, " +
+        const val QUERY_ALL = "SELECT site.$_ID, site.$CREATOR_ID, site.$PARTICIPANT_IDS, site.$NAME, site.$CODE, site.$DEFECTS_IDS, " +
                 "site.$MANAGEMENT_IDS, site.$BLUEPRINT_ID, site.$CREATED_DATE, site.$FAVORITE, " +
                 "image.${Image.FILENAME}, image.${Image.LOCATION} FROM $TABLE_NAME AS site LEFT JOIN ${Image.TABLE_NAME} AS image ON site.$BLUEPRINT_ID = image.${Image._ID} " +
                 "WHERE ',' || site.$PARTICIPANT_IDS || ',' LIKE '%,' || ? || ',%'"
@@ -48,7 +48,7 @@ data class Site(val _id: Long, val creatorId: Long, val participantIds: String, 
             PARTICIPANT_IDS,        // 2
             NAME,                   // 3
             CODE,                   // 4
-            DEFAULT_IDS,            // 5
+            DEFECTS_IDS,            // 5
             MANAGEMENT_IDS,         // 6
             MANAGEMENT_IDS,         // 7
             BLUEPRINT_ID,           // 8

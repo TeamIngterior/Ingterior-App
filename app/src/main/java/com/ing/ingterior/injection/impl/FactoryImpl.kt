@@ -16,7 +16,7 @@ class FactoryImpl : Factory() {
             instance = factory
             factory.application = application
             factory.move = MoveImpl()
-            factory.session = SessionImpl()
+            factory.session = SessionImpl(application)
             factory.database = DatabaseImpl()
         }
     }

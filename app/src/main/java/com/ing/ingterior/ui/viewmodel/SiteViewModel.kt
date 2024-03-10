@@ -14,7 +14,6 @@ import com.ing.ingterior.db.Site
 import com.ing.ingterior.db.Status
 import com.ing.ingterior.injection.Factory
 import com.ing.ingterior.model.ImageModel
-import com.ing.ingterior.model.SiteModel
 import com.ing.ingterior.util.ImageUtils
 import com.ing.ingterior.util.ImageUtils.GraphicUtils.loadBitmapFromFile
 import com.ing.ingterior.util.ImageUtils.GraphicUtils.loadBitmapFromUri
@@ -93,7 +92,7 @@ class SiteViewModel : ViewModel() {
                     val participantIds = cursor.getString(cursor.getColumnIndexOrThrow(Site.PARTICIPANT_IDS))
                     val siteName = cursor.getString(cursor.getColumnIndexOrThrow(Site.NAME))
                     val siteCode = cursor.getString(cursor.getColumnIndexOrThrow(Site.CODE))
-                    val defaultIds = cursor.getString(cursor.getColumnIndexOrThrow(Site.DEFAULT_IDS)) ?: ""
+                    val defaultIds = cursor.getString(cursor.getColumnIndexOrThrow(Site.DEFECTS_IDS)) ?: ""
                     val managementIds = cursor.getString(cursor.getColumnIndexOrThrow(Site.MANAGEMENT_IDS)) ?: ""
                     val imageId = cursor.getLong(cursor.getColumnIndexOrThrow(Site.BLUEPRINT_ID))
                     val createdDate = cursor.getLong(cursor.getColumnIndexOrThrow(Site.CREATED_DATE))
@@ -124,7 +123,7 @@ class SiteViewModel : ViewModel() {
         isCreate = false
 
         siteName = site.siteName
-        isDefects = site.defaultIds.isNotEmpty()
+        isDefects = site.defectsIds.isNotEmpty()
         isManagement = site.managementIds.isNotEmpty()
         imageModel.postValue(ImageModel(site.imageId, null, site.imageLocation, site.imageName, bitmap = loadBitmapFromFile(site.imageLocation)))
     }

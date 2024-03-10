@@ -39,7 +39,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val serverApi = ServerApi.retrofit.create(ServerApi::class.java)
 //        serverApi.updateConstruction(SiteModel(111, 27, "테스트 현장", 3)).enqueue(object : Callback<SiteModel> {
 //            override fun onResponse(call: Call<SiteModel>, response: Response<SiteModel>) {
 //                if (response.isSuccessful) {
@@ -88,6 +87,7 @@ class MainActivity : AppCompatActivity() {
         bottomNavView.selectedItemId = viewModel.getPageId(index)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         if(viewModel.fabOpen.value == true) {
             viewModel.fabOpen.postValue(false)

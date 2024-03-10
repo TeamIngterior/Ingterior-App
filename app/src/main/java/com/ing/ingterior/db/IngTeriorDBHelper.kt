@@ -3,10 +3,9 @@ package com.ing.ingterior.db
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.provider.ContactsContract.CommonDataKinds.Im
 
 const val AUTHORITY = "ingterior"
-private const val DATABASE_VERSION = 4
+private const val DATABASE_VERSION = 5
 class IngTeriorDBHelper(context: Context) : SQLiteOpenHelper(context, "${AUTHORITY}.db", null, DATABASE_VERSION) {
 
     companion object{
@@ -14,7 +13,7 @@ class IngTeriorDBHelper(context: Context) : SQLiteOpenHelper(context, "${AUTHORI
                 "${Sign.EMAIL} TEXT NOT NULL, ${Sign.TOKEN} TEXT NOT NULL, ${Sign.TYPE} INTEGER NOT NULL, ${Sign.LATEST_DATE} INTEGER NOT NULL);"
 
         const val SITE_CREATE_TABLE = "CREATE TABLE ${Site.TABLE_NAME} (${Site._ID} INTEGER PRIMARY KEY AUTOINCREMENT, ${Site.CREATOR_ID} INTEGER NOT NULL, " +
-                "${Site.PARTICIPANT_IDS} INTEGER NOT NULL, ${Site.NAME} TEXT NOT NULL, ${Site.CODE} TEXT NOT NULL, ${Site.DEFAULT_IDS} TEXT, ${Site.MANAGEMENT_IDS} TEXT , " +
+                "${Site.PARTICIPANT_IDS} INTEGER NOT NULL, ${Site.NAME} TEXT NOT NULL, ${Site.CODE} TEXT NOT NULL, ${Site.DEFECTS_IDS} TEXT, ${Site.MANAGEMENT_IDS} TEXT , " +
                 "${Site.BLUEPRINT_ID} INTEGER NOT NULL, " +
                 "${Site.CREATED_DATE} INTEGER NOT NULL, " +
                 "${Site.FAVORITE} INTEGER NOT NULL, " +
@@ -28,13 +27,13 @@ class IngTeriorDBHelper(context: Context) : SQLiteOpenHelper(context, "${AUTHORI
                 "${Fold.MEMO} TEXT, ${Fold.CREATOR_ID} INTEGER NOT NULL, ${Fold.CREATOR_TYPE} TEXT NOT NULL, ${Fold.POSITION} TEXT, ${Fold.CREATED_DATE} INTEGER NOT NULL);"
 
         // trigger 생성 안된 상태 디버깅 필요
-        const val CREATE_ADD_FOLD_DEFAULT_TRIGGER = "CREATE TRIGGER AddFoldIdToSiteDefault AFTER INSERT ON fold " +
+        const val CREATE_ADD_FOLD_DEFECTS_TRIGGER = "CREATE TRIGGER AddFoldIdToSiteDefects AFTER INSERT ON fold " +
                 "FOR EACH ROW " +
                 "WHEN NEW.type = 1 " +
                 "BEGIN " +
-                "UPDATE site SET default_ids = CASE " +
-                "WHEN default_ids IS NULL OR default_ids = '' THEN NEW._id " +
-                "ELSE default_ids || ',' || NEW._id " +
+                "UPDATE site SET defects_ids = CASE " +
+                "WHEN defects_ids IS NULL OR defects_ids = '' THEN NEW._id " +
+                "ELSE defects_ids || ',' || NEW._id " +
                 "END " +
                 "WHERE _id = NEW.site_id; " +
                 "END;"
@@ -61,7 +60,7 @@ class IngTeriorDBHelper(context: Context) : SQLiteOpenHelper(context, "${AUTHORI
         const val DROP_IMAGE_TABLE = "DROP TABLE IF EXISTS  ${Image.TABLE_NAME}"
         const val DROP_FOLD_TABLE = "DROP TABLE IF EXISTS  ${Fold.TABLE_NAME}"
 
-        const val DROP_FOLD_DEFAULT_TRIGGER = "DROP TABLE IF EXISTS AddFoldIdToSiteDefault"
+        const val DROP_FOLD_DEFECTS_TRIGGER = "DROP TABLE IF EXISTS AddFoldIdToSiteDefects"
         const val DROP_FOLD_MANAGEMENT_TRIGGER = "DROP TABLE IF EXISTS AddFoldIdToSiteManagement"
         const val DROP_DELETE_IMAGE_UPDATE_SITE_TRIGGER = "DROP TABLE IF EXISTS UpdateBlueprintIdBeforeImageDelete"
 
@@ -76,7 +75,7 @@ class IngTeriorDBHelper(context: Context) : SQLiteOpenHelper(context, "${AUTHORI
     }
 
     private fun createTrigger(db: SQLiteDatabase){
-        db.execSQL(CREATE_ADD_FOLD_DEFAULT_TRIGGER)
+        db.execSQL(CREATE_ADD_FOLD_DEFECTS_TRIGGER)
         db.execSQL(CREATE_ADD_FOLD_MANAGEMENT_TRIGGER)
         db.execSQL(CREATE_DELETE_IMAGE_UPDATE_SITE_TRIGGER)
     }
@@ -86,7 +85,7 @@ class IngTeriorDBHelper(context: Context) : SQLiteOpenHelper(context, "${AUTHORI
         db.execSQL(DROP_SITE_TABLE)
         db.execSQL(DROP_IMAGE_TABLE)
         db.execSQL(DROP_FOLD_TABLE)
-        db.execSQL(DROP_FOLD_DEFAULT_TRIGGER)
+        db.execSQL(DROP_FOLD_DEFECTS_TRIGGER)
         db.execSQL(DROP_FOLD_MANAGEMENT_TRIGGER)
         db.execSQL(DROP_DELETE_IMAGE_UPDATE_SITE_TRIGGER)
     }
