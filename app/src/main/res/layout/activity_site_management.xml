@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,7 +9,10 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
 
         <androidx.appcompat.widget.Toolbar
@@ -31,22 +34,23 @@
                     android:id="@+id/vib_site_list_back"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
+                    android:layout_marginStart="@dimen/login_label_start_margin"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginStart="@dimen/login_label_start_margin"
                     app:srcCompat="@drawable/ic_back_24" />
 
 
                 <com.ing.ui.text.label.LabelView
+                    android:id="@+id/lb_site_management_title"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/vib_site_list_option"
                     app:layout_constraintStart_toEndOf="@+id/vib_site_list_back"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="가나다" />
-
 
                 <com.ing.ui.button.VisualImageButton
                     android:id="@+id/vib_site_list_option"
@@ -73,17 +77,17 @@
 
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/tab_site_management_default"
+                style="@style/Theme.Custom.Tab.Default"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="하자 체크"
-                style="@style/Theme.Custom.Tab.Default"/>
+                android:text="하자 체크" />
 
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/tab_site_management_manamge"
+                style="@style/Theme.Custom.Tab.Default"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="공사 관리"
-                style="@style/Theme.Custom.Tab.Default"/>
+                android:text="공사 관리" />
 
 
         </com.google.android.material.tabs.TabLayout>
@@ -98,14 +102,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tab_site_management_layout">
 
-            <ImageView
-                android:id="@+id/iv_management_image"
+            <com.github.chrisbanes.photoview.PhotoView
+                android:id="@+id/photo_site_management_blueprint"
                 android:layout_width="300dp"
                 android:layout_height="300dp"
                 android:layout_gravity="center"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/blueprint1"
-                />
+                app:srcCompat="@drawable/blueprint1" />
 
         </FrameLayout>
 
@@ -115,10 +118,10 @@
             android:layout_width="350dp"
             android:layout_height="120dp"
             android:layout_marginTop="24dp"
-            app:visualLineSpacingExtra="3dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/frame_site_management_image_layout"
+            app:visualLineSpacingExtra="3dp"
             app:visualText="아래에 + 버튼을 눌러\n새로운 하자를 추가해 보세요!" />
 
 
@@ -128,6 +131,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/frame_site_management_image_layout" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -144,4 +149,4 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
