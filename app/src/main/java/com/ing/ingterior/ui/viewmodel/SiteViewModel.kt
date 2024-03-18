@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ing.ingterior.EXTRA_SITE
@@ -17,19 +18,29 @@ import com.ing.ingterior.model.ImageModel
 import com.ing.ingterior.util.ImageUtils
 import com.ing.ingterior.util.ImageUtils.GraphicUtils.loadBitmapFromFile
 import com.ing.ingterior.util.ImageUtils.GraphicUtils.loadBitmapFromUri
+import com.ing.ingterior.util.getParcelableCompat
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class SiteViewModel : ViewModel() {
     companion object{
         private const val TAG = "SiteViewModel"
+        const val UI_DEFECTS_MODE = 1
+        const val UI_MANAGING_MODE = 2
     }
+
     var isCreate = true
+    var uiState = UI_DEFECTS_MODE
+
     var site: Site? = null
     var siteName = ""
     var isDefects = true
     var isManagement = false
     val imageModel = MutableLiveData<ImageModel>()
+    val defectImages = arrayListOf<ImageModel>()
 
     fun requireEnable(): Boolean{
         return siteName.isNotEmpty() && (isDefects || isManagement)
@@ -114,11 +125,7 @@ class SiteViewModel : ViewModel() {
     }
 
     fun setIntent(intent: Intent) {
-        val site = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            intent.getParcelableExtra(EXTRA_SITE, Site::class.java) ?: return
-        } else {
-            intent.getParcelableExtra(EXTRA_SITE) ?: return
-        }
+        val site = intent.getParcelableCompat<Site>(EXTRA_SITE) ?: return
         this.site = site
         isCreate = false
 
@@ -126,6 +133,22 @@ class SiteViewModel : ViewModel() {
         isDefects = site.defectsIds.isNotEmpty()
         isManagement = site.managementIds.isNotEmpty()
         imageModel.postValue(ImageModel(site.imageId, null, site.imageLocation, site.imageName, bitmap = loadBitmapFromFile(site.imageLocation)))
+    }
+
+    fun addDefectImage(context: Context, defectImage: ImageModel){
+        var isContains = false
+        for(image in defectImages){
+            if(image.uri == defectImage.uri) {
+                isContains = true
+            }
+        }
+        if(isContains) Toast.makeText(context, "이미 포함된 이미지 입니다.", Toast.LENGTH_SHORT).show()
+        else defectImages.add(defectImage)
+
+    }
+
+    fun removeDefectImage(defectImage: ImageModel){
+        defectImages.remove(defectImage)
     }
 
 }

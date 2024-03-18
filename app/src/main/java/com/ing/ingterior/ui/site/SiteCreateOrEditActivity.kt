@@ -27,6 +27,8 @@ import com.ing.ingterior.db.Site
 import com.ing.ingterior.injection.Factory
 import com.ing.ingterior.model.ImageModel
 import com.ing.ingterior.ui.IngTeriorViewModelFactory
+import com.ing.ingterior.ui.RoundDialogButtonListener
+import com.ing.ingterior.ui.RoundDialogFragment
 import com.ing.ingterior.ui.viewmodel.SiteViewModel
 import com.ing.ingterior.util.FileWrapper
 import com.ing.ingterior.util.FileWrapper.MB
@@ -68,6 +70,9 @@ class SiteCreateOrEditActivity : AppCompatActivity() {
     private lateinit var btnEditImage: VisualDefaultButton
     private lateinit var btnRemoveImage: VisualDefaultButton
 
+    private lateinit var promptRemoveImageDialog: RoundDialogFragment
+    private lateinit var promptEditImageDialog: RoundDialogFragment
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_site_create_or_edit)
@@ -88,9 +93,9 @@ class SiteCreateOrEditActivity : AppCompatActivity() {
             itvName.setText(siteViewModel.siteName)
             vcbDefects.setChecked(siteViewModel.isDefects)
             vcbManagement.setChecked(siteViewModel.isManagement)
-            lbTitle.text = if(siteViewModel.isCreate) getString(R.string.title_edit_site) else getString(R.string.title_add_new_site)
+            lbTitle.text = if(siteViewModel.isCreate) getString(R.string.title_add_new_site) else getString(R.string.title_edit_site)
             btnCommit.setText(if(siteViewModel.isCreate) getString(R.string.action_add_new_site) else getString(R.string.action_edit_site))
-//            btnCommit.isEnabled = !siteViewModel.isCreate
+            btnCommit.isEnabled = !siteViewModel.isCreate
         }
 
         dismissListener = object : SiteImageEditDialog.DialogListener {
@@ -148,6 +153,22 @@ class SiteCreateOrEditActivity : AppCompatActivity() {
         ivImage = findViewById(R.id.iv_site_coe_image)
         btnEditImage = findViewById(R.id.btn_site_coe_edit_image)
         btnRemoveImage = findViewById(R.id.btn_site_coe_remove_image)
+
+        promptRemoveImageDialog = RoundDialogFragment("도면 이미지 편집/삭제 시 저장해둔 마커의 정보가 사라집니다.", "취소하기",
+            "이미지 삭제하기", object : RoundDialogButtonListener{
+                override fun onConfirmClicked() {
+                    siteViewModel.imageModel.postValue(null)
+                }
+                override fun onCancelClicked() {}
+            })
+
+        promptEditImageDialog = RoundDialogFragment("도면 이미지 편집/삭제 시 저장해둔 마커의 정보가 사라집니다.", "취소하기",
+            "이미지 편집하기", object : RoundDialogButtonListener{
+                override fun onConfirmClicked() {
+                    Factory.get().getMove().showImageDialog(this@SiteCreateOrEditActivity,  dismissListener, false)
+                }
+                override fun onCancelClicked() {}
+            })
     }
 
     private fun initBindListener(){
@@ -177,7 +198,12 @@ class SiteCreateOrEditActivity : AppCompatActivity() {
         }
 
         btnEditImage.setOnClickListener {
-            Factory.get().getMove().showImageDialog(this,  dismissListener, false)
+            if(siteViewModel.isCreate) {
+                Factory.get().getMove().showImageDialog(this,  dismissListener, false)
+            }
+            else {
+                if(!promptEditImageDialog.isVisible) promptEditImageDialog.show(supportFragmentManager.beginTransaction(), "promptRemoveImageDialog")
+            }
         }
 
         btnAddImage.setOnClickListener {
@@ -185,7 +211,12 @@ class SiteCreateOrEditActivity : AppCompatActivity() {
         }
 
         btnRemoveImage.setOnClickListener {
-            siteViewModel.imageModel.postValue(null)
+            if(siteViewModel.isCreate) {
+                siteViewModel.imageModel.postValue(null)
+            }
+            else {
+                if(!promptRemoveImageDialog.isVisible) promptRemoveImageDialog.show(supportFragmentManager.beginTransaction(), "promptRemoveImageDialog")
+            }
         }
 
         btnCommit.setOnClickListener {

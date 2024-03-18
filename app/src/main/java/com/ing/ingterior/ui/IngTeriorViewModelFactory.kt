@@ -10,7 +10,6 @@ class IngTeriorViewModelFactory : ViewModelProvider.Factory {
 
     companion object{
         private val mainViewModel = MainViewModel()
-        var simpleEstimationViewModel: SimpleEstimationViewModel? = SimpleEstimationViewModel()
     }
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -18,8 +17,7 @@ class IngTeriorViewModelFactory : ViewModelProvider.Factory {
             return mainViewModel as T
         }
         else if (modelClass.isAssignableFrom(SimpleEstimationViewModel::class.java)) {
-            if(simpleEstimationViewModel == null) simpleEstimationViewModel = SimpleEstimationViewModel()
-            return simpleEstimationViewModel as T
+            return SimpleEstimationViewModel() as T
         }
         else if (modelClass.isAssignableFrom(SiteViewModel::class.java)) {
             return SiteViewModel() as T

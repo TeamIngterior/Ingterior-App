@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context=".ui.site.SiteManagementActivity">
+    tools:context=".ui.site.SiteActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
 
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/tool_site_list_bar"
+            android:id="@+id/tool_site_bar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:contentInsetStart="0dp"
@@ -31,7 +31,7 @@
                 android:orientation="horizontal">
 
                 <com.ing.ui.button.VisualImageButton
-                    android:id="@+id/vib_site_list_back"
+                    android:id="@+id/vib_site_back"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginStart="@dimen/login_label_start_margin"
@@ -42,18 +42,20 @@
 
 
                 <com.ing.ui.text.label.LabelView
-                    android:id="@+id/lb_site_management_title"
+                    android:id="@+id/lb_site_title"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:ellipsize="end"
                     android:gravity="center"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/vib_site_list_option"
-                    app:layout_constraintStart_toEndOf="@+id/vib_site_list_back"
+                    app:layout_constraintEnd_toStartOf="@+id/vib_site_option"
+                    app:layout_constraintStart_toEndOf="@+id/vib_site_back"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="가나다" />
+                    tools:text="가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하" />
 
                 <com.ing.ui.button.VisualImageButton
-                    android:id="@+id/vib_site_list_option"
+                    android:id="@+id/vib_site_option"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginEnd="8dp"
@@ -68,75 +70,42 @@
         </androidx.appcompat.widget.Toolbar>
 
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tab_site_management_layout"
+            android:id="@+id/tab_site_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/page_horizontal_padding"
+            android:layout_marginEnd="@dimen/page_horizontal_padding"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tool_site_list_bar">
+            app:layout_constraintTop_toBottomOf="@+id/tool_site_bar">
 
             <com.google.android.material.tabs.TabItem
-                android:id="@+id/tab_site_management_default"
+                android:id="@+id/tab_site_defect"
                 style="@style/Theme.Custom.Tab.Default"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="하자 체크" />
 
             <com.google.android.material.tabs.TabItem
-                android:id="@+id/tab_site_management_manamge"
+                android:id="@+id/tab_site_management"
                 style="@style/Theme.Custom.Tab.Default"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="공사 관리" />
 
-
         </com.google.android.material.tabs.TabLayout>
 
-        <FrameLayout
-            android:id="@+id/frame_site_management_image_layout"
-            android:layout_width="304dp"
-            android:layout_height="304dp"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/bg_round_square_effect"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tab_site_management_layout">
-
-            <com.github.chrisbanes.photoview.PhotoView
-                android:id="@+id/photo_site_management_blueprint"
-                android:layout_width="300dp"
-                android:layout_height="300dp"
-                android:layout_gravity="center"
-                android:scaleType="fitCenter"
-                app:srcCompat="@drawable/blueprint1" />
-
-        </FrameLayout>
-
-
-        <com.ing.ui.button.VisualDotLineButton
-            android:id="@+id/vdb_site_management_add_point"
-            android:layout_width="350dp"
-            android:layout_height="120dp"
-            android:layout_marginTop="24dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/frame_site_management_image_layout"
-            app:visualLineSpacingExtra="3dp"
-            app:visualText="아래에 + 버튼을 눌러\n새로운 하자를 추가해 보세요!" />
-
-
         <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragment_container_site_management_content"
+            android:id="@+id/fragment_container_site_content"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/frame_site_management_image_layout" />
+            app:layout_constraintTop_toBottomOf="@+id/tab_site_layout" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_site_management_add"
+            android:id="@+id/fab_site_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"

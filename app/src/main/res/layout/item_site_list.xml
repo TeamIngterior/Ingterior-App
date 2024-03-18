@@ -148,10 +148,12 @@
 
             <ImageView
                 android:id="@+id/iv_site_item_more"
-                android:layout_width="9dp"
-                android:layout_height="11.17dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:scaleType="centerInside"
-                app:srcCompat="@drawable/ic_arrow_right"/>
+                app:srcCompat="@drawable/ic_arrow_right"
+                app:tint="@color/text_color_04"
+                />
 
         </LinearLayout>
 

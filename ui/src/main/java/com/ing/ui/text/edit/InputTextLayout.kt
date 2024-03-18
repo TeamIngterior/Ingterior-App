@@ -134,4 +134,6 @@ class InputTextLayout : ConstraintLayout {
     fun setText(text: String) {
         inputTextView.setText(text)
     }
+
+    fun getTextView() = inputTextView
 }

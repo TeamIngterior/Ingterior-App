@@ -57,9 +57,7 @@ class SiteListFragment : Fragment(), SiteListItemListener {
     }
 
     private val updateResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
-        if(result.resultCode == AppCompatActivity.RESULT_OK) {
-            siteViewModel.getAllSiteList(requireContext(), true)
-        }
+        siteViewModel.getAllSiteList(requireContext(), true)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -199,7 +197,7 @@ class SiteListFragment : Fragment(), SiteListItemListener {
     }
 
     override fun onSiteItemClicked(position: Int, site: Site) {
-        Factory.get().getMove().moveSiteActivity(requireActivity())
+        Factory.get().getMove().moveSiteActivity(requireActivity(), site)
     }
 
     override fun onFavoriteClicked(site: Site, isChecked: Boolean) {
@@ -207,7 +205,7 @@ class SiteListFragment : Fragment(), SiteListItemListener {
     }
 
     override fun onEditClicked(position: Int, site: Site) {
-        Factory.get().getMove().moveSiteCreateOrEditActivity(requireActivity(), null, site)
+        Factory.get().getMove().moveSiteCreateOrEditActivity(requireActivity(), updateResultLauncher, site)
     }
 
 

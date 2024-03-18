@@ -57,9 +57,7 @@ data class ImageModel(var id: Long = 0L, val uri: Uri? = null, var location: Str
         if (name != other.name) return false
         if (rotation != other.rotation) return false
         if (horizontalInversion != other.horizontalInversion) return false
-        if (verticalInversion != other.verticalInversion) return false
-
-        return true
+        return verticalInversion == other.verticalInversion
     }
 
 

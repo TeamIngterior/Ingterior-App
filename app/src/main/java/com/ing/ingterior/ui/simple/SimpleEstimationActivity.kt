@@ -18,6 +18,5 @@ class SimpleEstimationActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        IngTeriorViewModelFactory.simpleEstimationViewModel = null
     }
 }

@@ -11,7 +11,7 @@ import com.ing.ingterior.injection.Session
 import com.ing.ingterior.model.TYPE_GOOGLE
 import com.ing.ingterior.model.User
 
-class SessionImpl(context: Context) : Session() {
+class SessionImpl(private val context: Context) : Session() {
     private var user: User? = null
     private val googleSignInClient: GoogleSignInClient
     init {
@@ -41,6 +41,7 @@ class SessionImpl(context: Context) : Session() {
 
     override fun setUser(user: User) {
         this.user = user
+        Factory.get().getDatabase().insertLog(context, user)
     }
 
     override fun isLogin(): Boolean {

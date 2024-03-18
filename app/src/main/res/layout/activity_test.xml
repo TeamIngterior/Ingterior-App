@@ -7,38 +7,182 @@
     tools:context=".ui.TestActivity">
 
 
-    <FrameLayout
-        android:id="@+id/frame_site_management_image_layout"
-        android:layout_width="304dp"
-        android:layout_height="304dp"
-        android:background="@drawable/bg_round_square_effect"
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/page_horizontal_padding"
+        android:layout_marginEnd="@dimen/page_horizontal_padding"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.github.chrisbanes.photoview.PhotoView
-            android:id="@+id/iv_management_image"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
-            android:layout_gravity="center"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/blueprint1" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingEnd="6dp"
+            android:paddingStart="6dp"
+            android:paddingBottom="14dp"
+            android:background="@color/white">
 
-    </FrameLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1">
 
-    <Button
-        android:id="@+id/btn_blue_print_from_gallery"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="갤러리"
-        app:layout_constraintBottom_toTopOf="@+id/btn_blue_print_from_camera" />
+                <com.ing.ui.text.body.Body1View
+                    android:id="@+id/tv_year_month"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendard_regular"
+                    android:paddingLeft="18dp"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="12dp"
+                    android:textColor="@color/black"
+                    tools:text="2024년 3월"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="end|bottom"
+                    android:orientation="horizontal">
 
 
-    <Button
-        android:id="@+id/btn_blue_print_from_camera"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="카메라"
-        app:layout_constraintBottom_toBottomOf="parent" />
+                    <ImageButton
+                        android:id="@+id/ivb_up"
+                        android:layout_width="36dp"
+                        android:layout_height="48dp"
+                        android:background="@null"
+                        app:srcCompat="@drawable/ic_arrow_left" />
+
+                    <ImageButton
+                        android:id="@+id/ivb_right"
+                        android:layout_width="36dp"
+                        android:layout_height="48dp"
+                        android:background="@null"
+                        app:srcCompat="@drawable/ic_arrow_right"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/line_week_default"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_sun7"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:enabled="true"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:gravity="center"
+                    android:padding="12dp"
+                    android:text="일"
+                    android:textColor="@color/error_color"
+                    android:textSize="15sp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_mon7"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:enabled="true"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:gravity="center"
+                    android:padding="12dp"
+                    android:text="월"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_tue7"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:enabled="true"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:gravity="center"
+                    android:padding="12dp"
+                    android:text="화"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_wed7"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:enabled="true"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:gravity="center"
+                    android:padding="12dp"
+                    android:text="수"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tv_thu7"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:enabled="true"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:gravity="center"
+                    android:padding="12dp"
+                    android:text="목"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"/>
+
+                <TextView
+                    android:id="@+id/tv_fri7"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:enabled="true"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:gravity="center"
+                    android:padding="12dp"
+                    android:text="금"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tv_sat7"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:enabled="true"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:gravity="center"
+                    android:padding="12dp"
+                    android:text="토"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"/>
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_calendar_day_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:spanCount="7"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                tools:itemCount="42"
+                tools:listitem="@layout/item_calendar_day"/>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

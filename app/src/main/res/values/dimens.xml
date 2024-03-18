@@ -6,4 +6,5 @@
     <dimen name="dialog_land_width_ratio">0.85</dimen>
     <dimen name="image_size_limit">300dp</dimen>
     <dimen name="mark_size">24dp</dimen>
+    <dimen name="grid_item_margin">6dp</dimen>
 </resources>

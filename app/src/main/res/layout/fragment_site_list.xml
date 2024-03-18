@@ -7,7 +7,7 @@
 
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/tool_site_list_bar"
+        android:id="@+id/tool_site_bar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:contentInsetStart="0dp"
@@ -56,7 +56,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tool_site_list_bar"
+        app:layout_constraintTop_toBottomOf="@+id/tool_site_bar"
         app:layout_constraintVertical_bias="0.0">
 
 
@@ -81,7 +81,7 @@
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tool_site_list_bar"
+        app:layout_constraintTop_toBottomOf="@+id/tool_site_bar"
         app:visualLineSpacingExtra="8dp"
         app:visualText="아래의 + 버튼을 눌러\n새로운 현장을 추가해 보세요!" />
 

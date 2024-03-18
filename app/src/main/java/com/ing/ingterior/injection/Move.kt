@@ -22,5 +22,7 @@ abstract class Move {
     abstract fun moveResultSimpleEstimationFragment(view: View)
 
     abstract fun moveTestActivity(activity: Activity)
-    abstract fun moveSiteActivity(activity: Activity)
+    abstract fun moveSiteActivity(activity: Activity, site: Site)
+
+    abstract fun moveSiteInsertDefectActivity(activity: Activity, site: Site)
 }

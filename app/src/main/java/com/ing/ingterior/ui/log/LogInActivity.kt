@@ -46,8 +46,6 @@ class LogInActivity : AppCompatActivity() {
             val user = User(1, userEmail, serverAuth, userDisplayName, TYPE_GOOGLE)
             Factory.get().getSession().setUser(user)
             Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
-
-            Factory.get().getMove().moveMainActivity(this)
             setResult(RESULT_OK)
             finish()
             Log.d(LogInActivity::class.java.simpleName, "userEmail=$userEmail, userName=$userName, userDisplayName=$userDisplayName, serverAuth=$serverAuth")
@@ -87,9 +85,12 @@ class LogInActivity : AppCompatActivity() {
         }
 
         lbGoogle.setOnClickListener {
-//            val serverApi = ServerApi.retrofit.create(ServerApi::class.java)
-//            serverApi.googleLogin()
-            Factory.get().getSession().googleLogin(this, googleAuthLauncher)
+            val user = User(1, "jypjun12@gmail.com", "12345678", "준그래머", TYPE_GOOGLE)
+            Factory.get().getSession().setUser(user)
+            Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
+            setResult(RESULT_OK)
+            finish()
+//            Factory.get().getSession().googleLogin(this, googleAuthLauncher)
         }
 
         lbInstagram.setOnClickListener {

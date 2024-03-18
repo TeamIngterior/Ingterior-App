@@ -101,4 +101,8 @@ class VisualDefaultButton : BaseButtonView {
 
         invalidate()
     }
+
+    fun setText(text: String?) {
+        labelView.text = text
+    }
 }

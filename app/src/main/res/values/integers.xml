@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="smallest_device">640</integer>
+    <integer name="medium_device">1080</integer>
+    <integer name="expanded_device">1440</integer>
+    <integer name="biggest_device">1880</integer>
+</resources>

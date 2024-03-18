@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:gravity="center_vertical|end"
+    android:paddingTop="12dp"
+    android:paddingBottom="10dp"
+    android:background="@color/white">
+
+
+    <com.ing.ui.button.VisualImageButton
+        android:id="@+id/vib_default_dialog_close"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_close_24" />
+
+
+    <com.ing.ui.text.title.TitleH4View
+        android:id="@+id/tv_default_dialog_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:letterSpacing="0.03"
+        android:lineSpacingExtra="8dp"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp"
+        android:text="도면 이미지 편집/삭제 시\n저장해둔 마커의 정보가 사라집니다."
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vib_default_dialog_close" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="32dp"
+        android:paddingEnd="@dimen/page_horizontal_padding"
+        android:paddingStart="@dimen/page_horizontal_padding"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_default_dialog_title">
+
+        <com.ing.ui.button.VisualDefaultButton
+            android:id="@+id/vdb_default_dialog_cancel"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            app:visualText="취소하기" />
+
+        <com.ing.ui.button.VisualButton
+            android:id="@+id/vb_default_dialog_confirm"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            app:visualText="이미지 삭제하기"
+            />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
