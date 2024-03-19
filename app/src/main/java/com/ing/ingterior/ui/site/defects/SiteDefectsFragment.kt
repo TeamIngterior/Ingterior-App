@@ -8,10 +8,8 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.ing.ingterior.EXTRA_SITE
 import com.ing.ingterior.R
 import com.ing.ingterior.db.Site
@@ -36,7 +34,7 @@ class SiteDefectsFragment : Fragment() {
     }
 
     private lateinit var siteViewModel: SiteViewModel
-    private lateinit var vdbAddPoint: VisualDotLineButton
+    private lateinit var vdbAddDefect: VisualDotLineButton
     private lateinit var frameImageLayout: FrameLayout
     private lateinit var ivBluePrintView: ImageView
     private lateinit var markImageView: ImageView
@@ -66,10 +64,16 @@ class SiteDefectsFragment : Fragment() {
 
     private fun initViewBinding(view: View){
         frameImageLayout = view.findViewById(R.id.frame_site_blueprint_layout)
+        frameImageLayout.post {
+            val params = frameImageLayout.layoutParams
+            params.height = frameImageLayout.width // 너비와 같게 설정
+            frameImageLayout.layoutParams = params
+        }
         ivBluePrintView = view.findViewById(R.id.iv_site_blueprint)
-        vdbAddPoint = view.findViewById(R.id.vdb_site_add_point)
+        vdbAddDefect = view.findViewById(R.id.vdb_site_add_defect)
 
-        vdbAddPoint.setOnClickListener {
+
+        vdbAddDefect.setOnClickListener {
             if(siteViewModel.site == null) {
                 Toast.makeText(requireContext(), "에러 발생", Toast.LENGTH_SHORT).show()
                 requireActivity().finish()

@@ -21,7 +21,7 @@
 
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/tool_site_bar"
+            android:id="@+id/tool_create_defect_bar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:contentInsetStart="0dp"
@@ -36,7 +36,7 @@
                 android:orientation="horizontal">
 
                 <com.ing.ui.button.VisualImageButton
-                    android:id="@+id/vib_site_insert_defects_back"
+                    android:id="@+id/vib_site_create_defects_back"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginStart="@dimen/login_label_start_margin"
@@ -47,50 +47,27 @@
 
 
                 <com.ing.ui.text.label.LabelView
-                    android:id="@+id/lb_site_insert_defects_title"
+                    android:id="@+id/lb_site_create_defects_title"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:ellipsize="end"
                     android:gravity="center"
                     android:maxLines="1"
-                    android:ellipsize="end"
                     android:text="하자 체크"
-                    android:layout_marginEnd="@dimen/page_horizontal_padding"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/vib_site_insert_defects_back"
-                    app:layout_constraintTop_toTopOf="parent"
-                     />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.appcompat.widget.Toolbar>
 
-
-        <FrameLayout
-            android:id="@+id/frame_site_insert_defects_image_layout"
-            android:layout_width="304dp"
-            android:layout_height="304dp"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/bg_round_square_effect"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tab_site_layout">
-
-            <com.github.chrisbanes.photoview.PhotoView
-                android:id="@+id/photo_site_insert_defects_blueprint"
-                android:layout_width="300dp"
-                android:layout_height="300dp"
-                android:layout_gravity="center"
-                android:scaleType="fitCenter"
-                tools:srcCompat="@drawable/blueprint1" />
-
-        </FrameLayout>
-
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/nested_site_create_content_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scrollbarSize="4dp"
-            android:layout_marginTop="24dp"
             android:scrollbars="vertical"
             >
 
@@ -99,7 +76,33 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingStart="@dimen/page_horizontal_padding"
-                android:paddingEnd="@dimen/page_horizontal_padding">
+                android:paddingEnd="@dimen/page_horizontal_padding"
+                android:gravity="center_horizontal">
+
+                <FrameLayout
+                    android:id="@+id/frame_site_create_defects_image_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginTop="12dp"
+                    android:padding="2dp"
+                    android:background="@drawable/bg_round_square_effect"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tab_site_layout"
+                    tools:layout_width="380dp"
+                    tools:layout_height="380dp">
+
+                    <com.github.chrisbanes.photoview.PhotoView
+                        android:id="@+id/photo_site_create_defects_blueprint"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:scaleType="fitCenter"
+                        tools:srcCompat="@drawable/blueprint1" />
+
+                </FrameLayout>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -121,10 +124,10 @@
                 </LinearLayout>
 
                 <com.ing.ui.text.edit.InputTextLayout
-                    android:id="@+id/itv_site_insert_defects_name_layout"
+                    android:id="@+id/itv_site_create_defects_name_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="12dp"
                     app:inputHint="하자 위치(이름)을 입력해주세요."
                     app:inputMax="50"
                     app:inputMaxLine="1"
@@ -134,7 +137,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="24dp"
                     android:orientation="horizontal">
 
                     <com.ing.ui.text.title.TitleH5View
@@ -152,10 +155,10 @@
                 </LinearLayout>
 
                 <com.ing.ui.text.edit.InputTextLayout
-                    android:id="@+id/itv_site_insert_defects_description_layout"
+                    android:id="@+id/itv_site_create_defects_description_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="12dp"
                     app:inputHint="하자 설명 내용을 입력해주세요."
                     app:inputMax="200"
                     app:inputMaxLine="10"
@@ -165,7 +168,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="24dp"
                     android:orientation="vertical">
 
 
@@ -189,10 +192,10 @@
                     </LinearLayout>
 
                     <com.ing.ui.button.VisualDefaultButton
-                        android:id="@+id/vdb_site_insert_defects_add_image"
+                        android:id="@+id/vdb_site_create_defects_add_image"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="12dp"
                         android:clickable="true"
                         app:visualIconSize="12dp"
                         app:visualSrc="@drawable/ic_add_image"
@@ -200,31 +203,31 @@
 
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rv_site_insert_defects_list"
+                        android:id="@+id/rv_site_insert_create_list"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="12dp"
                         android:orientation="vertical"
                         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                         app:spanCount="4"
                         tools:itemCount="8"
-                        tools:listitem="@layout/item_site_defect_image"/>
+                        tools:listitem="@layout/item_site_image"/>
 
                     <com.ing.ui.text.caption.Caption2View
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="12dp"
                         android:lineSpacingExtra="4dp"
-                        android:text="@string/hint_new_site_2" />
+                        android:text="@string/hint_new_site_3" />
 
 
                 </LinearLayout>
 
                 <com.ing.ui.button.VisualButton
-                    android:id="@+id/vb_site_insert_defects_commit"
+                    android:id="@+id/vb_site_create_defects_commit"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="24dp"
                     android:layout_marginBottom="16dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

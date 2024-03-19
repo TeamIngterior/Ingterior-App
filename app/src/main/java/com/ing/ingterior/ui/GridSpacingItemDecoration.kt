@@ -21,12 +21,12 @@ class GridSpacingItemDecoration(private val spanCount: Int, private val spacing:
         }
 
         if(column == 0) { // 가장 처음 열 아이템
-            outRect.left = if(edge) /*spacing*/ 0 else spacing / 2
+            outRect.left = if(edge) spacing else 0
             outRect.right = spacing / 2
         }
         else if ((position + 1) % spanCount == 0) { // 가장 마지막 열 아이템
             outRect.left = spacing / 2
-            outRect.right = if(edge) /*spacing*/ 0 else spacing / 2
+            outRect.right = if(edge) spacing else 0
         }
         else{
             outRect.left = spacing / 2

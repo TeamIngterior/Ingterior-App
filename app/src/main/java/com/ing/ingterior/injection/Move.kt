@@ -25,4 +25,6 @@ abstract class Move {
     abstract fun moveSiteActivity(activity: Activity, site: Site)
 
     abstract fun moveSiteInsertDefectActivity(activity: Activity, site: Site)
+
+    abstract fun moveSiteInsertManagementActivity(activity: Activity, site: Site)
 }

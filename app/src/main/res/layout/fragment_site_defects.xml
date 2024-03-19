@@ -9,18 +9,22 @@
 
     <FrameLayout
         android:id="@+id/frame_site_blueprint_layout"
-        android:layout_width="304dp"
-        android:layout_height="304dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:padding="2dp"
+        android:layout_marginHorizontal="@dimen/page_horizontal_padding"
         android:background="@drawable/bg_round_square_effect"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_width="380dp"
+        tools:layout_height="380dp">
 
         <ImageView
             android:id="@+id/iv_site_blueprint"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/blueprint1" />
@@ -28,10 +32,11 @@
     </FrameLayout>
 
     <com.ing.ui.button.VisualDotLineButton
-        android:id="@+id/vdb_site_add_point"
-        android:layout_width="350dp"
+        android:id="@+id/vdb_site_add_defect"
+        android:layout_width="0dp"
         android:layout_height="120dp"
         android:layout_marginTop="24dp"
+        android:layout_marginHorizontal="@dimen/page_horizontal_padding"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frame_site_blueprint_layout"

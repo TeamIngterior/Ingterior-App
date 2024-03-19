@@ -8,11 +8,13 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.distinctUntilChanged
@@ -31,7 +33,6 @@ import com.ing.ingterior.ui.RoundDialogButtonListener
 import com.ing.ingterior.ui.RoundDialogFragment
 import com.ing.ingterior.ui.viewmodel.SiteViewModel
 import com.ing.ingterior.util.FileWrapper
-import com.ing.ingterior.util.FileWrapper.MB
 import com.ing.ingterior.util.FileWrapper.createImageFile
 import com.ing.ingterior.util.FileWrapper.getFileSize
 import com.ing.ingterior.util.FileWrapper.isFileUri
@@ -65,7 +66,8 @@ class SiteCreateOrEditActivity : AppCompatActivity() {
     private lateinit var vcbManagement: VisualButtonCheckBox
     private lateinit var btnAddImage: VisualDefaultButton
 
-    private lateinit var lineAddImage: LinearLayout
+    private lateinit var constAddImage: ConstraintLayout
+    private lateinit var frameImageLayout: FrameLayout
     private lateinit var ivImage: ImageView
     private lateinit var btnEditImage: VisualDefaultButton
     private lateinit var btnRemoveImage: VisualDefaultButton
@@ -114,10 +116,10 @@ class SiteCreateOrEditActivity : AppCompatActivity() {
                     val fileSize: Long = if(isFileUri(photoUri)) getFileSize(this@SiteCreateOrEditActivity, photoUri)
                         else getMediaFileSize(this@SiteCreateOrEditActivity, photoUri)
                     Log.d(TAG, "getPictureResult: fileSize=$fileSize")
-                    if(fileSize > 5*MB){
-                        Toast.makeText(this, "이미지 파일의 크기가 너무 큽니다.", Toast.LENGTH_SHORT).show()
-                        return@registerForActivityResult
-                    }
+//                    if(fileSize > 5*MB){
+//                        Toast.makeText(this, "이미지 파일의 크기가 너무 큽니다.", Toast.LENGTH_SHORT).show()
+//                        return@registerForActivityResult
+//                    }
 
                     var fileName: String? = FileWrapper.getImageNameFromUri(this, photoUri)
 
@@ -149,7 +151,15 @@ class SiteCreateOrEditActivity : AppCompatActivity() {
         vcbDefects = findViewById(R.id.vcb_site_coe_defects)
         vcbManagement = findViewById(R.id.vcb_site_coe_management)
         btnAddImage = findViewById(R.id.btn_site_coe_add_image)
-        lineAddImage = findViewById(R.id.line_new_site_image)
+        constAddImage = findViewById(R.id.const_site_coe_image)
+        frameImageLayout = findViewById(R.id.frame_site_coe_blueprint_layout)
+
+        frameImageLayout.post {
+            val params = frameImageLayout.layoutParams
+            params.height = frameImageLayout.width // 너비와 같게 설정
+            frameImageLayout.layoutParams = params
+        }
+
         ivImage = findViewById(R.id.iv_site_coe_image)
         btnEditImage = findViewById(R.id.btn_site_coe_edit_image)
         btnRemoveImage = findViewById(R.id.btn_site_coe_remove_image)
@@ -302,12 +312,12 @@ class SiteCreateOrEditActivity : AppCompatActivity() {
         siteViewModel.imageModel.distinctUntilChanged().observe(this) { imageModel ->
             lifecycleScope.launch {
                 if(imageModel==null) {
-                    lineAddImage.isVisible = false
+                    constAddImage.isVisible = false
                     btnAddImage.isVisible = true
                     ivImage.setImageURI(null)
                 }
                 else{
-                    lineAddImage.isVisible = true
+                    constAddImage.isVisible = true
                     btnAddImage.isVisible = false
                     ivImage.setImageBitmap(siteViewModel.getImageBitmap(this@SiteCreateOrEditActivity))
                 }

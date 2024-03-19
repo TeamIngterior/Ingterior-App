@@ -17,6 +17,7 @@
         <attr name="inputSupportText" format="string"/>
         <attr name="inputSupportSpacing" format="dimension"/>
         <attr name="inputSupportColor" format="color"/>
+        <attr name="inputEnable" format="boolean"/>
     </declare-styleable>
 
     <declare-styleable name="VisualCheckBox">

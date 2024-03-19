@@ -19,6 +19,7 @@ import com.ing.ingterior.ui.site.SiteImageEditDialog
 import com.ing.ingterior.ui.site.SiteCreateOrEditActivity
 import com.ing.ingterior.ui.site.SiteActivity
 import com.ing.ingterior.ui.site.defects.SiteInsertDefectsActivity
+import com.ing.ingterior.ui.site.management.SiteCreateManagementActivity
 
 class MoveImpl : Move() {
     override fun moveMainActivity(activity: Activity) {
@@ -89,6 +90,13 @@ class MoveImpl : Move() {
 
     override fun moveSiteInsertDefectActivity(activity: Activity, site: Site) {
         val intent = Intent(activity, SiteInsertDefectsActivity::class.java)
+        intent.putExtra(EXTRA_SITE, site)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        activity.startActivity(intent)
+    }
+
+    override fun moveSiteInsertManagementActivity(activity: Activity, site: Site) {
+        val intent = Intent(activity, SiteCreateManagementActivity::class.java)
         intent.putExtra(EXTRA_SITE, site)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         activity.startActivity(intent)

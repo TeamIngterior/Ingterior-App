@@ -21,8 +21,8 @@ class SiteDefectImagesAdapter(private val siteViewModel: SiteViewModel, private 
         parent: ViewGroup,
         viewType: Int,
     ): SiteDefectImagesAdapter.ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_site_defect_image, parent, false)
-        view.layoutParams = RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, itemSize)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_site_image, parent, false)
+        view.layoutParams = RecyclerView.LayoutParams(itemSize, itemSize)
         return ViewHolder(view)
     }
 

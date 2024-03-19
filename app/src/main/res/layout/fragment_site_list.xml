@@ -74,7 +74,7 @@
 
     <com.ing.ui.button.VisualDotLineButton
         android:id="@+id/vdlb_site_list_new_action"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="120dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"

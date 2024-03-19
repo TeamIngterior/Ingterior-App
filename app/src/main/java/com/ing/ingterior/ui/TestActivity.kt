@@ -4,66 +4,28 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.ing.ingterior.CalendarDayAdapter
 import com.ing.ingterior.R
-import com.ing.ingterior.model.DateModel
-import com.ing.ui.text.body.Body1View
-import java.util.Calendar
+import com.ing.ingterior.util.getDisplayPixelSize
 
 class TestActivity : AppCompatActivity() {
 
-    private lateinit var tvYearMonth: Body1View
-    private lateinit var rvCalendarDayList: RecyclerView
-
-    private val calendar = Calendar.getInstance()
+    private var gridColorItemDecoration: GridSpacingItemDecoration? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test)
+        val rvColorList = findViewById<RecyclerView>(R.id.rv_site_create_management_color_list)
 
-        tvYearMonth = findViewById(R.id.tv_year_month)
-        rvCalendarDayList = findViewById(R.id.rv_calendar_day_list)
-
-        // 현재 연도와 월을 TextView에 설정
-        updateDateInView()
-
-        setupRecyclerView()
-
-
-        com.google.api.services.calendar.Calendar
-
-        "https://www.googleapis.com/calendar/v3/calendars/calendarId/events?key=YAIzaSyCr4yojNO4vDOOCObjo-ltTsTFWnkH2Puk"
-        "https://www.googleapis.com/calendar/v3/calendars/ko%23holiday%40group.v.calendar.google.com/events?key="
-    }
-
-    private fun updateDateInView() {
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH) + 1 // Calendar.MONTH는 0부터 시작하므로 1을 더해줍니다.
-
-        tvYearMonth.text = "${year}년 ${month}월"
-    }
-
-    private fun setupRecyclerView() {
-        val days = mutableListOf<DateModel>()
-        val year = calendar.get(Calendar.YEAR)     // 현재 연도
-        val month = calendar.get(Calendar.MONTH)   // 현재 월 (Calendar.MONTH는 0부터 시작하므로 주의)
-
-        calendar.set(Calendar.DAY_OF_MONTH, 1)
-        val weekDayOfFirstDay = calendar.get(Calendar.DAY_OF_WEEK) - 1
-
-        // 첫 번째 날이 시작하기 전까지 빈 DateModel 객체를 채움
-        for (i in 0 until weekDayOfFirstDay) {
-            days.add(DateModel(0, i, month, year))
+        val displaySize = this.getDisplayPixelSize()
+        val spanCount = 5
+        val itemSize = (displaySize.width - ((spanCount+1) * resources.getDimensionPixelSize(R.dimen.page_horizontal_padding))) / spanCount
+        rvColorList.apply {
+            layoutManager = GridLayoutManager(context, spanCount)
+//            if (gridColorItemDecoration != null) removeItemDecoration(gridColorItemDecoration!!)
+//            gridColorItemDecoration = GridSpacingItemDecoration(5, resources.getDimensionPixelSize(R.dimen.page_horizontal_padding), true)
+//            addItemDecoration(gridColorItemDecoration!!)
+            adapter = ColorListAdapter(this@TestActivity, itemSize)
         }
-
-        // 현재 달의 날짜를 DateModel 객체 리스트에 추가
-        val maxDayOfMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
-        for (day in 1..maxDayOfMonth) {
-            days.add(DateModel(day, (weekDayOfFirstDay + day - 1) % 7, month, year))
-        }
-
-        rvCalendarDayList.layoutManager = GridLayoutManager(this, 7) // 주당 일수 설정
-        rvCalendarDayList.adapter = CalendarDayAdapter(days) // 어댑터에 days 리스트 전달
     }
 
 

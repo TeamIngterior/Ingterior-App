@@ -27,6 +27,7 @@
 
     <string name="hint_new_site_1">마커 기능을 사용하여 현장관리를 더 효율적으로 이용할 수 있습니다.</string>
     <string name="hint_new_site_2">-최대 1개까지 추가 가능합니다.\n-파일 형식은 Jpg, Jpeg, Png, Gif 만 가능합니다.\n-최대 5MB 까지 등록 가능합니다.</string>
+    <string name="hint_new_site_3">-최대 8개까지 추가 가능합니다.\n-파일 형식은 Jpg, Jpeg, Png, Gif 만 가능합니다.\n-최대 5MB 까지 등록 가능합니다.</string>
     <string name="label_defect_check">하자체크</string>
     <string name="label_site_management">공사관리</string>
     <string name="caption_muti_select_enabled">다중선택 가능</string>

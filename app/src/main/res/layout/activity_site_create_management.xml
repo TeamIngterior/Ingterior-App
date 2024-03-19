@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.site.management.SiteCreateManagementActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tool_site_bar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:contentInsetStart="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <com.ing.ui.button.VisualImageButton
+                    android:id="@+id/vib_site_create_management_back"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="@dimen/login_label_start_margin"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_back_24" />
+
+
+                <com.ing.ui.text.label.LabelView
+                    android:id="@+id/lb_site_insert_management_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="공사 추가"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nested_site_create_management_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbarSize="4dp"
+            android:scrollbars="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+
+                <LinearLayout
+                    android:id="@+id/line_site_create_management_top_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="@dimen/page_horizontal_padding"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:orientation="horizontal">
+
+                        <com.ing.ui.text.title.TitleH5View
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="1dp"
+                            android:text="현장 도면 이미지" />
+
+                        <com.ing.ui.text.caption.Caption2View
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="2dp"
+                            android:text="@string/caption_option" />
+
+                    </LinearLayout>
+
+
+                    <com.ing.ui.text.caption.Caption2View
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="현장 도면 이미지를 참고하여 더 체계적인 공사관리를 하세요." />
+
+
+                    <FrameLayout
+                        android:id="@+id/frame_site_create_management_blueprint_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:background="@drawable/bg_round_square_effect"
+                        android:padding="2dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:layout_height="380dp"
+                        tools:layout_width="match_parent">
+
+                        <ImageView
+                            android:id="@+id/iv_site_create_management_blueprint"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:scaleType="fitCenter"
+                            app:srcCompat="@drawable/blueprint1" />
+
+                    </FrameLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:orientation="horizontal">
+
+                        <com.ing.ui.text.title.TitleH5View
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="1dp"
+                            android:text="공사 현장 이름" />
+
+                        <com.ing.ui.text.title.TitleH5View
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="*"
+                            app:customTextColor="@color/secondary_color05" />
+
+                    </LinearLayout>
+
+                    <com.ing.ui.text.edit.InputTextLayout
+                        android:id="@+id/itv_site_create_management_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        app:inputHint="공사 현장 이름을 입력해주세요."
+                        app:inputMax="50"
+                        app:inputMaxLine="1"
+                        app:inputSingleLine="true"
+                        app:inputSupportSpacing="2dp" />
+
+
+
+                </LinearLayout>
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/line_site_create_management_top_layout"
+                    >
+
+                    <LinearLayout
+                        android:id="@+id/line_site_create_management_color"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:orientation="horizontal"
+                        android:layout_marginHorizontal="@dimen/page_horizontal_padding"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <com.ing.ui.text.title.TitleH5View
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="1dp"
+                            android:text="폴더 색 선택" />
+
+                        <com.ing.ui.text.title.TitleH5View
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="*"
+                            app:customTextColor="@color/secondary_color05" />
+
+                    </LinearLayout>
+
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_site_create_management_color_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginStart="@dimen/page_horizontal_padding"
+                        app:layout_constraintTop_toBottomOf="@id/line_site_create_management_color"
+                        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                        app:spanCount="5"
+                        tools:itemCount="10"
+                        tools:listitem="@layout/item_color"/>
+
+
+                    <LinearLayout
+                        android:id="@+id/line_site_create_management_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:orientation="horizontal"
+                        android:layout_marginHorizontal="@dimen/page_horizontal_padding"
+                        app:layout_constraintTop_toBottomOf="@id/rv_site_create_management_color_list">
+
+                        <com.ing.ui.text.title.TitleH5View
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="1dp"
+                            android:text="공사 설명" />
+
+                        <com.ing.ui.text.caption.Caption2View
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="2dp"
+                            android:text="(선택 / 최대 200자 까지)" />
+
+
+                    </LinearLayout>
+
+                    <com.ing.ui.text.edit.InputTextLayout
+                        android:id="@+id/itv_site_create_management_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginHorizontal="@dimen/page_horizontal_padding"
+                        app:inputHint="공사 설명 내용을 입력해주세요."
+                        app:inputMax="200"
+                        app:inputMaxLine="1"
+                        app:inputSingleLine="true"
+                        app:inputSupportSpacing="2dp"
+                        app:layout_constraintTop_toBottomOf="@id/line_site_create_management_description"/>
+
+                    <LinearLayout
+                        android:id="@+id/line_site_create_management_period"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:orientation="horizontal"
+                        android:layout_marginHorizontal="@dimen/page_horizontal_padding"
+                        app:layout_constraintTop_toBottomOf="@id/itv_site_create_management_description">
+
+                        <com.ing.ui.text.title.TitleH5View
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="1dp"
+                            android:text="일정 선택" />
+
+                        <com.ing.ui.text.title.TitleH5View
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="*"
+                            app:customTextColor="@color/secondary_color05" />
+
+                    </LinearLayout>
+
+                    <com.ing.ui.text.edit.InputTextLayout
+                        android:id="@+id/itv_site_create_management_period"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/page_horizontal_padding"
+                        android:layout_marginTop="12dp"
+                        app:inputHint="2024.03.03 ~ 2024.03.03"
+                        app:inputMax="50"
+                        app:inputMaxLine="1"
+                        app:inputSingleLine="true"
+                        app:inputSupportSpacing="2dp"
+                        app:inputEnable="false"
+                        app:layout_constraintTop_toBottomOf="@id/line_site_create_management_period"/>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="0dp"
+                        android:background="@color/text_color_03"
+                        app:layout_constraintBottom_toBottomOf="@+id/itv_site_create_management_period"
+                        app:layout_constraintEnd_toStartOf="@+id/imageView2"
+                        app:layout_constraintTop_toTopOf="@+id/itv_site_create_management_period" />
+
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="48dp"
+                        android:layout_height="0dp"
+                        android:scaleType="centerInside"
+                        app:layout_constraintBottom_toBottomOf="@+id/itv_site_create_management_period"
+                        app:layout_constraintEnd_toEndOf="@+id/itv_site_create_management_period"
+                        app:layout_constraintTop_toTopOf="@+id/itv_site_create_management_period"
+                        app:srcCompat="@drawable/ic_calendar" />
+
+
+                    <LinearLayout
+                        android:id="@+id/line_site_create_management_description_image_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:orientation="horizontal"
+                        android:layout_marginHorizontal="@dimen/page_horizontal_padding"
+                        app:layout_constraintTop_toBottomOf="@id/itv_site_create_management_period">
+
+                        <com.ing.ui.text.title.TitleH5View
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="1dp"
+                            android:text="공사 참고 이미지 추가하기" />
+
+                        <com.ing.ui.text.caption.Caption2View
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="2dp"
+                            android:text="(선택)" />
+
+
+                    </LinearLayout>
+
+                    <com.ing.ui.button.VisualDefaultButton
+                        android:id="@+id/vdb_site_create_management_add_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="12dp"
+                        android:clickable="true"
+                        android:layout_marginHorizontal="@dimen/page_horizontal_padding"
+                        app:layout_constraintTop_toBottomOf="@id/line_site_create_management_description_image_layout"
+                        app:visualIconSize="12dp"
+                        app:visualSrc="@drawable/ic_add_image"
+                        app:visualText="이미지 추가하기" />
+
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_site_create_management_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:orientation="vertical"
+                        android:layout_marginHorizontal="@dimen/page_horizontal_padding"
+                        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                        app:layout_constraintTop_toBottomOf="@id/vdb_site_create_management_add_image"
+                        app:spanCount="4"
+                        tools:itemCount="8"
+                        tools:listitem="@layout/item_site_image" />
+
+                    <com.ing.ui.text.caption.Caption2View
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:lineSpacingExtra="4dp"
+                        android:layout_marginHorizontal="@dimen/page_horizontal_padding"
+                        android:text="@string/hint_new_site_3"
+                        app:layout_constraintTop_toBottomOf="@id/rv_site_create_management_list" />
+
+                    <FrameLayout
+                        android:id="@+id/frame_site_create_management_calendar_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/itv_site_create_management_period">
+
+                        <include
+                            android:id="@+id/include_calendar"
+                            layout="@layout/layout_calendar" />
+
+                    </FrameLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <com.ing.ui.button.VisualButton
+                    android:id="@+id/vb_site_create_managment_commit"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginHorizontal="@dimen/page_horizontal_padding"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/line_add_code_site_layout"
+                    app:layout_constraintVertical_bias="0"
+                    app:visualEnable="false"
+                    app:visualText="추가하기" />
+
+
+            </LinearLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
+
+
+
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

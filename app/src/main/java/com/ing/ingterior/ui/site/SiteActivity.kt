@@ -11,6 +11,7 @@ import com.ing.ingterior.EXTRA_SITE
 import com.ing.ingterior.R
 import com.ing.ingterior.ui.IngTeriorViewModelFactory
 import com.ing.ingterior.ui.site.defects.SiteDefectsFragment
+import com.ing.ingterior.ui.site.management.SiteManagementFragment
 import com.ing.ingterior.ui.viewmodel.SiteViewModel
 import com.ing.ingterior.ui.viewmodel.SiteViewModel.Companion.UI_DEFECTS_MODE
 import com.ing.ingterior.util.getParcelableCompat
@@ -43,7 +44,7 @@ class SiteActivity : AppCompatActivity() {
 
         ivBack = findViewById(R.id.vib_site_back)
         ivBack.setOnClickListener {
-            super.onBackPressed()
+            finish()
         }
 
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -54,7 +55,7 @@ class SiteActivity : AppCompatActivity() {
                         moveDefectFragment()
                     }
                     1 -> {
-
+                        moveManagementFragment()
                     }
                 }
             }
@@ -75,8 +76,12 @@ class SiteActivity : AppCompatActivity() {
     private fun moveDefectFragment(){
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_container_site_content, SiteDefectsFragment.newInstance(intent.getParcelableCompat(EXTRA_SITE)))
-        transaction.addToBackStack(null)
         transaction.commit()
     }
 
+    private fun moveManagementFragment(){
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragment_container_site_content, SiteManagementFragment.newInstance(intent.getParcelableCompat(EXTRA_SITE)))
+        transaction.commit()
+    }
 }

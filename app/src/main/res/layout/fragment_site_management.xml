@@ -1,9 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.site.management.SiteManagementFragment">
 
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginHorizontal="@dimen/page_horizontal_padding"
+        android:background="@color/transparent_20_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+
+    <com.ing.ui.button.VisualDotLineButton
+        android:id="@+id/vdb_site_add_management"
+        android:layout_width="0dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginHorizontal="@dimen/page_horizontal_padding"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view"
+        app:visualLineSpacingExtra="3dp"
+        app:visualText="아래에 + 버튼을 눌러\n새로운 하자를 추가해 보세요!" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

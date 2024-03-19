@@ -43,4 +43,15 @@
     <color name="btn_kakaotalk_color">#FEE500</color>
     <color name="btn_naver_color">#03C75A</color>
     <color name="btn_google_insta_color">#FFFFFF</color>
+
+    <color name="palette1">#FBD2DF</color>
+    <color name="palette2">#FFE5DC</color>
+    <color name="palette3">#F6DFB7</color>
+    <color name="palette4">#D6F2D6</color>
+    <color name="palette5">#BCE3E1</color>
+    <color name="palette6">#DEE9DE</color>
+    <color name="palette7">#E2F0FA</color>
+    <color name="palette8">#CDD9F1</color>
+    <color name="palette9">#E1DCE4</color>
+    <color name="palette10">#F1DDF6</color>
 </resources>

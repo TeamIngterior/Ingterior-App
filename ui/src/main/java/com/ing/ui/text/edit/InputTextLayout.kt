@@ -75,6 +75,9 @@ class InputTextLayout : ConstraintLayout {
             val singleLine = typedArray.getBoolean(R.styleable.InputTextLayout_inputSingleLine, false)
             inputTextView.isSingleLine = singleLine
 
+            val isEnable = typedArray.getBoolean(R.styleable.InputTextLayout_inputEnable, true)
+            inputTextView.isEnabled = isEnable
+
             if(!singleLine){
                 spacing = typedArray.getDimensionPixelSize(R.styleable.InputTextLayout_inputSupportSpacing, 0)
                 inputTextView.setLineSpacing(spacing.toFloat(), 1f)

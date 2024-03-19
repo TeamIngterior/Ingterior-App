@@ -4,16 +4,14 @@ import android.content.Intent
 import android.graphics.Matrix
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.MotionEvent
-import android.view.View
-import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -33,6 +31,7 @@ import com.ing.ingterior.util.getParcelableCompat
 import com.ing.ingterior.util.hideKeyboard
 import com.ing.ui.button.VisualButton
 import com.ing.ui.button.VisualDefaultButton
+import com.ing.ui.button.VisualImageButton
 import com.ing.ui.text.edit.InputTextLayout
 
 class SiteInsertDefectsActivity : AppCompatActivity() {
@@ -45,9 +44,11 @@ class SiteInsertDefectsActivity : AppCompatActivity() {
     private lateinit var siteViewModel: SiteViewModel
     private lateinit var siteDefectImagesAdapter: SiteDefectImagesAdapter
 
-    private lateinit var frameImageLayout: FrameLayout
+    private lateinit var vibBack: VisualImageButton
+    private lateinit var frameBlueprintLayout: FrameLayout
     private lateinit var photoBluePrintView: PhotoView
     private lateinit var markImageView: ImageView
+    private lateinit var nestedContentLayout: NestedScrollView
     private lateinit var itvInsertName: InputTextLayout
     private lateinit var itvInsertDescription: InputTextLayout
     private lateinit var vdbInsertImage: VisualDefaultButton
@@ -66,8 +67,7 @@ class SiteInsertDefectsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        setContentView(R.layout.activity_site_insert_defects)
+        setContentView(R.layout.activity_site_create_defects)
         
         siteViewModel = ViewModelProvider(this, IngTeriorViewModelFactory())[SiteViewModel::class.java]
         siteViewModel.site = intent.getParcelableCompat<Site>(EXTRA_SITE)
@@ -84,10 +84,10 @@ class SiteInsertDefectsActivity : AppCompatActivity() {
                     else ImageUtils.getMediaFileSize(this, photoUri)
                     Log.d(TAG, "getPictureResult: photoUri=$photoUri")
                     Log.d(TAG, "getPictureResult: fileSize=$fileSize")
-                    if(fileSize > 5* FileWrapper.MB){
-                        Toast.makeText(this, "이미지 파일의 크기가 너무 큽니다.", Toast.LENGTH_SHORT).show()
-                        return@registerForActivityResult
-                    }
+//                    if(fileSize > 5* FileWrapper.MB){
+//                        Toast.makeText(this, "이미지 파일의 크기가 너무 큽니다.", Toast.LENGTH_SHORT).show()
+//                        return@registerForActivityResult
+//                    }
 
                     var fileName: String? = FileWrapper.getImageNameFromUri(this, photoUri)
                     if(fileName?.lastIndexOf(".")!! < 0){
@@ -121,9 +121,14 @@ class SiteInsertDefectsActivity : AppCompatActivity() {
     }
 
     private fun initBindingView(){
-        itvInsertName = findViewById(R.id.itv_site_insert_defects_name_layout)
-        itvInsertDescription = findViewById(R.id.itv_site_insert_defects_description_layout)
-        vbCommit = findViewById(R.id.vb_site_insert_defects_commit)
+        nestedContentLayout = findViewById(R.id.nested_site_create_content_layout)
+        itvInsertName = findViewById(R.id.itv_site_create_defects_name_layout)
+        itvInsertDescription = findViewById(R.id.itv_site_create_defects_description_layout)
+        vbCommit = findViewById(R.id.vb_site_create_defects_commit)
+        vibBack = findViewById(R.id.vib_site_create_defects_back)
+        vibBack.setOnClickListener {
+            super.onBackPressed()
+        }
     }
 
     private fun initMarkView(){
@@ -136,12 +141,14 @@ class SiteInsertDefectsActivity : AppCompatActivity() {
             lastTouchX = x
             lastTouchY = y
         }
-        frameImageLayout.addView(markImageView)
+
+        frameBlueprintLayout.addView(markImageView)
         markImageView.setOnTouchListener { view, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     tempX = event.x
                     tempY = event.y
+                    nestedContentLayout.requestDisallowInterceptTouchEvent(true)
                 }
                 MotionEvent.ACTION_MOVE -> {
                     // 드래그 이동 로직
@@ -153,14 +160,22 @@ class SiteInsertDefectsActivity : AppCompatActivity() {
                     lastTouchY = view.y
                     Log.d("TestActivity", "onCreate: markImageView x=${markImageView.x}, markImageView y=${markImageView.y}")
                 }
+                MotionEvent.ACTION_CANCEL, MotionEvent.ACTION_UP -> {
+                    nestedContentLayout.requestDisallowInterceptTouchEvent(false)
+                }
             }
             true
         }
     }
 
     private fun initBluePrintView(){
-        frameImageLayout = findViewById(R.id.frame_site_insert_defects_image_layout)
-        photoBluePrintView = findViewById(R.id.photo_site_insert_defects_blueprint)
+        frameBlueprintLayout = findViewById(R.id.frame_site_create_defects_image_layout)
+        frameBlueprintLayout.post {
+            val params = frameBlueprintLayout.layoutParams
+            params.height = frameBlueprintLayout.width // 너비와 같게 설정
+            frameBlueprintLayout.layoutParams = params
+        }
+        photoBluePrintView = findViewById(R.id.photo_site_create_defects_blueprint)
         Glide.with(this).load(siteViewModel.site?.imageLocation).into(photoBluePrintView)
 
 //        photoBluePrintView.isZoomable = false
@@ -217,8 +232,8 @@ class SiteInsertDefectsActivity : AppCompatActivity() {
     }
 
     private fun initDefectsImageView(){
-        vdbInsertImage = findViewById(R.id.vdb_site_insert_defects_add_image)
-        rvDefectsImages = findViewById(R.id.rv_site_insert_defects_list)
+        vdbInsertImage = findViewById(R.id.vdb_site_create_defects_add_image)
+        rvDefectsImages = findViewById(R.id.rv_site_insert_create_list)
 
         vdbInsertImage.setOnClickListener {
             itvInsertName.getTextView().hideKeyboard(this)
@@ -242,7 +257,7 @@ class SiteInsertDefectsActivity : AppCompatActivity() {
         }
 
         val spacing = resources.getDimensionPixelSize(R.dimen.grid_item_margin) // 각 아이템 사이의 간격
-        val availableWidth = screenWidth - (spacing * (columnCount + 1))
+        val availableWidth = screenWidth - (spacing * (columnCount)) - (resources.getDimensionPixelSize(R.dimen.page_horizontal_padding) * 2)
         val itemSize = availableWidth / columnCount
         siteDefectImagesAdapter = SiteDefectImagesAdapter(siteViewModel, itemSize)
         rvDefectsImages.apply {

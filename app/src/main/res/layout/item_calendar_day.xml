@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.ing.ui.check.VisualTextCheckBox
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/vt_calendar_day_box"
     android:layout_width="match_parent"
-    android:layout_height="40dp"
-    app:checkBoxText="1"
-    />
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+    <com.ing.ui.check.VisualCalendarTextView
+        android:id="@+id/vct_date_view"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        app:checkBoxText="1"/>
+
+</LinearLayout>
