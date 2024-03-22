@@ -6,10 +6,16 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     >
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/text_color_02"/>
+
     <com.ing.ui.check.VisualCalendarTextView
         android:id="@+id/vct_date_view"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         app:checkBoxText="1"/>
 
 </LinearLayout>

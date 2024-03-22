@@ -9,7 +9,7 @@ import androidx.core.content.ContextCompat
 import com.ing.ui.Config
 import com.ing.ui.R
 
-class VisualCalendarTextView : VisualCheckBox {
+class VisualCalendarTextView2 : VisualCheckBox {
 
     companion object{
         const val SUNDAY = 0
@@ -17,10 +17,8 @@ class VisualCalendarTextView : VisualCheckBox {
 
     }
 
-    private val backgroundContain = R.drawable.bg_calendar_cotain
     private val backgroundDefault = R.drawable.bg_calendar_default
-    private val backgroundEnd = R.drawable.bg_calendar_end
-    private val backgroundStart = R.drawable.bg_calendar_start
+    private val backgroundSelect = R.drawable.bg_calendar_select
 
     private val startEndTextColor = R.color.text_color_01
     private val defaultTextColor = R.color.text_color_06
@@ -30,7 +28,7 @@ class VisualCalendarTextView : VisualCheckBox {
             layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
             gravity = Gravity.CENTER_VERTICAL
             // 초기 텍스트 색상 설정
-            textSize = Config.LABEL_FONT_SIZE
+            textSize = Config.CAPTION1_FONT_SIZE
             val font: Typeface = resources.getFont(Config.MEDIUM)
             typeface = font
             setTextColor(ContextCompat.getColor(context, defaultTextColor))
@@ -45,6 +43,9 @@ class VisualCalendarTextView : VisualCheckBox {
         attrs,
         defStyleAttr
     ) {
+
+        setPadding(resources.getDimensionPixelSize(R.dimen.calendar_item_horizontal_margin), resources.getDimensionPixelSize(R.dimen.calendar_item_vertical_margin),
+            resources.getDimensionPixelSize(R.dimen.calendar_item_horizontal_margin),resources.getDimensionPixelSize(R.dimen.calendar_item_vertical_margin))
 
         orientation = HORIZONTAL
         gravity = Gravity.CENTER
@@ -61,15 +62,9 @@ class VisualCalendarTextView : VisualCheckBox {
         addView(textView)
     }
 
-    fun setStart(){
-        background = ContextCompat.getDrawable(context, backgroundStart)
+    fun setSelect(){
+        background = ContextCompat.getDrawable(context, backgroundSelect)
         textView.setTextColor(ContextCompat.getColor(context, startEndTextColor))
-    }
-
-    fun setEnd() {
-        background = ContextCompat.getDrawable(context, backgroundEnd)
-        textView.setTextColor(ContextCompat.getColor(context, startEndTextColor))
-
     }
 
     fun setDefault(week: Int) {
@@ -92,12 +87,6 @@ class VisualCalendarTextView : VisualCheckBox {
         background = ContextCompat.getDrawable(context, backgroundDefault)
         textView.setTextColor(ContextCompat.getColor(context, R.color.text_color_03))
 
-    }
-
-
-    fun setContains() {
-        background = ContextCompat.getDrawable(context, backgroundContain)
-        textView.setTextColor(ContextCompat.getColor(context, defaultTextColor))
     }
 
     fun setText(text: String){

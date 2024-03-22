@@ -11,9 +11,12 @@
 
     <dimen name="input_text_support_start_margin">14dp</dimen>
 
-
     <dimen name="check_box_spacing">8dp</dimen>
     <dimen name="check_box_size">16dp</dimen>
 
+    <dimen name="calendar_item_horizontal_margin">8dp</dimen>
+    <dimen name="calendar_item_vertical_margin">0dp</dimen>
+    <dimen name="calendar_item_height">78dp</dimen>
+    <dimen name="calendar_schedule_height">24dp</dimen>
 
 </resources>

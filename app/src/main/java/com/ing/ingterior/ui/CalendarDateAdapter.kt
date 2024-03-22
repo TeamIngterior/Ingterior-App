@@ -20,8 +20,10 @@ class CalendarDateAdapter : RecyclerView.Adapter<CalendarDateAdapter.DayViewHold
     val selectedDate = arrayListOf<DateModel>()
     var startDate: DateModel? = null
     var endDate: DateModel? = null
+    private var currentDateModel: DateModel? = null
 
-    fun update(newDates: MutableList<DateModel>) {
+    fun update(newDates: MutableList<DateModel>, currentDateModel: DateModel) {
+        this.currentDateModel = currentDateModel
         dates.clear()
         dates.addAll(newDates)
         notifyDataSetChanged()
@@ -35,7 +37,11 @@ class CalendarDateAdapter : RecyclerView.Adapter<CalendarDateAdapter.DayViewHold
             else vctDateView.visibility = View.VISIBLE
 
             vctDateView.setText(dateModel.day.toString())
-            if(startDate == dateModel){
+            val otherDate = !dateModel.isSameYearAndMonth(currentDateModel)
+            if(otherDate){
+                vctDateView.setDisable()
+            }
+            else if(startDate == dateModel){
                 vctDateView.setStart()
             }
             else if(endDate == dateModel) {
@@ -49,6 +55,7 @@ class CalendarDateAdapter : RecyclerView.Adapter<CalendarDateAdapter.DayViewHold
             }
 
             vctDateView.setOnClickListener {
+                if(otherDate) return@setOnClickListener
                 val isChecked = selectedDate.contains(dateModel)
                 Log.d(TAG, "bind: isChecked=$isChecked, dateModel=$dateModel")
                 if(isChecked){

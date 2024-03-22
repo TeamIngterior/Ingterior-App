@@ -74,3 +74,7 @@ fun EditText.hideKeyboard(context: Context) {
         inputMethodManager.hideSoftInputFromWindow(windowToken, 0)
     }, 0)
 }
+
+fun Context.pxToDp(px: Int): Int {
+    return (px / resources.displayMetrics.density).toInt()
+}

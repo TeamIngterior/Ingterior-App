@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:layout_marginHorizontal="@dimen/page_horizontal_padding">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <com.ing.ui.text.body.Body1View
+                android:id="@+id/tv_year_month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_regular"
+                android:paddingLeft="8dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="12dp"
+                android:textColor="@color/black"
+                tools:text="2024년 3월"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="end|bottom"
+                android:orientation="horizontal">
+
+
+                <ImageButton
+                    android:id="@+id/ib_prev"
+                    android:layout_width="36dp"
+                    android:layout_height="48dp"
+                    android:background="@null"
+                    app:srcCompat="@drawable/icon_arrow_left" />
+
+                <ImageButton
+                    android:id="@+id/ib_next"
+                    android:layout_width="36dp"
+                    android:layout_height="48dp"
+                    android:background="@null"
+                    app:srcCompat="@drawable/icon_arrow_right"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/line_week_default"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_sun7"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:enabled="true"
+                android:fontFamily="@font/pretendard_medium"
+                android:gravity="center"
+
+                android:text="일"
+                android:textColor="@color/error_color"
+                android:textSize="15sp"
+                />
+
+            <TextView
+                android:id="@+id/tv_mon7"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:enabled="true"
+                android:fontFamily="@font/pretendard_medium"
+                android:gravity="center"
+
+                android:text="월"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                />
+
+            <TextView
+                android:id="@+id/tv_tue7"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:enabled="true"
+                android:fontFamily="@font/pretendard_medium"
+                android:gravity="center"
+                android:text="화"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                />
+
+            <TextView
+                android:id="@+id/tv_wed7"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:enabled="true"
+                android:fontFamily="@font/pretendard_medium"
+                android:gravity="center"
+
+                android:text="수"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tv_thu7"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:enabled="true"
+                android:fontFamily="@font/pretendard_medium"
+                android:gravity="center"
+
+                android:text="목"
+                android:textColor="@color/black"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tv_fri7"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:enabled="true"
+                android:fontFamily="@font/pretendard_medium"
+                android:gravity="center"
+
+                android:text="금"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tv_sat7"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:enabled="true"
+                android:fontFamily="@font/pretendard_medium"
+                android:gravity="center"
+                android:text="토"
+                android:textColor="@color/black"
+                android:textSize="15sp"/>
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_calendar_day_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:spanCount="7"
+                tools:itemCount="42"
+                tools:listitem="@layout/item_calendar_day_2" />
+
+            <TextView
+                android:layout_width="108dp"
+                android:layout_height="24dp"
+                android:background="@drawable/bg_calendar_content_start"
+                android:backgroundTint="@color/palette1"
+                android:ellipsize="end"
+                android:fontFamily="@font/pretendard_medium"
+                android:gravity="center"
+                android:paddingHorizontal="4dp"
+                android:textSize="15sp"
+                android:text="타일 시트 공사하기"
+                android:maxLines="1"
+                android:maxWidth="324dp"
+                android:layout_marginTop="26dp"
+                android:layout_marginStart="54dp"
+                android:textColor="@color/text_color_06"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:background="@drawable/bg_calendar_content_start"
+                android:backgroundTint="@color/palette2"
+                android:ellipsize="end"
+                android:fontFamily="@font/pretendard_medium"
+                android:gravity="center"
+                android:paddingHorizontal="4dp"
+                android:textSize="15sp"
+                android:text="가나다라마바사아자차카타파하가나다라마바사아자차카타파하"
+                android:maxLines="1"
+                android:maxWidth="324dp"
+                android:layout_marginTop="52dp"
+                android:layout_marginStart="54dp"
+                android:textColor="@color/text_color_06"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="162dp"
+                android:layout_height="24dp"
+                android:background="@drawable/bg_calendar_content_start"
+                android:backgroundTint="@color/palette3"
+                android:ellipsize="end"
+                android:fontFamily="@font/pretendard_medium"
+                android:gravity="center"
+                android:paddingHorizontal="4dp"
+                android:textSize="15sp"
+                android:text="화장실 공사하기"
+                android:maxLines="1"
+                android:maxWidth="324dp"
+                android:layout_marginTop="102dp"
+                android:layout_marginStart="54dp"
+                android:textColor="@color/text_color_06"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -26,6 +26,13 @@ data class DateModel(val day: Int, val week: Int, val month: Int, val year: Int,
         }
     }
 
+    fun isSameYearAndMonth(dateModel: DateModel?) : Boolean {
+        return if(dateModel == null) false
+        else {
+            year == dateModel.year && month == dateModel.month
+        }
+    }
+
     fun getWeekString(week: Int):String {
         return when(week) {
             0 -> "일"

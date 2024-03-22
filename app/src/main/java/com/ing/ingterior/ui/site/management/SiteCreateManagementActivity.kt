@@ -1,20 +1,20 @@
 package com.ing.ingterior.ui.site.management
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.ing.ingterior.ui.CalendarDateAdapter
 import com.ing.ingterior.EXTRA_SITE
 import com.ing.ingterior.R
 import com.ing.ingterior.db.Site
 import com.ing.ingterior.model.DateModel
+import com.ing.ingterior.ui.CalendarDateAdapter
 import com.ing.ingterior.ui.ColorListAdapter
 import com.ing.ingterior.ui.GridSpacingItemDecoration
 import com.ing.ingterior.ui.IngTeriorViewModelFactory
@@ -95,9 +95,6 @@ class SiteCreateManagementActivity : AppCompatActivity() {
         val itemSize = (displaySize.width - ((spanCount+1) * resources.getDimensionPixelSize(R.dimen.page_horizontal_padding))) / spanCount
         rvColorList.apply {
             layoutManager = GridLayoutManager(context, spanCount)
-//            if (gridColorItemDecoration != null) removeItemDecoration(gridColorItemDecoration!!)
-//            gridColorItemDecoration = GridSpacingItemDecoration(spanCount, resources.getDimensionPixelSize(R.dimen.page_horizontal_padding), false)
-//            addItemDecoration(gridColorItemDecoration!!)
             adapter = ColorListAdapter(this@SiteCreateManagementActivity, itemSize)
         }
     }
@@ -107,25 +104,24 @@ class SiteCreateManagementActivity : AppCompatActivity() {
         calendar.add(Calendar.MONTH, monthIncrement)
         updateDateInView()
         setupRecyclerView()
-        updateButtonsState()
+//        updateButtonsState()
     }
 
     private fun updateButtonsState() {
-        // 한 달전까지만 이동 가능
-        // 일 년전이지만 한 달전인 경우 ex) 현재 2024년 1월, 최소 이동 가능 2023년 12월
-        val first = (currentCalendar.get(Calendar.YEAR) < calendar.get(Calendar.YEAR) && (currentCalendar.get(Calendar.MONTH) == 0 && calendar.get(Calendar.MONTH) == 11))
-        val second = (currentCalendar.get(Calendar.YEAR) == calendar.get(Calendar.YEAR) && (currentCalendar.get(Calendar.MONTH) <= calendar.get(Calendar.MONTH)))
-        Log.d("test", "updateButtonsState: first=$first, second=$second")
-        // 같은 해면서 한 달전인 경우 ex) 현재 2024년 2월 최소 이동 가능 2024년 1월
+        // 세 달 전까지만 이동 가능
+        // 일 년 전이지만 세 달전인 경우 ex) 현재 2024년 3월, 최소 이동 가능 2023년 12월
+        val first = (currentCalendar.get(Calendar.YEAR) > calendar.get(Calendar.YEAR) && (calendar.get(Calendar.MONTH) - currentCalendar.get(Calendar.MONTH) >= 9))
+        val second = (currentCalendar.get(Calendar.YEAR) == calendar.get(Calendar.YEAR) && (currentCalendar.get(Calendar.MONTH) - 3 <= calendar.get(Calendar.MONTH)))
+
         ibPrev.isEnabled = first || second
 
-        // 현재 달로부터 6달 후를 계산
-        val sixMonthsAheadCalendar = Calendar.getInstance().apply {
-            add(Calendar.MONTH, 6)
+        // 현재 달로부터 1년 후
+        val oneYearAheadCalendar = Calendar.getInstance().apply {
+            add(Calendar.MONTH, 12)
         }
 
-        ibNext.isEnabled = calendar.get(Calendar.YEAR) < sixMonthsAheadCalendar.get(Calendar.YEAR) ||
-                (calendar.get(Calendar.YEAR) == sixMonthsAheadCalendar.get(Calendar.YEAR) && calendar.get(Calendar.MONTH) < sixMonthsAheadCalendar.get(Calendar.MONTH))
+        ibNext.isEnabled = calendar.get(Calendar.YEAR) < oneYearAheadCalendar.get(Calendar.YEAR) ||
+                (calendar.get(Calendar.YEAR) == oneYearAheadCalendar.get(Calendar.YEAR) && calendar.get(Calendar.MONTH) < oneYearAheadCalendar.get(Calendar.MONTH))
     }
 
     private fun updateDateInView() {
@@ -135,24 +131,45 @@ class SiteCreateManagementActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
-        val days = mutableListOf<DateModel>()
-        val year = calendar.get(Calendar.YEAR)     // 현재 연도
-        val month = calendar.get(Calendar.MONTH)   // 현재 월 (Calendar.MONTH는 0부터 시작하므로 주의)
+        val dates = mutableListOf<DateModel>()
+        val year = calendar.get(Calendar.YEAR) // 현재 연도
+        val month = calendar.get(Calendar.MONTH) // 현재 월
+        val cday = calendar[Calendar.DAY_OF_MONTH] // 현재 일
+        val dayOfWeek = calendar[Calendar.DAY_OF_WEEK] // 요일 (1: 일요일, 2: 월요일, ..., 7: 토요일)
+        val currentDateModel = DateModel(cday, dayOfWeek, (month + 1) % 12, year)
 
         calendar.set(Calendar.DAY_OF_MONTH, 1)
         val weekDayOfFirstDay = calendar.get(Calendar.DAY_OF_WEEK) - 1
 
-        // 첫 번째 날이 시작하기 전까지 빈 DateModel 객체를 채움
-        for (i in 0 until weekDayOfFirstDay) {
-            days.add(DateModel(0, i, month, year))
+        // 이전 달의 날짜들로 첫 주 채우기
+        calendar.add(Calendar.MONTH, -1) // 이전 달로 설정
+        val maxDayOfPrevMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
+        val startDayOfPrevMonth = maxDayOfPrevMonth - weekDayOfFirstDay + 1
+        for (day in startDayOfPrevMonth..maxDayOfPrevMonth) {
+            dates.add(DateModel(day, dates.size % 7, calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.YEAR)))
         }
 
-        // 현재 달의 날짜를 DateModel 객체 리스트에 추가
+        calendar.add(Calendar.MONTH, 1) // 다시 현재 달로 설정
+
+        // 현재 달의 날짜들 추가
         val maxDayOfMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
         for (day in 1..maxDayOfMonth) {
-            days.add(DateModel(day, (weekDayOfFirstDay + day - 1) % 7, month, year))
+            dates.add(DateModel(day, dates.size % 7, month + 1, year))
         }
 
-        calendarDateAdapter.update(days)
+        // 마지막 날짜의 요일 확인
+        calendar.set(Calendar.DAY_OF_MONTH, maxDayOfMonth)
+        val lastDayOfWeek = calendar.get(Calendar.DAY_OF_WEEK)
+
+        // 마지막 날짜가 토요일이 아니라면 다음 달의 날짜들로 채움
+        if (lastDayOfWeek != Calendar.SATURDAY) {
+            val nextMonthDays = 7 - lastDayOfWeek // 토요일까지 필요한 날짜 수
+            for (day in 1..nextMonthDays) {
+                dates.add(DateModel(day, dates.size % 7, (month + 2) % 12, if(month == 11) year + 1 else year))
+            }
+        }
+
+        calendarDateAdapter.update(dates, currentDateModel)
     }
+
 }
