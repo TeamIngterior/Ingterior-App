@@ -143,6 +143,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginBottom="16dp"
+                    android:visibility="gone"
                     app:loginType="google" />
 
                 <com.ing.ui.button.LoginButton
@@ -152,6 +153,13 @@
                     android:layout_marginBottom="16dp"
                     android:visibility="gone"
                     app:loginType="instagram" />
+
+                <com.ing.ui.button.LoginButton
+                    android:id="@+id/lb_login_test"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginBottom="16dp"
+                    app:loginType="test" />
 
             </LinearLayout>
 

@@ -29,6 +29,7 @@ class LogInActivity : AppCompatActivity() {
     private val lbNaver: LoginButton by lazy { findViewById(R.id.lb_login_naver) }
     private val lbGoogle: LoginButton by lazy { findViewById(R.id.lb_login_google) }
     private val lbInstagram: LoginButton by lazy { findViewById(R.id.lb_login_instagram) }
+    private val lbTest: LoginButton by lazy { findViewById(R.id.lb_login_test) }
     private lateinit var vibBack: VisualImageButton
 
     private val googleAuthLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -85,7 +86,7 @@ class LogInActivity : AppCompatActivity() {
         }
 
         lbGoogle.setOnClickListener {
-            val user = User(1, "jypjun12@gmail.com", "12345678", "준그래머", TYPE_GOOGLE)
+            val user = User(1, "jum8kit", "테스트 계정", "", TYPE_GOOGLE)
             Factory.get().getSession().setUser(user)
             Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
             setResult(RESULT_OK)
@@ -101,6 +102,15 @@ class LogInActivity : AppCompatActivity() {
 //                setResult(RESULT_OK)
 //                finish()
 //            }
+        }
+
+        lbTest.setOnClickListener {
+            val user = User(1, "jum8kit", "테스트 계정", "", TYPE_GOOGLE)
+            Factory.get().getSession().setUser(user)
+            Toast.makeText(this, "테스트 계정으로 로그인 하셨습니다.", Toast.LENGTH_SHORT).show()
+            setResult(RESULT_OK)
+            finish()
+//            Factory.get().getSession().googleLogin(this, googleAuthLauncher)
         }
     }
 

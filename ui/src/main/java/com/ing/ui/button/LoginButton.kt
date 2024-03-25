@@ -1,15 +1,12 @@
 package com.ing.ui.button
 
 import android.content.Context
-import android.text.InputFilter
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.annotation.IdRes
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import com.ing.ui.R
 import com.ing.ui.text.label.LabelView
 
@@ -60,7 +57,7 @@ class LoginButton : LinearLayoutCompat {
 
         attrs?.let {
             val typedArray = context.obtainStyledAttributes(attrs, R.styleable.LoginButton, defStyleAttr, 0)
-            when(typedArray.getString(R.styleable.InputTextLayout_inputHint) ?: "") {
+            when(typedArray.getString(R.styleable.LoginButton_loginType) ?: "") {
                 "kakao" -> {
                     iconRec = R.drawable.ic_logo_kakao_24
                     backgroundRec = R.drawable.bg_kakaotalk_button
@@ -86,9 +83,9 @@ class LoginButton : LinearLayoutCompat {
                     textColor = R.color.text_color_06
                 }
                 else -> {
-                    iconRec = R.drawable.ic_logo_instagram_24
+                    iconRec = R.drawable.ic_main_logo_24
                     backgroundRec = R.drawable.bg_default_button
-                    actionString = context.getString(R.string.action_login, context.getString(R.string.instagram))
+                    actionString = context.getString(R.string.action_login, context.getString(R.string.test_account))
                     textColor = R.color.text_color_06
                 }
             }

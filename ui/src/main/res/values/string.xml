@@ -4,5 +4,6 @@
     <string name="naver">네이버</string>
     <string name="google">Google</string>
     <string name="instagram">Instagram</string>
+    <string name="test_account">테스트 계정으</string>
     <string name="action_login">%s로 이용하기</string>
 </resources>

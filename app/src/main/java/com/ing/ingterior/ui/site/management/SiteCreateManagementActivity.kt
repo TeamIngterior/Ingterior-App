@@ -1,7 +1,8 @@
 package com.ing.ingterior.ui.site.management
 
+import android.graphics.Rect
 import android.os.Bundle
-import android.util.Log
+import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -16,11 +17,11 @@ import com.ing.ingterior.db.Site
 import com.ing.ingterior.model.DateModel
 import com.ing.ingterior.ui.CalendarDateAdapter
 import com.ing.ingterior.ui.ColorListAdapter
-import com.ing.ingterior.ui.GridSpacingItemDecoration
 import com.ing.ingterior.ui.IngTeriorViewModelFactory
 import com.ing.ingterior.ui.viewmodel.SiteViewModel
 import com.ing.ingterior.util.getDisplayPixelSize
 import com.ing.ingterior.util.getParcelableCompat
+import com.ing.ui.button.VisualImageButton
 import com.ing.ui.text.body.Body1View
 import java.util.Calendar
 
@@ -34,14 +35,14 @@ class SiteCreateManagementActivity : AppCompatActivity() {
     private lateinit var rvCalendarDayList: RecyclerView
     private lateinit var ibPrev: ImageButton
     private lateinit var ibNext: ImageButton
+    private lateinit var vibBack: VisualImageButton
 
-    private var gridColorItemDecoration: GridSpacingItemDecoration? = null
+    private var colorItemDecoration: ColorGridSpacingItemDecoration? = null
     private lateinit var rvColorList: RecyclerView
 
     private val calendar = Calendar.getInstance()
     private val currentCalendar = Calendar.getInstance() // 현재 날짜를 유지하는 캘린더
     private lateinit var calendarDateAdapter: CalendarDateAdapter
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,6 +67,11 @@ class SiteCreateManagementActivity : AppCompatActivity() {
             override fun canScrollVertically(): Boolean {
                 return false
             }
+        }
+
+        vibBack = findViewById(R.id.vib_site_create_management_back)
+        vibBack.setOnClickListener {
+            finish()
         }
 
         rvCalendarDayList.layoutManager = gridLayoutManager // 주당 일수 설정
@@ -94,6 +100,11 @@ class SiteCreateManagementActivity : AppCompatActivity() {
         // 1080 - 16*6 / 5
         val itemSize = (displaySize.width - ((spanCount+1) * resources.getDimensionPixelSize(R.dimen.page_horizontal_padding))) / spanCount
         rvColorList.apply {
+            if(colorItemDecoration!=null) {
+                removeItemDecoration(colorItemDecoration!!)
+            }
+            colorItemDecoration = ColorGridSpacingItemDecoration(spanCount, resources.getDimensionPixelSize(R.dimen.grid_item_margin))
+            addItemDecoration(colorItemDecoration!!)
             layoutManager = GridLayoutManager(context, spanCount)
             adapter = ColorListAdapter(this@SiteCreateManagementActivity, itemSize)
         }
@@ -172,4 +183,17 @@ class SiteCreateManagementActivity : AppCompatActivity() {
         calendarDateAdapter.update(dates, currentDateModel)
     }
 
+    inner class ColorGridSpacingItemDecoration(private val spanCount: Int, private val spacing: Int) : RecyclerView.ItemDecoration() {
+        override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+            val position = parent.getChildAdapterPosition(view) // 아이템의 위치
+            if(position / spanCount == 0) {
+                outRect.top = spacing
+                outRect.bottom = spacing / 2
+            }
+            else {
+                outRect.top = spacing / 2
+                outRect.bottom = spacing / 2
+            }
+        }
+    }
 }

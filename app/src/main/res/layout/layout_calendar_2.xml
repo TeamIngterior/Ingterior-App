@@ -13,13 +13,15 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@color/white"
+        android:paddingTop="6dp"
         android:layout_marginHorizontal="@dimen/page_horizontal_padding">
 
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:orientation="horizontal"
+            android:gravity="center_vertical"
             android:weightSum="1">
 
             <com.ing.ui.text.body.Body1View
@@ -28,8 +30,6 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/pretendard_regular"
                 android:paddingLeft="8dp"
-                android:paddingTop="20dp"
-                android:paddingBottom="12dp"
                 android:textColor="@color/black"
                 tools:text="2024년 3월"/>
 
@@ -154,7 +154,7 @@
                 android:fontFamily="@font/pretendard_medium"
                 android:gravity="center"
                 android:text="토"
-                android:textColor="@color/black"
+                android:textColor="@color/blue_color04"
                 android:textSize="15sp"/>
         </LinearLayout>
 
