@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/const_calendar_day_parent"
+    android:id="@+id/line_calendar_day_parent"
     android:layout_width="match_parent"
     android:layout_height="@dimen/calendar_item_height"
+    android:gravity="center_horizontal"
     android:orientation="vertical">
 
     <View
@@ -12,17 +13,43 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/text_color_02"
-        app:layout_constraintTop_toTopOf="@id/const_calendar_day_parent" />
+        app:layout_constraintTop_toTopOf="@id/line_calendar_day_parent" />
 
     <com.ing.ui.check.VisualCalendarTextView2
-        android:id="@+id/vct_date_view"
+        android:id="@+id/vct_calendar_day2"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="16dp"
         android:layout_marginTop="4dp"
         app:checkBoxText="1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <LinearLayout
+        android:id="@+id/line_calendar_day2_schedule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="2dp"
+        android:gravity="center"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginTop="2dp"
+        android:backgroundTint="@color/palette2"
+        android:ellipsize="end"
+        android:fontFamily="@font/pretendard_medium"
+        android:gravity="center"
+        android:maxWidth="324dp"
+        android:maxLines="1"
+        android:textColor="@color/text_color_04"
+        android:textSize="15sp"
+        tools:text="+2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</LinearLayout>

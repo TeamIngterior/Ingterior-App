@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginTop="16dp"
+    android:orientation="horizontal"
+    android:background="@drawable/bg_round_square">
+
+    <View
+        android:layout_width="6dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_schedule_tag"
+        android:backgroundTint="@color/palette1"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingVertical="16dp"
+        android:paddingStart="14dp"
+        android:paddingEnd="10dp"
+        android:layout_weight="1">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <TextView
+                android:id="@+id/tv_site_management_schedule_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="@font/pretendard_semibold"
+                android:maxLines="1"
+                android:textColor="@color/text_color_06"
+                android:textSize="15sp"
+                android:layout_marginEnd="40dp"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/iv_site_management_option"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="가나다라마바사아자차카타파하" />
+
+            <TextView
+                android:id="@+id/tv_site_management_schedule_date"
+                android:layout_width="38dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:fontFamily="@font/pretendard_regular"
+                android:textColor="@color/text_color_04"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_site_management_schedule_title"
+                app:layout_constraintEnd_toStartOf="@+id/iv_site_management_option"
+                app:layout_constraintStart_toEndOf="@+id/tv_site_management_schedule_title"
+                app:layout_constraintTop_toTopOf="@+id/tv_site_management_schedule_title"
+                tools:text="03.07" />
+
+            <ImageView
+                android:id="@+id/iv_site_management_option"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:padding="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_vertical_option_24" />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:paddingEnd="24dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_image"/>
+
+            <TextView
+                android:id="@+id/tv_site_management_schedule_image_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:layout_marginStart="3dp"
+                android:fontFamily="@font/pretendard_regular"
+                android:textColor="@color/text_color_04"
+                android:layout_marginEnd="4dp"
+                tools:text="3"
+                />
+
+            <TextView
+                android:id="@+id/tv_site_management_schedule_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:fontFamily="@font/pretendard_regular"
+                android:textColor="@color/text_color_06"
+                android:layout_marginStart="2dp"
+                tools:text="가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하"
+                />
+            
+        </LinearLayout>
+            
+    </LinearLayout>
+    
+
+
+
+</LinearLayout>

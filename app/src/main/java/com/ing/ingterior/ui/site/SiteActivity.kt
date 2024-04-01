@@ -26,9 +26,7 @@ class SiteActivity : AppCompatActivity() {
 
     private lateinit var lbTitle: LabelView
     private lateinit var tabLayout: TabLayout
-    private lateinit var fabAddPoint: FloatingActionButton
     private lateinit var ivBack: VisualImageButton
-
     private lateinit var siteViewModel: SiteViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,7 +38,6 @@ class SiteActivity : AppCompatActivity() {
 
         lbTitle = findViewById(R.id.lb_site_title)
         tabLayout = findViewById(R.id.tab_site_layout)
-        fabAddPoint = findViewById(R.id.fab_site_add)
 
         ivBack = findViewById(R.id.vib_site_back)
         ivBack.setOnClickListener {
@@ -84,4 +81,5 @@ class SiteActivity : AppCompatActivity() {
         transaction.replace(R.id.fragment_container_site_content, SiteManagementFragment.newInstance(intent.getParcelableCompat(EXTRA_SITE)))
         transaction.commit()
     }
+
 }

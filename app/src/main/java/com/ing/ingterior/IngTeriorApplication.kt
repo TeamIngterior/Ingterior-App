@@ -1,6 +1,7 @@
 package com.ing.ingterior
 
 import android.app.Application
+import com.ing.ingterior.cache.CalendarCache
 import com.ing.ingterior.injection.Factory
 import com.ing.ingterior.injection.impl.FactoryImpl
 
@@ -16,5 +17,6 @@ class IngTeriorApplication : Application() {
         instance = this
         FactoryImpl.register(this)
         Factory.get().getDatabase().generateDatabase(this)
+        CalendarCache.getInstance()
     }
 }

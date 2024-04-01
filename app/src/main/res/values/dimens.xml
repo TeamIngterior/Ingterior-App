@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="calendar_schedule_top_margin">23dp</dimen>
     <dimen name="page_horizontal_padding">16dp</dimen>
     <dimen name="popup_item_width">150dp</dimen>
     <dimen name="dialog_port_width_ratio">0.95</dimen>
     <dimen name="dialog_land_width_ratio">0.85</dimen>
     <dimen name="image_size_limit">300dp</dimen>
     <dimen name="mark_size">24dp</dimen>
+    <dimen name="schedule_size">8dp</dimen>
     <dimen name="grid_item_margin">6dp</dimen>
 </resources>

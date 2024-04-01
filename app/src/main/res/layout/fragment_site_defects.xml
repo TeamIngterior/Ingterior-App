@@ -31,18 +31,17 @@
 
     </FrameLayout>
 
-    <com.ing.ui.button.VisualDotLineButton
-        android:id="@+id/vdb_site_add_defect"
-        android:layout_width="0dp"
-        android:layout_height="120dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginHorizontal="@dimen/page_horizontal_padding"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_site_defect_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="32dp"
+        app:backgroundTint="@color/primary_color07"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frame_site_blueprint_layout"
-        app:visualLineSpacingExtra="3dp"
-        app:visualText="아래에 + 버튼을 눌러\n새로운 하자를 추가해 보세요!" />
-
+        app:srcCompat="@drawable/ic_add_image"
+        app:tint="@color/white" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

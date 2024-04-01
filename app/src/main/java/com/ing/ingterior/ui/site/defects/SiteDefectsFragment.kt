@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.ing.ingterior.EXTRA_SITE
 import com.ing.ingterior.R
 import com.ing.ingterior.db.Site
@@ -34,7 +35,7 @@ class SiteDefectsFragment : Fragment() {
     }
 
     private lateinit var siteViewModel: SiteViewModel
-    private lateinit var vdbAddDefect: VisualDotLineButton
+    private lateinit var fabAdd: FloatingActionButton
     private lateinit var frameImageLayout: FrameLayout
     private lateinit var ivBluePrintView: ImageView
     private lateinit var markImageView: ImageView
@@ -70,10 +71,10 @@ class SiteDefectsFragment : Fragment() {
             frameImageLayout.layoutParams = params
         }
         ivBluePrintView = view.findViewById(R.id.iv_site_blueprint)
-        vdbAddDefect = view.findViewById(R.id.vdb_site_add_defect)
+        fabAdd = view.findViewById(R.id.fab_site_defect_add)
 
 
-        vdbAddDefect.setOnClickListener {
+        fabAdd.setOnClickListener {
             if(siteViewModel.site == null) {
                 Toast.makeText(requireContext(), "에러 발생", Toast.LENGTH_SHORT).show()
                 requireActivity().finish()

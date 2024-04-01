@@ -27,7 +27,7 @@
             android:weightSum="1">
 
             <com.ing.ui.text.body.Body1View
-                android:id="@+id/tv_year_month"
+                android:id="@+id/tv_site_create_management_year_and_month"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/pretendard_regular"
@@ -46,14 +46,14 @@
 
 
                 <ImageButton
-                    android:id="@+id/ib_prev"
+                    android:id="@+id/ib_site_create_management_prev"
                     android:layout_width="36dp"
                     android:layout_height="48dp"
                     android:background="@null"
                     app:srcCompat="@drawable/icon_arrow_left" />
 
                 <ImageButton
-                    android:id="@+id/ib_next"
+                    android:id="@+id/ib_site_create_management_next"
                     android:layout_width="36dp"
                     android:layout_height="48dp"
                     android:background="@null"
@@ -164,7 +164,7 @@
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_calendar_day_list"
+            android:id="@+id/rv_site_create_management_calendar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:spanCount="7"
@@ -181,7 +181,7 @@
             android:gravity="end">
 
             <com.ing.ui.button.VisualDefaultButton
-                android:id="@+id/vdb_calendar_cancel"
+                android:id="@+id/vdb_site_create_management_calendar_cancel"
                 android:layout_width="80dp"
                 android:layout_height="40dp"
                 android:layout_marginEnd="8dp"
@@ -190,7 +190,7 @@
 
 
             <com.ing.ui.button.VisualButton
-                android:id="@+id/vdb_calendar_ok"
+                android:id="@+id/vdb_site_create_management_calendar_ok"
                 android:layout_width="80dp"
                 android:layout_height="40dp"
                 app:visualText="확인"/>

@@ -6,8 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ing.ingterior.R
-import com.ing.ingterior.model.DateModel
-import com.ing.ingterior.ui.site.management.SiteCreateManagementActivity
+import com.ing.ingterior.model.CalendarDate
 import com.ing.ui.check.VisualCalendarTextView
 
 class CalendarDateAdapter : RecyclerView.Adapter<CalendarDateAdapter.DayViewHolder>() {
@@ -16,13 +15,13 @@ class CalendarDateAdapter : RecyclerView.Adapter<CalendarDateAdapter.DayViewHold
         private const val TAG = "CalendarDayAdapter"
     }
 
-    private val dates: ArrayList<DateModel> = arrayListOf()
-    val selectedDate = arrayListOf<DateModel>()
-    var startDate: DateModel? = null
-    var endDate: DateModel? = null
-    private var currentDateModel: DateModel? = null
+    private val dates: ArrayList<CalendarDate> = arrayListOf()
+    val selectedDate = arrayListOf<CalendarDate>()
+    var startDate: CalendarDate? = null
+    var endDate: CalendarDate? = null
+    private var currentDateModel: CalendarDate? = null
 
-    fun update(newDates: MutableList<DateModel>, currentDateModel: DateModel) {
+    fun update(newDates: MutableList<CalendarDate>, currentDateModel: CalendarDate) {
         this.currentDateModel = currentDateModel
         dates.clear()
         dates.addAll(newDates)
@@ -30,11 +29,9 @@ class CalendarDateAdapter : RecyclerView.Adapter<CalendarDateAdapter.DayViewHold
     }
 
     inner class DayViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val vctDateView: VisualCalendarTextView = itemView.findViewById(R.id.vct_date_view)
+        private val vctDateView: VisualCalendarTextView = itemView.findViewById(R.id.vct_calendar_day)
 
-        fun bind(dateModel: DateModel) {
-            if(dateModel.day == 0) vctDateView.visibility = View.INVISIBLE
-            else vctDateView.visibility = View.VISIBLE
+        fun bind(dateModel: CalendarDate) {
 
             vctDateView.setText(dateModel.day.toString())
             val otherDate = !dateModel.isSameYearAndMonth(currentDateModel)
@@ -51,7 +48,7 @@ class CalendarDateAdapter : RecyclerView.Adapter<CalendarDateAdapter.DayViewHold
                 vctDateView.setContains()
             }
             else{
-                vctDateView.setDefault(dateModel.week)
+                vctDateView.setDefault(dateModel.dayOfWeek)
             }
 
             vctDateView.setOnClickListener {

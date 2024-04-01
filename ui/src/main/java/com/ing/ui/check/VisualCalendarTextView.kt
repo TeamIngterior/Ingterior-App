@@ -12,9 +12,8 @@ import com.ing.ui.R
 class VisualCalendarTextView : VisualCheckBox {
 
     companion object{
-        const val SUNDAY = 0
-        const val SATURDAY = 6
-
+        const val SUNDAY = 1
+        const val SATURDAY = 7
     }
 
     private val backgroundContain = R.drawable.bg_calendar_cotain
