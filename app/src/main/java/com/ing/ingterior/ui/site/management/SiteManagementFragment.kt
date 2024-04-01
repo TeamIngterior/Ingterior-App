@@ -1,7 +1,6 @@
 package com.ing.ingterior.ui.site.management
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,10 +10,12 @@ import android.widget.ImageButton
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.ing.ingterior.EXTRA_SITE
 import com.ing.ingterior.R
+import com.ing.ingterior.ScheduleListAdapter
 import com.ing.ingterior.cache.CalendarCache
 import com.ing.ingterior.db.Site
 import com.ing.ingterior.injection.Factory
@@ -49,6 +50,7 @@ class SiteManagementFragment : Fragment(), CalendarDateClickListener {
     private lateinit var ibPrev: ImageButton
     private lateinit var tvYearMonth: Body1View
     private lateinit var rvCalendarList: RecyclerView
+    private lateinit var rvScheduleList: RecyclerView
     private lateinit var frameCalendarLayout: FrameLayout
 
     private val calendar = Calendar.getInstance()
@@ -94,8 +96,16 @@ class SiteManagementFragment : Fragment(), CalendarDateClickListener {
                 return false
             }
         }
-
         rvCalendarList.layoutManager = gridLayoutManager // 주당 일수 설정
+
+        rvScheduleList = view.findViewById(R.id.rv_site_management_schedule)
+        val linearLayoutManager = object : LinearLayoutManager(requireContext()){
+            override fun canScrollVertically(): Boolean {
+                return false
+            }
+        }
+        rvScheduleList.layoutManager = linearLayoutManager
+
         ibNext = view.findViewById(R.id.ib_site_management_next)
         ibPrev = view.findViewById(R.id.ib_site_management_prev)
         tvYearMonth = view.findViewById(R.id.tv_site_management_year_and_month)
@@ -109,50 +119,52 @@ class SiteManagementFragment : Fragment(), CalendarDateClickListener {
             moveCalendarByMonth(1)
         }
 
-        updateDateInView()
-        setupRecyclerView()
-        setUpScheduleView()
+        val year = calendar.get(Calendar.YEAR) // 현재 연도
+        val month = calendar.get(Calendar.MONTH) // 현재 월
+        val showDateModel = CalendarDate(1, calendar[Calendar.DAY_OF_WEEK], calendar.get(Calendar.WEEK_OF_MONTH), month + 1 , year)
+        updateDateInView(showDateModel)
+        setupRecyclerView(showDateModel)
+        setUpScheduleView(showDateModel)
     }
 
 
     private fun moveCalendarByMonth(monthIncrement: Int) {
         calendar.add(Calendar.MONTH, monthIncrement)
-        updateDateInView()
-        setupRecyclerView()
-        setUpScheduleView()
+        val year = calendar.get(Calendar.YEAR) // 현재 연도
+        val month = calendar.get(Calendar.MONTH) // 현재 월
+        val showDateModel = CalendarDate(1, calendar[Calendar.DAY_OF_WEEK], calendar.get(Calendar.WEEK_OF_MONTH), month + 1 , year)
+        updateDateInView(showDateModel)
+        setupRecyclerView(showDateModel)
+        setUpScheduleView(showDateModel)
     }
 
 
-    private fun updateDateInView() {
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH) + 1
-        tvYearMonth.text = "${year}년 ${month}월"
+    private fun updateDateInView(showDateModel: CalendarDate) {
+        tvYearMonth.text = "${showDateModel.year}년 ${showDateModel.month}월"
     }
 
-    private fun setUpScheduleView(){
+    private fun setUpScheduleView(showDateModel: CalendarDate){
         (rvCalendarList.adapter as CalendarDateAdapter2).updateSchedules(DummyModel.getDummySchedule())
+        rvScheduleList.adapter = ScheduleListAdapter(DummyModel.getDummySchedule(), showDateModel)
     }
 
 
     private var selectedDate:CalendarDate? = null
-    private fun setupRecyclerView() {
+    private fun setupRecyclerView(showDateModel: CalendarDate) {
         val displaySize = requireActivity().getDisplayPixelSize()
         val displayWidth = displaySize.width
         val contentDisplayWidth = displayWidth - (2 * resources.getDimensionPixelSize(R.dimen.page_horizontal_padding))
         val itemWidth = contentDisplayWidth / 7
 
-        val year = calendar.get(Calendar.YEAR) // 현재 연도
-        val month = calendar.get(Calendar.MONTH) // 현재 월
-        val showDateModel = CalendarDate(1, calendar[Calendar.DAY_OF_WEEK], calendar.get(Calendar.WEEK_OF_MONTH), month + 1 , year)
         selectedDate = showDateModel
         rvCalendarList.adapter = CalendarDateAdapter2(this, CalendarCache.getInstance().getCalendarDate(calendar), showDateModel, itemWidth)
         (rvCalendarList.adapter as CalendarDateAdapter2).notifySelectDate(-1, selectedDate!!)
-
     }
 
-    override fun onCalendarItemClicked(position: Int, calendarDate: CalendarDate) {
-        selectedDate = calendarDate
-        (rvCalendarList.adapter as CalendarDateAdapter2).notifySelectDate(position, selectedDate!!)
+    override fun onCalendarItemClicked(position: Int, showDateModel: CalendarDate) {
+        selectedDate = showDateModel
+        (rvCalendarList.adapter as CalendarDateAdapter2).notifySelectDate(position, showDateModel)
+        setUpScheduleView(showDateModel)
     }
 
 

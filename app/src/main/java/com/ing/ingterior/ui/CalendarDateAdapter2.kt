@@ -5,7 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.ing.ingterior.Logging.logD
 import com.ing.ingterior.R
@@ -36,6 +38,7 @@ class CalendarDateAdapter2(private val clickListener: CalendarDateClickListener,
         private val vctDateView: VisualCalendarTextView2 = itemView.findViewById(R.id.vct_calendar_day2)
         private val lineDateParent: LinearLayout = itemView.findViewById(R.id.line_calendar_day_parent)
         private val lineScheduleLayout: LinearLayout = itemView.findViewById(R.id.line_calendar_day2_schedule)
+        private val tvDateMore: TextView = itemView.findViewById(R.id.tv_calendar_day2_more)
 
         fun bind(position: Int, dateModel: CalendarDate) {
             vctDateView.setText(dateModel.day.toString())
@@ -53,21 +56,27 @@ class CalendarDateAdapter2(private val clickListener: CalendarDateClickListener,
             }
 
             lineScheduleLayout.removeAllViews()
+            var moreCount = 0
             for(schedule in scheduleList){
-                logD(TAG, "bind: schedule=$schedule")
-//                if(schedule.containCalendarDate(dateModel)) {
-//                    val circleView = ImageView(itemView.context)
-//                    circleView.setImageDrawable(ContextCompat.getDrawable(itemView.context, R.drawable.bg_white_circle))
-//                    circleView.imageTintList = (ContextCompat.getColorStateList(itemView.context, schedule.palette))
-//                    lineScheduleLayout.addView(circleView)
-//                }
-                val circleView = ImageView(itemView.context)
-                val layoutParams = LinearLayout.LayoutParams(itemView.resources.getDimensionPixelSize(R.dimen.schedule_size), itemView.resources.getDimensionPixelSize(R.dimen.schedule_size))
-                circleView.layoutParams = layoutParams
-                circleView.setImageDrawable(ContextCompat.getDrawable(itemView.context, R.drawable.bg_white_circle))
-                circleView.imageTintList = (ContextCompat.getColorStateList(itemView.context, schedule.palette))
-                lineScheduleLayout.addView(circleView)
+                if(schedule.containCalendarDate(dateModel)) {
+                    if(lineScheduleLayout.childCount == 3) {
+                        moreCount++
+                        continue
+                    }
+                    val circleView = ImageView(itemView.context)
+                    val layoutParams = LinearLayout.LayoutParams(itemView.resources.getDimensionPixelSize(R.dimen.schedule_size), itemView.resources.getDimensionPixelSize(R.dimen.schedule_size))
+                    if(lineScheduleLayout.childCount != 0) {
+                        layoutParams.setMargins(4,0,0,0)
+                    }
+                    circleView.layoutParams = layoutParams
+                    circleView.setImageDrawable(ContextCompat.getDrawable(itemView.context, R.drawable.bg_white_circle))
+                    circleView.imageTintList = (ContextCompat.getColorStateList(itemView.context, schedule.palette))
+                    lineScheduleLayout.addView(circleView)
+                }
             }
+            logD(TAG, "childCount=${moreCount}")
+            tvDateMore.isVisible = moreCount>0
+            tvDateMore.text = "+${moreCount}"
         }
     }
 

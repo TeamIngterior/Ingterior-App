@@ -1,5 +1,7 @@
 package com.ing.ingterior.model
 
+import android.util.Log
+import com.ing.ingterior.Logging.logD
 import java.time.LocalDate
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
@@ -8,6 +10,7 @@ import java.util.Calendar
 data class CalendarDate(val day: Int,val dayOfWeek: Int, val week: Int, val month: Int, val year: Int) {
 
     companion object{
+        private const val TAG = "CalendarDate"
         fun getCurrentCalendarDate(): CalendarDate {
             val calendar = Calendar.getInstance() // 현재 날짜 캘린더
             val year = calendar.get(Calendar.YEAR) // 현재 연도
@@ -67,18 +70,19 @@ data class CalendarDate(val day: Int,val dayOfWeek: Int, val week: Int, val mont
 
     private fun getWeekString(week: Int):String {
         return when(week) {
-            1 -> "일"
-            2 -> "월"
-            3 -> "화"
-            4 -> "수"
-            5 -> "목"
-            6 -> "금"
-            7 -> "토"
+            0 -> "일"
+            1 -> "월"
+            2 -> "화"
+            3 -> "수"
+            4 -> "목"
+            5 -> "금"
+            6 -> "토"
             else -> "알 수 없음"
         }
     }
 
     fun toMillis(): Long {
+        logD(TAG, "toMillis: ${timeFormat()}")
         val localDate = LocalDate.parse(timeFormat(), DateTimeFormatter.ISO_LOCAL_DATE)
         val zonedDateTime = localDate.atStartOfDay(ZoneId.systemDefault())
         return zonedDateTime.toInstant().toEpochMilli()
@@ -89,6 +93,12 @@ data class CalendarDate(val day: Int,val dayOfWeek: Int, val week: Int, val mont
     }
 
     fun timeFormat(): String{
-        return "${year}-${if(month<10) "0$month" else month}-${{if(day<10) "0$day" else day}}"
+        logD(TAG, "timeFormat: ${toString()}")
+        return "${year}-${if(month<10) "0$month" else month}-${if(day<10) "0$day" else day}"
+    }
+
+    fun timeFormat2(): String{
+        logD(TAG, "timeFormat: ${toString()}")
+        return "${if(month<10) "0$month" else month}-${if(day<10) "0$day" else day}"
     }
 }

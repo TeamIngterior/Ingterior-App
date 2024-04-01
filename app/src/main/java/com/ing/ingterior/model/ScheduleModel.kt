@@ -1,12 +1,15 @@
 package com.ing.ingterior.model
 
 import android.content.Context
+import com.ing.ingterior.Logging.logD
 import com.ing.ingterior.R
 
 data class ScheduleModel(val id: Long, val title: String, val content: String, val startDate: CalendarDate, val endDate: CalendarDate, var palette: Int = R.color.palette1) {
-
+    companion object{
+        private const val TAG = "ScheduleModel"
+    }
     fun containCalendarDate(calendarDate: CalendarDate): Boolean{
-        return startDate.toMillis() <= calendarDate.toMillis() || calendarDate.toMillis() <= endDate.toMillis() || calendarDate.isSameYearAndMonth(endDate)
+        return startDate.toMillis() <= calendarDate.toMillis() && calendarDate.toMillis() <= endDate.toMillis()
     }
 
 
