@@ -6,6 +6,7 @@ import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.fragment.app.FragmentActivity
 import com.ing.ingterior.db.Site
+import com.ing.ingterior.model.EventModel
 import com.ing.ingterior.ui.site.SiteImageEditDialog
 
 abstract class Move {
@@ -14,6 +15,8 @@ abstract class Move {
     abstract fun moveSignInActivity(activity: Activity)
     abstract fun moveSignInActivity(activity: Activity, moveResultLauncher: ActivityResultLauncher<Intent>)
     abstract fun moveSiteCreateOrEditActivity(activity: Activity, moveResultLauncher: ActivityResultLauncher<Intent>?, site: Site?)
+
+    abstract fun moveSiteEventActivity(activity: Activity, event: EventModel, site: Site)
 
     abstract fun showAddCodeDialog(activity: FragmentActivity)
     abstract fun showImageDialog(activity: FragmentActivity, dismissListener: SiteImageEditDialog.DialogListener, isFirst: Boolean)

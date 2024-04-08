@@ -6,10 +6,12 @@ import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.Navigation
+import com.ing.ingterior.EXTRA_EVENT
 import com.ing.ingterior.EXTRA_SITE
 import com.ing.ingterior.R
 import com.ing.ingterior.db.Site
 import com.ing.ingterior.injection.Move
+import com.ing.ingterior.model.EventModel
 import com.ing.ingterior.ui.MainActivity
 import com.ing.ingterior.ui.TestActivity
 import com.ing.ingterior.ui.main.SiteAddCodeDialog
@@ -18,6 +20,7 @@ import com.ing.ingterior.ui.simple.SimpleEstimationActivity
 import com.ing.ingterior.ui.site.SiteImageEditDialog
 import com.ing.ingterior.ui.site.SiteCreateOrEditActivity
 import com.ing.ingterior.ui.site.SiteActivity
+import com.ing.ingterior.ui.site.SiteEventActivity
 import com.ing.ingterior.ui.site.defects.SiteInsertDefectsActivity
 import com.ing.ingterior.ui.site.management.SiteCreateManagementActivity
 
@@ -56,6 +59,14 @@ class MoveImpl : Move() {
         else{
             activity.startActivity(intent)
         }
+    }
+
+    override fun moveSiteEventActivity(activity: Activity, event: EventModel, site: Site) {
+        val intent = Intent(activity, SiteEventActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        intent.putExtra(EXTRA_EVENT, event)
+        intent.putExtra(EXTRA_SITE, site)
+        activity.startActivity(intent)
     }
 
     override fun showAddCodeDialog(activity: FragmentActivity) {

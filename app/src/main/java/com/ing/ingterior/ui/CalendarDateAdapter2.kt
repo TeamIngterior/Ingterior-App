@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ing.ingterior.Logging.logD
 import com.ing.ingterior.R
 import com.ing.ingterior.model.CalendarDate
-import com.ing.ingterior.model.ScheduleModel
+import com.ing.ingterior.model.EventModel
 import com.ing.ui.check.VisualCalendarTextView2
 
 interface CalendarDateClickListener{
@@ -25,7 +25,7 @@ class CalendarDateAdapter2(private val clickListener: CalendarDateClickListener,
     }
 
     private var selectedDate:CalendarDate? = null
-    private var scheduleList: ArrayList<ScheduleModel> = arrayListOf()
+    private var scheduleList: ArrayList<EventModel> = arrayListOf()
 
     fun notifySelectDate(position: Int, date: CalendarDate){
         selectedDate = date
@@ -77,6 +77,7 @@ class CalendarDateAdapter2(private val clickListener: CalendarDateClickListener,
             logD(TAG, "childCount=${moreCount}")
             tvDateMore.isVisible = moreCount>0
             tvDateMore.text = "+${moreCount}"
+
         }
     }
 
@@ -93,7 +94,7 @@ class CalendarDateAdapter2(private val clickListener: CalendarDateClickListener,
     override fun getItemCount() = dates.size
 
 
-    fun updateSchedules(scheduleList: ArrayList<ScheduleModel>) {
+    fun updateSchedules(scheduleList: ArrayList<EventModel>) {
         this.scheduleList.clear()
         this.scheduleList.addAll(scheduleList)
         notifyDataSetChanged()

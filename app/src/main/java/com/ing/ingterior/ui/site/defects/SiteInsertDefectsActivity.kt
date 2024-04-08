@@ -56,7 +56,6 @@ class SiteInsertDefectsActivity : AppCompatActivity() {
     private lateinit var vbCommit: VisualButton
     private lateinit var getPictureResult: ActivityResultLauncher<Intent>
 
-
     private var gridSpacingItemDecoration: GridSpacingItemDecoration? = null
 
     private var lastTouchX: Float = 0f
@@ -73,7 +72,7 @@ class SiteInsertDefectsActivity : AppCompatActivity() {
         siteViewModel.site = intent.getParcelableCompat<Site>(EXTRA_SITE)
 
         getPictureResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
-            if(result.resultCode == AppCompatActivity.RESULT_OK) {
+            if(result.resultCode == RESULT_OK) {
                 if(siteViewModel.defectImages.size >= MAX_DEFECT_IMAGE_SIZE) {
                     Toast.makeText(this, "최대 8장 까지 첨부할 수 있습니다.", Toast.LENGTH_SHORT).show()
                     return@registerForActivityResult

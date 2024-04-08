@@ -19,6 +19,24 @@ object StringFormatter {
     const val DATE_SEC = (24*60*60*1000).toLong()
     const val YEAR_SEC = DATE_SEC * 365
 
+
+    fun formatTimeStampString(context: Context, time: Long, fullFormat: Boolean): String {
+        var formatFlags = DateUtils.FORMAT_ABBREV_ALL
+        formatFlags = if (fullFormat) {
+            formatFlags or (DateUtils.FORMAT_SHOW_YEAR or DateUtils.FORMAT_SHOW_DATE or DateUtils.FORMAT_SHOW_TIME)
+        } else {
+            val sameYear = isSameYear(time)
+            val sameDay = isSameDay(time)
+            if (sameDay) {
+                formatFlags or DateUtils.FORMAT_SHOW_TIME
+            } else if (sameYear) {
+                formatFlags or DateUtils.FORMAT_SHOW_DATE
+            } else {
+                formatFlags or (DateUtils.FORMAT_SHOW_YEAR or DateUtils.FORMAT_SHOW_DATE)
+            }
+        }
+        return DateUtils.formatDateTime(context, time, formatFlags)
+    }
     fun formatTimeStampString(time: Long, fullFormat: Boolean): String {
         val calendarTime = Calendar.getInstance().apply { timeInMillis = time }
         val now = Calendar.getInstance()

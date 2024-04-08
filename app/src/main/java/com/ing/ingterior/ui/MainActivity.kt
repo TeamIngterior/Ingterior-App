@@ -1,7 +1,6 @@
 package com.ing.ingterior.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
@@ -10,14 +9,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ing.ingterior.R
 import com.ing.ingterior.injection.Factory
-import com.ing.ingterior.injection.ServerApi
-import com.ing.ingterior.model.SiteModel
+import com.ing.ingterior.ui.chat.ConversationListFragment
 import com.ing.ingterior.ui.main.*
 import com.ing.ingterior.ui.viewmodel.MainViewModel
 import com.ing.ingterior.util.AnimationUtils
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,7 +21,7 @@ class MainActivity : AppCompatActivity() {
             private val pageMappings = mapOf(
                     R.id.menu_main to Pair({ HomeFragment() }, 0),
                     R.id.menu_site_management to Pair({ SiteListFragment() }, 1),
-                    R.id.menu_message to Pair({ MessageFragment() }, 2),
+                    R.id.menu_message to Pair({ ConversationListFragment() }, 2),
             R.id.menu_setting to Pair({ SettingFragment() }, 3)
         )
     }

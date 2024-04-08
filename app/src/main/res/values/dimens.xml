@@ -9,4 +9,7 @@
     <dimen name="mark_size">24dp</dimen>
     <dimen name="schedule_size">8dp</dimen>
     <dimen name="grid_item_margin">6dp</dimen>
+    <dimen name="conversation_one_avatar_size">48dp</dimen>
+    <dimen name="conversation_two_avatar_size">32dp</dimen>
+    <dimen name="conversation_four_avatar_size">23dp</dimen>
 </resources>

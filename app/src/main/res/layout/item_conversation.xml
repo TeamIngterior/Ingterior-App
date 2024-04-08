@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.ing.ingterior.ui.chat.ConversationListItemView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="@dimen/page_horizontal_padding"
+    android:paddingVertical="12dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <FrameLayout
+        android:id="@+id/frame_conversation_item_avatar_parent"
+        android:layout_width="@dimen/conversation_one_avatar_size"
+        android:layout_height="@dimen/conversation_one_avatar_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/frame_conversation_item_avatar_parent"
+        app:layout_constraintTop_toTopOf="@+id/frame_conversation_item_avatar_parent">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:orientation="horizontal">
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_conversation_snippet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:letterSpacing="0.04"
+                    android:maxLines="1"
+                    android:textColor="@color/text_color_06"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="2dp"
+                    tools:text="가나다라마바사아자차카 타 파 하가나다라마바사아자차카 타 파 하" />
+
+
+                <TextView
+                    android:id="@+id/tv_conversation_body"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_color_04"
+                    android:fontFamily="@font/pretendard_regular"
+                    android:letterSpacing="0.04"
+                    android:lineSpacingExtra="2dp"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    tools:text="가나다라마바사아자차카 타 가나다라마바사아자차카 타 가나다라마바사아자차카 타 가나다라마바사아자차카 타 "/>
+
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/tv_conversation_recipient_size"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/pretendard_regular"
+                android:textColor="@color/text_color_04"
+                android:textSize="12sp"
+                tools:text="3" />
+
+        </LinearLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_conversation_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_semibold"
+                android:textColor="@color/text_color_04"
+                android:textSize="11sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="오후 2:30" />
+
+            <TextView
+                android:id="@+id/tv_conversation_unread_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_white_circle"
+                android:backgroundTint="@color/secondary_color02"
+                android:fontFamily="@font/pretendard_regular"
+                android:paddingHorizontal="6dp"
+                android:paddingVertical="2dp"
+                android:textColor="@color/text_color_06"
+                android:textSize="12sp"
+                android:layout_marginTop="2dp"
+                app:layout_constraintVertical_bias="1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_conversation_date"
+                tools:text="2" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+</com.ing.ingterior.ui.chat.ConversationListItemView>

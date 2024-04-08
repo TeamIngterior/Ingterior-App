@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.ing.ingterior.EXTRA_SITE
 import com.ing.ingterior.R
-import com.ing.ingterior.ScheduleListAdapter
+import com.ing.ingterior.EventListAdapter
 import com.ing.ingterior.cache.CalendarCache
 import com.ing.ingterior.db.Site
 import com.ing.ingterior.injection.Factory
@@ -145,7 +145,7 @@ class SiteManagementFragment : Fragment(), CalendarDateClickListener {
 
     private fun setUpScheduleView(showDateModel: CalendarDate){
         (rvCalendarList.adapter as CalendarDateAdapter2).updateSchedules(DummyModel.getDummySchedule())
-        rvScheduleList.adapter = ScheduleListAdapter(DummyModel.getDummySchedule(), showDateModel)
+        rvScheduleList.adapter = EventListAdapter(DummyModel.getDummySchedule(), showDateModel, siteViewModel.site!!)
     }
 
 

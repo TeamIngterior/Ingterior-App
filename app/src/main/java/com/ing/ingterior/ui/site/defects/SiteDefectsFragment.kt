@@ -73,7 +73,6 @@ class SiteDefectsFragment : Fragment() {
         ivBluePrintView = view.findViewById(R.id.iv_site_blueprint)
         fabAdd = view.findViewById(R.id.fab_site_defect_add)
 
-
         fabAdd.setOnClickListener {
             if(siteViewModel.site == null) {
                 Toast.makeText(requireContext(), "에러 발생", Toast.LENGTH_SHORT).show()
