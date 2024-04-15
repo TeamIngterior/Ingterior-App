@@ -2,10 +2,10 @@
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer_site_layout"
+    android:id="@+id/drawer_message_list_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.site.SiteActivity">
+    tools:context=".ui.chat.MessageListActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -31,7 +31,7 @@
                 android:orientation="horizontal">
 
                 <com.ing.ui.button.VisualImageButton
-                    android:id="@+id/vib_site_list_back"
+                    android:id="@+id/vib_message_list_back"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginStart="@dimen/login_label_start_margin"
@@ -42,20 +42,20 @@
 
 
                 <com.ing.ui.text.label.LabelView
-                    android:id="@+id/lb_site_title"
+                    android:id="@+id/lb_message_list_title"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:gravity="center"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/vib_site_option"
-                    app:layout_constraintStart_toEndOf="@+id/vib_site_list_back"
+                    app:layout_constraintEnd_toStartOf="@+id/vib_message_list_nav"
+                    app:layout_constraintStart_toEndOf="@+id/vib_message_list_back"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하" />
 
                 <com.ing.ui.button.VisualImageButton
-                    android:id="@+id/vib_site_option"
+                    android:id="@+id/vib_message_list_nav"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginEnd="8dp"
@@ -69,42 +69,55 @@
 
         </androidx.appcompat.widget.Toolbar>
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tab_site_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/page_horizontal_padding"
-            android:layout_marginEnd="@dimen/page_horizontal_padding"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tool_site_bar">
-
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/tab_site_defect"
-                style="@style/Theme.Custom.Tab.Default"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="하자 체크" />
-
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/tab_site_management"
-                style="@style/Theme.Custom.Tab.Default"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="공사 관리" />
-
-        </com.google.android.material.tabs.TabLayout>
-
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragment_container_site_content"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_message_list_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            tools:listitem="@layout/item_send_message"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@+id/line_message_list_input_layout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tab_site_layout" />
+            app:layout_constraintTop_toBottomOf="@+id/tool_site_bar" />
 
+        <LinearLayout
+            android:id="@+id/line_message_list_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/gray_02"
+            android:orientation="horizontal"
+            android:paddingStart="6dp"
+            android:paddingVertical="6dp"
+            android:gravity="center_vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
+            <EditText
+                android:id="@+id/et_message_list_input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:maxLines="3"
+                android:paddingVertical="10dp"
+                android:paddingHorizontal="12dp"
+                android:lineSpacingExtra="2dp"
+                android:textSize="14sp"
+                android:minHeight="42dp"
+                android:background="@drawable/bg_message_input"
+                android:textColor="@color/text_color_06"
+                android:fontFamily="@font/pretendard_regular"
+                tools:text="메시지 내용입니다. 가나다라마바사"/>
+
+            <ImageButton
+                android:id="@+id/ib_message_list_send"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                app:srcCompat="@drawable/ic_send"/>
+
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <include layout="@layout/layout_navigation_drawer_view"/>

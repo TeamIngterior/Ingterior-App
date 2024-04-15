@@ -31,7 +31,7 @@
                 android:orientation="horizontal">
 
                 <com.ing.ui.button.VisualImageButton
-                    android:id="@+id/vib_site_event_back"
+                    android:id="@+id/vib_site_back"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginStart="@dimen/login_label_start_margin"
@@ -51,7 +51,7 @@
                     android:text="일정 상세 정보"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/vib_site_event_option"
-                    app:layout_constraintStart_toEndOf="@+id/vib_site_event_back"
+                    app:layout_constraintStart_toEndOf="@+id/vib_site_back"
                     app:layout_constraintTop_toTopOf="parent"
                     />
 
@@ -206,7 +206,7 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <include layout="@layout/layout_site_navigation_view"/>
+    <include layout="@layout/layout_navigation_drawer_view"/>
 
 
 </androidx.drawerlayout.widget.DrawerLayout>

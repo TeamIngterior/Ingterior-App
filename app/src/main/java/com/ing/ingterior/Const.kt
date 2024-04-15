@@ -14,6 +14,9 @@ const val EXTRA_MOVE_INDEX = "extra_move_index"
 const val EXTRA_SITE = "extra_site"
 const val EXTRA_EVENT = "extra_event"
 
+
+const val EXTRA_CONVERSATION = "extra_conversation"
+
 val DIALOG_LAND_WIDTH_RATIO = 0.85F
 val DIALOG_PORT_WIDTH_RATIO = 0.95F
 

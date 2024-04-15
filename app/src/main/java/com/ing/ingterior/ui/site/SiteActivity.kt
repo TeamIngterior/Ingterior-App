@@ -2,32 +2,26 @@ package com.ing.ingterior.ui.site
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
 import com.ing.ingterior.EXTRA_SITE
 import com.ing.ingterior.R
 import com.ing.ingterior.db.Site
 import com.ing.ingterior.injection.Factory
-import com.ing.ingterior.model.User
 import com.ing.ingterior.ui.IngTeriorViewModelFactory
 import com.ing.ingterior.ui.site.defects.SiteDefectsFragment
 import com.ing.ingterior.ui.site.management.SiteManagementFragment
 import com.ing.ingterior.ui.viewmodel.SiteViewModel
 import com.ing.ingterior.util.getParcelableCompat
-import com.ing.ui.button.VisualButton
 import com.ing.ui.button.VisualImageButton
 import com.ing.ui.text.label.LabelView
 import java.text.SimpleDateFormat
@@ -60,7 +54,7 @@ class SiteActivity : AppCompatActivity() {
         lbTitle = findViewById(R.id.lb_site_title)
         tabLayout = findViewById(R.id.tab_site_layout)
 
-        ivBack = findViewById(R.id.vib_site_back)
+        ivBack = findViewById(R.id.vib_site_list_back)
         ivBack.setOnClickListener {
             finish()
         }
@@ -92,11 +86,11 @@ class SiteActivity : AppCompatActivity() {
         siteViewModel.site = intent.getParcelableCompat<Site>(EXTRA_SITE)
         val site = siteViewModel.site
         drawerLayout = findViewById(R.id.drawer_site_layout)
-        val ivNavClose = findViewById<ImageView>(R.id.iv_nav_site_close)
-        val tvNavTitle = findViewById<TextView>(R.id.tv_nav_site_title)
-        val tvNavCreator = findViewById<TextView>(R.id.tv_nav_site_creator)
-        val tvNavDate = findViewById<TextView>(R.id.tv_nav_site_date)
-        val tvNavCode = findViewById<TextView>(R.id.tv_nav_site_code)
+        val ivNavClose = findViewById<ImageView>(R.id.iv_nav_close)
+        val tvNavTitle = findViewById<TextView>(R.id.tv_nav_title)
+        val tvNavCreator = findViewById<TextView>(R.id.tv_nav_creator)
+        val tvNavDate = findViewById<TextView>(R.id.tv_nav_date)
+        val tvNavCode = findViewById<TextView>(R.id.tv_nav_code)
         tvNavCode.text = site?.siteCode
         tvNavTitle.text = site?.siteName
         tvNavCreator.text = Factory.get().getSession().getUser()?.nickName
@@ -104,7 +98,7 @@ class SiteActivity : AppCompatActivity() {
         ivNavClose.setOnClickListener {
             drawerLayout.closeDrawers()
         }
-        val rvNavParticipants = findViewById<RecyclerView>(R.id.rv_nav_site_participants)
+        val rvNavParticipants = findViewById<RecyclerView>(R.id.rv_nav_participants)
         rvNavParticipants.layoutManager = LinearLayoutManager(this)
         rvNavParticipants.adapter = ParticipantAdapter(arrayListOf(Factory.get().getSession().getUser()!!))
 
@@ -112,6 +106,12 @@ class SiteActivity : AppCompatActivity() {
         vibSiteOption.setOnClickListener {
             drawerLayout.openDrawer(GravityCompat.END)
         }
+
+        val tvSiteDetail = findViewById<LinearLayout>(R.id.line_nav_message_site_detail)
+        val tvMessageListDownload = findViewById<LinearLayout>(R.id.line_nav_message_list_download)
+
+        tvSiteDetail.isVisible = false
+        tvMessageListDownload.isVisible = false
     }
     fun setTitleCompat(title: String) {
         lbTitle.text = title

@@ -6,14 +6,17 @@ import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.Navigation
+import com.ing.ingterior.EXTRA_CONVERSATION
 import com.ing.ingterior.EXTRA_EVENT
 import com.ing.ingterior.EXTRA_SITE
 import com.ing.ingterior.R
 import com.ing.ingterior.db.Site
 import com.ing.ingterior.injection.Move
+import com.ing.ingterior.model.ConversationModel
 import com.ing.ingterior.model.EventModel
 import com.ing.ingterior.ui.MainActivity
 import com.ing.ingterior.ui.TestActivity
+import com.ing.ingterior.ui.chat.MessageListActivity
 import com.ing.ingterior.ui.main.SiteAddCodeDialog
 import com.ing.ingterior.ui.log.LogInActivity
 import com.ing.ingterior.ui.simple.SimpleEstimationActivity
@@ -109,6 +112,13 @@ class MoveImpl : Move() {
     override fun moveSiteInsertManagementActivity(activity: Activity, site: Site) {
         val intent = Intent(activity, SiteCreateManagementActivity::class.java)
         intent.putExtra(EXTRA_SITE, site)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        activity.startActivity(intent)
+    }
+
+    override fun moveMessageListActivity(activity: Activity, conversationModel: ConversationModel) {
+        val intent = Intent(activity, MessageListActivity::class.java)
+        intent.putExtra(EXTRA_CONVERSATION, conversationModel)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         activity.startActivity(intent)
     }

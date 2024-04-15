@@ -12,4 +12,7 @@
     <dimen name="conversation_one_avatar_size">48dp</dimen>
     <dimen name="conversation_two_avatar_size">32dp</dimen>
     <dimen name="conversation_four_avatar_size">23dp</dimen>
+
+    <dimen name="message_item_bubble_min_width">64dp</dimen>
+    <dimen name="message_item_bubble_max_width">230dp</dimen>
 </resources>

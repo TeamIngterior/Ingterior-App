@@ -48,6 +48,14 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".ui.chat.MessageListActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ui.TestActivity"
             android:exported="true">
             <meta-data

@@ -6,6 +6,7 @@ import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.fragment.app.FragmentActivity
 import com.ing.ingterior.db.Site
+import com.ing.ingterior.model.ConversationModel
 import com.ing.ingterior.model.EventModel
 import com.ing.ingterior.ui.site.SiteImageEditDialog
 
@@ -30,4 +31,6 @@ abstract class Move {
     abstract fun moveSiteInsertDefectActivity(activity: Activity, site: Site)
 
     abstract fun moveSiteInsertManagementActivity(activity: Activity, site: Site)
+
+    abstract fun moveMessageListActivity(activity: Activity, conversationModel: ConversationModel)
 }

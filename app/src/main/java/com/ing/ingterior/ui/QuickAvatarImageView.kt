@@ -48,15 +48,14 @@ class QuickAvatarImageView : AppCompatImageView, View.OnClickListener {
         mDrawable = null
     }
 
-    fun setGroupAvatarImageView(user: User, size: Int){
+    fun setGroupAvatarImageView(user: User, size: Int, iconSize: Int){
         if(user.avatarURL.isEmpty()) {
-            val drawable:Drawable = ContactAvatarDrawable(context, true, size)
+            val drawable:Drawable = ContactAvatarDrawable(context, true, size, iconSize)
             setAvatarImageDrawable(drawable)
         }
         else{
             CoroutineScope(Dispatchers.Main).launch {
                 val bitmap = withContext(Dispatchers.IO) {
-
                     val url = URL(user.avatarURL)
                     val connection: HttpURLConnection = url.openConnection() as HttpURLConnection
                     connection.doInput = true

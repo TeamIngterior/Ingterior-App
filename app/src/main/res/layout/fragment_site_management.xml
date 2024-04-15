@@ -154,7 +154,7 @@
             android:fontFamily="@font/pretendard_medium"
             android:gravity="center"
             android:text="토"
-            android:textColor="@color/blue_color04"
+            android:textColor="@color/saturday_color"
             android:textSize="15sp" />
     </LinearLayout>
 

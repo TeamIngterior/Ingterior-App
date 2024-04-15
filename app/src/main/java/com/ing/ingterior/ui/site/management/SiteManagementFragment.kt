@@ -16,19 +16,23 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.ing.ingterior.EXTRA_SITE
 import com.ing.ingterior.R
 import com.ing.ingterior.EventListAdapter
-import com.ing.ingterior.cache.CalendarCache
+import com.ing.ingterior.Logging.logD
 import com.ing.ingterior.db.Site
 import com.ing.ingterior.injection.Factory
-import com.ing.ingterior.model.CalendarDate
+import com.ing.ingterior.model.DayModel
 import com.ing.ingterior.model.DummyModel
+import com.ing.ingterior.model.MonthModel.Companion.calculateCurrentMonth
 import com.ing.ingterior.ui.CalendarDateAdapter2
 import com.ing.ingterior.ui.CalendarDateClickListener
 import com.ing.ingterior.ui.IngTeriorViewModelFactory
 import com.ing.ingterior.ui.viewmodel.SiteViewModel
-import com.ing.ingterior.util.getDisplayPixelSize
+import com.ing.ingterior.util.StaticValues
+import com.ing.ingterior.util.StaticValues.getSpecificMonth
+import com.ing.ingterior.util.StaticValues.maxTime
+import com.ing.ingterior.util.StaticValues.minTime
 import com.ing.ingterior.util.getParcelableCompat
 import com.ing.ui.text.body.Body1View
-import java.util.Calendar
+import org.joda.time.LocalDate
 
 class SiteManagementFragment : Fragment(), CalendarDateClickListener {
 
@@ -53,7 +57,8 @@ class SiteManagementFragment : Fragment(), CalendarDateClickListener {
     private lateinit var rvScheduleList: RecyclerView
     private lateinit var frameCalendarLayout: FrameLayout
 
-    private val calendar = Calendar.getInstance()
+    private var currentMonth = 0
+    private var selectedDay:LocalDate = LocalDate()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,6 +67,8 @@ class SiteManagementFragment : Fragment(), CalendarDateClickListener {
         arguments?.let {
             siteViewModel.site = it.getParcelableCompat<Site>(EXTRA_SITE)
         }
+
+        currentMonth = calculateCurrentMonth(LocalDate.now(), LocalDate().minusYears(1))
     }
 
     override fun onCreateView(
@@ -119,52 +126,46 @@ class SiteManagementFragment : Fragment(), CalendarDateClickListener {
             moveCalendarByMonth(1)
         }
 
-        val year = calendar.get(Calendar.YEAR) // 현재 연도
-        val month = calendar.get(Calendar.MONTH) // 현재 월
-        val showDateModel = CalendarDate(1, calendar[Calendar.DAY_OF_WEEK], calendar.get(Calendar.WEEK_OF_MONTH), month + 1 , year)
-        updateDateInView(showDateModel)
-        setupRecyclerView(showDateModel)
-        setUpScheduleView(showDateModel)
+        updateDateInView()
+        setupRecyclerView()
+        setUpScheduleView()
     }
 
 
     private fun moveCalendarByMonth(monthIncrement: Int) {
-        calendar.add(Calendar.MONTH, monthIncrement)
-        val year = calendar.get(Calendar.YEAR) // 현재 연도
-        val month = calendar.get(Calendar.MONTH) // 현재 월
-        val showDateModel = CalendarDate(1, calendar[Calendar.DAY_OF_WEEK], calendar.get(Calendar.WEEK_OF_MONTH), month + 1 , year)
-        updateDateInView(showDateModel)
-        setupRecyclerView(showDateModel)
-        setUpScheduleView(showDateModel)
+        currentMonth += monthIncrement
+        val currentMonthModel = StaticValues.getMonthList()[currentMonth]
+        val currentLocalDate = LocalDate(currentMonthModel.year, currentMonthModel.month, 1)
+        logD(TAG, "moveCalendarByMonth: currentLocalDate=$currentLocalDate")
+        ibPrev.isEnabled = !(currentLocalDate.year == minTime.year && currentLocalDate.monthOfYear == minTime.monthOfYear)
+        ibNext.isEnabled = !(currentLocalDate.year == maxTime.year && currentLocalDate.monthOfYear == maxTime.monthOfYear)
+        updateDateInView()
+        setupRecyclerView()
+        setUpScheduleView()
     }
 
 
-    private fun updateDateInView(showDateModel: CalendarDate) {
-        tvYearMonth.text = "${showDateModel.year}년 ${showDateModel.month}월"
+    private fun updateDateInView() {
+        tvYearMonth.text = StaticValues.getMonthList()[currentMonth].getCalendarTitle()
     }
 
-    private fun setUpScheduleView(showDateModel: CalendarDate){
+    private fun setUpScheduleView(){
         (rvCalendarList.adapter as CalendarDateAdapter2).updateSchedules(DummyModel.getDummySchedule())
-        rvScheduleList.adapter = EventListAdapter(DummyModel.getDummySchedule(), showDateModel, siteViewModel.site!!)
+        rvScheduleList.adapter = EventListAdapter(DummyModel.getDummySchedule(), selectedDay!!, siteViewModel.site!!)
     }
-
-
-    private var selectedDate:CalendarDate? = null
-    private fun setupRecyclerView(showDateModel: CalendarDate) {
-        val displaySize = requireActivity().getDisplayPixelSize()
+    private fun setupRecyclerView() {
+        val displaySize = StaticValues.displayPixelSize
         val displayWidth = displaySize.width
         val contentDisplayWidth = displayWidth - (2 * resources.getDimensionPixelSize(R.dimen.page_horizontal_padding))
         val itemWidth = contentDisplayWidth / 7
-
-        selectedDate = showDateModel
-        rvCalendarList.adapter = CalendarDateAdapter2(this, CalendarCache.getInstance().getCalendarDate(calendar), showDateModel, itemWidth)
-        (rvCalendarList.adapter as CalendarDateAdapter2).notifySelectDate(-1, selectedDate!!)
+        rvCalendarList.adapter = CalendarDateAdapter2(this, getSpecificMonth(currentMonth), itemWidth)
+        (rvCalendarList.adapter as CalendarDateAdapter2).notifySelectDate(-1, selectedDay!!)
     }
 
-    override fun onCalendarItemClicked(position: Int, showDateModel: CalendarDate) {
-        selectedDate = showDateModel
-        (rvCalendarList.adapter as CalendarDateAdapter2).notifySelectDate(position, showDateModel)
-        setUpScheduleView(showDateModel)
+    override fun onCalendarItemClicked(position: Int, dayModel: DayModel) {
+        selectedDay = LocalDate(dayModel.year, dayModel.month, dayModel.day)
+        (rvCalendarList.adapter as CalendarDateAdapter2).notifySelectDate(position, selectedDay!!)
+        setUpScheduleView()
     }
 
 

@@ -5,44 +5,85 @@
     android:layout_height="@dimen/conversation_one_avatar_size"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <com.ing.ingterior.ui.QuickAvatarImageView
-        android:id="@+id/qci_avatar_first"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_avatar_first"
         android:layout_width="@dimen/conversation_four_avatar_size"
         android:layout_height="@dimen/conversation_four_avatar_size"
+        android:elevation="0dp"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:background="@drawable/bg_user_avatar"
-        tools:src="@drawable/ic_user_avatar" />
+        >
 
-    <com.ing.ingterior.ui.QuickAvatarImageView
-        android:id="@+id/qci_avatar_second"
+        <ImageView
+            android:id="@+id/iv_avatar_first"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:background="@drawable/bg_user_avatar"
+            tools:src="@drawable/ic_user_avatar" />
+
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_avatar_second"
         android:layout_width="@dimen/conversation_four_avatar_size"
         android:layout_height="@dimen/conversation_four_avatar_size"
+        android:elevation="0dp"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:background="@drawable/bg_user_avatar"
-        tools:src="@drawable/ic_user_avatar" />
+        >
 
+        <ImageView
+            android:id="@+id/iv_avatar_second"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:background="@drawable/bg_user_avatar"
+            tools:src="@drawable/ic_user_avatar" />
 
-    <com.ing.ingterior.ui.QuickAvatarImageView
-        android:id="@+id/qci_avatar_third"
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_avatar_third"
         android:layout_width="@dimen/conversation_four_avatar_size"
         android:layout_height="@dimen/conversation_four_avatar_size"
+        android:elevation="0dp"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/qci_avatar_second"
-        tools:background="@drawable/bg_user_avatar"
-        tools:src="@drawable/ic_user_avatar" />
+        >
 
+        <ImageView
+            android:id="@+id/iv_avatar_third"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:background="@drawable/bg_user_avatar"
+            tools:src="@drawable/ic_user_avatar" />
 
-    <com.ing.ingterior.ui.QuickAvatarImageView
-        android:id="@+id/qci_avatar_fourth"
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_avatar_fourth"
         android:layout_width="@dimen/conversation_four_avatar_size"
         android:layout_height="@dimen/conversation_four_avatar_size"
+        android:elevation="0dp"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/qci_avatar_second"
-        tools:background="@drawable/bg_user_avatar"
-        tools:src="@drawable/ic_user_avatar" />
+        >
+
+        <ImageView
+            android:id="@+id/iv_avatar_fourth"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:background="@drawable/bg_user_avatar"
+            tools:src="@drawable/ic_user_avatar" />
+
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

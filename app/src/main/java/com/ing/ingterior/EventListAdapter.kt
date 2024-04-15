@@ -10,15 +10,15 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.ing.ingterior.db.Site
 import com.ing.ingterior.injection.Factory
-import com.ing.ingterior.model.CalendarDate
 import com.ing.ingterior.model.EventModel
+import org.joda.time.LocalDate
 
-class EventListAdapter(private val scheduleList: ArrayList<EventModel>, private val showDate: CalendarDate, private val site:Site) : RecyclerView.Adapter<EventListAdapter.ViewHolder>() {
+class EventListAdapter(private val scheduleList: ArrayList<EventModel>, private val currentDay: LocalDate, private val site:Site) : RecyclerView.Adapter<EventListAdapter.ViewHolder>() {
 
     private val showScheduleList = arrayListOf<EventModel>()
     init {
         for(schedule in scheduleList){
-            if(schedule.containCalendarDate(showDate)) {
+            if(schedule.containCalendarDate(currentDay)) {
                 showScheduleList.add(schedule)
             }
         }
@@ -35,7 +35,7 @@ class EventListAdapter(private val scheduleList: ArrayList<EventModel>, private 
             viewTag.backgroundTintList = ContextCompat.getColorStateList(itemView.context, event.palette)
             tvTitle.text = event.title
             tvContent.text = event.content
-            tvDate.text = showDate.timeFormat2()
+//            tvDate.text = showDate.timeFormat2()
             lineParent.setOnClickListener {
                 Factory.get().getMove().moveSiteEventActivity(itemView.context as Activity, event, site)
             }

@@ -13,12 +13,18 @@ import androidx.core.content.ContextCompat
 import com.ing.ingterior.Logging.logD
 import com.ing.ingterior.R
 
-class ContactAvatarDrawable(private val context: Context, private val isMe: Boolean, private val size: Int) : Drawable() {
+class ContactAvatarDrawable(private val context: Context, private val isMe: Boolean, private val size: Int, private val iconSize: Int) : Drawable() {
+
+    companion object{
+        const val SMALL = 1
+        const val DEFAULT = 2
+    }
 
     private val sDefaultColor = ContextCompat.getColor(context, R.color.white)
     private val sMeColor = ContextCompat.getColor(context, R.color.gray_03)
 
     private val sDefaultAvatar = ContextCompat.getDrawable(context, R.drawable.ic_user_avatar)
+    private val sSmallAvatar = ContextCompat.getDrawable(context, R.drawable.ic_user_avatar_24)
     private val sMeAvatar = ContextCompat.getDrawable(context, R.drawable.ic_user_avatar_white)
 
     private val sPaint = Paint()
@@ -65,7 +71,7 @@ class ContactAvatarDrawable(private val context: Context, private val isMe: Bool
     }
 
     private fun getAvatar(): Bitmap? {
-        val vector = if(isMe) sMeAvatar ?: return null else sDefaultAvatar ?: return null
+        val vector = if(isMe) sMeAvatar ?: return null else if(iconSize == SMALL) sSmallAvatar ?: return null else sDefaultAvatar ?: return null
         var avatarWidth = vector.intrinsicWidth
         var avatarHeight = vector.intrinsicHeight
         if(size == 2) {

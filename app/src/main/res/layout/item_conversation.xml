@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.ing.ingterior.ui.chat.ConversationListItemView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/conversation_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingHorizontal="@dimen/page_horizontal_padding"
     android:paddingVertical="12dp"
+    android:background="?attr/selectableItemBackground"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <FrameLayout

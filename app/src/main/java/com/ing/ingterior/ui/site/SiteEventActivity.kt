@@ -1,13 +1,14 @@
 package com.ing.ingterior.ui.site
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
+import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -72,11 +73,11 @@ class SiteEventActivity : AppCompatActivity() {
     fun setDrawerLayout(){
         val site = intent.getParcelableCompat<Site>(EXTRA_SITE)
         drawerLayout = findViewById(R.id.drawer_site_event_layout)
-        val ivNavClose = findViewById<ImageView>(R.id.iv_nav_site_close)
-        val tvNavTitle = findViewById<TextView>(R.id.tv_nav_site_title)
-        val tvNavCreator = findViewById<TextView>(R.id.tv_nav_site_creator)
-        val tvNavDate = findViewById<TextView>(R.id.tv_nav_site_date)
-        val tvNavCode = findViewById<TextView>(R.id.tv_nav_site_code)
+        val ivNavClose = findViewById<ImageView>(R.id.iv_nav_close)
+        val tvNavTitle = findViewById<TextView>(R.id.tv_nav_title)
+        val tvNavCreator = findViewById<TextView>(R.id.tv_nav_creator)
+        val tvNavDate = findViewById<TextView>(R.id.tv_nav_date)
+        val tvNavCode = findViewById<TextView>(R.id.tv_nav_code)
         tvNavCode.text = site?.siteCode
         tvNavTitle.text = site?.siteName
         tvNavCreator.text = Factory.get().getSession().getUser()?.nickName
@@ -84,10 +85,10 @@ class SiteEventActivity : AppCompatActivity() {
         ivNavClose.setOnClickListener {
             drawerLayout.closeDrawers()
         }
-        val rvNavParticipants = findViewById<RecyclerView>(R.id.rv_nav_site_participants)
+        val rvNavParticipants = findViewById<RecyclerView>(R.id.rv_nav_participants)
         rvNavParticipants.layoutManager = LinearLayoutManager(this)
         rvNavParticipants.adapter = ParticipantAdapter(arrayListOf(Factory.get().getSession().getUser()!!))
-        vibBack = findViewById(R.id.vib_site_event_back)
+        vibBack = findViewById(R.id.vib_site_back)
         vibBack.setOnClickListener {
             onBackPressed()
         }
@@ -95,5 +96,12 @@ class SiteEventActivity : AppCompatActivity() {
         vibOption.setOnClickListener {
             drawerLayout.openDrawer(GravityCompat.END)
         }
+
+        val tvSiteDetail = findViewById<LinearLayout>(R.id.line_nav_message_site_detail)
+        val tvMessageListDownload = findViewById<LinearLayout>(R.id.line_nav_message_list_download)
+
+        tvSiteDetail.isVisible = false
+        tvMessageListDownload.isVisible = false
+
     }
 }

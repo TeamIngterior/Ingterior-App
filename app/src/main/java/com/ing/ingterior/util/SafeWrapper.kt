@@ -78,3 +78,4 @@ fun EditText.hideKeyboard(context: Context) {
 fun Context.pxToDp(px: Int): Int {
     return (px / resources.displayMetrics.density).toInt()
 }
+
