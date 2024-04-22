@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:backgroundTint="@color/background_color"
+    tools:context=".ui.setting.SettingWithdrawActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:contentInsetStart="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <com.ing.ui.button.VisualImageButton
+                android:id="@+id/vib_sw_back"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="@dimen/login_label_start_margin"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_back_24" />
+
+
+            <TextView
+                android:id="@+id/tv_sw_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_medium"
+                android:paddingStart="4dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="4dp"
+                android:paddingBottom="4dp"
+                android:text="회원 탈퇴"
+                android:textColor="@color/text_view_tint_color"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/page_horizontal_padding"
+            android:paddingTop="16dp"
+            android:paddingBottom="80dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="1dp"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="회원탈퇴 사유"
+                    android:textColor="@color/text_color_06"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="*"
+                    android:textColor="@color/secondary_color05"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginEnd="1dp"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="(최대 200자 까지)"
+                    android:textColor="@color/text_color_04"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+            <com.ing.ui.text.edit.InputTextLayout
+                android:id="@+id/itv_sw_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:inputHint="회원 탈퇴 사유를 입력해주세요."
+                app:inputMax="200"
+                app:inputMaxLine="10"
+                app:inputSingleLine="true" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="유의사항"
+                android:textColor="@color/text_color_06" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/pretendard_regular"
+                android:lineSpacingExtra="4dp"
+                android:text="-회원탈퇴 처리 후에는 회원님의 개인정보를 복원할 수 없으며, 해당 아이디는 영구적으로 삭제되어 재가입이 불가합니다.\n-유료로 구매한 상품 정보가 삭제되며 복구가 불가능합니다.\n-구독서비스의 경우 회원탈퇴 해당 월 까지 결제되며, 이후 자동해지됩니다."
+                android:textColor="@color/text_color_04"
+                android:textSize="13sp" />
+
+
+            <LinearLayout
+                android:id="@+id/line_si_agree"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_sw_checkbox"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    app:srcCompat="@drawable/ic_unchecked" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:fontFamily="@font/pretendard_regular"
+                    android:text="해당 내용을 모두 확인했으며, 회원탈되에 동의합니다."
+                    android:textColor="@color/text_color_06" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.ing.ui.button.VisualButton
+        android:id="@+id/vb_sw_withdraw"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginHorizontal="@dimen/page_horizontal_padding"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:visualEnable="false"
+        app:visualText="회원탈퇴" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

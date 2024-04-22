@@ -10,9 +10,12 @@ import android.os.Parcelable
 import android.util.DisplayMetrics
 import android.util.Size
 import android.util.TypedValue
+import android.view.View
 import android.view.WindowInsets
+import android.view.WindowInsetsController
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import androidx.core.content.ContextCompat
 import com.ing.ingterior.R
 
 
@@ -77,5 +80,33 @@ fun EditText.hideKeyboard(context: Context) {
 
 fun Context.pxToDp(px: Int): Int {
     return (px / resources.displayMetrics.density).toInt()
+}
+
+fun Activity.updateStatusBarColor(isLight: Boolean) {
+    val window = window ?: return
+    if(isLight) {
+        window.statusBarColor = ContextCompat.getColor(this, R.color.background_color)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.decorView.windowInsetsController?.setSystemBarsAppearance(
+                WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
+                WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
+            )
+        }
+        else {
+            window.decorView.systemUiVisibility = window.decorView.systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        }
+    }
+    else{
+        window.statusBarColor = ContextCompat.getColor(this, R.color.primary_color07)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.decorView.windowInsetsController?.setSystemBarsAppearance(
+                0,
+                WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
+            )
+        }
+        else {
+            window.decorView.systemUiVisibility = window.decorView.systemUiVisibility and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv()
+        }
+    }
 }
 

@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    tools:context=".ui.setting.SettingInquiryActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:contentInsetStart="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <com.ing.ui.button.VisualImageButton
+                android:id="@+id/vib_si_back"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="@dimen/login_label_start_margin"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_back_24" />
+
+
+            <TextView
+                android:id="@+id/tv_si_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_medium"
+                android:paddingStart="4dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="4dp"
+                android:paddingBottom="4dp"
+                android:text="개발자에게 문의하기"
+                android:textColor="@color/text_view_tint_color"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/page_horizontal_padding"
+            android:paddingTop="16dp"
+            android:paddingBottom="80dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="1dp"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="이메일 주소"
+                    android:textColor="@color/text_color_06"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="*"
+                    android:textColor="@color/secondary_color05"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+            <com.ing.ui.text.edit.InputTextLayout
+                android:id="@+id/itv_si_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:inputHint="account_email@gmail.com"
+                app:inputMax="50"
+                app:inputMaxLine="1"
+                app:inputSingleLine="true" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="1dp"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="문의 제목"
+                    android:textColor="@color/text_color_06"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="*"
+                    android:textColor="@color/secondary_color05"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+            <com.ing.ui.text.edit.InputTextLayout
+                android:id="@+id/itv_si_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:inputHint="개발자에게 문의하기"
+                app:inputMax="50"
+                app:inputMaxLine="1"
+                app:inputSingleLine="true" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="1dp"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="문의 내용"
+                    android:textColor="@color/text_color_06"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="*"
+                    android:textColor="@color/secondary_color05"
+                    android:textSize="18sp" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginEnd="1dp"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="(최대 200자 까지)"
+                    android:textColor="@color/text_color_04"
+                    android:textSize="13sp" />
+
+
+            </LinearLayout>
+
+            <com.ing.ui.text.edit.InputTextLayout
+                android:id="@+id/itv_si_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:inputHint="문의 내용을 입력해 주세요."
+                app:inputMax="200"
+                app:inputMaxLine="10"
+                app:inputSupportSpacing="4dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="개인정보 수집 및 이용 동의"
+                android:textColor="@color/text_color_06" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/pretendard_regular"
+                android:lineSpacingExtra="4dp"
+                android:text="저메이킷(Jum8kit)에서는 문의처리를 위해 이메일 주소와\n내용을 수집하며, 전장상거래법에 따라 3년 보관 후 파기 합니다.\n동의 거부 시 문의에 제한이 있을 수 있습니다."
+                android:textColor="@color/text_color_04"
+                android:textSize="13sp" />
+
+
+            <LinearLayout
+                android:id="@+id/line_si_agree"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_si_checkbox"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    app:srcCompat="@drawable/ic_unchecked" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:fontFamily="@font/pretendard_regular"
+                    android:text="개인정보 수집 및 이용에 동의 합니다."
+                    android:textColor="@color/text_color_06" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.ing.ui.button.VisualButton
+        android:id="@+id/vb_si_inquiry"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginHorizontal="@dimen/page_horizontal_padding"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:visualEnable="false"
+        app:visualText="문의하기" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

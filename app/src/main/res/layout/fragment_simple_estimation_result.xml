@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.simple.SimpleEstimationResultFragment">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/background_color"
+            android:paddingHorizontal="@dimen/page_horizontal_padding"
+            android:paddingTop="16dp"
+            android:paddingBottom="128dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_round_square"
+                android:backgroundTint="@color/gray_02"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/line_ser_summary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/page_horizontal_padding"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/text_color_06"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/pretendard_semibold"
+                        android:text="내 견적 정보"/>
+
+                    <ImageView
+                        android:id="@+id/iv_ser_summary_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_arrow_down"/>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/line_ser_summary_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="@dimen/page_horizontal_padding"
+                    android:paddingBottom="@dimen/page_horizontal_padding">
+
+                    <TextView
+                        android:id="@+id/tv_ser_summary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/text_color_06"
+                        android:fontFamily="@font/pretendard_medium"
+                        android:text="공급 면적: 111㎡\n샷시 교체: 네\n발코니 확장: 2\n욕실 갯수: 2"
+                        android:lineSpacingExtra="4dp"/>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="기본"
+                android:fontFamily="@font/pretendard_semibold"
+                android:textColor="@color/text_color_06"
+                android:textSize="18sp"
+                android:layout_marginTop="24dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_color_04"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/pretendard_regular"
+                android:lineSpacingExtra="4dp"
+                android:text="기초적인 공사만 진행합니다. 주로 일반적인 수리나 본인 살지 않는 전/월세 집의 인테리어할 때의 비용 편균값입니다."/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="@dimen/page_horizontal_padding"
+                    android:paddingTop="@dimen/page_horizontal_padding"
+                    android:paddingBottom="12dp">
+
+                    <TextView
+                        android:id="@+id/tv_ser_basic_cost"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/text_color_06"
+                        android:layout_weight="1"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/pretendard_semibold"
+                        android:text="~ 4714"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/text_color_06"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/pretendard_medium"
+                        android:text="만원"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/gray_03"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="보통"
+                android:fontFamily="@font/pretendard_semibold"
+                android:textColor="@color/text_color_06"
+                android:textSize="18sp"
+                android:layout_marginTop="24dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_color_04"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/pretendard_regular"
+                android:lineSpacingExtra="4dp"
+                android:text="일반적인 본인 주거목적 전체 인테리어할 때의\n비용 평균값입니다."/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="@dimen/page_horizontal_padding"
+                    android:paddingTop="@dimen/page_horizontal_padding"
+                    android:paddingBottom="12dp">
+
+                    <TextView
+                        android:id="@+id/tv_ser_standard_cost"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/text_color_06"
+                        android:layout_weight="1"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/pretendard_semibold"
+                        android:text="6128"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/text_color_06"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/pretendard_medium"
+                        android:text="만원"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/gray_03"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="고급"
+                android:fontFamily="@font/pretendard_semibold"
+                android:textColor="@color/text_color_06"
+                android:textSize="18sp"
+                android:layout_marginTop="24dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_color_04"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/pretendard_regular"
+                android:lineSpacingExtra="4dp"
+                android:text="하이앤드 디자인 인테리어할 때의 비용 평균값입니다.\n구조변경, 자재선택에 따라 비용이 크게 차이납니다."/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="@dimen/page_horizontal_padding"
+                    android:paddingTop="@dimen/page_horizontal_padding"
+                    android:paddingBottom="12dp">
+
+                    <TextView
+                        android:id="@+id/tv_ser_advanced_cost"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/text_color_06"
+                        android:layout_weight="1"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/pretendard_semibold"
+                        android:text="9428 ~ "/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/text_color_06"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/pretendard_medium"
+                        android:text="만원"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/gray_03"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_color_04"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/pretendard_regular"
+                android:lineSpacingExtra="4dp"
+                android:text="위 금액은 서울, 수도권 기준 금액의 평균가 입니다.\n참고로 활용하시되 정확한 견적은 업체 별 다를 수 있습니다."/>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="16dp"
+        android:layout_marginHorizontal="@dimen/page_horizontal_padding"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_regular"
+            android:gravity="center"
+            android:lineSpacingExtra="4dp"
+            android:text="로그인하고 세부 항목 별 견적을 확인해 보세요!"
+            android:textColor="@color/text_color_06"
+            android:textSize="16sp" />
+
+        <com.ing.ui.button.VisualButton
+            android:id="@+id/vb_ser_login"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            app:visualText="로그인" />
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

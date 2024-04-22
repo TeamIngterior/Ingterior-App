@@ -3,6 +3,7 @@ package com.ing.ui.text.edit
 import android.content.Context
 import android.graphics.Typeface
 import android.text.InputFilter
+import android.text.InputType
 import android.text.TextWatcher
 import android.util.AttributeSet
 import android.widget.TextView
@@ -57,6 +58,14 @@ class InputTextLayout : ConstraintLayout {
             val typedArray = context.obtainStyledAttributes(attrs, R.styleable.InputTextLayout, defStyleAttr, 0)
             val hint = typedArray.getString(R.styleable.InputTextLayout_inputHint)
             inputTextView.hint = hint
+
+            val inputType = typedArray.getString(R.styleable.InputTextLayout_inputTextType)
+            if(inputType == "numberDecimal") {
+                inputTextView.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
+            }
+            else{
+                inputTextView.inputType = InputType.TYPE_CLASS_TEXT
+            }
 
             val text = typedArray.getString(R.styleable.InputTextLayout_inputText)
             inputTextView.setText(text)

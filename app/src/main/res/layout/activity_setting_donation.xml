@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="@color/background_color"
+tools:context=".ui.setting.SettingDonationActivity">
+
+<androidx.appcompat.widget.Toolbar
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    app:contentInsetStart="0dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <com.ing.ui.button.VisualImageButton
+            android:id="@+id/vib_sd_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="@dimen/login_label_start_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_back_24" />
+
+
+        <TextView
+            android:id="@+id/tv_sd_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_medium"
+            android:paddingStart="4dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="4dp"
+            android:paddingBottom="4dp"
+            android:text="개발자 후원하기"
+            android:textColor="@color/text_view_tint_color"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.appcompat.widget.Toolbar>
+
+<androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/toolbar" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingVertical="16dp"
+            android:paddingHorizontal="@dimen/page_horizontal_padding"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textColor="@color/text_color_06"
+                    android:text="개발자에게 커피 쏘기"
+                    android:layout_marginBottom="4dp"
+                    android:fontFamily="@font/pretendard_medium"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="+ 광고 제거"
+                    android:textColor="@color/text_color_04"
+                    android:fontFamily="@font/pretendard_regular"
+                    />
+
+            </LinearLayout>
+
+            <com.ing.ui.button.VisualDefaultButton
+                android:id="@+id/vdb_sd_5000_donation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp"
+                app:visualText="₩ 5,000"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/diver_color"
+            android:layout_marginHorizontal="@dimen/page_horizontal_padding"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingVertical="16dp"
+            android:paddingHorizontal="@dimen/page_horizontal_padding"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textColor="@color/text_color_06"
+                    android:text="개발자에게 밥 사주기"
+                    android:layout_marginBottom="4dp"
+                    android:fontFamily="@font/pretendard_medium"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="+ 광고 제거, "
+                        android:textColor="@color/text_color_04"
+                        android:fontFamily="@font/pretendard_regular"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="얼리버트 혜택"
+                        android:textColor="@color/secondary_color05"
+                        android:fontFamily="@font/pretendard_regular"
+                        />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <com.ing.ui.button.VisualDefaultButton
+                android:id="@+id/vdb_sd_30000_donation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp"
+                app:visualText="₩ 30,000"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/diver_color"
+            android:layout_marginHorizontal="@dimen/page_horizontal_padding"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginVertical="24dp"
+            android:paddingHorizontal="@dimen/page_horizontal_padding">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_color_06"
+                android:textSize="18sp"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="@font/pretendard_medium"
+                android:text="얼리버드 혜택"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_regular"
+                android:textSize="13sp"
+                android:text="얼리버드 후원자들에게 아래와 같은 혜택을 제공합니다."
+                android:textColor="@color/text_color_04"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_round_square"
+                android:paddingVertical="@dimen/page_horizontal_padding"
+                android:paddingHorizontal="12dp"
+                android:backgroundTint="@color/gray_02"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_color_06"
+                    android:fontFamily="@font/pretendard_regular"
+                    android:text="비즈니스 스타터 구독플랜 무제한 사용"
+                    />
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textColor="@color/text_color_04"
+                    android:fontFamily="@font/pretendard_regular"
+                    android:lineSpacingExtra="4dp"
+                    android:paddingHorizontal="12dp"
+                    android:text="· 현장 50개 생성 및 관리\n· 현장 별 최대인원 10명 초대 가능\n· 현장 작업자 전용 채팅방 생성 가능\n· 현장 편집권한 제한 등록 가능(등록, 삭제 등)"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/diver_color"
+            android:layout_marginHorizontal="@dimen/page_horizontal_padding"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingVertical="16dp"
+            android:paddingHorizontal="@dimen/page_horizontal_padding"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textColor="@color/text_color_06"
+                    android:text="개발 후원 계좌번호"
+                    android:layout_marginBottom="4dp"
+                    android:fontFamily="@font/pretendard_medium"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="000-0000-0000(00)은행"
+                    android:textColor="@color/text_color_04"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/pretendard_regular"
+                    />
+
+            </LinearLayout>
+
+            <com.ing.ui.button.VisualDefaultButton
+                android:id="@+id/vdb_sd_account_copy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp"
+                app:visualText="계좌번호 복사"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

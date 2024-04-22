@@ -33,4 +33,10 @@ abstract class Move {
     abstract fun moveSiteInsertManagementActivity(activity: Activity, site: Site)
 
     abstract fun moveMessageListActivity(activity: Activity, conversationModel: ConversationModel)
+
+    abstract fun moveInquiryActivity(activity: Activity)
+
+    abstract fun moveDonationActivity(activity: Activity)
+
+    abstract fun moveWithdrawActivity(activity: Activity)
 }

@@ -2,6 +2,7 @@
 <resources>
     <dimen name="calendar_schedule_top_margin">23dp</dimen>
     <dimen name="page_horizontal_padding">16dp</dimen>
+    <dimen name="popup_horizontal_padding">24dp</dimen>
     <dimen name="popup_item_width">150dp</dimen>
     <dimen name="dialog_port_width_ratio">0.95</dimen>
     <dimen name="dialog_land_width_ratio">0.85</dimen>

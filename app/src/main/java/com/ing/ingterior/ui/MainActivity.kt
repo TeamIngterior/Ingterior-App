@@ -14,6 +14,7 @@ import com.ing.ingterior.ui.main.*
 import com.ing.ingterior.ui.viewmodel.MainViewModel
 import com.ing.ingterior.util.AnimationUtils
 import com.ing.ingterior.util.StaticValues
+import com.ing.ingterior.util.updateStatusBarColor
 
 class MainActivity : AppCompatActivity() {
 
@@ -55,11 +56,13 @@ class MainActivity : AppCompatActivity() {
         if(Factory.get().getApplication().isFirst) {
             AnimationUtils.fadeInAndOut(ivLogo, 750, object : AnimationUtils.AnimationListener {
                 override fun start() {
+                    updateStatusBarColor(true)
                     lineSplashScreenLayout.isVisible = true
                 }
                 override fun end() {
                     lineSplashScreenLayout.isVisible = false
                     Factory.get().getApplication().isFirst = false
+                    updateStatusBarColor(false)
                 }
             })
         }

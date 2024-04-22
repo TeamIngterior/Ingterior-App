@@ -19,6 +19,9 @@ import com.ing.ingterior.ui.TestActivity
 import com.ing.ingterior.ui.chat.MessageListActivity
 import com.ing.ingterior.ui.main.SiteAddCodeDialog
 import com.ing.ingterior.ui.log.LogInActivity
+import com.ing.ingterior.ui.setting.SettingDonationActivity
+import com.ing.ingterior.ui.setting.SettingInquiryActivity
+import com.ing.ingterior.ui.setting.SettingWithdrawActivity
 import com.ing.ingterior.ui.simple.SimpleEstimationActivity
 import com.ing.ingterior.ui.site.SiteImageEditDialog
 import com.ing.ingterior.ui.site.SiteCreateOrEditActivity
@@ -85,7 +88,7 @@ class MoveImpl : Move() {
 
     override fun moveResultSimpleEstimationFragment(view: View) {
         val navController = Navigation.findNavController(view)
-        navController.navigate(R.id.action_inputSimpleEstimationFragment_to_resultSimpleEstimationFragment)
+        navController.navigate(R.id.action_inputSimpleEstimationFragment_to_simpleEstimationResultFragment)
     }
 
     override fun moveTestActivity(activity: Activity) {
@@ -119,6 +122,24 @@ class MoveImpl : Move() {
     override fun moveMessageListActivity(activity: Activity, conversationModel: ConversationModel) {
         val intent = Intent(activity, MessageListActivity::class.java)
         intent.putExtra(EXTRA_CONVERSATION, conversationModel)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        activity.startActivity(intent)
+    }
+
+    override fun moveInquiryActivity(activity: Activity) {
+        val intent = Intent(activity, SettingInquiryActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        activity.startActivity(intent)
+    }
+
+    override fun moveDonationActivity(activity: Activity) {
+        val intent = Intent(activity, SettingDonationActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        activity.startActivity(intent)
+    }
+
+    override fun moveWithdrawActivity(activity: Activity) {
+        val intent = Intent(activity, SettingWithdrawActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         activity.startActivity(intent)
     }

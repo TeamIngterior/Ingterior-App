@@ -6,6 +6,7 @@
     </declare-styleable>
 
     <declare-styleable name="InputTextLayout">
+        <attr name="inputTextType" format="string"/>
         <attr name="inputText" format="string"/>
         <attr name="inputTextColor" format="color"/>
         <attr name="inputHint" format="string"/>

@@ -1,126 +1,276 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingStart="@dimen/page_horizontal_padding"
-    android:paddingEnd="@dimen/page_horizontal_padding"
+    android:layout_height="wrap_content"
+    android:fillViewport="true"
     tools:context=".ui.main.HomeFragment">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="120dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="6dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_main_logo_horizon" />
-
-    <TextView
-        android:id="@+id/tv_home_main_title"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/pretendard_medium"
-        android:lineSpacingExtra="8sp"
-        android:text="@string/prompt_home_renovation_cost_estimate"
-        android:textColor="@color/text_color_06"
-        android:textSize="@dimen/title_h5"
-        android:layout_marginTop="14dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-    <com.ing.ui.button.VisualButton
-        android:id="@+id/line_home_main_simple_estimation"
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:orientation="horizontal"
-        android:layout_marginTop="8dp"
-        app:visualText="@string/action_simple_estimate"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_home_main_title"/>
-
-    <LinearLayout
-        android:id="@+id/line_home_site_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/line_home_main_simple_estimation">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/text_color_04"
-            android:textSize="@dimen/body2"
-            android:fontFamily="@font/pretendard_medium"
-            android:text="@string/tip_register_new_site"
-            android:layout_marginBottom="1dp"
-            />
+        android:background="@color/background_color">
 
         <LinearLayout
+            android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="bottom"
-            android:layout_marginBottom="2dp">
+            android:background="@color/primary_color07"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/page_horizontal_padding"
+            android:paddingVertical="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:elevation="0dp"
+                    app:cardElevation="0dp"
+                    app:cardCornerRadius="4dp">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/gray_03">
+
+                        <ImageView
+                            android:id="@+id/iv_home_avatar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            app:srcCompat="@drawable/ic_user_avatar_white" />
+
+                    </FrameLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    tools:text="반갑습니다! 1GA001님" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/line_home_simple_estimation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_round_square"
+                android:orientation="vertical"
+                android:layout_marginTop="24dp"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/pretendard_semibold"
+                        android:text="인테리어 간편견적"
+                        android:textColor="@color/text_color_06"
+                        android:textSize="22sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_simple_estimation" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="우리집 평형대 인테리어 평균 비용은 얼마?"
+                    android:textColor="@color/text_color_04"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:textSize="15sp"
+                    android:layout_marginTop="8dp"
+                    />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/line_home_main_site_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_round_square"
+                android:orientation="vertical"
+                android:layout_marginTop="16dp"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/pretendard_semibold"
+                        android:text="현장목록"
+                        android:textColor="@color/text_color_06"
+                        android:textSize="22sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_site_list" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="입주 전 하자체크, 공정 별 관리를 편하고 빠르게!"
+                    android:textColor="@color/text_color_04"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:textSize="15sp"
+                    android:layout_marginTop="8dp"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/line_home_tip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="24dp"
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_round_square"
+            android:backgroundTint="@color/gray_02"
+            android:orientation="horizontal"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/pretendard_bold"
-                android:text="@string/prompt_check_and_management"
-                android:textColor="@color/text_color_06"
-                android:textSize="@dimen/title_h3"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendard_bold"
+                    android:text="인테리어 꿀팁!"
+                    android:textColor="@color/text_color_06"
+                    android:textSize="24sp" />
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="인테리어 공사 전에 읽어보면 좋은 팁들만 모아서!"
+                    android:textColor="@color/text_color_04"
+                    android:textSize="15sp" />
+
+
+            </LinearLayout>
+
 
             <ImageView
-                android:id="@+id/iv_home_add"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                app:srcCompat="@drawable/ic_baseline_add_24"
-                android:background="@drawable/bg_circle_effect"
-                android:padding="4dp"
-                android:layout_marginEnd="2dp"
-                android:clickable="true"
-                />
-
-            <ImageView
-                android:id="@+id/iv_home_search"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                app:srcCompat="@drawable/ic_baseline_search_24"
-                android:background="@drawable/bg_circle_effect"
-                android:padding="4dp"
-                android:clickable="true"
-                />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_arrow_right" />
 
         </LinearLayout>
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_home_site_list"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
             android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            android:layout_marginTop="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line_home_tip">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="@dimen/page_horizontal_padding"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendard_bold"
+                    android:text="즐겨찾는 현장목록"
+                    android:textColor="@color/text_color_06"
+                    android:textSize="24sp"
+                    android:layout_weight="1"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="전체보기"
+                        android:textColor="@color/text_color_06"
+                        android:fontFamily="@font/pretendard_regular"
+                        android:layout_marginEnd="8dp"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_arrow_right" />
+
+                </LinearLayout>
 
 
-        <com.ing.ui.button.VisualDotLineButton
-            android:id="@+id/vdlb_home_new_site_action"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            app:visualLineSpacingExtra="8dp"
-            android:layout_marginTop="8dp"
-            app:visualText="@string/prompt_login_required"/>
+            </LinearLayout>
 
 
-    </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_home_site_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginHorizontal="@dimen/page_horizontal_padding"/>
+
+        </LinearLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.core.widget.NestedScrollView>

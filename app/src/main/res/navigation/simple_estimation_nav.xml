@@ -3,25 +3,58 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/simple_estimation_nav"
-    app:startDestination="@id/inputSimpleEstimationFragment">
+    app:startDestination="@id/simpleEstimationFragment">
 
     <fragment
-        android:id="@+id/inputSimpleEstimationFragment"
-        android:name="com.ing.ingterior.ui.simple.InputSimpleEstimationFragment"
+        android:id="@+id/simpleEstimationFragment"
+        android:name="com.ing.ingterior.ui.simple.SimpleEstimationFragment"
         android:label="fragment_input_simple_estimation"
-        tools:layout="@layout/fragment_input_simple_estimation" >
+        tools:layout="@layout/fragment_simple_estimation" >
+
         <action
-            android:id="@+id/action_inputSimpleEstimationFragment_to_resultSimpleEstimationFragment"
-            app:destination="@id/resultSimpleEstimationFragment"
-            app:popUpTo="@id/inputSimpleEstimationFragment"
-            app:popUpToInclusive="true"/>
+            android:id="@+id/action_inputSimpleEstimationFragment_to_simpleEstimationResultFragment"
+            app:destination="@id/simpleEstimationResultFragment"
+            app:popUpTo="@id/simpleEstimationFragment"
+            app:popUpToInclusive="true">
+
+            <argument
+                android:name="meter"
+                app:argType="integer" />
+            <argument
+                android:name="isWindow"
+                app:argType="boolean" />
+            <argument
+                android:name="balconyCount"
+                app:argType="integer" />
+            <argument
+                android:name="bathroomCount"
+                app:argType="integer" />
+
+
+        </action>
     </fragment>
 
     <fragment
-        android:id="@+id/resultSimpleEstimationFragment"
-        android:name="com.ing.ingterior.ui.simple.ResultSimpleEstimationFragment"
+        android:id="@+id/simpleEstimationResultFragment"
+        android:name="com.ing.ingterior.ui.simple.SimpleEstimationResultFragment"
         android:label="fragment_result_simple_estimation"
-        tools:layout="@layout/fragment_result_simple_estimation"/>
+        tools:layout="@layout/fragment_simple_estimation_result">
+
+
+        <argument
+            android:name="meter"
+            app:argType="integer" />
+        <argument
+            android:name="isWindow"
+            app:argType="boolean" />
+        <argument
+            android:name="balconyCount"
+            app:argType="integer" />
+        <argument
+            android:name="bathroomCount"
+            app:argType="integer" />
+
+    </fragment>
 
 
 </navigation>

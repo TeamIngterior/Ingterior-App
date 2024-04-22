@@ -24,6 +24,15 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ui.setting.SettingInquiryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.setting.SettingDonationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.setting.SettingWithdrawActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.site.SiteEventActivity"
             android:exported="false" />
         <activity

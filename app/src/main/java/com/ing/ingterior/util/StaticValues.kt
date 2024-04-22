@@ -3,6 +3,7 @@ package com.ing.ingterior.util
 import android.app.Activity
 import android.util.Size
 import com.ing.ingterior.Logging.logD
+import com.ing.ingterior.R
 import com.ing.ingterior.model.DayModel
 import com.ing.ingterior.model.MonthModel
 import org.joda.time.LocalDate
@@ -91,6 +92,11 @@ object StaticValues {
     var displayPixelSize: Size = Size(0,0)
     fun updateDisplaySize(activity: Activity){
         displayPixelSize = activity.getDisplayPixelSize()
+    }
+
+    fun getHorizontalPaddingDisplayWidth(activity: Activity): Int {
+        updateDisplaySize(activity)
+        return displayPixelSize.width - activity.resources.getDimensionPixelSize(R.dimen.popup_horizontal_padding)
     }
 
 }

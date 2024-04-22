@@ -19,11 +19,10 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:visibility="gone">
+            android:orientation="horizontal">
 
             <com.ing.ui.button.VisualImageButton
-                android:id="@+id/ib_se_back"
+                android:id="@+id/vib_se_back"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 app:srcCompat="@drawable/ic_back_24"
@@ -33,19 +32,20 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/ib_se_sign_in"
+                android:id="@+id/tv_se_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/pretendard_medium"
                 android:paddingStart="4dp"
                 android:paddingTop="4dp"
                 android:paddingEnd="4dp"
                 android:paddingBottom="4dp"
-                android:text="로그인"
+                android:text="인테리어 간편견적"
                 android:textColor="@color/text_view_tint_color"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -57,7 +57,6 @@
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:visibility="gone"
         app:navGraph="@navigation/simple_estimation_nav"
         app:defaultNavHost="true"
         app:layout_constraintBottom_toBottomOf="parent"

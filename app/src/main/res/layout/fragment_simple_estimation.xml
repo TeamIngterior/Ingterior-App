@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.simple.SimpleEstimationFragment">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/background_color"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/page_horizontal_padding"
+            android:paddingTop="16dp"
+            android:paddingBottom="80dp">
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                    android:id="@+id/line_se_meter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="1dp"
+                            android:fontFamily="@font/pretendard_medium"
+                            android:text="공급면적"
+                            android:textColor="@color/text_color_06"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/pretendard_medium"
+                            android:text="*"
+                            android:textColor="@color/secondary_color05"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/iv_se_meter_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_info" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <com.ing.ui.text.edit.InputTextLayout
+                android:id="@+id/itv_se_meter_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:inputHint="공급면적을 입력해주세요. (Ex 112㎡)"
+                app:inputMax="10"
+                app:inputMaxLine="1"
+                app:inputSingleLine="true"
+                app:inputSupportSpacing="2dp"
+                app:inputTextType="numberDecimal"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:fontFamily="@font/pretendard_medium"
+                android:text="㎡"
+                android:textColor="@color/text_color_04"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/itv_se_meter_input"
+                app:layout_constraintEnd_toEndOf="@+id/itv_se_meter_input"
+                app:layout_constraintTop_toTopOf="@+id/itv_se_meter_input" />
+
+
+            <LinearLayout
+                android:id="@+id/line_se_window"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/itv_se_meter_input">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="1dp"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="샷시 교체"
+                    android:textColor="@color/text_color_06"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="*"
+                    android:textColor="@color/secondary_color05"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/line_se_window_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/line_se_window"
+                tools:layout_editor_absoluteX="16dp">
+
+                <TextView
+                    android:id="@+id/tv_se_window_yes"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_round_square"
+                    android:backgroundTint="@color/primary_color05"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:gravity="center"
+                    android:paddingVertical="12dp"
+                    android:text="네"
+                    android:textColor="@color/text_color_01"
+                    android:textSize="16sp" />
+
+
+                <TextView
+                    android:id="@+id/tv_se_window_no"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_round_square"
+                    android:backgroundTint="@color/gray_02"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:gravity="center"
+                    android:paddingVertical="12dp"
+                    android:text="아니요"
+                    android:textColor="@color/text_color_04"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/line_se_balcony"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/line_se_window_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="1dp"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="발코니 확장"
+                    android:textColor="@color/text_color_06"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="*"
+                    android:textColor="@color/secondary_color05"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/line_se_balcony_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/line_se_balcony">
+
+                <TextView
+                    android:id="@+id/tv_se_balcony_0"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_round_square"
+                    android:backgroundTint="@color/primary_color05"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:gravity="center"
+                    android:paddingVertical="12dp"
+                    android:text="X"
+                    android:textColor="@color/text_color_01"
+                    android:textSize="16sp" />
+
+
+                <TextView
+                    android:id="@+id/tv_se_balcony_1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_round_square"
+                    android:backgroundTint="@color/gray_02"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:gravity="center"
+                    android:paddingVertical="12dp"
+                    android:text="1"
+                    android:textColor="@color/text_color_04"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_se_balcony_2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_round_square"
+                    android:backgroundTint="@color/gray_02"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:gravity="center"
+                    android:paddingVertical="12dp"
+                    android:text="2"
+                    android:textColor="@color/text_color_04"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_se_balcony_3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_round_square"
+                    android:backgroundTint="@color/gray_02"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:gravity="center"
+                    android:paddingVertical="12dp"
+                    android:text="3"
+                    android:textColor="@color/text_color_04"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_se_balcony_4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_round_square"
+                    android:backgroundTint="@color/gray_02"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:gravity="center"
+                    android:paddingVertical="12dp"
+                    android:text="4"
+                    android:textColor="@color/text_color_04"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/line_se_bathroom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/line_se_balcony_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="1dp"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="욕실 갯수"
+                    android:textColor="@color/text_color_06"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="*"
+                    android:textColor="@color/secondary_color05"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/line_se_bathroom_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/line_se_bathroom"
+                tools:layout_editor_absoluteX="16dp">
+
+                <TextView
+                    android:id="@+id/tv_se_bathroom_1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_round_square"
+                    android:backgroundTint="@color/primary_color05"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:gravity="center"
+                    android:paddingVertical="12dp"
+                    android:text="1"
+                    android:textColor="@color/text_color_01"
+                    android:textSize="16sp" />
+
+
+                <TextView
+                    android:id="@+id/tv_se_bathroom_2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_round_square"
+                    android:backgroundTint="@color/gray_02"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:gravity="center"
+                    android:paddingVertical="12dp"
+                    android:text="2"
+                    android:textColor="@color/text_color_04"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_se_bathroom_3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_round_square"
+                    android:backgroundTint="@color/gray_02"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:gravity="center"
+                    android:paddingVertical="12dp"
+                    android:text="3"
+                    android:textColor="@color/text_color_04"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.ing.ui.button.VisualButton
+        android:id="@+id/vb_se_result"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:textAllCaps="false"
+        android:layout_marginBottom="16dp"
+        android:layout_marginHorizontal="@dimen/page_horizontal_padding"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:visualEnable="false"
+        app:visualText="간편 견적 보기" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

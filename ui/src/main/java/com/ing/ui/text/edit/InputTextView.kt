@@ -7,6 +7,7 @@ import android.util.AttributeSet
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.ing.ui.Config
+import com.ing.ui.Config.INPUT_FONT_SIZE
 import com.ing.ui.Config.LABEL_FONT_SIZE
 import com.ing.ui.R
 import java.lang.reflect.Field
@@ -24,7 +25,7 @@ class InputTextView: androidx.appcompat.widget.AppCompatEditText {
 //        val horizontalPadding = context.resources.getDimensionPixelSize(R.dimen.horizontal_input_text_padding)
 //        val verticalPadding = context.resources.getDimensionPixelSize(R.dimen.vertical_input_text_padding)
 //        setPadding(horizontalPadding, verticalPadding, horizontalPadding, verticalPadding)
-        textSize = LABEL_FONT_SIZE
+        textSize = INPUT_FONT_SIZE
 
         val font: Typeface = resources.getFont(Config.MEDIUM)
         typeface = font

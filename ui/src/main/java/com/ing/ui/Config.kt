@@ -16,7 +16,8 @@ object Config {
     const val CAPTION1_FONT_SIZE = 12F
     const val CAPTION2_FONT_SIZE = 9F
 
-    const val LABEL_FONT_SIZE = 15F
+    const val LABEL_FONT_SIZE = 16F
+    const val INPUT_FONT_SIZE = 16F
 
     val SEMI_BOLD = R.font.pretendard_semibold
     val BOLD = R.font.pretendard_bold

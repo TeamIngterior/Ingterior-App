@@ -1,15 +1,26 @@
 package com.ing.ingterior.ui.simple
 
-import androidx.lifecycle.MutableLiveData
+import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
+import com.ing.ingterior.R
 
 class SimpleEstimationViewModel : ViewModel() {
 
-    val meterOrPyeong = MutableLiveData(-1)
-    var changeSash = -1
-    var expandBalcony = -1
-    var bathRoomCount = -1
+    var meter = 0
+    var isWindow = true
+    var balconyCount = 0
+    var bathroomCount = 1
 
-    fun isEnableResult() = changeSash > 0 && expandBalcony >= 0 && bathRoomCount > 0 && (meterOrPyeong.value?.toInt() ?: 0) > 0
+    fun setSelectedTextView(view: TextView) {
+        val context = view.context
+        view.setTextColor(ContextCompat.getColor(context, R.color.text_color_01))
+        view.backgroundTintList = ContextCompat.getColorStateList(context, R.color.primary_color05)
+    }
 
+    fun setDefaultTextView(view: TextView) {
+        val context = view.context
+        view.setTextColor(ContextCompat.getColor(context, R.color.text_color_04))
+        view.backgroundTintList = ContextCompat.getColorStateList(context, R.color.gray_02)
+    }
 }
