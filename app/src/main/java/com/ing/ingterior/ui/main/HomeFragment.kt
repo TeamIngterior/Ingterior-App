@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowInsetsController
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -29,6 +30,7 @@ class HomeFragment : Fragment() {
     private val viewModel : MainViewModel by lazy { ViewModelProvider(this, IngTeriorViewModelFactory())[MainViewModel::class.java] }
     private lateinit var lineSimpleEstimation: LinearLayout
     private lateinit var lineSiteList :LinearLayout
+    private lateinit var tvUser: TextView
 
     private val moveResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
         if(result.resultCode == AppCompatActivity.RESULT_OK) {
@@ -77,9 +79,15 @@ class HomeFragment : Fragment() {
 //            }
 //        }
 
+        tvUser = view.findViewById(R.id.tv_home_user)
         viewModel.user.observe(requireActivity()){
-
+            tvUser.text = "반갑습니다! ${it.nickName}님"
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if(Factory.get().getSession().getUser() != null) tvUser.text = "반갑습니다! ${Factory.get().getSession().getUser()?.nickName}"
     }
 
     override fun onDestroyView() {

@@ -87,7 +87,7 @@ class SimpleEstimationFragment : Fragment() {
             override fun afterTextChanged(s: Editable?) {
                 vbButton.isEnabled = !s.isNullOrEmpty()
                 if(s.isNullOrEmpty()) return
-                viewModel.meter = s.toString().toInt()
+                viewModel.meter = s.toString().toLong()
             }
 
         })
