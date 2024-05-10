@@ -17,7 +17,7 @@ class SessionImpl(private val context: Context) : Session() {
     init {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
-            .requestServerAuthCode("412737837459-8gb98d665el7im06opjl7d319pcouc37.apps.googleusercontent.com")
+            .requestIdToken("412737837459-8gb98d665el7im06opjl7d319pcouc37.apps.googleusercontent.com")
             .build()
         googleSignInClient = GoogleSignIn.getClient(context, gso)
     }

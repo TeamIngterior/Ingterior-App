@@ -7,7 +7,7 @@ import com.ing.ingterior.R
 
 class SimpleEstimationViewModel : ViewModel() {
 
-    var meter = 0
+    var meter = 0L
     var isWindow = true
     var balconyCount = 0
     var bathroomCount = 1

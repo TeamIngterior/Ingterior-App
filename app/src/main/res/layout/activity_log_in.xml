@@ -143,7 +143,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginBottom="16dp"
-                    android:visibility="gone"
                     app:loginType="google" />
 
                 <com.ing.ui.button.LoginButton
@@ -159,6 +158,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginBottom="16dp"
+                    android:visibility="gone"
                     app:loginType="test" />
 
             </LinearLayout>

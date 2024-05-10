@@ -21,16 +21,16 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
+
             <com.ing.ui.button.VisualImageButton
                 android:id="@+id/vib_si_back"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginStart="@dimen/login_label_start_margin"
+                android:layout_marginStart="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_back_24" />
-
 
             <TextView
                 android:id="@+id/tv_si_title"

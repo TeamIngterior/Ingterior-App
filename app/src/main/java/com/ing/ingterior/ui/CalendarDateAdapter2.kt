@@ -49,9 +49,12 @@ class CalendarDateAdapter2(private val clickListener: CalendarDateClickListener,
                 vctDateView.setDisable()
             }
             else {
+                logD(TAG, "bind: dayOfWeek=${dayModel.dayOfWeek}")
                 if(selectedDay?.year == dayModel.year && selectedDay?.monthOfYear == dayModel.month && selectedDay?.dayOfMonth == dayModel.day)
                     vctDateView.setSelect()
-                else vctDateView.setDefault(dayModel.dayOfWeek)
+                else {
+                    vctDateView.setDefault(dayModel.dayOfWeek)
+                }
             }
 
             lineDateParent.setOnClickListener {
