@@ -1,4 +1,4 @@
-package com.ing.ingterior.ui.site.management
+package com.ing.ingterior.ui.constructor.management
 
 import android.graphics.Rect
 import android.os.Bundle
@@ -20,7 +20,7 @@ import com.ing.ingterior.model.CalendarDate
 import com.ing.ingterior.ui.CalendarDateAdapter
 import com.ing.ingterior.ui.ColorListAdapter
 import com.ing.ingterior.ui.IngTeriorViewModelFactory
-import com.ing.ingterior.ui.viewmodel.SiteViewModel
+import com.ing.ingterior.ui.viewmodel.ConstructionViewModel
 import com.ing.ingterior.util.getDisplayPixelSize
 import com.ing.ingterior.util.getParcelableCompat
 import com.ing.ui.button.VisualImageButton
@@ -31,7 +31,7 @@ import java.util.Calendar
 
 class SiteCreateManagementActivity : AppCompatActivity() {
 
-    private lateinit var siteViewModel: SiteViewModel
+    private lateinit var constructionViewModel: ConstructionViewModel
     private lateinit var frameBlueprintLayout: FrameLayout
     private lateinit var ivBlueprint: ImageView
 
@@ -57,8 +57,8 @@ class SiteCreateManagementActivity : AppCompatActivity() {
         threeMonthsAgo = LocalDateTime.now().minusMonths(3).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()
         oneYearAfter = LocalDateTime.now().plusMonths(12).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()
 
-        siteViewModel = ViewModelProvider(this, IngTeriorViewModelFactory())[SiteViewModel::class.java]
-        siteViewModel.site = intent.getParcelableCompat<Site>(EXTRA_SITE)
+        constructionViewModel = ViewModelProvider(this, IngTeriorViewModelFactory())[ConstructionViewModel::class.java]
+        constructionViewModel.site = intent.getParcelableCompat<Site>(EXTRA_SITE)
 
         frameBlueprintLayout = findViewById(R.id.frame_site_create_management_blueprint_layout)
         frameBlueprintLayout.post {
@@ -67,7 +67,7 @@ class SiteCreateManagementActivity : AppCompatActivity() {
             frameBlueprintLayout.layoutParams = params
         }
         ivBlueprint = findViewById(R.id.iv_site_create_management_blueprint)
-        Glide.with(this).load(siteViewModel.site?.imageLocation).into(ivBlueprint)
+        Glide.with(this).load(constructionViewModel.site?.imageLocation).into(ivBlueprint)
         calendarDateAdapter = CalendarDateAdapter()
 
         tvYearMonth = findViewById(R.id.tv_site_create_management_year_and_month)

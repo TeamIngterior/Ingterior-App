@@ -1,4 +1,4 @@
-package com.ing.ingterior.ui.site
+package com.ing.ingterior.ui.constructor
 
 import android.view.LayoutInflater
 import android.view.View

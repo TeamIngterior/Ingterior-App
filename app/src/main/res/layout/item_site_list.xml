@@ -17,21 +17,21 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.ing.ui.text.caption.Caption2View
-            android:id="@+id/tv_site_item_defaults_caption"
+            android:id="@+id/tv_construction_item_defaults_caption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingStart="8dp"
             android:paddingTop="6dp"
             android:paddingEnd="8dp"
             android:paddingBottom="6dp"
-            android:text="하자체크"
+            android:text="@string/title_construction_manage"
             app:customTextColor="@color/secondary_color05"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.ing.ui.text.caption.Caption2View
-            android:id="@+id/tv_site_item_management_caption"
+            android:id="@+id/tv_construction_item_management_caption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
@@ -39,14 +39,14 @@
             android:paddingTop="6dp"
             android:paddingEnd="8dp"
             android:paddingBottom="6dp"
-            android:text="공사관리"
+            android:text="@string/title_default_check"
             app:customTextColor="@color/secondary_color05"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tv_site_item_defaults_caption"
+            app:layout_constraintStart_toEndOf="@+id/tv_construction_item_defaults_caption"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.ing.ui.button.VisualImageButton
-            android:id="@+id/vib_site_item_option"
+            android:id="@+id/vib_construction_item_option"
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:scaleType="centerInside"
@@ -69,7 +69,7 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
         <com.ing.ui.text.title.TitleH5View
-            android:id="@+id/tv_site_item_name"
+            android:id="@+id/tv_construction_item_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -78,7 +78,7 @@
             tools:text="영통구 인계동 5동 912호 전체공사 진어쩌고 저쩌고 어쩌고 저쩌고"/>
 
         <com.ing.ui.check.VisualImageCheckBox
-            android:id="@+id/ivc_site_item_favorite"
+            android:id="@+id/ivc_construction_item_favorite"
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:scaleType="centerInside"
@@ -90,7 +90,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/line_site_item_content"
+        android:id="@+id/line_construction_item_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_round_square"
@@ -129,7 +129,7 @@
                 android:orientation="vertical">
 
                 <com.ing.ui.text.body.Body2View
-                    android:id="@+id/tv_site_item_creator"
+                    android:id="@+id/tv_construction_item_creator"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:customTextColor="@color/text_color_05"
@@ -138,7 +138,7 @@
                     />
 
                 <com.ing.ui.text.body.Body2View
-                    android:id="@+id/tv_site_item_created_date"
+                    android:id="@+id/tv_construction_item_created_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:customTextColor="@color/text_color_05"
@@ -179,7 +179,7 @@
                     />
 
                 <com.ing.ui.text.body.Body2View
-                    android:id="@+id/tv_site_item_code"
+                    android:id="@+id/tv_construction_item_code"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:text="1GA001A001"/>
@@ -188,7 +188,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/line_site_item_code_share"
+                android:id="@+id/line_construction_item_code_share"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:paddingStart="14dp"

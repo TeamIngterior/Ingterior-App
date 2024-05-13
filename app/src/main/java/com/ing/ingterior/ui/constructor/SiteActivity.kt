@@ -1,4 +1,4 @@
-package com.ing.ingterior.ui.site
+package com.ing.ingterior.ui.constructor
 
 import android.os.Bundle
 import android.util.Log
@@ -18,9 +18,9 @@ import com.ing.ingterior.R
 import com.ing.ingterior.db.Site
 import com.ing.ingterior.injection.Factory
 import com.ing.ingterior.ui.IngTeriorViewModelFactory
-import com.ing.ingterior.ui.site.defects.SiteDefectsFragment
-import com.ing.ingterior.ui.site.management.SiteManagementFragment
-import com.ing.ingterior.ui.viewmodel.SiteViewModel
+import com.ing.ingterior.ui.constructor.defects.SiteDefectsFragment
+import com.ing.ingterior.ui.constructor.management.SiteManagementFragment
+import com.ing.ingterior.ui.viewmodel.ConstructionViewModel
 import com.ing.ingterior.util.getParcelableCompat
 import com.ing.ui.button.VisualImageButton
 import com.ing.ui.text.label.LabelView
@@ -38,7 +38,7 @@ class SiteActivity : AppCompatActivity() {
     private lateinit var lbTitle: LabelView
     private lateinit var tabLayout: TabLayout
     private lateinit var ivBack: VisualImageButton
-    private lateinit var siteViewModel: SiteViewModel
+    private lateinit var constructionViewModel: ConstructionViewModel
     private lateinit var vibSiteOption: VisualImageButton
 
 
@@ -46,7 +46,7 @@ class SiteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_site)
 
-        siteViewModel = ViewModelProvider(this, IngTeriorViewModelFactory())[SiteViewModel::class.java]
+        constructionViewModel = ViewModelProvider(this, IngTeriorViewModelFactory())[ConstructionViewModel::class.java]
         setDrawerLayout()
 
         moveDefectFragment()
@@ -54,7 +54,7 @@ class SiteActivity : AppCompatActivity() {
         lbTitle = findViewById(R.id.lb_site_title)
         tabLayout = findViewById(R.id.tab_site_layout)
 
-        ivBack = findViewById(R.id.vib_site_list_back)
+        ivBack = findViewById(R.id.vib_home_construction_list_back)
         ivBack.setOnClickListener {
             finish()
         }
@@ -83,8 +83,8 @@ class SiteActivity : AppCompatActivity() {
 
 
     fun setDrawerLayout(){
-        siteViewModel.site = intent.getParcelableCompat<Site>(EXTRA_SITE)
-        val site = siteViewModel.site
+        constructionViewModel.site = intent.getParcelableCompat<Site>(EXTRA_SITE)
+        val site = constructionViewModel.site
         drawerLayout = findViewById(R.id.drawer_site_layout)
         val ivNavClose = findViewById<ImageView>(R.id.iv_nav_close)
         val tvNavTitle = findViewById<TextView>(R.id.tv_nav_title)

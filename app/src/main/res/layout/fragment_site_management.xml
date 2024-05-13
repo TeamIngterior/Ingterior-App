@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/text_color_02"
-    tools:context=".ui.site.management.SiteManagementFragment">
+    tools:context=".ui.constructor.management.SiteManagementFragment">
 
     <LinearLayout
         android:id="@+id/line_site_management_calendar_title"

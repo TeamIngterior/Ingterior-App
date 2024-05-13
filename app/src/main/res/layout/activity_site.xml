@@ -5,7 +5,7 @@
     android:id="@+id/drawer_site_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.site.SiteActivity">
+    tools:context=".ui.constructor.SiteActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -31,7 +31,7 @@
                 android:orientation="horizontal">
 
                 <com.ing.ui.button.VisualImageButton
-                    android:id="@+id/vib_site_list_back"
+                    android:id="@+id/vib_home_construction_list_back"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginStart="@dimen/login_label_start_margin"
@@ -50,7 +50,7 @@
                     android:gravity="center"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/vib_site_option"
-                    app:layout_constraintStart_toEndOf="@+id/vib_site_list_back"
+                    app:layout_constraintStart_toEndOf="@+id/vib_home_construction_list_back"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하" />
 

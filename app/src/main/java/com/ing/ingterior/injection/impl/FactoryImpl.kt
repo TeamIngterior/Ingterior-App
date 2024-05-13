@@ -9,6 +9,7 @@ class FactoryImpl : Factory() {
     private var move: Move? = null
     private var session: Session? = null
     private var database: Database? = null
+    private var serverApi: ServerApi? = null
 
     companion object{
         fun register(application: IngTeriorApplication){
@@ -18,6 +19,7 @@ class FactoryImpl : Factory() {
             factory.move = MoveImpl()
             factory.session = SessionImpl(application)
             factory.database = DatabaseImpl()
+            factory.serverApi = ServerApiImpl()
         }
     }
 
@@ -36,5 +38,9 @@ class FactoryImpl : Factory() {
 
     override fun getDatabase(): Database {
         return database!!
+    }
+
+    override fun getServerApi(): ServerApi {
+        return serverApi!!
     }
 }

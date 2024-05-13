@@ -1,9 +1,8 @@
-package com.ing.ingterior.ui.site
+package com.ing.ingterior.ui.constructor
 
 import android.content.DialogInterface
 import android.content.res.Configuration
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +18,7 @@ import com.ing.ingterior.DIALOG_LAND_WIDTH_RATIO
 import com.ing.ingterior.DIALOG_PORT_WIDTH_RATIO
 import com.ing.ingterior.R
 import com.ing.ingterior.model.ImageModel
-import com.ing.ingterior.ui.viewmodel.SiteViewModel
+import com.ing.ingterior.ui.viewmodel.ConstructionViewModel
 import com.ing.ingterior.util.DisplayUtils
 import com.ing.ingterior.util.DisplayUtils.getPropertyImageSize
 import com.ing.ui.button.VisualButton
@@ -31,7 +30,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
-class SiteImageEditDialog(private val listener:DialogListener, private val isFirst: Boolean) : DialogFragment() {
+class ConstructionImageEditDialog(private val listener:DialogListener, private val isFirst: Boolean) : DialogFragment() {
     interface DialogListener {
         fun onDialogDismiss()
     }
@@ -52,7 +51,7 @@ class SiteImageEditDialog(private val listener:DialogListener, private val isFir
     private lateinit var ivSelectImage:ImageView
     private lateinit var btnCommit: VisualButton
 
-    private lateinit var siteViewModel : SiteViewModel
+    private lateinit var constructionViewModel : ConstructionViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,7 +61,7 @@ class SiteImageEditDialog(private val listener:DialogListener, private val isFir
 
     private fun init(){
         setStyle(STYLE_NORMAL, R.style.Theme_Custom_Dialog_Default)
-        siteViewModel = (requireActivity() as SiteCreateOrEditActivity).getViewModel()
+        constructionViewModel = (requireActivity() as ConstructionCreateOrEditActivity).getViewModel()
     }
 
     override fun onCreateView(
@@ -80,7 +79,7 @@ class SiteImageEditDialog(private val listener:DialogListener, private val isFir
 
         initBindListener()
 
-        siteViewModel.imageModel.distinctUntilChanged().observe(this) { bluePrint ->
+        constructionViewModel.imageModel.distinctUntilChanged().observe(this) { bluePrint ->
             lifecycleScope.launch {
                 if(bluePrint==null) {
                     labelSelectImage.isVisible = true
@@ -91,7 +90,7 @@ class SiteImageEditDialog(private val listener:DialogListener, private val isFir
                     labelSelectImage.isVisible = false
                     ivSelectImage.isVisible = true
                     btnCommit.isEnabled = true
-                    ivSelectImage.setImageBitmap(siteViewModel.getImageBitmap(requireContext()))
+                    ivSelectImage.setImageBitmap(constructionViewModel.getImageBitmap(requireContext()))
                 }
             }
         }
@@ -140,53 +139,53 @@ class SiteImageEditDialog(private val listener:DialogListener, private val isFir
 
     private fun initBindListener() {
         vibClose.setOnClickListener {
-            if(isFirst) siteViewModel.imageModel.postValue(null)
+            if(isFirst) constructionViewModel.imageModel.postValue(null)
             dismiss()
         }
 
         vibRotate.setOnClickListener {
-            if(siteViewModel.imageModel.value ==null) {
+            if(constructionViewModel.imageModel.value ==null) {
                 return@setOnClickListener
             }
             lifecycleScope.launch {
-                siteViewModel.imageModel.value?.increaseRotation()
+                constructionViewModel.imageModel.value?.increaseRotation()
 
-                ivSelectImage.setImageBitmap(siteViewModel.reScaleBluePrintImage(requireContext()))
+                ivSelectImage.setImageBitmap(constructionViewModel.reScaleBluePrintImage(requireContext()))
             }
         }
 
         vibHorizontalInversion.setOnClickListener {
-            if(siteViewModel.imageModel.value ==null) {
+            if(constructionViewModel.imageModel.value ==null) {
                 return@setOnClickListener
             }
 
             lifecycleScope.launch {
-                siteViewModel.imageModel.value?.updateHorizontalInversion()
+                constructionViewModel.imageModel.value?.updateHorizontalInversion()
 
-                ivSelectImage.setImageBitmap(siteViewModel.reScaleBluePrintImage(requireContext()))
+                ivSelectImage.setImageBitmap(constructionViewModel.reScaleBluePrintImage(requireContext()))
             }
         }
 
         vibVerticalInversion.setOnClickListener {
-            if(siteViewModel.imageModel.value ==null) {
+            if(constructionViewModel.imageModel.value ==null) {
                 return@setOnClickListener
             }
 
             lifecycleScope.launch {
-                siteViewModel.imageModel.value?.updateVerticalInversion()
-                ivSelectImage.setImageBitmap(siteViewModel.reScaleBluePrintImage(requireContext()))
+                constructionViewModel.imageModel.value?.updateVerticalInversion()
+                ivSelectImage.setImageBitmap(constructionViewModel.reScaleBluePrintImage(requireContext()))
             }
         }
 
         btnReset.setOnClickListener {
-            val imageModel = siteViewModel.imageModel.value ?: return@setOnClickListener
+            val imageModel = constructionViewModel.imageModel.value ?: return@setOnClickListener
             val ifNeedReset = imageModel.horizontalInversion || imageModel.verticalInversion || imageModel.rotation > 0
             if(ifNeedReset) {
                 lifecycleScope.launch{
                     withContext(Dispatchers.IO){
-                        siteViewModel.imageModel.postValue(ImageModel(0L, imageModel.uri, null, imageModel.name))
+                        constructionViewModel.imageModel.postValue(ImageModel(0L, imageModel.uri, null, imageModel.name))
                     }
-                    ivSelectImage.setImageBitmap(siteViewModel.reScaleBluePrintImage(requireContext()))
+                    ivSelectImage.setImageBitmap(constructionViewModel.reScaleBluePrintImage(requireContext()))
                 }
             }
         }

@@ -1,4 +1,4 @@
-package com.ing.ingterior.ui.site.defects
+package com.ing.ingterior.ui.constructor.defects
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -16,10 +16,9 @@ import com.ing.ingterior.R
 import com.ing.ingterior.db.Site
 import com.ing.ingterior.injection.Factory
 import com.ing.ingterior.ui.IngTeriorViewModelFactory
-import com.ing.ingterior.ui.site.SiteActivity
-import com.ing.ingterior.ui.viewmodel.SiteViewModel
+import com.ing.ingterior.ui.constructor.SiteActivity
+import com.ing.ingterior.ui.viewmodel.ConstructionViewModel
 import com.ing.ingterior.util.getParcelableCompat
-import com.ing.ui.button.VisualDotLineButton
 
 class SiteDefectsFragment : Fragment() {
     companion object {
@@ -34,7 +33,7 @@ class SiteDefectsFragment : Fragment() {
             }
     }
 
-    private lateinit var siteViewModel: SiteViewModel
+    private lateinit var constructionViewModel: ConstructionViewModel
     private lateinit var fabAdd: FloatingActionButton
     private lateinit var frameImageLayout: FrameLayout
     private lateinit var ivBluePrintView: ImageView
@@ -43,9 +42,9 @@ class SiteDefectsFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        siteViewModel = ViewModelProvider(this, IngTeriorViewModelFactory())[SiteViewModel::class.java]
+        constructionViewModel = ViewModelProvider(this, IngTeriorViewModelFactory())[ConstructionViewModel::class.java]
         arguments?.let {
-            siteViewModel.site = it.getParcelableCompat<Site>(EXTRA_SITE)
+            constructionViewModel.site = it.getParcelableCompat<Site>(EXTRA_SITE)
         }
     }
 
@@ -74,11 +73,11 @@ class SiteDefectsFragment : Fragment() {
         fabAdd = view.findViewById(R.id.fab_site_defect_add)
 
         fabAdd.setOnClickListener {
-            if(siteViewModel.site == null) {
+            if(constructionViewModel.site == null) {
                 Toast.makeText(requireContext(), "에러 발생", Toast.LENGTH_SHORT).show()
                 requireActivity().finish()
             }
-            else Factory.get().getMove().moveSiteInsertDefectActivity(requireActivity(), siteViewModel.site!!)
+            else Factory.get().getMove().moveSiteInsertDefectActivity(requireActivity(), constructionViewModel.site!!)
         }
 
         // 동적으로 마크 생성 및 추가
@@ -90,7 +89,7 @@ class SiteDefectsFragment : Fragment() {
         }
         frameImageLayout.addView(markImageView)
 
-        (requireActivity() as SiteActivity).setTitleCompat(siteViewModel.site?.siteName ?: "")
-        Glide.with(requireActivity()).load(siteViewModel.site?.imageLocation).into(ivBluePrintView)
+        (requireActivity() as SiteActivity).setTitleCompat(constructionViewModel.site?.siteName ?: "")
+        Glide.with(requireActivity()).load(constructionViewModel.site?.imageLocation).into(ivBluePrintView)
     }
 }

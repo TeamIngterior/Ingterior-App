@@ -1,4 +1,4 @@
-package com.ing.ingterior.ui.site
+package com.ing.ingterior.ui.constructor
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

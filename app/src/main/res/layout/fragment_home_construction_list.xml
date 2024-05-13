@@ -22,7 +22,7 @@
             android:orientation="horizontal">
 
             <com.ing.ui.button.VisualImageButton
-                android:id="@+id/vib_site_list_back"
+                android:id="@+id/vib_home_construction_list_back"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -49,7 +49,7 @@
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_refresh_site_list"
+        android:id="@+id/swipe_refresh_home_construction_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -61,7 +61,7 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_site_list"
+            android:id="@+id/rv_home_construction_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -73,7 +73,7 @@
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.ing.ui.button.VisualDotLineButton
-        android:id="@+id/vdlb_site_list_new_action"
+        android:id="@+id/vdlb_home_construction_list_new_action"
         android:layout_width="0dp"
         android:layout_height="120dp"
         android:layout_marginStart="16dp"
@@ -86,19 +86,19 @@
         app:visualText="아래의 + 버튼을 눌러\n새로운 현장을 추가해 보세요!" />
 
     <LinearLayout
-        android:id="@+id/line_site_list_options"
+        android:id="@+id/line_home_construction_list_options"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginBottom="12dp"
         android:gravity="end"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/fab_site_list_option"
-        app:layout_constraintEnd_toEndOf="@+id/fab_site_list_option">
+        app:layout_constraintBottom_toTopOf="@+id/fab_home_construction_list_option"
+        app:layout_constraintEnd_toEndOf="@+id/fab_home_construction_list_option">
 
 
         <com.ing.ui.button.VisualDefaultButton
-            android:id="@+id/vdb_site_list_add_code"
+            android:id="@+id/vdb_home_construction_list_add_code"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginBottom="6dp"
@@ -111,7 +111,7 @@
             app:visualText="코드로 현장 추가" />
 
         <com.ing.ui.button.VisualDefaultButton
-            android:id="@+id/vdb_site_list_add_new"
+            android:id="@+id/vdb_home_construction_list_add_new"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:paddingStart="16dp"
@@ -126,7 +126,7 @@
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_site_list_option"
+        android:id="@+id/fab_home_construction_list_option"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"

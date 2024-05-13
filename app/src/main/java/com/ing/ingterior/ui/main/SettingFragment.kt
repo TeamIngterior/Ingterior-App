@@ -10,10 +10,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.ing.ingterior.R
 import com.ing.ingterior.injection.Factory
 import com.ing.ingterior.ui.IngTeriorViewModelFactory
-import com.ing.ingterior.ui.viewmodel.MainViewModel
+import com.ing.ingterior.ui.viewmodel.HomeViewModel
 
 class SettingFragment : Fragment() {
-    private val viewModel : MainViewModel by lazy { ViewModelProvider(this, IngTeriorViewModelFactory())[MainViewModel::class.java] }
+    private val viewModel : HomeViewModel by lazy { ViewModelProvider(this, IngTeriorViewModelFactory())[HomeViewModel::class.java] }
 
     private lateinit var lineDonation: LinearLayout
     private lateinit var lineInquiry: LinearLayout

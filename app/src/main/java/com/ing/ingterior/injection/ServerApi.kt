@@ -1,27 +1,23 @@
 package com.ing.ingterior.injection
 
-import com.ing.ingterior.model.SiteModel
-import retrofit2.Call
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import com.ing.ingterior.db.constructor.Construction
+import com.ing.ingterior.db.constructor.ConstructionRequest
+import io.reactivex.Observable
 import retrofit2.http.Body
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
 import retrofit2.http.POST
-import retrofit2.http.PUT
+import retrofit2.http.Query
 
 interface ServerApi {
-    companion object{
-        const val SERVER_URL = "https://ingterior/"
-        val retrofit = Retrofit.Builder()
-            .baseUrl(SERVER_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
+    @GET("construction/constructions")
+    abstract fun getConstructions(@Query("memberId") memberId: Int) : Observable<List<Construction>>
 
-        const val s = "construction"
-    }
+    @POST("construction/")
+    abstract fun insertConstruction(@Body request: ConstructionRequest) : Observable<Int>
 
-    @PUT("construction")
-    fun updateConstruction(@Body siteModel: SiteModel): Call<SiteModel>
-
-    @POST("member/google")
-    fun googleLogin(): Call<Int>
+    @FormUrlEncoded
+    @POST("construction/like")
+    abstract fun likeConstruction(@Field("memberId") memberId: Int, @Field("constructionId") constructionId: Int) : Observable<Int>
 }

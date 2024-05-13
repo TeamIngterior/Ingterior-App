@@ -5,7 +5,7 @@
     android:id="@+id/drawer_site_event_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.site.SiteEventActivity">
+    tools:context=".ui.constructor.SiteEventActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

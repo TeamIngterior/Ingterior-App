@@ -7,8 +7,7 @@
         android:required="false" />
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
@@ -33,23 +32,23 @@
             android:name=".ui.setting.SettingWithdrawActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.site.SiteEventActivity"
+            android:name=".ui.constructor.SiteEventActivity"
             android:exported="false" />
         <activity
             android:name=".ui.chat.ConversationListFragment"
             android:exported="false" />
         <activity
-            android:name=".ui.site.management.SiteCreateManagementActivity"
+            android:name=".ui.constructor.management.SiteCreateManagementActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.site.SiteActivity"
+            android:name=".ui.constructor.SiteActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.site.SiteCreateOrEditActivity"
+            android:name=".ui.constructor.ConstructionCreateOrEditActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize">
             <meta-data
@@ -88,14 +87,14 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.site.defects.SiteInsertDefectsActivity"
+            android:name=".ui.constructor.defects.SiteInsertDefectsActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.log.LogInActivity"
+            android:name=".ui.log.SignInActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

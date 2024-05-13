@@ -16,4 +16,6 @@ abstract class Factory {
     abstract fun getMove(): Move
     abstract fun getSession(): Session
     abstract fun getDatabase(): Database
+
+    abstract fun getServerApi(): ServerApi
 }

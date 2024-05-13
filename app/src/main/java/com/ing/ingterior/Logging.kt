@@ -20,4 +20,7 @@ object Logging {
         Log.e(TAG, "$TAG -> $msg", e)
     }
 
+    fun logE(TAG: String, msg: String, e: Throwable?) {
+        Log.e(TAG, "$TAG -> $msg", e)
+    }
 }

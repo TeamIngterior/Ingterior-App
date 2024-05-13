@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/bluePrintManagementFragment"
-        android:name="com.ing.ingterior.ui.site.BluePrintManagementFragment"
+        android:name="com.ing.ingterior.ui.constructor.BluePrintManagementFragment"
         android:label="fragment_input_simple_estimation"
         tools:layout="@layout/fragment_blue_print_management" >
         <action
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/editBlueprintFragment"
-        android:name="com.ing.ingterior.ui.site.EditBlueprintFragment"
+        android:name="com.ing.ingterior.ui.constructor.EditBlueprintFragment"
         android:label="fragment_result_simple_estimation"
         tools:layout="@layout/fragment_edit_blueprint"/>
 

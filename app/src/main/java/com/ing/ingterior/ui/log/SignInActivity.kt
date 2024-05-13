@@ -13,16 +13,12 @@ import com.google.android.gms.common.api.ApiException
 import com.ing.ingterior.Logging.logD
 import com.ing.ingterior.R
 import com.ing.ingterior.injection.Factory
-import com.ing.ingterior.injection.ServerApi
 import com.ing.ingterior.model.TYPE_GOOGLE
-import com.ing.ingterior.model.TYPE_INSTAGRAM
-import com.ing.ingterior.model.TYPE_KAKAO_TALK
-import com.ing.ingterior.model.TYPE_NAVER
 import com.ing.ingterior.model.User
 import com.ing.ui.button.LoginButton
 import com.ing.ui.button.VisualImageButton
 
-class LogInActivity : AppCompatActivity() {
+class SignInActivity : AppCompatActivity() {
 
     private val lbKakaoTalk: LoginButton by lazy { findViewById(R.id.lb_login_kakaotalk) }
     private val lbNaver: LoginButton by lazy { findViewById(R.id.lb_login_naver) }
@@ -44,17 +40,17 @@ class LogInActivity : AppCompatActivity() {
             val serverAuth = account.serverAuthCode ?: ""
             val avatarURL = account.photoUrl ?: ""
             val user = User(id = 1, email = userEmail, nickName = userDisplayName, token = serverAuth, type = TYPE_GOOGLE, avatarURL = avatarURL.toString())
-            logD(LogInActivity::class.java.simpleName, "user=${user}")
+            logD(SignInActivity::class.java.simpleName, "user=${user}")
             Factory.get().getSession().setUser(user)
             Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
             setResult(RESULT_OK)
             finish()
-            Log.d(LogInActivity::class.java.simpleName, "id=${account.id}, photoUrl=${account.photoUrl}")
-            Log.d(LogInActivity::class.java.simpleName, "idToken=${account.idToken}, photoUrl=${account.photoUrl}")
-            Log.d(LogInActivity::class.java.simpleName, "userEmail=$userEmail, userName=$userName, userDisplayName=$userDisplayName, serverAuth=$serverAuth")
+            Log.d(SignInActivity::class.java.simpleName, "id=${account.id}, photoUrl=${account.photoUrl}")
+            Log.d(SignInActivity::class.java.simpleName, "idToken=${account.idToken}, photoUrl=${account.photoUrl}")
+            Log.d(SignInActivity::class.java.simpleName, "userEmail=$userEmail, userName=$userName, userDisplayName=$userDisplayName, serverAuth=$serverAuth")
         } catch (e: ApiException) {
             // 로그인 실패 처리
-            Log.e(LogInActivity::class.java.simpleName, e.stackTraceToString())
+            Log.e(SignInActivity::class.java.simpleName, e.stackTraceToString())
             Toast.makeText(this, "로그인 실패", Toast.LENGTH_SHORT).show()
         }
     }

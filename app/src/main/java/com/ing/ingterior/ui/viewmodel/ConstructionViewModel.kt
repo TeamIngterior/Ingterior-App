@@ -4,30 +4,33 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
-import android.os.Build
 import android.util.Log
 import android.widget.Toast
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.ing.ingterior.EXTRA_SITE
+import com.ing.ingterior.Logging.logE
+import com.ing.ingterior.Logging.logW
+import com.ing.ingterior.R
 import com.ing.ingterior.db.Image
 import com.ing.ingterior.db.Site
-import com.ing.ingterior.db.Status
+import com.ing.ingterior.db.constructor.Construction
+import com.ing.ingterior.db.constructor.ConstructionRequest
 import com.ing.ingterior.injection.Factory
 import com.ing.ingterior.model.ImageModel
 import com.ing.ingterior.util.ImageUtils
 import com.ing.ingterior.util.ImageUtils.GraphicUtils.loadBitmapFromFile
 import com.ing.ingterior.util.ImageUtils.GraphicUtils.loadBitmapFromUri
+import com.ing.ingterior.util.Resource
 import com.ing.ingterior.util.getParcelableCompat
-import kotlinx.coroutines.CoroutineScope
+import com.ing.ingterior.util.ioNewThread
+import io.reactivex.observers.DisposableObserver
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class SiteViewModel : ViewModel() {
+class ConstructionViewModel : BaseViewModel() {
     companion object{
-        private const val TAG = "SiteViewModel"
+        private const val TAG = "ConstructionViewModel"
         const val UI_DEFECTS_MODE = 1
         const val UI_MANAGING_MODE = 2
     }
@@ -36,14 +39,14 @@ class SiteViewModel : ViewModel() {
     var uiState = UI_DEFECTS_MODE
 
     var site: Site? = null
-    var siteName = ""
+    var constructionName = ""
     var isDefects = true
     var isManagement = false
     val imageModel = MutableLiveData<ImageModel>()
     val defectImages = arrayListOf<ImageModel>()
 
     fun requireEnable(): Boolean{
-        return siteName.isNotEmpty() && (isDefects || isManagement)
+        return constructionName.isNotEmpty() && (isDefects || isManagement)
     }
 
     suspend fun getImageBitmap(context: Context): Bitmap? {
@@ -88,11 +91,11 @@ class SiteViewModel : ViewModel() {
 
 
 
-    val allSiteListData = MutableLiveData<Status<ArrayList<Site>>>()
+    val allSiteListData = MutableLiveData<Resource<ArrayList<Site>>>()
     fun getAllSiteList(context: Context, forced: Boolean) {
-        if(!forced && allSiteListData.value!=null && allSiteListData.value is Status.Success) return
-        allSiteListData.postValue(Status.Loading)
-        val userId = Factory.get().getSession().getUser()?.id ?: return allSiteListData.postValue(Status.Error("로그인 상태가 아닙니다."))
+        if(!forced && allSiteListData.value!=null) return
+        allSiteListData.postValue(Resource.loading())
+        val userId = Factory.get().getSession().getUser()?.id ?: return allSiteListData.postValue(Resource.error("로그인 상태가 아닙니다.", null))
         val siteList = arrayListOf<Site>()
         val cursor = context.contentResolver.query(Uri.parse(Site.CONTENT_URI), Site.ALL_PROJECTION, null, arrayOf(userId.toString()), null)
         cursor?.let {
@@ -117,10 +120,10 @@ class SiteViewModel : ViewModel() {
         }
         Log.d(TAG, "getAllSiteList: siteList=$siteList")
         if(siteList.isEmpty()){
-            allSiteListData.postValue(Status.Error("참여 중인 현장이 없습니다."))
+            allSiteListData.postValue(Resource.error("참여 중인 현장이 없습니다.", null))
         }
         else{
-            allSiteListData.postValue(Status.Success(siteList))
+            allSiteListData.postValue(Resource.success(siteList))
         }
     }
 
@@ -129,7 +132,7 @@ class SiteViewModel : ViewModel() {
         this.site = site
         isCreate = false
 
-        siteName = site.siteName
+        constructionName = site.siteName
         isDefects = site.defectsIds.isNotEmpty()
         isManagement = site.managementIds.isNotEmpty()
         imageModel.postValue(ImageModel(site.imageId, null, site.imageLocation, site.imageName, bitmap = loadBitmapFromFile(site.imageLocation)))
@@ -151,4 +154,78 @@ class SiteViewModel : ViewModel() {
         defectImages.remove(defectImage)
     }
 
+    private val _constructionListData = MutableLiveData<Resource<List<Construction>>>()
+    val constructionListData: LiveData<Resource<List<Construction>>> = _constructionListData
+    fun getConstructionList(context: Context, memberId: Int) {
+        val constructions = arrayListOf<Construction>()
+        if (isNetworkConnected(context)) {
+            addToDisposable(Factory.get().getServerApi().getConstructions(memberId).ioNewThread()
+                .subscribeWith(object : DisposableObserver<List<Construction>>() {
+                    override fun onNext(t: List<Construction>) {
+                        constructions.addAll(t)
+                    }
+
+                    override fun onError(e: Throwable) {
+                        logE(TAG, "onError", e)
+                        logW(TAG, "onError ${e.message}")
+                        _constructionListData.postValue(Resource.errorInt(R.string.error_occurred, null))
+                    }
+
+                    override fun onComplete() {
+                        _constructionListData.postValue(Resource.success(constructions))
+                    }
+                }
+                ))
+        }
+    }
+
+    private val _insertRequestData = MutableLiveData<Resource<Int>>()
+    val insertRequestData: LiveData<Resource<Int>> = _insertRequestData
+    fun insertConstruction(context: Context, memberId: Int, usage: Int){
+        var result = 200
+        if (isNetworkConnected(context)) {
+            addToDisposable(Factory.get().getServerApi().insertConstruction(ConstructionRequest(memberId, usage, constructionName)).ioNewThread()
+                .subscribeWith(object : DisposableObserver<Int>() {
+                    override fun onNext(t: Int) {
+                        result = t
+                    }
+
+                    override fun onError(e: Throwable) {
+                        logE(TAG, "onError", e)
+                        logW(TAG, "onError ${e.message}")
+                        _insertRequestData.postValue(Resource.errorInt(R.string.error_occurred, null))
+                    }
+
+                    override fun onComplete() {
+                        _insertRequestData.postValue(Resource.success(result))
+                    }
+                }
+                ))
+        }
+    }
+
+    private val _likeRequestData = MutableLiveData<Resource<Int>>()
+    val likeRequestData: LiveData<Resource<Int>> = _likeRequestData
+    fun likeConstruction(context: Context, memberId: Int, constructionId: Int) {
+        var result = 200
+        if (isNetworkConnected(context)) {
+            addToDisposable(Factory.get().getServerApi().likeConstruction(memberId, constructionId).ioNewThread()
+                .subscribeWith(object : DisposableObserver<Int>() {
+                    override fun onNext(t: Int) {
+                        result = t
+                    }
+
+                    override fun onError(e: Throwable) {
+                        logE(TAG, "onError", e)
+                        logW(TAG, "onError ${e.message}")
+                        _likeRequestData.postValue(Resource.errorInt(R.string.error_occurred, null))
+                    }
+
+                    override fun onComplete() {
+                        _likeRequestData.postValue(Resource.success(result))
+                    }
+                }
+                ))
+        }
+    }
 }

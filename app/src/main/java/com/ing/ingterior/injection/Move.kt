@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentActivity
 import com.ing.ingterior.db.Site
 import com.ing.ingterior.model.ConversationModel
 import com.ing.ingterior.model.EventModel
-import com.ing.ingterior.ui.site.SiteImageEditDialog
+import com.ing.ingterior.ui.constructor.ConstructionImageEditDialog
 
 abstract class Move {
     abstract fun moveMainActivity(activity: Activity)
@@ -20,7 +20,7 @@ abstract class Move {
     abstract fun moveSiteEventActivity(activity: Activity, event: EventModel, site: Site)
 
     abstract fun showAddCodeDialog(activity: FragmentActivity)
-    abstract fun showImageDialog(activity: FragmentActivity, dismissListener: SiteImageEditDialog.DialogListener, isFirst: Boolean)
+    abstract fun showImageDialog(activity: FragmentActivity, dismissListener: ConstructionImageEditDialog.DialogListener, isFirst: Boolean)
 
     // fragment
     abstract fun moveResultSimpleEstimationFragment(view: View)

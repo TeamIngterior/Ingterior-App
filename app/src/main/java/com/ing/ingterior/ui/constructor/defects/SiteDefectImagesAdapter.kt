@@ -1,4 +1,4 @@
-package com.ing.ingterior.ui.site.defects
+package com.ing.ingterior.ui.constructor.defects
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.ing.ingterior.R
 import com.ing.ingterior.model.ImageModel
-import com.ing.ingterior.ui.viewmodel.SiteViewModel
+import com.ing.ingterior.ui.viewmodel.ConstructionViewModel
 
-class SiteDefectImagesAdapter(private val siteViewModel: SiteViewModel, private val itemSize: Int) : RecyclerView.Adapter<SiteDefectImagesAdapter.ViewHolder>() {
+class SiteDefectImagesAdapter(private val constructionViewModel: ConstructionViewModel, private val itemSize: Int) : RecyclerView.Adapter<SiteDefectImagesAdapter.ViewHolder>() {
 
     companion object{
         private const val TAG = "SiteDefectImagesAdapter"
@@ -27,12 +27,12 @@ class SiteDefectImagesAdapter(private val siteViewModel: SiteViewModel, private 
     }
 
     override fun onBindViewHolder(holder: SiteDefectImagesAdapter.ViewHolder, position: Int) {
-        Log.d(TAG, "onBindViewHolder: imageModel=${siteViewModel.defectImages[position]}")
-        holder.bindItem(siteViewModel.defectImages[position])
+        Log.d(TAG, "onBindViewHolder: imageModel=${constructionViewModel.defectImages[position]}")
+        holder.bindItem(constructionViewModel.defectImages[position])
     }
 
     override fun getItemCount(): Int {
-        return siteViewModel.defectImages.size
+        return constructionViewModel.defectImages.size
     }
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
@@ -43,7 +43,7 @@ class SiteDefectImagesAdapter(private val siteViewModel: SiteViewModel, private 
             Glide.with(itemView.context).load(imageModel.uri).into(ivDefect)
 
             ivRemove.setOnClickListener {
-                siteViewModel.removeDefectImage(imageModel)
+                constructionViewModel.removeDefectImage(imageModel)
                 notifyDataSetChanged()
             }
         }

@@ -18,17 +18,17 @@ import com.ing.ingterior.ui.MainActivity
 import com.ing.ingterior.ui.TestActivity
 import com.ing.ingterior.ui.chat.MessageListActivity
 import com.ing.ingterior.ui.main.SiteAddCodeDialog
-import com.ing.ingterior.ui.log.LogInActivity
+import com.ing.ingterior.ui.log.SignInActivity
 import com.ing.ingterior.ui.setting.SettingDonationActivity
 import com.ing.ingterior.ui.setting.SettingInquiryActivity
 import com.ing.ingterior.ui.setting.SettingWithdrawActivity
 import com.ing.ingterior.ui.simple.SimpleEstimationActivity
-import com.ing.ingterior.ui.site.SiteImageEditDialog
-import com.ing.ingterior.ui.site.SiteCreateOrEditActivity
-import com.ing.ingterior.ui.site.SiteActivity
-import com.ing.ingterior.ui.site.SiteEventActivity
-import com.ing.ingterior.ui.site.defects.SiteInsertDefectsActivity
-import com.ing.ingterior.ui.site.management.SiteCreateManagementActivity
+import com.ing.ingterior.ui.constructor.ConstructionImageEditDialog
+import com.ing.ingterior.ui.constructor.ConstructionCreateOrEditActivity
+import com.ing.ingterior.ui.constructor.SiteActivity
+import com.ing.ingterior.ui.constructor.SiteEventActivity
+import com.ing.ingterior.ui.constructor.defects.SiteInsertDefectsActivity
+import com.ing.ingterior.ui.constructor.management.SiteCreateManagementActivity
 
 class MoveImpl : Move() {
     override fun moveMainActivity(activity: Activity) {
@@ -44,19 +44,19 @@ class MoveImpl : Move() {
     }
 
     override fun moveSignInActivity(activity: Activity) {
-        val intent = Intent(activity, LogInActivity::class.java)
+        val intent = Intent(activity, SignInActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         activity.startActivity(intent)
     }
 
     override fun moveSignInActivity(activity: Activity, moveResultLauncher: ActivityResultLauncher<Intent>) {
-        val intent = Intent(activity, LogInActivity::class.java)
+        val intent = Intent(activity, SignInActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         moveResultLauncher.launch(intent)
     }
 
     override fun moveSiteCreateOrEditActivity(activity: Activity, moveResultLauncher: ActivityResultLauncher<Intent>?, site: Site?) {
-        val intent = Intent(activity, SiteCreateOrEditActivity::class.java)
+        val intent = Intent(activity, ConstructionCreateOrEditActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         intent.putExtra(EXTRA_SITE, site)
         if(moveResultLauncher!=null) {
@@ -80,9 +80,9 @@ class MoveImpl : Move() {
         siteAddCodeDialog.show(activity.supportFragmentManager.beginTransaction(), "site_add_code_dialog")
     }
 
-    override fun showImageDialog(activity: FragmentActivity, dismissListener: SiteImageEditDialog.DialogListener, isFirst: Boolean) {
+    override fun showImageDialog(activity: FragmentActivity, dismissListener: ConstructionImageEditDialog.DialogListener, isFirst: Boolean) {
         val transaction = activity.supportFragmentManager.beginTransaction()
-        val bluePrintFragmentDialog = SiteImageEditDialog(dismissListener, isFirst)
+        val bluePrintFragmentDialog = ConstructionImageEditDialog(dismissListener, isFirst)
         bluePrintFragmentDialog.show(transaction, "bluePrintFragmentDialog")
     }
 

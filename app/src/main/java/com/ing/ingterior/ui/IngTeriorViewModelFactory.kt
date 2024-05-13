@@ -4,24 +4,24 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.ing.ingterior.ui.chat.ChatViewModel
 import com.ing.ingterior.ui.simple.SimpleEstimationViewModel
-import com.ing.ingterior.ui.viewmodel.MainViewModel
-import com.ing.ingterior.ui.viewmodel.SiteViewModel
+import com.ing.ingterior.ui.viewmodel.HomeViewModel
+import com.ing.ingterior.ui.viewmodel.ConstructionViewModel
 
 class IngTeriorViewModelFactory : ViewModelProvider.Factory {
 
     companion object{
-        private val mainViewModel = MainViewModel()
+        private val homeViewModel = HomeViewModel()
     }
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if(modelClass.isAssignableFrom(MainViewModel::class.java)){
-            return mainViewModel as T
+        if(modelClass.isAssignableFrom(HomeViewModel::class.java)){
+            return homeViewModel as T
         }
         else if (modelClass.isAssignableFrom(SimpleEstimationViewModel::class.java)) {
             return SimpleEstimationViewModel() as T
         }
-        else if (modelClass.isAssignableFrom(SiteViewModel::class.java)) {
-            return SiteViewModel() as T
+        else if (modelClass.isAssignableFrom(ConstructionViewModel::class.java)) {
+            return ConstructionViewModel() as T
         }
         else if (modelClass.isAssignableFrom(ChatViewModel::class.java)) {
             return ChatViewModel() as T

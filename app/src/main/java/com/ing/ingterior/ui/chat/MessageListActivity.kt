@@ -22,7 +22,7 @@ import com.ing.ingterior.model.ConversationModel
 import com.ing.ingterior.model.DummyModel
 import com.ing.ingterior.model.DummyModel.DAY
 import com.ing.ingterior.model.MessageModel
-import com.ing.ingterior.ui.site.ParticipantAdapter
+import com.ing.ingterior.ui.constructor.ParticipantAdapter
 import com.ing.ingterior.util.getParcelableCompat
 import com.ing.ingterior.util.hideKeyboard
 import com.ing.ui.button.VisualImageButton

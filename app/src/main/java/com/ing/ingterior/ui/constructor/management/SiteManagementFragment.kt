@@ -1,4 +1,4 @@
-package com.ing.ingterior.ui.site.management
+package com.ing.ingterior.ui.constructor.management
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -25,7 +25,7 @@ import com.ing.ingterior.model.MonthModel.Companion.calculateCurrentMonth
 import com.ing.ingterior.ui.CalendarDateAdapter2
 import com.ing.ingterior.ui.CalendarDateClickListener
 import com.ing.ingterior.ui.IngTeriorViewModelFactory
-import com.ing.ingterior.ui.viewmodel.SiteViewModel
+import com.ing.ingterior.ui.viewmodel.ConstructionViewModel
 import com.ing.ingterior.util.StaticValues
 import com.ing.ingterior.util.StaticValues.getSpecificMonth
 import com.ing.ingterior.util.StaticValues.maxTime
@@ -48,7 +48,7 @@ class SiteManagementFragment : Fragment(), CalendarDateClickListener {
             }
     }
 
-    private lateinit var siteViewModel: SiteViewModel
+    private lateinit var constructionViewModel: ConstructionViewModel
     private lateinit var fabAdd: FloatingActionButton
     private lateinit var ibNext: ImageButton
     private lateinit var ibPrev: ImageButton
@@ -63,9 +63,9 @@ class SiteManagementFragment : Fragment(), CalendarDateClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        siteViewModel = ViewModelProvider(this, IngTeriorViewModelFactory())[SiteViewModel::class.java]
+        constructionViewModel = ViewModelProvider(this, IngTeriorViewModelFactory())[ConstructionViewModel::class.java]
         arguments?.let {
-            siteViewModel.site = it.getParcelableCompat<Site>(EXTRA_SITE)
+            constructionViewModel.site = it.getParcelableCompat<Site>(EXTRA_SITE)
         }
 
         currentMonth = calculateCurrentMonth(LocalDate.now(), LocalDate().minusYears(1))
@@ -90,11 +90,11 @@ class SiteManagementFragment : Fragment(), CalendarDateClickListener {
         fabAdd = view.findViewById(R.id.fab_site_management_add)
 
         fabAdd.setOnClickListener {
-            if(siteViewModel.site == null) {
+            if(constructionViewModel.site == null) {
                 Toast.makeText(requireContext(), "에러 발생", Toast.LENGTH_SHORT).show()
                 requireActivity().finish()
             }
-            else Factory.get().getMove().moveSiteInsertManagementActivity(requireActivity(), siteViewModel.site!!)
+            else Factory.get().getMove().moveSiteInsertManagementActivity(requireActivity(), constructionViewModel.site!!)
         }
 
         rvCalendarList = view.findViewById(R.id.rv_site_management_calendar)
@@ -151,7 +151,7 @@ class SiteManagementFragment : Fragment(), CalendarDateClickListener {
 
     private fun setUpScheduleView(){
         (rvCalendarList.adapter as CalendarDateAdapter2).updateSchedules(DummyModel.getDummySchedule())
-        rvScheduleList.adapter = EventListAdapter(DummyModel.getDummySchedule(), selectedDay!!, siteViewModel.site!!)
+        rvScheduleList.adapter = EventListAdapter(DummyModel.getDummySchedule(), selectedDay!!, constructionViewModel.site!!)
     }
     private fun setupRecyclerView() {
         val displaySize = StaticValues.displayPixelSize

@@ -1,4 +1,4 @@
-package com.ing.ingterior.ui.site.defects
+package com.ing.ingterior.ui.constructor.defects
 
 import android.content.Intent
 import android.graphics.Matrix
@@ -23,7 +23,7 @@ import com.ing.ingterior.db.Site
 import com.ing.ingterior.model.ImageModel
 import com.ing.ingterior.ui.GridSpacingItemDecoration
 import com.ing.ingterior.ui.IngTeriorViewModelFactory
-import com.ing.ingterior.ui.viewmodel.SiteViewModel
+import com.ing.ingterior.ui.viewmodel.ConstructionViewModel
 import com.ing.ingterior.util.FileWrapper
 import com.ing.ingterior.util.ImageUtils
 import com.ing.ingterior.util.getDisplayPixelSize
@@ -41,7 +41,7 @@ class SiteInsertDefectsActivity : AppCompatActivity() {
         private const val MAX_DEFECT_IMAGE_SIZE = 8
     }
 
-    private lateinit var siteViewModel: SiteViewModel
+    private lateinit var constructionViewModel: ConstructionViewModel
     private lateinit var siteDefectImagesAdapter: SiteDefectImagesAdapter
 
     private lateinit var vibBack: VisualImageButton
@@ -68,12 +68,12 @@ class SiteInsertDefectsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_site_create_defects)
         
-        siteViewModel = ViewModelProvider(this, IngTeriorViewModelFactory())[SiteViewModel::class.java]
-        siteViewModel.site = intent.getParcelableCompat<Site>(EXTRA_SITE)
+        constructionViewModel = ViewModelProvider(this, IngTeriorViewModelFactory())[ConstructionViewModel::class.java]
+        constructionViewModel.site = intent.getParcelableCompat<Site>(EXTRA_SITE)
 
         getPictureResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
             if(result.resultCode == RESULT_OK) {
-                if(siteViewModel.defectImages.size >= MAX_DEFECT_IMAGE_SIZE) {
+                if(constructionViewModel.defectImages.size >= MAX_DEFECT_IMAGE_SIZE) {
                     Toast.makeText(this, "최대 8장 까지 첨부할 수 있습니다.", Toast.LENGTH_SHORT).show()
                     return@registerForActivityResult
                 }
@@ -95,8 +95,8 @@ class SiteInsertDefectsActivity : AppCompatActivity() {
 
                     Log.d(TAG, "getPictureResult: fileName=$fileName")
                     if(fileName!=null){
-                        siteViewModel.addDefectImage(this, ImageModel(0L, photoUri, null, fileName)).apply {
-                            Log.d(TAG, "getPictureResult: defectImages=${siteViewModel.defectImages}")
+                        constructionViewModel.addDefectImage(this, ImageModel(0L, photoUri, null, fileName)).apply {
+                            Log.d(TAG, "getPictureResult: defectImages=${constructionViewModel.defectImages}")
                             siteDefectImagesAdapter.notifyDataSetChanged()
                         }
                     }
@@ -175,7 +175,7 @@ class SiteInsertDefectsActivity : AppCompatActivity() {
             frameBlueprintLayout.layoutParams = params
         }
         photoBluePrintView = findViewById(R.id.photo_site_create_defects_blueprint)
-        Glide.with(this).load(siteViewModel.site?.imageLocation).into(photoBluePrintView)
+        Glide.with(this).load(constructionViewModel.site?.imageLocation).into(photoBluePrintView)
 
 //        photoBluePrintView.isZoomable = false
         photoBluePrintView.setOnMatrixChangeListener {
@@ -237,7 +237,7 @@ class SiteInsertDefectsActivity : AppCompatActivity() {
         vdbInsertImage.setOnClickListener {
             itvInsertName.getTextView().hideKeyboard(this)
             itvInsertDescription.getTextView().hideKeyboard(this)
-            if(siteViewModel.defectImages.size >= MAX_DEFECT_IMAGE_SIZE) {
+            if(constructionViewModel.defectImages.size >= MAX_DEFECT_IMAGE_SIZE) {
                 Toast.makeText(this, "최대 8장 까지 첨부할 수 있습니다.", Toast.LENGTH_SHORT).show()
             }
             else{
@@ -258,7 +258,7 @@ class SiteInsertDefectsActivity : AppCompatActivity() {
         val spacing = resources.getDimensionPixelSize(R.dimen.grid_item_margin) // 각 아이템 사이의 간격
         val availableWidth = screenWidth - (spacing * (columnCount)) - (resources.getDimensionPixelSize(R.dimen.page_horizontal_padding) * 2)
         val itemSize = availableWidth / columnCount
-        siteDefectImagesAdapter = SiteDefectImagesAdapter(siteViewModel, itemSize)
+        siteDefectImagesAdapter = SiteDefectImagesAdapter(constructionViewModel, itemSize)
         rvDefectsImages.apply {
             layoutManager = GridLayoutManager(context, columnCount)
             if (gridSpacingItemDecoration != null) removeItemDecoration(gridSpacingItemDecoration!!)

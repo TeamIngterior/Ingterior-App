@@ -43,4 +43,10 @@
     <string name="duration_long_format" translatable="false">%s:%s:%s</string>
     <string name="google_login_client_id">412737837459–0qdosc06qcmrprm9njet7o5rmh9o094g.apps.googleusercontent.com</string>
 
+    <string name="error_occurred">예상치 못한 오류가 발생하였습니다.</string>
+    <string name="please_wait_for_loading">데이터를 로딩하는 중입니다. 잠시만 기다려주세요.</string>
+    <string name="please_wait_for_data_loading">데이터를 불러오는 중입니다.\n잠시만 기다려주세요.</string>
+    <string name="please_wait_for_data_loading2">데이터를 불러오는 중입니다.</string>
+    <string name="title_default_check">하자체크</string>
+    <string name="title_construction_manage">공사관리</string>
 </resources>
