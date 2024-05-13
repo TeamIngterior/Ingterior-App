@@ -14,8 +14,9 @@ import com.ing.ingterior.Logging.logW
 import com.ing.ingterior.R
 import com.ing.ingterior.db.Image
 import com.ing.ingterior.db.Site
+import com.ing.ingterior.db.constructor.ConstInsertRequest
+import com.ing.ingterior.db.constructor.ConstLikeRequest
 import com.ing.ingterior.db.constructor.Construction
-import com.ing.ingterior.db.constructor.ConstructionRequest
 import com.ing.ingterior.injection.Factory
 import com.ing.ingterior.model.ImageModel
 import com.ing.ingterior.util.ImageUtils
@@ -184,7 +185,7 @@ class ConstructionViewModel : BaseViewModel() {
     fun insertConstruction(context: Context, memberId: Int, usage: Int){
         var result = 200
         if (isNetworkConnected(context)) {
-            addToDisposable(Factory.get().getServerApi().insertConstruction(ConstructionRequest(memberId, usage, constructionName)).ioNewThread()
+            addToDisposable(Factory.get().getServerApi().insertConstruction(ConstInsertRequest(memberId, usage, constructionName)).ioNewThread()
                 .subscribeWith(object : DisposableObserver<Int>() {
                     override fun onNext(t: Int) {
                         result = t
@@ -209,7 +210,7 @@ class ConstructionViewModel : BaseViewModel() {
     fun likeConstruction(context: Context, memberId: Int, constructionId: Int) {
         var result = 200
         if (isNetworkConnected(context)) {
-            addToDisposable(Factory.get().getServerApi().likeConstruction(memberId, constructionId).ioNewThread()
+            addToDisposable(Factory.get().getServerApi().likeConstruction(ConstLikeRequest(memberId,  constructionId)).ioNewThread()
                 .subscribeWith(object : DisposableObserver<Int>() {
                     override fun onNext(t: Int) {
                         result = t

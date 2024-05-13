@@ -2,8 +2,9 @@ package com.ing.ingterior.injection.impl
 
 import com.google.gson.GsonBuilder
 import com.ing.ingterior.Logging.logD
+import com.ing.ingterior.db.constructor.ConstInsertRequest
+import com.ing.ingterior.db.constructor.ConstLikeRequest
 import com.ing.ingterior.db.constructor.Construction
-import com.ing.ingterior.db.constructor.ConstructionRequest
 import com.ing.ingterior.injection.ServerApi
 import io.reactivex.Observable
 import okhttp3.OkHttpClient
@@ -54,14 +55,14 @@ class ServerApiImpl : ServerApi {
         return getApi().getConstructions(memberId)
     }
 
-    override fun insertConstruction(request: ConstructionRequest): Observable<Int> {
+    override fun insertConstruction(request: ConstInsertRequest): Observable<Int> {
         logD(TAG, "insertConstruction: request=$request")
         return getApi().insertConstruction(request)
     }
 
-    override fun likeConstruction(memberId: Int, constructionId: Int): Observable<Int> {
-        logD(TAG, "likeConstruction: memberId=$memberId, constructionId=$constructionId")
-        return getApi().likeConstruction(memberId, constructionId)
+    override fun likeConstruction(request: ConstLikeRequest): Observable<Int> {
+        logD(TAG, "likeConstruction: request=$request")
+        return getApi().likeConstruction(request)
     }
 
 }
